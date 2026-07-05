@@ -1,0 +1,15 @@
+{
+  "name": "pocket-decision-book",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mobile-first offline PWA of decision-making frameworks.",
+  "scripts": {
+    "serve": "python3 -m http.server 4173",
+    "icons": "python3 scripts/gen-icons.py",
+    "test:shell": "node tests/shell.spec.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "playwright": "^1.61.1"
+  }
+}

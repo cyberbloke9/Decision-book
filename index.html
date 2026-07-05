@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pocket Decision Book</title>
+  <meta name="description" content="Decision-making frameworks in your pocket — from a real-life trigger to the right method, offline, in under a minute." />
+  <meta name="theme-color" content="#12141c" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <!-- Anti-flash: set the theme on <html> BEFORE the stylesheet paints.
+       Reads localStorage['pdb.theme'], falls back to prefers-color-scheme, then dark.
+       Intentionally placed above the main stylesheet link. -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('pdb.theme');
+        var theme = (stored === 'light' || stored === 'dark') ? stored : null;
+        if (!theme) {
+          theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+            ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles/app.css" />
+</head>
+<body>
+  <a class="skip-link" href="#screen-region">Skip to content</a>
+
+  <header class="app-bar" role="banner">
+    <h1 class="wordmark">
+      <span class="wordmark-full">Pocket Decision Book</span>
+      <span class="wordmark-short">Decision Book</span>
+    </h1>
+    <div class="app-bar-actions">
+      <a class="icon-btn" id="search-affordance" href="#/search" aria-label="Search frameworks">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <line x1="16.2" y1="16.2" x2="20.5" y2="20.5"></line>
+        </svg>
+      </a>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to light theme">
+        <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20 14.5A8 8 0 0 1 9.5 4 7.5 7.5 0 1 0 20 14.5Z"></path>
+        </svg>
+        <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4.2"></circle>
+          <g class="sun-rays">
+            <line x1="12" y1="2.5" x2="12" y2="5"></line>
+            <line x1="12" y1="19" x2="12" y2="21.5"></line>
+            <line x1="2.5" y1="12" x2="5" y2="12"></line>
+            <line x1="19" y1="12" x2="21.5" y2="12"></line>
+            <line x1="5.4" y1="5.4" x2="7.1" y2="7.1"></line>
+            <line x1="16.9" y1="16.9" x2="18.6" y2="18.6"></line>
+            <line x1="5.4" y1="18.6" x2="7.1" y2="16.9"></line>
+            <line x1="16.9" y1="7.1" x2="18.6" y2="5.4"></line>
+          </g>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="screen-region" class="screen-region" tabindex="-1">
+    <!-- Situations (default / home) -->
+    <section class="screen" id="screen-situations" data-route="situations" aria-labelledby="h-situations">
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-situations">Start where you are</h2>
+        <p class="lede">From a real feeling — "I can't choose", "I keep delaying", "this decision scares me" — to the right thinking method, in under a minute.</p>
+        <div class="panel">
+          <p class="panel-kicker">How to use this</p>
+          <ol class="how-list">
+            <li>Name the situation you're actually in.</li>
+            <li>Open the framework it hands you and read the one-screen card.</li>
+            <li>Answer its final question, then act.</li>
+          </ol>
+          <p class="panel-note">Star the ones that help so they're one tap away, and check <strong>Today</strong> for a daily prompt that builds the habit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Browse -->
+    <section class="screen" id="screen-browse" data-route="browse" aria-labelledby="h-browse" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-browse">Browse the shelf</h2>
+        <p class="lede">Explore every framework by where it lives — the four working areas of the book plus four extension sets for mental models, biases, attention, and decision processes.</p>
+      </div>
+    </section>
+
+    <!-- Favorites -->
+    <section class="screen" id="screen-favorites" data-route="favorites" aria-labelledby="h-favorites" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-favorites">Your favorites</h2>
+        <div class="empty-state">
+          <svg class="empty-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path d="M24 6l5.3 10.7 11.8 1.7-8.6 8.3 2 11.8L24 33.2 13.5 38.5l2-11.8-8.6-8.3 11.8-1.7z"></path>
+          </svg>
+          <p class="empty-title">No favorites yet</p>
+          <p class="empty-body">Frameworks you star will collect here — tap the star on any card to keep it one tap away.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Today -->
+    <section class="screen" id="screen-today" data-route="today" aria-labelledby="h-today" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-today">Today</h2>
+        <div class="empty-state">
+          <svg class="empty-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <rect x="8" y="10" width="32" height="30" rx="4"></rect>
+            <line x1="8" y1="18" x2="40" y2="18"></line>
+            <line x1="16" y1="6" x2="16" y2="13"></line>
+            <line x1="32" y1="6" x2="32" y2="13"></line>
+          </svg>
+          <p class="empty-title">No card yet today</p>
+          <p class="empty-body">Once frameworks are loaded, one will surface here each day with a prompt to apply it — and your streak will start counting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search (reached from the app bar, not a bottom tab) -->
+    <section class="screen" id="screen-search" data-route="search" aria-labelledby="h-search" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-search">Search</h2>
+        <label class="search-field">
+          <span class="visually-hidden">Search frameworks by name or keyword</span>
+          <svg class="search-field-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <line x1="16.2" y1="16.2" x2="20.5" y2="20.5"></line>
+          </svg>
+          <input class="search-input" id="search-input" type="search" inputmode="search"
+                 placeholder="Search by name or keyword" autocomplete="off" />
+        </label>
+        <p class="search-hint">Type to find a framework by name or keyword. Search results arrive once the framework library is in place.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tab-bar" aria-label="Primary">
+    <a class="tab" href="#/situations" data-route="situations">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="8.5"></circle>
+        <path d="M15.5 8.5l-2 5-5 2 2-5z"></path>
+      </svg>
+      <span class="tab-label">Situations</span>
+    </a>
+    <a class="tab" href="#/browse" data-route="browse">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect x="4" y="4" width="7" height="7" rx="1.5"></rect>
+        <rect x="13" y="4" width="7" height="7" rx="1.5"></rect>
+        <rect x="4" y="13" width="7" height="7" rx="1.5"></rect>
+        <rect x="13" y="13" width="7" height="7" rx="1.5"></rect>
+      </svg>
+      <span class="tab-label">Browse</span>
+    </a>
+    <a class="tab" href="#/favorites" data-route="favorites">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 4l2.5 5.2 5.7.8-4.1 4 1 5.7L12 22.9 6.9 19.7l1-5.7-4.1-4 5.7-.8z"></path>
+      </svg>
+      <span class="tab-label">Favorites</span>
+    </a>
+    <a class="tab" href="#/today" data-route="today">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect x="4" y="5" width="16" height="15" rx="2.5"></rect>
+        <line x1="4" y1="9.5" x2="20" y2="9.5"></line>
+        <line x1="9" y1="2.5" x2="9" y2="6.5"></line>
+        <line x1="15" y1="2.5" x2="15" y2="6.5"></line>
+      </svg>
+      <span class="tab-label">Today</span>
+    </a>
+  </nav>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

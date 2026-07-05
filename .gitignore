@@ -1,0 +1,25 @@
+# Environment / secrets
+.env
+.env.*
+*.local
+
+# Databases and generated data stores
+*.db
+db/
+
+# Uploaded / generated artifacts
+uploads/
+
+# Dependencies
+node_modules/
+
+# Test/build output
+test-results/
+playwright-report/
+.playwright/
+
+# Harness workspace (agent bus — never committed with the app)
+.harness/
+
+# OS cruft
+.DS_Store
