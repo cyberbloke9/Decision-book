@@ -204,7 +204,7 @@ const run = async () => {
   // The shell cache version is bumped every sprint that adds precached assets
   // (v2 content, v3 visuals, v4 nav modules); this regression check tracks the
   // CURRENT version so it stays green after each bump — same pattern as v2→v3.
-  log(/pdb-shell-v5/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v5)");
+  log(/pdb-shell-v6/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v6)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak

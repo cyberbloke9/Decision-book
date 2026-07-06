@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v5";
+var CACHE = "pdb-shell-v6";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -18,6 +18,12 @@ var CACHE = "pdb-shell-v5";
 // cache that lacks these files (contract §8.2, protects B20).
 // v5 adds js/daily.js (Sprint 005) so the Today daily card + habit loop work
 // offline; the bump purges the stale v4 cache that lacks daily.js (protects B20).
+// v6 (Sprint 006) ships two edits to already-listed shell assets: the F-001
+// streak-grammar edit to js/daily.js and the §5.1 search-input :focus-visible
+// outline fix to styles/app.css. No new precache entry (both files are already
+// listed), but the version bump forces the activate handler to purge the stale
+// v5 cache so the offline app serves the updated daily.js + app.css (protects
+// B20). Test/script files are NOT precached (they never ship).
 var SHELL = [
   "./",
   "index.html",

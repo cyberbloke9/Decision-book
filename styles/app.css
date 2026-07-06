@@ -321,6 +321,12 @@ svg.icon,
 }
 .search-input::placeholder { color: var(--muted); opacity: 1; }
 .search-input:focus { outline: none; }
+/* B21/§5.1 control #9: the mouse-focus state drops the outline in favour of the
+   wrapper's :focus-within border, but a KEYBOARD focus needs a rendered outline
+   (the contract requires an actual outline, not merely a border change). Equal
+   specificity to .search-input:focus, placed AFTER it so source order wins; the
+   inset offset keeps the ring inside the rounded field wrapper (no clip). */
+.search-input:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; border-radius: var(--radius-md); }
 .search-hint { color: var(--muted); margin: 0; }
 
 /* ==========================================================================

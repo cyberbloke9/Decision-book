@@ -394,7 +394,7 @@ const run = async () => {
   await ctx.setOffline(false);
 
   const swSrc = readFileSync(resolve(HERE, "..", "sw.js"), "utf8");
-  log(/CACHE\s*=\s*"pdb-shell-v5"/.test(swSrc), "sw.js CACHE === pdb-shell-v5");
+  log(/CACHE\s*=\s*"pdb-shell-v6"/.test(swSrc), "sw.js CACHE === pdb-shell-v6");
   log(/js\/nav-data\.js/.test(swSrc) && /js\/favorites\.js/.test(swSrc) && /js\/lists\.js/.test(swSrc), "sw.js precaches the 3 new modules");
   log(/keys\.filter[\s\S]*caches\.delete/.test(swSrc), "sw.js activate purges old cache");
 

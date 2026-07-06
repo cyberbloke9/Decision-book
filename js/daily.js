@@ -236,10 +236,17 @@
     var chip = el("div", "streak-chip");
     chip.setAttribute("aria-hidden", "true");
     chip.appendChild(streakGlyph());
+    // F-001: number and unit share ONE label span (not two direct flex children)
+    // so the flex `gap` on .streak-chip does NOT insert a space between them.
+    // The hyphenated adjective must read "N-day streak" with no space before the
+    // hyphen; a naive line edit that left them as sibling flex items would render
+    // "N -day streak". The glyph keeps its gap from this label wrapper.
+    var chipLabel = el("span", "streak-chip-label");
     var chipNum = el("span", "streak-chip-num");
-    chip.appendChild(chipNum);
-    var chipUnit = el("span", "streak-chip-unit", "day streak");
-    chip.appendChild(chipUnit);
+    chipLabel.appendChild(chipNum);
+    var chipUnit = el("span", "streak-chip-unit", "-day streak");
+    chipLabel.appendChild(chipUnit);
+    chip.appendChild(chipLabel);
     topRow.appendChild(chip);
     bar.appendChild(topRow);
 
@@ -297,7 +304,9 @@
           ? "You logged today — this is the start of a streak."
           : "You logged today — keep it going tomorrow.";
       } else if (s > 0) {
-        statusNudge.textContent = "Apply today's card to keep your " + pluralDays(s) + " streak.";
+        // F-001: hyphenated "N-day streak" adjective (status-main line above
+        // keeps the un-hyphenated full-sentence form "Current streak: N days.").
+        statusNudge.textContent = "Apply today's card to keep your " + s + "-day streak.";
       } else {
         statusNudge.textContent = "Apply today's card to start your streak.";
       }
