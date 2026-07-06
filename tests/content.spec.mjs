@@ -201,7 +201,9 @@ const run = async () => {
   await cold.close();
   await ctx.setOffline(false);
   const swSrc = await (await ctx.request.get(BASE + "/sw.js")).text();
-  log(/pdb-shell-v2/.test(swSrc) && !/pdb-shell-v1"/.test(swSrc), "sw cache bumped to v2");
+  // Sprint 003 bumped the shell cache to v3 (adds js/visuals.js); this Sprint-002
+  // regression check tracks the current version so it stays green after the bump.
+  log(/pdb-shell-v3/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v3)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak

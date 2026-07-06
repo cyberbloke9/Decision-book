@@ -15,7 +15,11 @@ const bg = (page) => page.evaluate(() => getComputedStyle(document.body).backgro
 
 const run = async () => {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width: 375, height: 667 } });
+  // F-002: emulate reduced motion context-wide so axe never samples a mid-crossfade
+  // theme-transition frame (hash-route navigations don't reload, so a transition
+  // started on "/" could still be animating when axe scans "#/situations"). This
+  // makes the color-contrast scans deterministic (50/50 across 10 runs). Test-only.
+  const ctx = await browser.newContext({ viewport: { width: 375, height: 667 }, reducedMotion: "reduce" });
   const errors = [];
   ctx.on("weberror", (e) => errors.push("weberror: " + e.error().message));
 

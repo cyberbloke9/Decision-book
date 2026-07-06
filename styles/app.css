@@ -378,36 +378,64 @@ svg.icon,
   color: var(--fg);
 }
 
-/* Visual figure — form-name caption (real SVG is Sprint 003) */
+/* Visual figure — original inline SVG (Sprint 003) above a form-name caption.
+   The SVG sits on --surface; all diagram colour comes from theme tokens below,
+   so it reads with AA contrast in BOTH dark and light themes. */
 .card-figure {
   margin: 0 0 var(--space-5);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
 }
-.card-figure-frame {
-  flex: none;
-  width: 56px; height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card-visual {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 120 / 84;   /* matches the viewBox → never collapses to 0px */
+  height: auto;
+  margin: 0 auto;
+}
+.card-figure-fallback {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 120 / 84;
+  border: 1px dashed var(--border);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
   background: var(--surface-2);
 }
-.card-figure-token {
-  font-family: var(--font-serif);
-  font-size: var(--fs-2);
-  font-weight: 600;
-  color: var(--accent);
-  text-transform: uppercase;
-  line-height: 1;
-}
-.card-figcaption { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+
+/* --- SVG theme-token classes (no hardcoded hex → theme-adaptive) --------- */
+.card-visual .v-stroke   { fill: none; stroke: var(--fg);     stroke-width: 2;   stroke-linecap: round; stroke-linejoin: round; }
+.card-visual .v-stroke-2 { fill: none; stroke: var(--muted);  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.card-visual .v-curve      { fill: none; stroke: var(--fg);     stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.card-visual .v-accent-line{ fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.card-visual .v-tick     { stroke: var(--muted); stroke-width: 1.4; }
+.card-visual .v-rule     { stroke: var(--muted); stroke-width: 1; }
+.card-visual .v-mirror   { stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 3 3; }
+.card-visual .v-panel      { fill: var(--surface-2); stroke: none; }
+.card-visual .v-cell-accent{ fill: var(--accent-soft); stroke: none; }
+.card-visual .v-lens       { fill: var(--accent-soft); stroke: none; }
+.card-visual .v-beam       { fill: var(--accent-soft); stroke: none; }
+.card-visual .v-fg-fill    { fill: var(--fg); stroke: none; }
+.card-visual .v-dot        { fill: var(--fg); stroke: none; }
+.card-visual .v-node       { fill: var(--surface-2); stroke: var(--fg); stroke-width: 1.5; }
+.card-visual .v-node-dim   { fill: var(--muted); stroke: none; }
+.card-visual .v-hole       { fill: var(--bg); stroke: none; }
+.card-visual .v-accent-dot { fill: var(--accent); stroke: none; }
+.card-visual .v-accent-fill{ fill: var(--accent); stroke: none; }
+.card-visual .v-arrow      { fill: var(--fg); stroke: none; }
+.card-visual .v-arrow-accent { fill: var(--accent); stroke: none; }
+.card-visual .v-text     { fill: var(--fg);    font-family: var(--font-sans); font-size: 8px;   font-weight: 600; }
+.card-visual .v-text-mut { fill: var(--muted); font-family: var(--font-sans); font-size: 7.5px; font-weight: 600; }
+.card-visual .v-text-inv    { fill: var(--bg); font-family: var(--font-sans); font-size: 10px; font-weight: 700; }
+.card-visual .v-text-inv-sm { fill: var(--bg); font-family: var(--font-sans); font-size: 7px;  font-weight: 700; }
+
+.card-figcaption { min-width: 0; display: flex; flex-direction: column; gap: 2px; align-self: flex-start; }
 .card-figcaption-kicker {
   font-size: var(--fs--1);
   font-weight: 700;

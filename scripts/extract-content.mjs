@@ -19,6 +19,17 @@ function isSeparator(c) {
   return c.every((x) => /^:?-{3,}:?$/.test(x));
 }
 
+// F-001: strip inline markdown emphasis markers (*word* / _word_) so no literal
+// `*`/`_` reaches js/data.js or the DOM. Applied at PARSE time so the value that
+// flows into build-data.mjs AND the B2 verbatim comparison are both stripped
+// (symmetric → B2 stays green). Only removes a marker that wraps a text run;
+// leaves standalone/unpaired markers untouched (defensive, none exist today).
+export function stripEmphasis(s) {
+  return String(s)
+    .replace(/\*([^*\n]+)\*/g, "$1")
+    .replace(/_([^_\n]+)_/g, "$1");
+}
+
 // Section spec: heading substring → { category, triggerCol, essenceCol, nameCol, expected }
 const SECTIONS = [
   { head: "### Q1 — Improve Yourself", category: "improve-yourself", nameCol: 1, triggerCol: 2, essenceCol: 3, visualCol: 4, expected: 18 },
@@ -54,9 +65,12 @@ export function extractResearch(md = readFileSync(RESEARCH_PATH, "utf8")) {
       if (!name) continue;
       out.push({
         category: sec.category,
-        name,
-        trigger: c[sec.triggerCol],
-        essence: c[sec.essenceCol],
+        // Strip emphasis on the name too: the WRAP row carries "*Decisive*" (a book
+        // title italicised in RESEARCH.md) which would otherwise render literal
+        // asterisks in the card <h2>. Same F-001 root cause, name column.
+        name: stripEmphasis(name),
+        trigger: stripEmphasis(c[sec.triggerCol]),
+        essence: stripEmphasis(c[sec.essenceCol]),
         visualRaw: c[sec.visualCol]
       });
     }

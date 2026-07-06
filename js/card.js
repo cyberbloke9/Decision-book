@@ -54,14 +54,18 @@
     trig.appendChild(el("p", "card-trigger-text", fw.trigger));
     article.appendChild(trig);
 
-    // 3. Visual — figure + figcaption naming the form (SVG itself is Sprint 003)
+    // 3. Visual — original inline SVG (Sprint 003) + figcaption naming the form.
     var figure = el("figure", "card-figure");
-    var placeholder = el("div", "card-figure-frame");
-    placeholder.setAttribute("aria-hidden", "true");
-    // A small, real geometric mark keyed to the form name — NOT a diagram, NOT
-    // "coming soon" copy. Sprint 003 replaces this frame with the parameterized SVG.
-    placeholder.appendChild(el("span", "card-figure-token", (visualLabelFor(fw, data)[0] || "•")));
-    figure.appendChild(placeholder);
+    var visuals = root.PDB_VISUALS;
+    if (visuals && typeof visuals.renderVisual === "function") {
+      figure.appendChild(visuals.renderVisual(fw));
+    } else {
+      // Safe fallback if the visuals module failed to load: a neutral, aria-hidden
+      // labelled frame — no crash, no placeholder token, no fake copy.
+      var frame = el("div", "card-figure-fallback");
+      frame.setAttribute("aria-hidden", "true");
+      figure.appendChild(frame);
+    }
     var figcap = el("figcaption", "card-figcaption");
     figcap.appendChild(el("span", "card-figcaption-kicker", "Visual form"));
     figcap.appendChild(el("span", "card-figcaption-name", visualLabelFor(fw, data)));

@@ -891,7 +891,7 @@
       "id": "confirmation-bias",
       "name": "Confirmation Bias",
       "category": "cognitive-biases",
-      "trigger": "You feel *satisfied* by evidence",
+      "trigger": "You feel satisfied by evidence",
       "essence": "You seek what agrees with you. Cue: actively hunt one disconfirming fact before deciding",
       "visualType": "funnel",
       "universalExample": "Convinced your new feature is a hit, you scan the analytics and feel satisfied — the numbers you looked at agree with you. That satisfaction is the cue. You deliberately hunt one disconfirming fact: the retention cohort, which you'd skipped. It tells a harder, truer story.",
@@ -1034,7 +1034,7 @@
     },
     {
       "id": "wrap",
-      "name": "WRAP (Heath, *Decisive*)",
+      "name": "WRAP (Heath, Decisive)",
       "category": "decision-processes",
       "trigger": "\"Big decision, narrow frame\"",
       "essence": "Widen options → Reality-test assumptions → Attain distance → Prepare to be wrong",
