@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v4";
+var CACHE = "pdb-shell-v5";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -16,6 +16,8 @@ var CACHE = "pdb-shell-v4";
 // situation picker, browse index, detail screens, search and favorites all work
 // offline; the version bump forces the activate handler to purge the stale v3
 // cache that lacks these files (contract §8.2, protects B20).
+// v5 adds js/daily.js (Sprint 005) so the Today daily card + habit loop work
+// offline; the bump purges the stale v4 cache that lacks daily.js (protects B20).
 var SHELL = [
   "./",
   "index.html",
@@ -23,6 +25,7 @@ var SHELL = [
   "js/data.js",
   "js/nav-data.js",
   "js/favorites.js",
+  "js/daily.js",
   "js/visuals.js",
   "js/lists.js",
   "js/card.js",

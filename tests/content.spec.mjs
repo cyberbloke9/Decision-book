@@ -204,7 +204,7 @@ const run = async () => {
   // The shell cache version is bumped every sprint that adds precached assets
   // (v2 content, v3 visuals, v4 nav modules); this regression check tracks the
   // CURRENT version so it stays green after each bump — same pattern as v2→v3.
-  log(/pdb-shell-v4/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v4)");
+  log(/pdb-shell-v5/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v5)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak
@@ -213,9 +213,12 @@ const run = async () => {
     situations: document.querySelector("#screen-situations").textContent.includes("Start where you are"),
     browse: document.querySelector("#screen-browse").textContent.includes("Browse the shelf"),
     favorites: document.querySelector("#screen-favorites").textContent.includes("No favorites yet"),
-    today: document.querySelector("#screen-today").textContent.includes("No card yet today"),
+    // Sprint 005 replaced the Today placeholder with a live daily card (rendered
+    // on visit); the honest current state is that the old placeholder is gone.
+    today: !document.querySelector("#screen-today").textContent.includes("No card yet today"),
     search: !!document.querySelector("#screen-search #search-input"),
-    noCardLeak: !document.querySelector("#screen-situations .card, #screen-browse .card, #screen-favorites .card, #screen-today .card, #screen-search .card")
+    // Today now legitimately owns a card; the other four screens must not leak one.
+    noCardLeak: !document.querySelector("#screen-situations .card, #screen-browse .card, #screen-favorites .card, #screen-search .card")
   }));
   log(Object.values(legacy).every(Boolean), "Sprint 001 screens intact, no card leak", JSON.stringify(legacy));
 

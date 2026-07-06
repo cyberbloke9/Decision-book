@@ -59,7 +59,16 @@ const run = async () => {
   await page.click('.tab[data-route="favorites"]');
   log((await page.textContent("#screen-favorites")).includes("No favorites yet"), "favorites empty copy");
   await page.click('.tab[data-route="today"]');
-  log((await page.textContent("#screen-today")).includes("No card yet today"), "today first-run copy");
+  // Sprint 005 owns Today: the static "No card yet today" placeholder is replaced
+  // by the live daily card + habit bar (applied toggle + streak). Assert the new
+  // reality, not the removed placeholder.
+  await page.waitForSelector("#today-mount button.applied-toggle");
+  const todayCopy = await page.evaluate(() => ({
+    noPlaceholder: !document.querySelector("#screen-today").textContent.includes("No card yet today"),
+    hasToggle: !!document.querySelector("#today-mount button.applied-toggle"),
+    hasCard: !!document.querySelector("#today-mount .card")
+  }));
+  log(todayCopy.noPlaceholder && todayCopy.hasToggle && todayCopy.hasCard, "today shows the dynamic daily card + habit bar (Sprint 005)", JSON.stringify(todayCopy));
   await page.click("#search-affordance");
   await page.waitForSelector("#screen-search:not([hidden])");
   log(await page.isVisible("#search-input"), "search input present");

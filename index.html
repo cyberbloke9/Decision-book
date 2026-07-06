@@ -123,16 +123,7 @@
     <section class="screen" id="screen-today" data-route="today" aria-labelledby="h-today" hidden>
       <div class="screen-inner">
         <h2 class="screen-title" id="h-today">Today</h2>
-        <div class="empty-state">
-          <svg class="empty-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-            <rect x="8" y="10" width="32" height="30" rx="4"></rect>
-            <line x1="8" y1="18" x2="40" y2="18"></line>
-            <line x1="16" y1="6" x2="16" y2="13"></line>
-            <line x1="32" y1="6" x2="32" y2="13"></line>
-          </svg>
-          <p class="empty-title">No card yet today</p>
-          <p class="empty-body">Once frameworks are loaded, one will surface here each day with a prompt to apply it — and your streak will start counting.</p>
-        </div>
+        <div id="today-mount" class="today-mount"></div>
       </div>
     </section>
 
@@ -198,6 +189,7 @@
   <script src="js/data.js"></script>
   <script src="js/nav-data.js"></script>
   <script src="js/favorites.js"></script>
+  <script src="js/daily.js"></script>
   <script src="js/visuals.js"></script>
   <script src="js/lists.js"></script>
   <script src="js/card.js"></script>

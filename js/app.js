@@ -84,6 +84,13 @@
       case "favorites":
         lists.renderFavorites(byId("favorites-mount"), data, fav);
         break;
+      case "today": {
+        var daily = root.PDB_DAILY;
+        if (daily && typeof daily.renderToday === "function") {
+          daily.renderToday(byId("today-mount"), data);
+        }
+        break;
+      }
       case "search":
         // Clear any stale query so returning to search shows the hint state
         // (the query is intentionally not encoded in the hash — see trace).

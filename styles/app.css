@@ -823,3 +823,103 @@ svg.icon,
 @media (min-width: 640px) {
   .screen-inner { padding-top: var(--space-7); }
 }
+
+/* ==========================================================================
+   Sprint 005 — Today daily card habit loop (habit bar: date + streak + applied).
+   Reuses Sprint-001 tokens only (no new palette, no new fonts). Accent paints
+   the streak indicator / applied state, never body text, so AA holds in both
+   themes. The daily card itself is the same responsive Sprint-002/003 card.
+   ========================================================================== */
+.today-mount { display: block; }
+
+.habit-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.habit-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.habit-date {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* Streak chip — glyph + number, accent-outlined. aria-hidden; value is also
+   conveyed as text in .habit-status for assistive tech. */
+.streak-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--fg);           /* text stays --fg for AA in both themes */
+  font-weight: 700;
+}
+.streak-glyph { width: 18px; height: 18px; fill: var(--accent); stroke: none; } /* accent glyph (aria-hidden, non-text) */
+.streak-chip-num { font-size: var(--fs-1); line-height: 1; font-variant-numeric: tabular-nums; }
+.streak-chip-unit { font-size: var(--fs--1); font-weight: 600; }
+
+.habit-status { margin: 0; }
+.habit-status-main {
+  margin: 0 0 var(--space-1);
+  color: var(--fg);
+  font-weight: 600;
+}
+.habit-status-nudge {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs--1);
+}
+
+/* "Applied it" toggle — a real button, thumb-reachable (>=44px). */
+.applied-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-0);
+  font-weight: 700;
+  cursor: pointer;
+  transition: color var(--motion-fast) var(--ease),
+              border-color var(--motion-fast) var(--ease),
+              background var(--motion-fast) var(--ease);
+}
+.applied-toggle:hover { border-color: var(--focus); }
+.applied-glyph { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.applied-toggle.is-applied {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--fg);           /* label text stays --fg for AA both themes */
+}
+.applied-toggle.is-applied .applied-glyph { stroke: var(--accent); } /* accent check glyph (aria-hidden) */
+
+/* The daily card container sits below the habit bar; the card inside is the
+   unchanged Sprint-002/003 responsive card. */
+.today-card { display: block; }

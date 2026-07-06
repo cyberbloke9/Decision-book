@@ -10,7 +10,8 @@
     "test:content": "node tests/content.spec.mjs",
     "test:shell": "node tests/shell.spec.mjs",
     "test:visuals": "node tests/visuals.spec.mjs",
-    "test:nav": "node tests/nav.spec.mjs"
+    "test:nav": "node tests/nav.spec.mjs",
+    "test:daily": "node tests/daily.spec.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

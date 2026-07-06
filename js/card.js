@@ -66,27 +66,37 @@
   }
 
   /* Render one framework entry into `mount`, replacing its contents.
-     data defaults to window.PDB_DATA. Returns the mount node. */
-  function renderCard(fw, mount, data) {
+     data defaults to window.PDB_DATA.
+     options (strictly additive; defaults preserve #/f/:id byte-for-byte):
+       { headingId: "h-framework", showBack: true }
+     The Today screen passes { headingId: "h-today-card", showBack: false } so
+     the card heading id is unique across screens and the drill-in back link is
+     omitted (Today is a root tab). Returns the mount node. */
+  function renderCard(fw, mount, data, options) {
     data = data || root.PDB_DATA;
+    options = options || {};
+    var headingId = options.headingId || "h-framework";
+    var showBack = options.showBack !== false; // default true
     mount.textContent = "";
     mount.setAttribute("data-state", "card");
 
     // Top back link (to Browse) — a sibling BEFORE article.card, so the card's
     // lastElementChild stays the personalPrompt (B5 preserved).
-    var back = el("a", "back-link card-back", "Back to Browse");
-    back.setAttribute("href", "#/browse");
-    var NS = "http://www.w3.org/2000/svg";
-    var chev = document.createElementNS(NS, "svg");
-    chev.setAttribute("class", "back-chevron");
-    chev.setAttribute("viewBox", "0 0 24 24");
-    chev.setAttribute("aria-hidden", "true");
-    chev.setAttribute("focusable", "false");
-    var chevPath = document.createElementNS(NS, "path");
-    chevPath.setAttribute("d", "M15 5l-7 7 7 7");
-    chev.appendChild(chevPath);
-    back.insertBefore(chev, back.firstChild);
-    mount.appendChild(back);
+    if (showBack) {
+      var back = el("a", "back-link card-back", "Back to Browse");
+      back.setAttribute("href", "#/browse");
+      var NS = "http://www.w3.org/2000/svg";
+      var chev = document.createElementNS(NS, "svg");
+      chev.setAttribute("class", "back-chevron");
+      chev.setAttribute("viewBox", "0 0 24 24");
+      chev.setAttribute("aria-hidden", "true");
+      chev.setAttribute("focusable", "false");
+      var chevPath = document.createElementNS(NS, "path");
+      chevPath.setAttribute("d", "M15 5l-7 7 7 7");
+      chev.appendChild(chevPath);
+      back.insertBefore(chev, back.firstChild);
+      mount.appendChild(back);
+    }
 
     var article = el("article", "card");
 
@@ -96,7 +106,7 @@
     header.appendChild(kicker);
     var headRow = el("div", "card-header-row");
     var h2 = el("h2", "card-name");
-    h2.id = "h-framework";
+    h2.id = headingId;
     h2.textContent = fw.name;
     headRow.appendChild(h2);
     headRow.appendChild(favButton(fw));

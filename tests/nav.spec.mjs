@@ -394,14 +394,29 @@ const run = async () => {
   await ctx.setOffline(false);
 
   const swSrc = readFileSync(resolve(HERE, "..", "sw.js"), "utf8");
-  log(/CACHE\s*=\s*"pdb-shell-v4"/.test(swSrc), "sw.js CACHE === pdb-shell-v4");
+  log(/CACHE\s*=\s*"pdb-shell-v5"/.test(swSrc), "sw.js CACHE === pdb-shell-v5");
   log(/js\/nav-data\.js/.test(swSrc) && /js\/favorites\.js/.test(swSrc) && /js\/lists\.js/.test(swSrc), "sw.js precaches the 3 new modules");
   log(/keys\.filter[\s\S]*caches\.delete/.test(swSrc), "sw.js activate purges old cache");
 
-  /* ---- 13. Non-regression: Today unchanged; prompt-last intact ---- */
+  /* ---- 13. Today is now the Sprint-005 dynamic daily card; prompt-last intact ---- */
   await page.goto(BASE + "/#/today", { waitUntil: "networkidle" });
-  const today = await page.evaluate(() => document.querySelector("#screen-today").textContent.includes("No card yet today"));
-  log(today, "Today screen unchanged (Sprint-001 placeholder)");
+  const todayNow = await page.evaluate(() => {
+    const screen = document.querySelector("#screen-today");
+    const mount = document.querySelector("#today-mount");
+    const btn = mount ? mount.querySelector("button.applied-toggle") : null;
+    const streak = mount ? mount.querySelector(".streak-chip") : null;
+    const card = mount ? mount.querySelector("[data-framework-id] .card, [data-framework-id].card") : null;
+    return {
+      noPlaceholder: !screen.textContent.includes("No card yet today"),
+      hasButton: !!(btn && (btn.getAttribute("aria-pressed") === "true" || btn.getAttribute("aria-pressed") === "false")),
+      hasStreak: !!streak,
+      hasCard: !!card
+    };
+  });
+  log(todayNow.noPlaceholder, "Today: old 'No card yet today' placeholder is gone");
+  log(todayNow.hasButton, "Today: habit bar has an 'applied it' toggle button (aria-pressed)");
+  log(todayNow.hasStreak, "Today: habit bar has a streak indicator");
+  log(todayNow.hasCard, "Today: #today-mount renders a daily card with data-framework-id");
   await page.goto(BASE + "/#/f/" + idA, { waitUntil: "networkidle" });
   const promptLast = await page.evaluate(() => {
     const card = document.querySelector("#framework-mount .card");
