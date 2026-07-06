@@ -16,11 +16,13 @@
   var KEY = "pdb.favorites";
   // In-memory mirror. Order = insertion order (most-recently-added last);
   // all() returns most-recently-favorited FIRST for the favorites list.
+  // sync() re-reads storage before every public call so a change made in
+  // another tab is never clobbered by a stale mirror; the mirror survives
+  // only when storage itself is blocked/unreadable.
   var ids = read();
 
-  function read() {
+  function parse(raw) {
     try {
-      var raw = root.localStorage ? root.localStorage.getItem(KEY) : null;
       if (!raw) return [];
       var parsed = JSON.parse(raw);
       if (!Array.isArray(parsed)) return [];
@@ -37,6 +39,25 @@
     }
   }
 
+  function read() {
+    try {
+      return parse(root.localStorage ? root.localStorage.getItem(KEY) : null);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function sync() {
+    var raw;
+    try {
+      if (!root.localStorage) return; // no storage — keep the in-memory mirror
+      raw = root.localStorage.getItem(KEY);
+    } catch (e) {
+      return; // storage blocked — keep the in-memory mirror
+    }
+    ids = parse(raw);
+  }
+
   function write() {
     try {
       if (root.localStorage) root.localStorage.setItem(KEY, JSON.stringify(ids));
@@ -46,11 +67,13 @@
   }
 
   function isFavorite(id) {
+    sync();
     return ids.indexOf(id) !== -1;
   }
 
   function toggle(id) {
     if (typeof id !== "string" || !id) return false;
+    sync();
     var i = ids.indexOf(id);
     if (i === -1) {
       ids.push(id);
@@ -64,6 +87,7 @@
 
   // Most-recently-favorited first (stable, deterministic given the stored order).
   function all() {
+    sync();
     return ids.slice().reverse();
   }
 

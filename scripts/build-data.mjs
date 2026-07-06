@@ -549,6 +549,24 @@ const AUTHORED = {
 const parsed = extractResearch();
 if (parsed.length !== IDS.length) throw new Error(`parsed ${parsed.length} != ids ${IDS.length}`);
 
+// Guard the positional join: IDS[i] must actually name the same framework as
+// parsed[i]. A reorder inside RESEARCH.md would otherwise weld framework i's
+// name/trigger/essence to framework j's authored fields and ship plausible but
+// wrong content. Rule: every token of the id appears in the slugified name.
+function slugTokens(s) {
+  return s.toLowerCase().replace(/['’]/g, "").split(/[^a-z0-9]+/).filter(Boolean);
+}
+parsed.forEach((row, i) => {
+  const nameTokens = slugTokens(row.name);
+  const missing = slugTokens(IDS[i]).filter((t) => !nameTokens.includes(t));
+  if (missing.length) {
+    throw new Error(
+      `id/name mismatch at index ${i}: id "${IDS[i]}" vs RESEARCH.md name "${row.name}" ` +
+      `(id tokens not in name: ${missing.join(", ")}) — RESEARCH.md rows and IDS are out of sync`
+    );
+  }
+});
+
 const frameworks = parsed.map((row, i) => {
   const id = IDS[i];
   const a = AUTHORED[id];

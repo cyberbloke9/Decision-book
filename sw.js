@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v6";
+var CACHE = "pdb-shell-v7";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -24,6 +24,10 @@ var CACHE = "pdb-shell-v6";
 // listed), but the version bump forces the activate handler to purge the stale
 // v5 cache so the offline app serves the updated daily.js + app.css (protects
 // B20). Test/script files are NOT precached (they never ship).
+// v7 (post-acceptance review swarm) ships edits to two already-listed shell
+// assets: index.html (iOS standalone meta tags) and js/favorites.js (fresh
+// storage re-read per call so a second tab never clobbers favorites). No new
+// precache entry; the bump purges the stale v6 cache (protects B20).
 var SHELL = [
   "./",
   "index.html",

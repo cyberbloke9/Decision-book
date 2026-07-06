@@ -6,6 +6,11 @@
   <title>Pocket Decision Book</title>
   <meta name="description" content="Decision-making frameworks in your pocket — from a real-life trigger to the right method, offline, in under a minute." />
   <meta name="theme-color" content="#12141c" />
+  <!-- iOS Safari ignores manifest display:standalone on many still-in-use
+       versions; these legacy tags are the reliable standalone signal there. -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Decision Book" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
