@@ -248,7 +248,7 @@ const run = async () => {
   await cold.close(); await off.close();
 
   const swSrc = readFileSync(resolve(HERE, "..", "sw.js"), "utf8");
-  log(/pdb-shell-v3/.test(swSrc), "sw.js cache bumped to pdb-shell-v3");
+  log(/pdb-shell-v4/.test(swSrc), "sw.js cache bumped to pdb-shell-v4");
   log(/js\/visuals\.js/.test(swSrc), "sw.js precaches js/visuals.js");
   log(/keys\.filter[\s\S]*caches\.delete/.test(swSrc), "sw.js activate purges old cache");
 

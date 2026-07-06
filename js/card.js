@@ -29,6 +29,42 @@
     return String(fw.visualType || "").replace(/-/g, " ");
   }
 
+  /* Build the favorite toggle button (a real <button>, not a link) reflecting
+     and toggling PDB_FAV state. aria-pressed + a dynamic aria-label; the star
+     glyph is aria-hidden. Kept in the card HEADER so the personalPrompt remains
+     the terminal card-part (B5). */
+  function favButton(fw) {
+    var fav = root.PDB_FAV;
+    var pressed = fav && typeof fav.isFavorite === "function" ? fav.isFavorite(fw.id) : false;
+
+    var btn = el("button", "fav-toggle");
+    btn.setAttribute("type", "button");
+
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "fav-star");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    var path = document.createElementNS(NS, "path");
+    path.setAttribute("d", "M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 17.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z");
+    svg.appendChild(path);
+    btn.appendChild(svg);
+
+    function reflect(on) {
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-label", on ? "Remove from favorites" : "Add to favorites");
+      if (on) btn.classList.add("is-fav"); else btn.classList.remove("is-fav");
+    }
+    reflect(pressed);
+
+    btn.addEventListener("click", function () {
+      var now = fav && typeof fav.toggle === "function" ? fav.toggle(fw.id) : false;
+      reflect(now);
+    });
+    return btn;
+  }
+
   /* Render one framework entry into `mount`, replacing its contents.
      data defaults to window.PDB_DATA. Returns the mount node. */
   function renderCard(fw, mount, data) {
@@ -36,16 +72,35 @@
     mount.textContent = "";
     mount.setAttribute("data-state", "card");
 
+    // Top back link (to Browse) — a sibling BEFORE article.card, so the card's
+    // lastElementChild stays the personalPrompt (B5 preserved).
+    var back = el("a", "back-link card-back", "Back to Browse");
+    back.setAttribute("href", "#/browse");
+    var NS = "http://www.w3.org/2000/svg";
+    var chev = document.createElementNS(NS, "svg");
+    chev.setAttribute("class", "back-chevron");
+    chev.setAttribute("viewBox", "0 0 24 24");
+    chev.setAttribute("aria-hidden", "true");
+    chev.setAttribute("focusable", "false");
+    var chevPath = document.createElementNS(NS, "path");
+    chevPath.setAttribute("d", "M15 5l-7 7 7 7");
+    chev.appendChild(chevPath);
+    back.insertBefore(chev, back.firstChild);
+    mount.appendChild(back);
+
     var article = el("article", "card");
 
-    // 1. Header — name (h2, screen heading) + category kicker
+    // 1. Header — category kicker + a row of name (h2, screen heading) + fav star
     var header = el("header", "card-header");
     var kicker = el("p", "card-kicker", labelFor(fw, data));
+    header.appendChild(kicker);
+    var headRow = el("div", "card-header-row");
     var h2 = el("h2", "card-name");
     h2.id = "h-framework";
     h2.textContent = fw.name;
-    header.appendChild(kicker);
-    header.appendChild(h2);
+    headRow.appendChild(h2);
+    headRow.appendChild(favButton(fw));
+    header.appendChild(headRow);
     article.appendChild(header);
 
     // 2. Trigger — the "when you're facing…" line

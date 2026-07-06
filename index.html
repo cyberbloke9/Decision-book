@@ -72,16 +72,8 @@
     <section class="screen" id="screen-situations" data-route="situations" aria-labelledby="h-situations">
       <div class="screen-inner">
         <h2 class="screen-title" id="h-situations">Start where you are</h2>
-        <p class="lede">From a real feeling — "I can't choose", "I keep delaying", "this decision scares me" — to the right thinking method, in under a minute.</p>
-        <div class="panel">
-          <p class="panel-kicker">How to use this</p>
-          <ol class="how-list">
-            <li>Name the situation you're actually in.</li>
-            <li>Open the framework it hands you and read the one-screen card.</li>
-            <li>Answer its final question, then act.</li>
-          </ol>
-          <p class="panel-note">Star the ones that help so they're one tap away, and check <strong>Today</strong> for a daily prompt that builds the habit.</p>
-        </div>
+        <p class="lede">Name the feeling you're actually in — "I can't choose", "I keep delaying", "this decision scares me" — and get the right thinking method, in under a minute.</p>
+        <div id="situations-mount" class="situations-mount"></div>
       </div>
     </section>
 
@@ -89,7 +81,24 @@
     <section class="screen" id="screen-browse" data-route="browse" aria-labelledby="h-browse" hidden>
       <div class="screen-inner">
         <h2 class="screen-title" id="h-browse">Browse the shelf</h2>
-        <p class="lede">Explore every framework by where it lives — the four working areas of the book plus four extension sets for mental models, biases, attention, and decision processes.</p>
+        <p class="lede">Every framework by where it lives — the book's four working areas plus four extension sets for mental models, biases, attention, and decision processes.</p>
+        <div id="browse-mount" class="browse-mount"></div>
+      </div>
+    </section>
+
+    <!-- Situation detail (reached via #/s/:id) -->
+    <section class="screen" id="screen-situation-detail" data-route="situation" aria-labelledby="h-situation" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-situation">Situation</h2>
+        <div id="situation-detail-mount" class="detail-mount"></div>
+      </div>
+    </section>
+
+    <!-- Category detail (reached via #/c/:id) -->
+    <section class="screen" id="screen-category-detail" data-route="category" aria-labelledby="h-category" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-category">Category</h2>
+        <div id="category-detail-mount" class="detail-mount"></div>
       </div>
     </section>
 
@@ -97,12 +106,15 @@
     <section class="screen" id="screen-favorites" data-route="favorites" aria-labelledby="h-favorites" hidden>
       <div class="screen-inner">
         <h2 class="screen-title" id="h-favorites">Your favorites</h2>
-        <div class="empty-state">
-          <svg class="empty-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-            <path d="M24 6l5.3 10.7 11.8 1.7-8.6 8.3 2 11.8L24 33.2 13.5 38.5l2-11.8-8.6-8.3 11.8-1.7z"></path>
-          </svg>
-          <p class="empty-title">No favorites yet</p>
-          <p class="empty-body">Frameworks you star will collect here — tap the star on any card to keep it one tap away.</p>
+        <div id="favorites-mount" class="favorites-mount">
+          <div class="empty-state">
+            <svg class="empty-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <path d="M24 6l5.3 10.7 11.8 1.7-8.6 8.3 2 11.8L24 33.2 13.5 38.5l2-11.8-8.6-8.3 11.8-1.7z"></path>
+            </svg>
+            <p class="empty-title">No favorites yet</p>
+            <p class="empty-body">Star a framework to keep it one tap away — tap the star in any card's header and it collects here.</p>
+            <a class="btn-link" href="#/browse">Browse frameworks</a>
+          </div>
         </div>
       </div>
     </section>
@@ -137,7 +149,7 @@
           <input class="search-input" id="search-input" type="search" inputmode="search"
                  placeholder="Search by name or keyword" autocomplete="off" />
         </label>
-        <p class="search-hint">Type to find a framework by name or keyword. Search results arrive once the framework library is in place.</p>
+        <div id="search-results" class="search-results" aria-live="polite"></div>
       </div>
     </section>
 
@@ -184,7 +196,10 @@
   </nav>
 
   <script src="js/data.js"></script>
+  <script src="js/nav-data.js"></script>
+  <script src="js/favorites.js"></script>
   <script src="js/visuals.js"></script>
+  <script src="js/lists.js"></script>
   <script src="js/card.js"></script>
   <script src="js/app.js"></script>
 </body>

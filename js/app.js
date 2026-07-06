@@ -6,6 +6,8 @@
 (function () {
   "use strict";
 
+  var root = typeof window !== "undefined" ? window : this;
+
   var THEME_KEY = "pdb.theme";
   var DEFAULT_ROUTE = "situations";
   var TAB_ROUTES = ["situations", "browse", "favorites", "today"];
@@ -29,13 +31,18 @@
   //   { route: "browse" }                 → a whitelisted screen
   //   { route: "framework", id: "..." }   → the parametric #/f/:id card
   //   null                                → unknown/garbage (caller normalises)
+  // Parametric-route prefixes → route name. #/f/:id (framework, Sprint 002),
+  // #/s/:id (situation detail), #/c/:id (category detail).
+  var PARAM_PREFIXES = { f: "framework", s: "situation", c: "category" };
+
   function parseHash() {
     var raw = (location.hash || "").replace(/^#\/?/, "").split(/[?#]/)[0].trim();
-    if (raw === "f" || raw.indexOf("f/") === 0) {
-      var rawId = raw === "f" ? "" : raw.slice(2);
+    var head = raw.indexOf("/") !== -1 ? raw.slice(0, raw.indexOf("/")) : raw;
+    if (Object.prototype.hasOwnProperty.call(PARAM_PREFIXES, head)) {
+      var rawId = raw === head ? "" : raw.slice(head.length + 1);
       var id = "";
       try { id = decodeURIComponent(rawId); } catch (e) { id = rawId; }
-      return { route: "framework", id: id.trim() };
+      return { route: PARAM_PREFIXES[head], id: id.trim() };
     }
     return ALL_ROUTES.indexOf(raw) !== -1 ? { route: raw } : null;
   }
@@ -54,6 +61,93 @@
       card.renderNotFound(mount);
     }
     return null;
+  }
+
+  function byId(x) { return document.getElementById(x); }
+
+  // Render the dynamic content for a Sprint-004 screen. Static headings already
+  // exist in the HTML; for parametric routes we set the heading text here.
+  function renderScreenContent(desc) {
+    var data = root.PDB_DATA;
+    var lists = root.PDB_LISTS;
+    var nav = root.PDB_NAV;
+    var fav = root.PDB_FAV;
+    if (!lists) return;
+
+    switch (desc.route) {
+      case "situations":
+        if (nav) lists.renderSituationPicker(byId("situations-mount"), nav);
+        break;
+      case "browse":
+        lists.renderBrowseIndex(byId("browse-mount"), data);
+        break;
+      case "favorites":
+        lists.renderFavorites(byId("favorites-mount"), data, fav);
+        break;
+      case "search":
+        // Clear any stale query so returning to search shows the hint state
+        // (the query is intentionally not encoded in the hash — see trace).
+        var input = byId("search-input");
+        if (input) input.value = "";
+        lists.renderSearch("", byId("search-results"), data);
+        break;
+      case "situation": {
+        var h = byId("h-situation");
+        var mount = byId("situation-detail-mount");
+        var sit = nav ? nav.situationById(desc.id) : null;
+        if (sit) {
+          if (h) h.textContent = sit.label;
+          lists.renderSituationDetail(sit, mount, data);
+        } else {
+          if (h) h.textContent = "Situation not found";
+          lists.renderNotFoundList(mount, {
+            message: "That situation doesn't exist. Pick one from the list to get matching frameworks.",
+            backHref: "#/situations",
+            backLabel: "Back to Situations"
+          });
+        }
+        break;
+      }
+      case "category": {
+        var hc = byId("h-category");
+        var cmount = byId("category-detail-mount");
+        var cat = data && data.categoryById ? data.categoryById(desc.id) : null;
+        if (cat) {
+          if (hc) hc.textContent = cat.label;
+          lists.renderCategoryDetail(cat, cmount, data);
+        } else {
+          if (hc) hc.textContent = "Category not found";
+          lists.renderNotFoundList(cmount, {
+            message: "That category doesn't exist. Browse the shelf to see all eight.",
+            backHref: "#/browse",
+            backLabel: "Back to Browse"
+          });
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
+  // Wire the live search once (the #search-input persists across routes).
+  function initSearch() {
+    var input = byId("search-input");
+    var results = byId("search-results");
+    if (!input || !results) return;
+    var lists = root.PDB_LISTS;
+    var data = root.PDB_DATA;
+    input.addEventListener("input", function () {
+      if (lists) lists.renderSearch(input.value, results, data);
+    });
+    // Delegated: the no-match "Clear search" button empties + refocuses the field.
+    results.addEventListener("click", function (e) {
+      var clr = e.target && e.target.closest ? e.target.closest(".search-clear") : null;
+      if (!clr) return;
+      input.value = "";
+      input.focus();
+      if (lists) lists.renderSearch("", results, data);
+    });
   }
 
   function render(desc) {
@@ -80,6 +174,10 @@
     // wiring aria-labelledby, so the h-framework heading exists to reference.
     if (route === "framework") {
       frameworkEntry = renderFramework(desc.id);
+    } else {
+      // All Sprint-004 dynamic screens render BEFORE aria-labelledby is set,
+      // and set their (static) heading's text where the route is parametric.
+      renderScreenContent(desc);
     }
 
     // Bottom-tab active state (search + framework are not bottom tabs)
@@ -104,6 +202,14 @@
   function titleFor(desc, frameworkEntry) {
     if (desc.route === "framework") {
       return "Pocket Decision Book — " + (frameworkEntry ? frameworkEntry.name : "Framework");
+    }
+    if (desc.route === "situation") {
+      var sit = root.PDB_NAV ? root.PDB_NAV.situationById(desc.id) : null;
+      return "Pocket Decision Book — " + (sit ? sit.label : "Situation");
+    }
+    if (desc.route === "category") {
+      var cat = root.PDB_DATA && root.PDB_DATA.categoryById ? root.PDB_DATA.categoryById(desc.id) : null;
+      return "Pocket Decision Book — " + (cat ? cat.label : "Category");
     }
     var names = {
       situations: "Situations",
@@ -175,6 +281,7 @@
   /* ---- Boot ---- */
   collect();
   initTheme();
+  initSearch();
   window.addEventListener("hashchange", handleRoute);
   handleRoute();
   initServiceWorker();

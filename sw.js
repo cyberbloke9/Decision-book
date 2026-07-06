@@ -6,18 +6,25 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v3";
+var CACHE = "pdb-shell-v4";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
 // v2 added the Sprint 002 content module + card renderer so #/f/:id works offline.
 // v3 adds js/visuals.js so offline cards render their inline SVG diagrams (B20).
+// v4 adds the Sprint 004 navigation modules (nav-data, favorites, lists) so the
+// situation picker, browse index, detail screens, search and favorites all work
+// offline; the version bump forces the activate handler to purge the stale v3
+// cache that lacks these files (contract §8.2, protects B20).
 var SHELL = [
   "./",
   "index.html",
   "styles/app.css",
   "js/data.js",
+  "js/nav-data.js",
+  "js/favorites.js",
   "js/visuals.js",
+  "js/lists.js",
   "js/card.js",
   "js/app.js",
   "manifest.json",
