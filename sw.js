@@ -6,14 +6,17 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v1";
+var CACHE = "pdb-shell-v2";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
+// v2 adds the Sprint 002 content module + card renderer so #/f/:id works offline.
 var SHELL = [
   "./",
   "index.html",
   "styles/app.css",
+  "js/data.js",
+  "js/card.js",
   "js/app.js",
   "manifest.json",
   "icons/icon-192.png",

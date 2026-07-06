@@ -140,6 +140,13 @@
         <p class="search-hint">Type to find a framework by name or keyword. Search results arrive once the framework library is in place.</p>
       </div>
     </section>
+
+    <!-- Framework card (reached only by direct hash #/f/:id this sprint) -->
+    <section class="screen" id="screen-framework" data-route="framework" aria-labelledby="h-framework" hidden>
+      <div class="screen-inner">
+        <div id="framework-mount" class="framework-mount"></div>
+      </div>
+    </section>
   </main>
 
   <nav class="tab-bar" aria-label="Primary">
@@ -176,6 +183,8 @@
     </a>
   </nav>
 
+  <script src="js/data.js"></script>
+  <script src="js/card.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

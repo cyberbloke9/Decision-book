@@ -25,12 +25,41 @@
     }
   }
 
-  function routeFromHash() {
+  // Parse the hash into a route descriptor:
+  //   { route: "browse" }                 → a whitelisted screen
+  //   { route: "framework", id: "..." }   → the parametric #/f/:id card
+  //   null                                → unknown/garbage (caller normalises)
+  function parseHash() {
     var raw = (location.hash || "").replace(/^#\/?/, "").split(/[?#]/)[0].trim();
-    return ALL_ROUTES.indexOf(raw) !== -1 ? raw : null;
+    if (raw === "f" || raw.indexOf("f/") === 0) {
+      var rawId = raw === "f" ? "" : raw.slice(2);
+      var id = "";
+      try { id = decodeURIComponent(rawId); } catch (e) { id = rawId; }
+      return { route: "framework", id: id.trim() };
+    }
+    return ALL_ROUTES.indexOf(raw) !== -1 ? { route: raw } : null;
   }
 
-  function render(route) {
+  function renderFramework(id) {
+    var mount = document.getElementById("framework-mount");
+    if (!mount) return null;
+    var data = window.PDB_DATA;
+    var card = window.PDB_CARD;
+    var fw = (id && data && typeof data.byId === "function") ? data.byId(id) : null;
+    if (fw && card && typeof card.renderCard === "function") {
+      card.renderCard(fw, mount, data);
+      return fw;
+    }
+    if (card && typeof card.renderNotFound === "function") {
+      card.renderNotFound(mount);
+    }
+    return null;
+  }
+
+  function render(desc) {
+    var route = desc.route;
+    var frameworkEntry = null;
+
     // Toggle screen visibility
     Object.keys(screens).forEach(function (r) {
       var isActive = r === route;
@@ -47,7 +76,13 @@
       }
     });
 
-    // Bottom-tab active state (search is not a bottom tab)
+    // Framework route: render the card (or not-found) into its mount before
+    // wiring aria-labelledby, so the h-framework heading exists to reference.
+    if (route === "framework") {
+      frameworkEntry = renderFramework(desc.id);
+    }
+
+    // Bottom-tab active state (search + framework are not bottom tabs)
     TAB_ROUTES.forEach(function (r) {
       var t = tabs[r];
       if (!t) return;
@@ -58,14 +93,18 @@
       }
     });
 
-    // Move focus target to the content region heading for a11y on route change
+    // Move focus target to the content region heading for a11y on route change.
+    // The framework screen's heading (name or "Framework not found") is #h-framework.
     var region = document.getElementById("screen-region");
     if (region) region.setAttribute("aria-labelledby", "h-" + route);
 
-    document.title = titleFor(route);
+    document.title = titleFor(desc, frameworkEntry);
   }
 
-  function titleFor(route) {
+  function titleFor(desc, frameworkEntry) {
+    if (desc.route === "framework") {
+      return "Pocket Decision Book — " + (frameworkEntry ? frameworkEntry.name : "Framework");
+    }
     var names = {
       situations: "Situations",
       browse: "Browse",
@@ -73,20 +112,20 @@
       today: "Today",
       search: "Search"
     };
-    return "Pocket Decision Book — " + (names[route] || "Situations");
+    return "Pocket Decision Book — " + (names[desc.route] || "Situations");
   }
 
   function handleRoute() {
-    var route = routeFromHash();
-    if (route === null) {
+    var desc = parseHash();
+    if (desc === null) {
       // Unknown/garbage hash → normalise to default without a history entry
       var target = "#/" + DEFAULT_ROUTE;
       if (location.hash !== target) {
         history.replaceState(null, "", location.pathname + location.search + target);
       }
-      route = DEFAULT_ROUTE;
+      desc = { route: DEFAULT_ROUTE };
     }
-    render(route);
+    render(desc);
   }
 
   /* ---- Theme toggle ---- */

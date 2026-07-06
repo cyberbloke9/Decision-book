@@ -323,6 +323,188 @@ svg.icon,
 .search-input:focus { outline: none; }
 .search-hint { color: var(--muted); margin: 0; }
 
+/* ==========================================================================
+   Framework card (Sprint 002) — data-driven six-part card.
+   Reuses Sprint-001 tokens only. Accent paints borders/tokens, never text,
+   so AA contrast holds in both themes. Long strings wrap; nothing clips.
+   ========================================================================== */
+.framework-mount { min-width: 0; }
+
+.card,
+.card * { overflow-wrap: anywhere; word-break: normal; }
+
+/* Header */
+.card-header { margin-bottom: var(--space-5); }
+.card-kicker {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs--1);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.card-name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-3);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+/* Generic part + label kicker */
+.card-part { margin: 0 0 var(--space-5); }
+.card-part-label {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs--1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Trigger — quoted voice of the user, set apart with an accent rule */
+.card-trigger {
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--accent);
+}
+.card-trigger-text {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+/* Visual figure — form-name caption (real SVG is Sprint 003) */
+.card-figure {
+  margin: 0 0 var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.card-figure-frame {
+  flex: none;
+  width: 56px; height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.card-figure-token {
+  font-family: var(--font-serif);
+  font-size: var(--fs-2);
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.card-figcaption { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.card-figcaption-kicker {
+  font-size: var(--fs--1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.card-figcaption-name {
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.2;
+}
+
+/* Essence */
+.card-essence-text {
+  margin: 0;
+  font-size: var(--fs-1);
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+/* Steps + pitfalls lists */
+.card-steps-list,
+.card-pitfalls-list {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: var(--space-2);
+}
+.card-steps-list li,
+.card-pitfalls-list li { color: var(--fg); }
+.card-pitfalls-list li::marker { color: var(--accent); }
+
+/* Example */
+.card-example-text { margin: 0; color: var(--fg); line-height: 1.55; }
+
+/* Personal prompt — emphasized TERMINAL element (the call to action) */
+.card-prompt {
+  margin: var(--space-6) 0 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow);
+}
+.card-prompt-kicker {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs--1);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.card-prompt-text {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-2);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--fg);
+}
+
+/* Not-found state */
+.card-notfound {
+  margin-top: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-5);
+}
+.card-notfound-title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-serif);
+  font-size: var(--fs-2);
+  font-weight: 600;
+  color: var(--fg);
+}
+.card-notfound-body { margin: 0 0 var(--space-5); color: var(--muted); }
+.card-notfound-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease);
+}
+.btn-link:hover { border-color: var(--focus); }
+
 /* ---- Bottom tab bar ---- */
 .tab-bar {
   position: fixed;
