@@ -62,6 +62,62 @@ const run = async () => {
   const notQ = fws.filter((f) => !f.personalPrompt.trim().endsWith("?")).map((f) => f.id);
   log(notQ.length === 0, "every personalPrompt ends with '?'", notQ.join(","));
 
+  // Step 3b: Sprint 001 examples[] engine, core 52 (B24-B27, D1-D5).
+  // Token lists are hardcoded inline here per contract §6.1 (authoritative);
+  // NOT loaded from the trace artifact (avoids the bootstrap problem).
+  const CORE_CATS = new Set(["improve-yourself", "understand-yourself", "understand-others", "improve-others"]);
+  const EXT_CATS = new Set(["mental-models", "cognitive-biases", "attention", "decision-processes"]);
+  const PERSONA_ORDER = ["everyday", "student", "relationship", "high-achiever", "privileged"];
+  // D3 helper — hasStakesToken(scenario)
+  const stakesRes = [
+    /[0-9]/,
+    /[₹$€£]/,
+    /\b(day|days|week|weeks|month|months|year|years|hour|hours|minute|minutes|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|tonight|tomorrow)\b/i,
+    /\b(manager|boss|spouse|husband|wife|partner|parent|mother|father|mom|dad|son|daughter|friend|teacher|co-founder|client|landlord|sister|brother|in-law)\b/i
+  ];
+  const hasStakesToken = (s) => stakesRes.some((r) => r.test(s));
+  // D4 helper — hasCostMarker(tradeoff)
+  const costRe = /\b(cost|costs|price|give up|gives up|lose|loss|risk|sacrifice|trade|traded|forfeit|at the expense|you may|could miss|downside|pay|pays)\b/i;
+  const hasCostMarker = (s) => costRe.test(s);
+  const BAD_TRADE = /\b(no downside|pure win|no trade-?off)\b/i;
+
+  const coreFws = fws.filter((f) => CORE_CATS.has(f.category));
+  const extFws = fws.filter((f) => EXT_CATS.has(f.category));
+  // 52-and-only-52 have examples; none in the 4 extension categories.
+  const coreWithEx = coreFws.filter((f) => f.examples);
+  const extWithEx = extFws.filter((f) => f.examples);
+  log(coreWithEx.length === 52, "exactly the 52 core frameworks carry examples[]", `core-with-examples=${coreWithEx.length}`);
+  log(extWithEx.length === 0, "no extension framework carries examples[] yet (Sprint 002)", `ext-with-examples=${extWithEx.length}`);
+
+  let d1 = null, d2 = null, d3 = null, d4 = null, d5 = null, d8 = null;
+  for (const f of coreWithEx) {
+    const ex = f.examples;
+    // D1 — array of 5, personas fixed order, non-empty scenario+tradeoff
+    if (!Array.isArray(ex) || ex.length !== 5) { d1 = d1 || `${f.id}: not length 5`; continue; }
+    ex.forEach((e, k) => {
+      if (e.persona !== PERSONA_ORDER[k]) d1 = d1 || `${f.id}: persona[${k}]=${e.persona}`;
+      if (!nonEmpty(e.scenario)) d1 = d1 || `${f.id}/${e.persona}: empty scenario`;
+      if (!nonEmpty(e.tradeoff)) d1 = d1 || `${f.id}/${e.persona}: empty tradeoff`;
+      // D3 — every scenario has a stakes token
+      if (nonEmpty(e.scenario) && !hasStakesToken(e.scenario)) d3 = d3 || `${f.id}/${e.persona}`;
+      // D4 — every tradeoff has a cost marker and is not a "pure win"
+      if (nonEmpty(e.tradeoff) && (!hasCostMarker(e.tradeoff) || BAD_TRADE.test(e.tradeoff))) d4 = d4 || `${f.id}/${e.persona}`;
+      // D8 — no placeholder tokens in any scenario OR tradeoff (all 5×52 strings, not just featured)
+      const exBlob = `${e.scenario} ${e.tradeoff}`.toLowerCase();
+      for (const p of PLACEHOLDERS) { if (exBlob.includes(p)) d8 = d8 || `${p} in ${f.id}/${e.persona}`; }
+    });
+    // D2 — featured int 0..4
+    if (!Number.isInteger(f.featured) || f.featured < 0 || f.featured > 4) d2 = d2 || `${f.id}: featured=${f.featured}`;
+    // D5 — universalExample === examples[featured].scenario (byte equality)
+    if (Number.isInteger(f.featured) && f.examples[f.featured] && f.universalExample !== f.examples[f.featured].scenario) d5 = d5 || f.id;
+  }
+  log(!d1, "D1: 52 core have 5 personas in fixed order, non-empty scenario+tradeoff", d1 || "");
+  log(!d2, "D2: featured is an int 0..4 for all 52", d2 || "");
+  log(!d3, "D3: every scenario (all 5×52) carries a concrete stakes token", d3 || "");
+  log(!d4, "D4: every tradeoff (all 5×52) carries an explicit cost marker", d4 || "");
+  log(!d5, "D5: universalExample === examples[featured].scenario for all 52", d5 || "");
+  log(!d8, "D8: no placeholder tokens in any of the 5×52 scenarios/tradeoffs", d8 || "");
+
   // Step 4: visual-type diversity >= 12
   const usedVT = new Set(fws.map((f) => f.visualType));
   log(Array.isArray(data.VISUAL_TYPES) && data.VISUAL_TYPES.length > 0 && usedVT.size >= 12, "≥12 distinct visualType used", `${usedVT.size}`);
@@ -204,7 +260,7 @@ const run = async () => {
   // The shell cache version is bumped every sprint that adds precached assets
   // (v2 content, v3 visuals, v4 nav modules); this regression check tracks the
   // CURRENT version so it stays green after each bump — same pattern as v2→v3.
-  log(/pdb-shell-v7/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v6)");
+  log(/pdb-shell-v8/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v8)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak

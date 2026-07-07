@@ -1,0 +1,208 @@
+[CONTRACT_REVIEW] Sprint 001 review started
+[CONTRACT_REVIEW] Reading: spec.md, sprints/sprint_001/contract.md
+[CONTRACT_REVIEW] Evaluating scope clarity, testability, pass/fail conditions, edge cases
+[CONTRACT_REVIEW] Analysis complete
+[CONTRACT_REVIEW] Verdict: ACCEPT (BLOCKERS: 0, HIGH: 0)
+[CONTRACT_REVIEW] Rationale: Well-scoped, testable, 13 explicit Playwright paths, complete state enumeration, correct PWA/persistence specs
+[CONTRACT_REVIEW] Minor observations: icon documentation and type-scale declaration left flexible (expected for design phase), empty-state copy requires manual review (contract is clear, test is conservative)
+[CONTRACT_REVIEW] Output: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_001/contract_review.md
+
+[2026-07-05] EVALUATE Sprint 001 — App Shell & PWA Foundation.
+Action: Live adversarial eval. Read spec.md, contract.md, all source (index.html, app.js, sw.js, manifest.json, app.css, tests, gitignore).
+Commands:
+  - python3 -m http.server 4173 (static serve)
+  - node tests/shell.spec.mjs  -> 50 passed, 0 failed (Generator suite, re-run by Evaluator not trusted)
+  - independent Evaluator suite -> FULL unrestricted axe (dark+light) 0 serious/critical; tap targets >=44; focus ring >=3px solid; Space-key theme toggle; cold new-page offline nav+theme (4/4 after fixing a test-race in Evaluator script); zero console errors.
+  - sips/file -> icons exactly 192x192 & 512x512 valid PNGs.
+  - git check-ignore -> ruvector.db/.harness/node_modules all ignored; git status --porcelain clean of artifacts.
+Result: PASS. Score 4.8. 0 blockers, 0 high. All 13 acceptance items hold.
+Evidence: findings.md; screenshots in scratchpad (dark-situations, light-search, dark-favorites, light-today).
+Next: proceed to Sprint 002 (content engine & data model).
+
+[CONTRACT_REVIEW] Sprint 002 review started
+[CONTRACT_REVIEW] Reading: spec.md, sprints/sprint_002/contract.md, sprints/sprint_001/contract.md (for regression context), .planning/RESEARCH.md (content authority)
+[CONTRACT_REVIEW] Scope: Content engine & data model — 74-framework data module, six-part card renderer, hash route #/f/:id, data-driven rendering (B1–B5)
+[CONTRACT_REVIEW] Key verifications:
+  - RESEARCH.md structure: 4 quadrants (Q1–Q4) + 4 extension sets (A–D) = 52+7+6+5+4 = 74 entries, counts per-category exact (18/13/13/8 / 7/6/5/4)
+  - Contract schema (§3.1): all field types, validation rules, non-emptiness enforced, placeholder detection (case-insensitive), B2 trigger/essence copy rule, B3 authored-field scope
+  - Route & renderer (§1.1–1.3): hash parametric #/f/:id, six-part card render, prompt last (B5), not-found state with back-links to #/situations & #/browse (Sprint 001 routes exist)
+  - States (§5): success/multi-step/no-step/not-found/offline/no-scroll all defined
+  - Test coverage (§11): 13 Playwright paths, each with concrete assertions, covers count/schema/B2 match/B4 genericity/B5 proxy/visual diversity/not-found/offline/a11y/console
+  - Acceptance checklist (§13): 13 concrete items, all verifiable
+[CONTRACT_REVIEW] Delegations verified:
+  - Visual-type naming: Generator defines VISUAL_TYPES as forward interface for Sprint 003; tested ≥12 distinct (§11.4)
+  - Steps identification: Marked optional, conditional test only (if present→<ol>, if absent→no empty); examples anchor (§11.6)
+  - Authored field quality: Non-empty/non-placeholder bar Sprint 002; deep originality review deferred Sprint 006 (§12)
+  - Service worker cache: Version bump pdb-shell-v1→v2 with activate cleanup fully specified (§9.2, §11.11)
+[CONTRACT_REVIEW] Analysis complete
+[CONTRACT_REVIEW] Verdict: ACCEPT (BLOCKERS: 0, HIGH: 0)
+[CONTRACT_REVIEW] Rationale: Exact route/schema/counts/states, testable Playwright suite, explicit Sprint 003/004/005/006 deferrals, visual-type interface pattern is legitimate forward contract, no testability gaps
+[CONTRACT_REVIEW] Observations: Visual naming should be descriptive (e.g. two-by-two-matrix); ensure ≥1 framework entry has steps to exercise conditional render state; persona guidance sufficient (spec §3 + B5 question proxy)
+[CONTRACT_REVIEW] Output: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_002/contract_review.md
+
+[2026-07-06] EVALUATE Sprint 002 — content engine & data model.
+Verdict: PASS (score 4.7, blockers 0, high 0). findings.md written.
+Independent checks (not the Generator's suite): own RESEARCH.md parser -> B2 0 mismatches/74; own schema pass -> counts 18/13/13/8+7/6/5/4, 0 issues, 37 visualType; own Playwright -> all 74 cards render six parts, prompt terminal, 0 console errors, synthetic entry renders, not-found+empty-id OK, no h-scroll 375/320; own steady-state axe -> 0 color-contrast (card+situations, dark+light, 375+320); own offline cold goto -> card renders from cache; sw v2 precaches data.js+card.js.
+Findings: F-001 Medium (craft) confirmation-bias trigger shows literal '*satisfied*' markdown asterisks; F-002 Low (process) shell.spec.mjs intermittent axe false-fail sampling mid theme-transition (steady-state clean, not a product regression). Both non-blocking.
+[2026-07-06] Wrote prompt_patch_002.md (repeat-pattern: axe mid-theme-transition flake, Sprint 001 content suite -> Sprint 002 shell suite). Also ran full independent axe rule set (color-contrast,list,link-name,document-title,html-has-lang) on card+not-found in both themes: 0 violations. Verdict unchanged: PASS.
+[2026-07-06T00:00:00Z] EVALUATOR: CONTRACT_REVIEW mode for sprint_003
+- Read contract.md (187 lines)
+- Read spec.md (141 lines)
+- Verified 37 visualTypes in js/data.js (via node script)
+- Verified 74 frameworks (52 Decision Book + 22 extension sets)
+- Verified delegate authority: RESEARCH.md → js/data.js → sprint_003 visuals.js
+- Assessment: 15 test paths, comprehensive metrics, offline gate explicit, carryover fixes scoped
+- Decision: ACCEPT (0 blockers, 0 high findings; 2 advisory notes on minor clarification)
+- Verdict file: sprints/sprint_003/contract_review.md
+
+[2026-07-06] EVALUATE Sprint 003 (Original SVG visuals, B6/B7). VERDICT: PASS (4.8, 0 blockers, 0 high).
+Independent verification (not Generator's suite): Playwright over all 74 frameworks -> every .card-figure has direct-child inline <svg>; .card-figure-token absent; six parts intact, prompt last; min rendered SVG h=216.3px/w=309.0px; min <text> effective 18.03px; 0 clipped; 0 console errors. 37/37 visualTypes have renderers. Request-interception: 0 image/diagram network requests. Deterministic (outerHTML identical re-render; no Math.random/Date). Unknown-type fallback returns SVGSVGElement, no throw. No h-scroll @375/320. Both-theme screenshots (12 forms x dark+light) reviewed -> all present/legible/AA-contrasting; .v-* colors theme-token only, no hardcoded hex. SVG aria-hidden + figcaption a11y name; axe 0 violations both themes. Offline cold #/f/:id renders full card WITH <svg>; sw pdb-shell-v3, visuals.js precached, old cache purged. F-001 fixed (confirmation-bias trigger clean; 0 stray */_ across 74; WRAP name fixed). F-002 fixed (shell 50/50 on 5 consecutive runs). content 27/27, visuals 27/27, shell 50/50. git hygiene clean. Wrote findings.md.
+---
+EVALUATOR_PHASE: CONTRACT_REVIEW
+SPRINT: sprint_004
+TIMESTAMP: 2026-07-06T00:00:00Z
+TASK: Review Sprint 004 contract for vagueness, testability, gamesmanship
+
+## Evidence
+- Read: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_004/contract.md (180 lines)
+- Read: /Users/prithviputta/Downloads/pocket-decision-book/.harness/spec.md (141 lines)
+- Consulted: advisor() for verdict consistency check (ACCEPT + HIGH mismatch detected and resolved)
+
+## Findings Summary
+VERDICT: ACCEPT
+BLOCKERS: 0
+HIGH: 0
+
+Key strengths:
+1. Routes fully enumerated (7 total)
+2. Data modules specified with API boundaries (PDB_NAV, PDB_FAV, PDB_LISTS)
+3. Acceptance criteria atomic and enumerable (13 checkboxes in §12)
+4. Evaluator click paths explicit and reproducible (14 Playwright sequences in §10)
+5. All required states enumerated (§5: empty, success, no-match, invalid-input, not-found, offline, back)
+6. A11y binding and detailed (§6)
+7. Non-regression explicit (B20 offline gate protected, card untouched)
+
+Non-blocking tightening notes:
+- aria-live region scope could clarify whether wrapper vs count-only (§6, line 100)
+- blurb field optionality not stated (§1.1 vs §2) — author-all or skip-if-empty?
+
+Neither affects binding requirements; both are implementation-clarity questions, not contract defects.
+
+## Conclusion
+Contract is comprehensive, testable, and ready for generator implementation. Two minor prose clarifications recommended but not blocking.
+
+---
+
+[2026-07-06 12:58]
+Action: EVALUATE Sprint 004 (situation nav, browse, search, favorites). Independent adversarial pass — did NOT trust tests/nav.spec.mjs.
+Commands:
+  python3 -m http.server 4173
+  node tests/{nav,shell,visuals,content}.spec.mjs  -> 72/50/27/27 all green
+  node -e (load data.js+nav-data.js) -> 74 fw, 8 cats 18/13/13/8+7/6/5/4, 10 situations each >=2, ZERO dangling ids
+  node _eval004.mjs (my own 64-check Playwright+axe) -> 63/64 (1 false negative: case-sensitive regex vs CSS-uppercased "3 matches")
+Independent checks reproduced: 500-char no-match no-h-scroll @375 & 320; special-char/emoji/whitespace search graceful; favorites persist BOTH directions across real reload + localStorage JSON array; situations 10 deterministic each >=2; browse union = exactly 74 unique; anchors-vs-buttons + browser Back; parametric not-found graceful zero console err; Space toggles fav; axe 0 violations on 18 populated-screen scans dark+light; tap targets >=44; offline cold-load all 7 routes from cache (sw v4, 3 modules precached, old purged); Today unchanged; card prompt-last + star-in-header; git hygiene clean.
+Result: PASS. Score 4.8. 0 blockers, 0 high.
+Evidence: findings.md (this sprint dir); screenshots in scratchpad (sh-situations-dark, sh-browse-dark, sh-category-dark, sh-nomatch-light).
+Next: Sprint 005 (daily card / streak, B16-B18, Today screen).
+
+--- EVALUATOR: CONTRACT_REVIEW (Sprint 005) ---
+Mode: CONTRACT_REVIEW
+Sprint: 005
+Task: Review daily habit loop contract (rotation, "applied it" log, streak)
+
+Step 1: Read spec.md and contract.md
+- Spec §11 Sprint 005 maps to B16 (deterministic rotation), B17 (applied-it log), B18 (streak with grace rule)
+- Contract 188 lines, extremely detailed with 14 Playwright click paths, 9-item acceptance summary
+
+Step 2: Verify technical feasibility against codebase
+- js/data.js contains exactly 74 frameworks (verified: `node -e "..."` confirms count)
+- Rotation formula uses modulo 74: index = ((dayNumber % 74) + 74) % 74 → adjacent days differ (sound)
+- Service worker cache version is currently "pdb-shell-v4" (sw.js line 9), contract correctly requires v5 bump
+- Router (app.js) lacks "case today:" (needs to be added by Generator)
+- HTML Today screen (#screen-today) has static placeholder "No card yet today" (lines 126-136 index.html)
+- tests/nav.spec.mjs line 403 asserts "No card yet today" (needs updating as contract requires)
+
+Step 3: Evaluate contract completeness
+✅ Routes/screens: #/today, #screen-today, #today-mount, #h-today, #h-today-card specified
+✅ Click paths: 14 numbered verification paths in §10 (determinism, persistence, streak rule, corruption, a11y, offline, regression)
+✅ Pass/fail conditions: 9-item acceptance summary (§13) with concrete testable outcomes
+✅ States: 6 required states listed (zero streak, applied, at-risk, missed-day, determinism, corrupt storage)
+✅ Keyboard/focus/a11y: §6 detailed binding (button aria-pressed, focus ring, accessible name, ≥44px, AA both themes)
+✅ Responsive: §7 specifies 375px/320px, no h-scroll, ≥44px tap targets
+✅ Persistence: localStorage keys and JSON structure specified (pdb.applied array of YYYY-MM-DD)
+✅ Security: §8.1 no backend, no network, no secrets
+✅ Verification: §9 exact commands, port 4173
+✅ Non-goals: §11 lists 7 out-of-scope items (no SRS, no free-text reflection, no multi-day history, etc.)
+
+Step 4: Check for vagueness or gameable loopholes
+- Streak rule: 5 worked examples pin the grace rule (e.g., {D-2,D-1} today=D → 2) → NOT vague, NOT gameable
+- Date source: Explicit precedence (window.__PDB_NOW__, then localStorage['pdb.testDate'], then real date) → NOT vague
+- Rotation determinism: Formula + 24h-wait-free testing via injection → NOT gameable
+- "Applied it" toggle: One-tap boolean to today only, persisted, not free-text → NOT gameable
+- Offline regression: Cache version + precache + purge verified in grep step → NOT gameable
+- "Sane starter state": Qualified with example copy + "not blank/crash/'No card yet today'" → acceptable specificity
+
+Step 5: Check for regressions / protecting prior sprints
+- Contract explicitly requires nav.spec.mjs Today assertion update (line 77) → BUILD work, not accidental regression
+- Contract requires cache version bump + daily.js precache to protect B20 (offline gate) → critical, correct
+- Contract says "no changes to card body/order, SVG visuals, situations/browse/search/favorites, palette/fonts" → scope boundary clear
+- renderCard signature change is strictly additive (new options param, defaults preserve #/f/:id) → backward compatible
+
+Minor issue (not a blocker):
+- Line 66 says "byte-for-byte unchanged" when technically the JS source changes (new parameter). Should say "behaviorally unchanged". However, the requirement is clear and testable: user experience at #/f/:id identical (tested in click path 8). Acceptable qualification.
+
+Verdict: ACCEPT
+- No blockers
+- No high-severity issues
+- Contract is detailed, testable, not vague, not gameable, complete
+- All acceptance criteria are concrete and verifiable
+- Explicit non-goals protect against scope creep
+- Regression protection is explicit (cache version bump, nav.spec update, other suites must pass)
+
+Recommended: Proceed to Generator implementation.
+
+[2026-07-06 EVALUATE Sprint 005 — Daily Card Habit Loop]
+Verdict: PASS (score 4.8, 0 blockers, 0 high). findings.md written.
+Method: independent Playwright + @axe-core adversarial pass (43/43 my own checks), NOT trusting the self-suite. Also ran all 5 self-suites: daily 61/61, nav 75/75, shell 50/50, content 27/27, visuals 27/27.
+Verified live: B16 modulo-74 determinism (07-06=ulysses-pact matches formula; reload stable; 07-07 differs; 10 consecutive distinct); single injectable date source (Date.UTC component parse, one new Date only, garbage falls through); B17 applied toggle aria-pressed + reload persistence both directions + localStorage array; B18 all 5 pinned streak examples (3/2/1/0/0) fn+chip; corrupt storage (not json / {"a":1} / mixed junk) sanitized, no console errors; no duplicate h-framework id (today card = h-today-card); #/f/:id regression intact (Back link, h-framework, prompt-last B5); no h-scroll 375/320; applied button 309x48 (>=44); keyboard Space+Enter toggle, focus retained; axe 0 critical across zero/applied/streak3 x dark+light; offline #/today renders + toggle from cache (sw pdb-shell-v5, daily.js precached, old purged); placeholder removed; git hygiene clean.
+Non-blocking: F-001 Low — "3 day streak"/"2 days streak" grammar (contract examples used hyphenated "e.g." forms; cosmetic).
+Post-advisor: verified visible focus INDICATOR (not just focusable) — .applied-toggle and reused .fav-toggle both show solid 3px outline focus ring in dark (rgb 255,205,92) and light (rgb 138,90,0). §6 visible-focus claim now evidence-backed. PASS unchanged.
+
+---
+## CONTRACT_REVIEW: Sprint 006 (2026-07-06 18:30 UTC)
+
+MODE: CONTRACT_REVIEW
+VERDICT: ACCEPT
+BLOCKERS: 0
+HIGH: 0
+
+SUMMARY: Sprint 006 contract is well-specified and ready for Generator. Correctly frames as verification-and-polish sprint with strict scope guards (§11). All acceptance criteria pinned to observable behaviors or code locations (§10). F-001 grammar fix verified to differ from current code. Originality gate honestly declares manual review (§6.2) while automating executable proxies (§6.1).
+
+FINDINGS:
+- BLOCKER-001 (F-001 before-state ambiguous): WITHDRAWN. Current forms verified in js/daily.js lines 241, 300. Target unambiguous. Generator can read and implement.
+- BLOCKER-002 (originality script split): WITHDRAWN. §6.1 attributes to script pair; §9 disambiguates which handles which proxy. Redundant coverage, not contradiction. Workable.
+- BLOCKER-003 (nudge grammar not in §9b): WITHDRAWN. §10 is binding criteria list; §9b is illustrative evaluator guidance. Nudge is in §10. Evaluator can construct test.
+- BLOCKER-004 (prefers-reduced-motion not in §9b): WITHDRAWN. Pinned to app.css:804 (§5.1) and §10 criteria. Not in §9b but evaluator has code location to test.
+
+LOW-001: Originality script redundancy. B2/B3 appear in both test:content and check:originality. Not a blocker; redundant coverage is safe.
+
+LOW-002: §9b illustrative, not exhaustive. At-risk nudge and reduced-motion suppression are §10 binding criteria but not detailed in §9b clicks. Evaluator can construct.
+
+READY FOR: Generator implementation → test suite write → EVALUATE_SYSTEM acceptance (cross-sprint regression).
+
+[2026-07-06] EVALUATE Sprint 006 (Polish & Acceptance)
+Verdict: PASS  Score: 4.8  Blockers: 0  High: 0
+Method: independent re-verification, not trusting generator self-suites.
+Ran: all 6 self-suites + accept(82) + check:originality(9) — all green.
+Independent Playwright: F-001 chip "1-day streak" live, status "Current streak: 1 day." un-hyphenated, zero-streak starter copy; daily rotation deterministic + clean-context rollover (07-06 ulysses-pact / 07-07 daily-highlight / 07-08 wrap / 08-01 cognitive-dissonance); favorites keyboard-toggle persists across reload; search invalid/nonsense no console error + no-match message; offline cold-reload all routes + inline SVG, zero failed requests; axe 0 critical/serious x 5 screens x 2 themes; tap targets all >=44; no h-scroll 320/375.
+Independent contrast math from CSS tokens: dark + light match pinned 5.2 table exactly (light tightest 5.78, accent 3.58 non-text). 
+Manual originality (6.2): read 13-entry sample — genuinely original, domain-specific, ends in question/action, nothing flagged.
+Security: no fetch/XHR/beacon to any origin (only SW handler); git hygiene clean; manifest 192/512 OK.
+One Low (cosmetic): N=0 aria-hidden chip reads "0-day streak"; AT status correct. Non-blocking, disclosed by generator.
+[2026-07-06] Post-advisor close-out: independently ran the 4 previously-delegated paths.
+- B9: all 10 situations >=2 frameworks (6,5,6,7,5,5,4,6,6,5), all ids resolve via byId.
+- Story 1: situation -> 6 framework links -> card h2#h-framework, 6 structural parts (7 w/ steps), figure=1 inline svg, prompt is last child.
+- Story 2: browse 8 categories -> frameworks -> card.
+- Story 8: theme toggle flips light->dark, --bg #f4f1e9->#12141c, persists across reload.
+- Accent-never-text asserted DIRECTLY (crawled rendered text nodes both themes = 0 accent-colored). Fixed prior overclaim (dark accent 9.86 would pass axe).
+Verdict unchanged: PASS 4.8, 0 blockers, 0 high.

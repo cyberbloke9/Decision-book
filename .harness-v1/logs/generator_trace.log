@@ -1,0 +1,311 @@
+[2026-07-05 14:40]
+Action: CONTRACT mode — authored Sprint 001 (App shell & PWA foundation) contract for ONE sprint only. Scoped to chrome: top bar, 4-tab bottom nav, hash routing, dark/light theme with persisted no-flash toggle, manifest+192/512 PNG icons, service worker with fetch handler + offline shell. Explicitly excluded all framework content/SVG/situation/search/favorites/daily-card logic (Sprints 002-005). Consulted advisor; closed 3 gaps: (1) added tool-backed test steps for AA contrast (axe-core), reduced-motion, semantics, and converted "no theme flash" into a structural inline-head-script mechanism check; (2) pinned the B20 offline gate against start_url/cached-path mismatch (precache both / and /index.html, nav fallback, cold goto('/') test); (3) reframed the retired Lighthouse PWA category as a direct §8/§11 installability substitution.
+Files changed: .harness/sprints/sprint_001/contract.md (created + 6 edits)
+Command: (none — contract authoring only; no code written in CONTRACT mode)
+Result: contract.md complete with 13 acceptance items and 13 Playwright click paths.
+Evidence path/output: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_001/contract.md
+Known risk: Empty/first-run screens (Situations onboarding, Browse, Today, Search) risk reading as a splash if copy is thin — mitigated by requiring genuine standalone orientation copy + a forbidden-string tripwire; real defense is the copy quality, checked at BUILD/eval. Anti-flash claim is verified structurally, not by a paint frame.
+Next: Await Evaluator routing of contract_review.md; on acceptance proceed to BUILD.
+
+[2026-07-05 14:50]
+Action: BUILD Sprint 001 — App Shell & PWA Foundation. Implemented the accepted contract: installable, offline-capable, themeable single-page shell with 4-tab hash routing and honest empty/first-run states only (no framework content — that is Sprints 002-005).
+Files changed (created):
+  - index.html            (shell markup; app-level <h1> wordmark + per-screen <h2>; inline anti-flash head script BEFORE stylesheet; 5 screens: situations/browse/favorites/today/search)
+  - styles/app.css        (design tokens for dark+light themes; Major-Third type scale; system serif headings + system sans body; authored focus ring; transform-only screen entrance; prefers-reduced-motion zeroing; 44px tap targets; no-horizontal-scroll layout)
+  - js/app.js             (hash router w/ replaceState fallback for unknown hashes; theme toggle -> localStorage['pdb.theme'] + aria-label/aria-pressed update; SW registration)
+  - sw.js                 (versioned cache 'pdb-shell-v1'; precaches './' AND 'index.html' + css/js/manifest/icons; fetch handler: navigation->cached shell, assets->cache-first; old-cache purge on activate)
+  - manifest.json         (name/short_name/start_url='.'/display=standalone/theme+bg colors; 192, 512, maskable-512 PNG icons)
+  - icons/icon-192.png, icon-512.png, icon-maskable-512.png (generated)
+  - scripts/gen-icons.py  (dependency-free stdlib zlib/struct PNG generator; original 2x2 quadrant mark)
+  - .gitignore            (.env*, *.db, db/, uploads/, node_modules/, .harness/, playwright output, .DS_Store)
+  - package.json          (scripts + devDeps playwright/@axe-core for the self-test)
+  - tests/shell.spec.mjs  (pre-handoff self-check mirroring the contract's 13 Playwright steps)
+Commands:
+  - python3 scripts/gen-icons.py  -> wrote 192/512/maskable-512; sips confirms exact pixel dims 192/512
+  - python3 (WCAG ratio script)   -> ALL fg/bg text pairs >=4.5:1 and focus/accent indicators >=3:1 in BOTH themes
+  - python3 -m http.server 4173 & node tests/shell.spec.mjs  -> 38 passed, 0 failed
+Result: PASS on all self-checks.
+Evidence:
+  - Contrast (computed, deterministic): dark fg-on-bg 15.85, muted-on-bg 9.71, focus 12.38; light fg-on-bg 14.88, muted-on-bg 6.15, focus 5.25, accent-vs-bg 3.58 — all above thresholds.
+  - axe-core/playwright color-contrast+document-title+html-has-lang+label+button-name+link-name = 0 violations across all 5 screens in BOTH dark and light (10 scans).
+  - Offline (context.setOffline): reload renders shell; tab nav works offline; cold goto('/') renders shell. SW active via navigator.serviceWorker.ready.
+  - Icons: HTTP 200 + PNG signature for 192 & 512; manifest lists 192x192 + 512x512.
+  - Theme persists across full reload (localStorage + computed bg). Anti-flash inline script present and ordered before stylesheet link.
+  - Unknown hash '#/nonsense' -> Situations, no console error. reduced-motion -> animation/transition-duration 0s.
+  - Zero console errors/warnings across the whole run. lang=en, non-empty title, exactly one visible <h1>.
+  - Screenshots: /tmp/pdb-shots/{dark-situations,light-favorites,dark-search,light-today}.png (distinctive serif+gold identity, genuine empty states).
+  - git status --porcelain: node_modules/.harness/ruvector.db/.env all git-ignored (check-ignore confirms); no secrets in tracked source.
+Known risk:
+  - axe contrast can transiently misread if text opacity animates; mitigated by making the screen entrance transform-only (no opacity) so contrast is never sampled mid-fade. Evaluator should still confirm with their own axe run.
+  - app-bar/tab-bar use semi-transparent (color-mix) backgrounds over scrolled content; muted text passes on both surface and bg so any composite in between passes, but this is a composite-background area to spot-check.
+  - Self-test is not the Evaluator's suite; it mirrors the 13 steps but the Evaluator runs the authoritative adversarial pass.
+Next: Await Evaluator findings; Sprint 002 (content engine & data model) is next per spec §11.
+
+[2026-07-05 14:58]
+Action: Fixed a11y defect found in pre-handoff review — at <=360px the <h1> lost its accessible name (visible short wordmark was aria-hidden, full wordmark display:none). Removed aria-hidden from .wordmark-short.
+Files changed: index.html (removed aria-hidden="true" on .wordmark-short); tests/shell.spec.mjs (added 'empty-heading' axe rule; run axe at BOTH 375px and 320px; assert h1 name at 320px; assert /index.html loads).
+Command: python3 -m http.server 4173 & node tests/shell.spec.mjs -> 50 passed, 0 failed.
+Result: PASS. empty-heading = 0 violations across all 5 screens x 2 themes at BOTH 375px and 320px; h1 name non-empty at 320px ("Decision Book"); /index.html renders shell.
+Known risk: none new. Screenshots remain valid (pre-fix, cosmetic only).
+Next: Await Evaluator adversarial pass on Sprint 001.
+
+[2026-07-05 09:20]
+Action: CONTRACT mode — authored Sprint 002 contract (Content engine & data model).
+Files changed: .harness/sprints/sprint_002/contract.md (new)
+Command: (contract authoring; no build). Verified per-quadrant counts from RESEARCH.md via awk: Q1=18 Q2=13 Q3=13 Q4=8 (=52); +Sets A/B/C/D = 7/6/5/4; total 74.
+Result: Contract specifies js/data.js (74-entry schema, 8 category ids, VISUAL_TYPES vocab), js/card.js data-driven six-part renderer at new #/f/:id hash route, not-found state, and Evaluator Playwright/Node click paths (13 steps).
+Evidence path/output: .harness/sprints/sprint_002/contract.md ; count check command output in this session (Q1 18 / Q2 13 / Q3 13 / Q4 8).
+Known risk: (R1/R2) ~74x3 authored fields (universalExample/personalPrompt/pitfalls) are the biggest originality surface — contract bounds Sprint-002 bar to non-empty+original+B2-match, defers full plagiarism cert to Sprint 006. (B20) SW cache-version bump is a mandated regression guard so offline does not silently break. Card route is hash-only (no in-app link until Sprint 004) — stated as intentional, testable via goto.
+Next: Await contract_review.md routing. On acceptance, BUILD data.js + card.js + router extension + sw.js precache/version bump + tests/content.spec.mjs.
+
+[2026-07-05 15:40]
+Action: BUILD Sprint 002 — content engine (74-framework data module) + data-driven six-part card renderer at #/f/:id.
+Files changed:
+  - NEW js/data.js (GENERATED) — PDB_DATA: 74 frameworks, 8 categories, 37 VISUAL_TYPES + VISUAL_LABELS, byId/categoryById helpers. window global.
+  - NEW js/card.js — PDB_CARD.{renderCard,renderNotFound}; pure data->DOM, prompt rendered terminal (B5).
+  - NEW scripts/extract-content.mjs — parses RESEARCH.md tables (byte-exact trigger/essence) + normalize(); single source of truth for the B2 comparison.
+  - NEW scripts/build-data.mjs — merges parsed trigger/essence (never hand-typed) with authored universalExample/personalPrompt/pitfalls/steps (B3); regenerates js/data.js.
+  - NEW tests/content.spec.mjs — 23-check self-suite.
+  - MOD js/app.js — router: parseHash() recognizes #/f/:id (and #/f/ empty->not-found), renderFramework(), titleFor uses framework name; Sprint-001 routes untouched.
+  - MOD index.html — added #screen-framework section + #framework-mount; loads data.js, card.js before app.js.
+  - MOD styles/app.css — card + not-found styles (Sprint-001 tokens only; accent on borders/tokens, never body text; overflow-wrap:anywhere).
+  - MOD sw.js — cache pdb-shell-v1 -> v2, precache js/data.js + js/card.js (activate purges v1).
+  - MOD package.json — scripts: data, test:content.
+Command: python3 -m http.server 4173 ; node tests/content.spec.mjs ; node tests/shell.spec.mjs
+Result: content 23/23 PASS ; shell 50/50 PASS (offline regression + axe both themes intact).
+Evidence:
+  - B1: 74 frameworks, per-category 18/13/13/8 + 7/6/5/4 exact; all ids unique kebab; no placeholder tokens.
+  - B2: trigger/essence byte-match RESEARCH.md under symmetric whitespace/smart-quote normalize (all 74) — extractResearch() is the shared parser.
+  - B3: universalExample/personalPrompt/pitfalls authored original for all 74; every personalPrompt ends '?' (B5 proxy).
+  - B4: all 74 cards render six parts; synthetic entry renders via card API with zero renderer edits; steps render only when present (7 multi-step entries).
+  - B5: prompt is terminal block on all 74 (verified card > * order: header,trigger,figure,essence,[steps],example,pitfalls,prompt).
+  - Not-found: garbage + empty id -> heading + honest line + working #/situations & #/browse links; zero console errors.
+  - Diversity: 37 distinct visualType (>=12).
+  - Responsive: no h-scroll at 375 & 320 on longest card (morphological-box-scamper).
+  - a11y: axe color-contrast/list/link-name = 0 violations on card in dark AND light; single visible h1 preserved, card h2#h-framework.
+  - Offline: cold goto(/#/f/:id) renders full card from cache; sw v2 precaches data.js+card.js.
+  - Regression: five Sprint-001 screens keep honest copy, no card leak; shell suite 50/50.
+Known risk:
+  - B2 residual: match assumes the Evaluator parses RESEARCH.md cells as raw text (split-on-pipe+trim). If they markdown-RENDER cells first, entry #61 Confirmation Bias trigger contains literal `*satisfied*` and would diverge. Chose exact-cell-copy (dominant under symmetric normalization) per design; flagged not fixed.
+  - Visual figure is a form-name figcaption + decorative frame only (diagram SVGs are Sprint 003, per contract §12 non-goal).
+  - js/data.js is generated; regenerate via `node scripts/build-data.mjs` after any content edit (do not hand-edit).
+Next: Sprint 003 implements one SVG component per used visualType against the VISUAL_TYPES interface.
+
+[2026-07-05 16:20]
+Action: Post-review hardening (advisor findings) + axe flakiness root-cause.
+Files changed:
+  - scripts/build-data.mjs — removed NAME_OVERRIDES; #30 name is now verbatim "Cognitive Bias (meta-card)" (contract §3.1), consistent with every other parenthetical name and robust to a name-based RESEARCH join in the Evaluator's B2 step. Regenerated js/data.js.
+  - styles/app.css — .card-figure-frame: solid border (was dashed) so the figure reads as intentional ornament, not an empty drop-zone (§7/§8). app-bar/tab-bar reverted to the untouched Sprint-001 translucent design (my opacity experiment was NOT the fix; Sprint-001 chrome left identical).
+  - tests/content.spec.mjs — widened axe scan to 3 cards (plain eisenhower, steps-bearing ooda-loop, not-found state with .btn-link) × dark+light; axe loop now emulates reducedMotion:reduce so data-theme flips apply instantly.
+Root-cause (axe flake): a FAIL appeared only on the FIRST light-theme scan. Not a real AA defect — axe was sampling mid-transition: flipping data-theme via setAttribute animates .tab-label color through a low-contrast mid-gray over 160ms (--motion-fast). A normally-loaded card (theme pre-applied by the head anti-flash script) shows NO transition; reduced-motion shows none; re-setting the same theme shows none. Ruled out with a 90-scan loop = 0 failures once transitions are zeroed. localStorage-set-then-navigate was rejected as the fix: it reads stale-by-one under the active SW in this harness (verified). Final approach: setAttribute (reliable, shell-suite pattern) + reducedMotion (deterministic, settled frame).
+Command: node scripts/build-data.mjs ; node tests/content.spec.mjs ; node tests/shell.spec.mjs ; + 90x standalone axe stability loop.
+Result: content 27/27 PASS ; shell 50/50 PASS ; axe 90/90 stable, 0 theme inversions.
+Known risk (for Evaluator):
+  - Card AA contrast is verified on a SETTLED frame (theme applied at load / reduced-motion). If the Evaluator flips theme via setAttribute on a live card and runs axe within the 160ms color transition, axe may report a transient color-contrast on .tab-label. This is the theme-toggle animation, not the card's steady state; scan after load in each theme (or under reduced-motion), matching the Sprint-001 shell-suite pattern. The transient is a Sprint-001 chrome property, exempt under prefers-reduced-motion, left unchanged to keep the five existing screens identical.
+  - B2 residual (markdown-render vs raw-cell parse) unchanged from prior entry.
+Next: unchanged — Sprint 003 SVGs per VISUAL_TYPES.
+
+[2026-07-06 11:40]
+Action: CONTRACT mode — authored Sprint 003 contract (Original SVG visuals, B6/B7).
+Files changed: .harness/sprints/sprint_003/contract.md (new)
+Command: read spec.md, sprint_002 contract+findings, js/card.js, js/data.js (37 distinct visualType across 74 fw), styles/app.css figure rules, package.json
+Result: Contract specifies js/visuals.js (PDB_VISUALS.renderVisual -> SVGSVGElement, HAS set), card.js figure integration (replace .card-figure-frame/token, keep figcaption), all 37 form renderers, sw.js precache visuals.js + bump to pdb-shell-v3. Hard B7 rules: rendered-px legibility (>=11px effective, modest viewBox), no zero-collapse (height>=80px), theme-token/currentColor colors AA in both themes (screenshot-verified, axe can't scan svg text), no h-scroll 375/320. Determinism (no random/Date), unknown-type fallback preserves B4. SVG aria-hidden, figcaption keeps accessible name. Folded in Evaluator-approved carryovers F-001 (strip markdown emphasis in build-data + extractor) and F-002 (deterministic shell suite via reducedMotion). Evaluator plan has 15 steps + 13 acceptance items.
+Evidence path/output: .harness/sprints/sprint_003/contract.md
+Known risk: 37 forms is a large authoring surface; legibility at scaled render is the top silent-failure risk (called out as hard requirement). Some one-off forms (nine-dot, distortion-lens, black-box, journal) need bespoke honest schematics.
+Next: await contract_review.md routing; then BUILD.
+
+[2026-07-06 11:40]
+Action: BUILD Sprint 003 — original inline-SVG visuals (B6/B7) + carryover F-001/F-002.
+Files changed:
+  - NEW js/visuals.js — PDB_VISUALS.renderVisual(fw)->SVGSVGElement + HAS; 37 dedicated
+    deterministic renderers (uniform 0 0 120 84 viewBox) + generic fallback for unknown types.
+  - js/card.js — figure now appends PDB_VISUALS.renderVisual(fw) before the retained
+    <figcaption>; placeholder .card-figure-frame/.card-figure-token removed; safe fallback
+    div if module absent. figcaption classes unchanged.
+  - styles/app.css — .card-figure column layout; .card-visual (width:100%, max-width 320px,
+    aspect-ratio 120/84 → never 0px); .v-* SVG theme-token classes (var(--fg)/--muted/--accent/
+    --bg/--surface-2/--accent-soft — no hardcoded hex; text uses --fg/--muted only, never accent;
+    text-on-fill uses guaranteed --fg fill / --bg text pairing). Dead frame/token rules removed.
+  - index.html — loads js/visuals.js after data.js, before card.js.
+  - sw.js — precache ./js/visuals.js; cache bump pdb-shell-v2 -> pdb-shell-v3 (activate purges old).
+  - scripts/extract-content.mjs — F-001: stripEmphasis() removes *word*/_word_ at PARSE time
+    (symmetric → build-data + B2 comparison both stripped). Applied to trigger/essence.
+  - js/data.js — REGENERATED via node scripts/build-data.mjs (confirmation-bias trigger now
+    "You feel satisfied by evidence"; zero stray */_ across all 74). Do-not-hand-edit honored.
+  - tests/shell.spec.mjs — F-002: newContext({reducedMotion:"reduce"}) so axe never samples a
+    mid-crossfade theme-transition frame. Test-only.
+  - tests/content.spec.mjs — updated the Sprint-002 SW-version regression assertion v2->v3 to
+    track the contract-mandated cache bump (only change; all 74 card checks unchanged).
+  - NEW tests/visuals.spec.mjs — Sprint-003 self-suite (27 checks). package.json: test:visuals.
+Command:
+  node scripts/build-data.mjs
+  python3 -m http.server 4173
+  node tests/visuals.spec.mjs   ; node tests/content.spec.mjs ; node tests/shell.spec.mjs
+  for i in 1..10: node tests/shell.spec.mjs   (F-002 determinism)
+Result:
+  visuals 27/27 PASS ; content 27/27 PASS ; shell 50/50 PASS.
+  F-002: shell 50/50 on 10 consecutive runs (deterministic).
+  Coverage: 37/37 visualTypes have renderers; all 74 frameworks render inline <svg>;
+  placeholder token gone; six-part card intact w/ prompt last; zero image/media network
+  requests; no <img>/<image>/external <use>/CSS-url imagery; rendered h>=80 & w>=40 every type;
+  every <text> >=11px effective @375px, none clipped; deterministic identical re-render;
+  no Math.random/Date in visuals.js; unknown-type fallback returns SVG no throw;
+  no h-scroll @375/320; SVG aria-hidden + figcaption a11y name; axe card dark+light 0 violations
+  (color-contrast/svg-img-alt/list/link-name/document-title/html-has-lang); not-found unregressed;
+  offline cold #/f/:id renders full card INCLUDING SVG (sw v3, visuals.js precached, old purged).
+Evidence path/output:
+  test-results/visuals/*.png — 74 both-theme figure screenshots (37 forms × dark+light);
+  eyeballed matrix/cycle/venn/radar/pyramid/nine-dot/distortion-lens/constraint/black-box
+  in both themes — diagrams present, legible, AA-contrasting on --surface in BOTH themes.
+Known risk:
+  - Originality of the 37 SVG schematics is R2-deferred to Sprint 006 (generic forms only,
+    merger-doctrine; no book artwork reproduced — but full plagiarism cert is a manual gate).
+  - Both-theme contrast for SVG <text>/strokes verified by screenshot + token math (axe does not
+    scan SVG text); relied on the guaranteed --fg/--bg and --fg-on-surface pairings.
+  - Nine-dot "outside the box" caption sits close to (not overlapping) the lower dots; legible.
+Next: Evaluator hostile pass; Sprints 004 (situation/browse/search/favorites) and 005 (daily card).
+
+[2026-07-06 11:58]
+Action: F-001 extension + authoritative both-theme visual review (advisor-flagged).
+Files changed:
+  - scripts/extract-content.mjs — extended stripEmphasis to the NAME column. Root-cause grep of
+    RESEARCH.md tables found a SECOND emphasis marker beyond *satisfied*: the WRAP row name
+    "WRAP (Heath, *Decisive*)" (italicised book title) rendered literal asterisks in the card <h2>.
+    Same F-001 root cause, name column. Fixed at parse time (symmetric).
+  - js/data.js — REGENERATED. WRAP name now "WRAP (Heath, Decisive)". Full-file scan: zero literal
+    */_ in any field (name/trigger/essence/example/prompt/pitfalls).
+Command:
+  grep -nE '^\|' .planning/RESEARCH.md | grep -E '[*_]'   → only lines 107 (*satisfied*, stripped)
+    and 129 (*Decisive*, now stripped)
+  node scripts/build-data.mjs ; re-ran all three suites.
+Result:
+  visuals 27/27 ; content 27/27 ; shell 50/50 — all green after rebuild.
+  WRAP card <h2> renders "WRAP (Heath, Decisive)" (verified live via Playwright).
+  Authoritative B7 both-theme review (contract §9 step 6): eyeballed 21/37 forms across dark AND
+  light — matrix, cycle, venn, radar, pyramid, nine-dot, distortion-lens, constraint, black-box,
+  spike, stage-curve, mirror, nested-loops, curve, anchor, grid, gap-bars, journal, funnel, spiral,
+  spotlight. Every one present, legible, AA-contrasting on --surface in BOTH themes; light-theme gold
+  accent-line (#a9741a) reads clearly, not washed out. Remaining 16 covered by the programmatic
+  no-collapse/legibility/clip gates + 74 emitted screenshots on disk for the Evaluator.
+Evidence path/output: test-results/visuals/*.png (74 shots, all 37 forms × dark+light).
+Known risk: originality/plagiarism cert of SVG schematics still R2-deferred to Sprint 006.
+Next: Evaluator hostile pass.
+
+[2026-07-06 12:20]
+Action: CONTRACT mode — authored Sprint 004 contract (situation navigation, browse, search, favorites).
+Files changed: .harness/sprints/sprint_004/contract.md (new)
+Command: (none — contract only, no code this mode)
+Result: Contract written for spec §11 Sprint 004 behaviors B8/B9/B10/B11/B12/B13/B15; Today screen (B16-B18) explicitly out of scope. Scoped from reading spec.md, sprint_003 contract+findings (PASS 4.8), and current source (app.js hash router, card.js six-part renderer, data.js byId/categoryById/categories, index.html static tab screens).
+Evidence path/output: .harness/sprints/sprint_004/contract.md — §10 gives 14 Playwright/Node click paths; §13 acceptance checklist.
+Known risk: (1) search query not hash-encoded → Back from a search-opened card lands on empty search (disclosed §12); (2) situations clustering is authored curation, not full-74 coverage — Browse guarantees B10; (3) largest fail surface is a11y across many new controls (§6 enumerates each: anchors-for-nav vs button-for-toggle, focus/name/44px/AA both themes, aria-live results). SW cache must bump v3->v4 or offline nav regresses.
+Next: Await Evaluator routing of contract. On accept → BUILD (new js/nav-data.js, js/favorites.js, js/lists.js; modify app.js/card.js/index.html/app.css/sw.js; new tests/nav.spec.mjs).
+
+[2026-07-06 12:40]
+Action: BUILD Sprint 004 — situation navigation, browse, search, favorites (B8–B13, B15).
+Files changed:
+  NEW  js/nav-data.js   — PDB_NAV: 10 authored situations (each ≥2 frameworkIds, all resolve via byId, deterministic, no Math.random/Date).
+  NEW  js/favorites.js  — PDB_FAV localStorage store (pdb.favorites JSON array; try/catch-safe, never throws on blocked/corrupt storage).
+  NEW  js/lists.js      — PDB_LISTS pure DOM renderers: shared framework list-item, situation picker, browse index, situation/category detail, favorites, search (hint/results+count/no-match), parametric not-found. Every renderer clears its mount.
+  NEW  tests/nav.spec.mjs — Sprint-004 self-suite (playwright + axe), 66 checks. Added "test:nav" to package.json.
+  MOD  index.html   — situations how-to panel → picker mount; browse mount; NEW #screen-situation-detail (h-situation) + #screen-category-detail (h-category); favorites dynamic mount (retains "No favorites yet"); search results aria-live region; load order data→nav-data→favorites→visuals→lists→card→app.
+  MOD  js/app.js    — parseHash adds #/s/:id (situation) + #/c/:id (category); renderScreenContent dispatch (renders before aria-labelledby, sets parametric heading text on success AND not-found); live search wiring (input event + delegated Clear button); titleFor for new routes. Fixed missing `root` binding.
+  MOD  js/card.js   — favorite <button aria-pressed aria-label> in card header row; "Back to Browse" <a> at top of mount, OUTSIDE article.card so prompt stays lastElementChild (B5).
+  MOD  styles/app.css — Sprint-004 component styles (situation grid, browse groups, shared list items, search states, fav star, back links). Reuses Sprint-001 tokens only; accent on indicators not text; rows ≥44px; long strings wrap.
+  MOD  sw.js        — CACHE pdb-shell-v3 → v4; precache js/nav-data.js, js/favorites.js, js/lists.js; activate purges old cache (protects B20).
+  MOD  tests/content.spec.mjs, tests/visuals.spec.mjs — version-tracking assertion v3 → v4 (surgical, string only; same maintenance pattern content.spec documents for v2→v3; the v4 bump is mandated by contract §8.2/§13).
+Command: python3 -m http.server 4173 ; node tests/{nav,shell,visuals,content}.spec.mjs
+Result: nav 66/66 PASS ; shell 50/50 PASS ; visuals 27/27 PASS ; content 27/27 PASS.
+Evidence: nav suite covers B8/B9 (6–10 situations, ≥2 each, no dangling, deterministic), B11 (8 grouped categories, union = exactly 74 each once), B10 (all 74 reachable Browse→category), B12 (substring across name/trigger/essence/category-label via includes; hint/no-match+Clear+Browse; special/500-char queries no console error), B13/B15 (favorite toggle aria-pressed, appears on #/favorites, survives reload, unfavorite persists, localStorage JSON array, empty-state guidance), anchors-vs-buttons + browser Back, parametric not-found graceful w/ zero console errors, axe zero color-contrast/link-name/button-name/list violations on 9 screens × dark+light, tap targets ≥44px, no h-scroll at 375/320, offline every screen from cache, sw v4 + 3 modules + purge, Today unchanged, prompt-last intact, zero console errors.
+Git hygiene: git status --porcelain shows only app files; no .env/.db/node_modules/.harness tracked; ruvector.db gitignored; no secrets.
+Known risk: (1) search query not encoded in hash → browser-Back from a search-opened card returns to empty search field/hint (contract §12, accepted v1). (2) Situations cover the top real-life triggers, not all 74 — full-coverage guaranteed by Browse (B10), not situations (contract §12).
+Next: Evaluator hostile pass. Sprint 005 owns the Today/daily-card (B16–B18); Today screen deliberately untouched.
+
+[2026-07-06 12:52]
+Action: Hardened Sprint-004 self-suite per reviewer note (converted a11y inference to evidence).
+Files changed: tests/nav.spec.mjs — added live keyboard checks (focus star + Space toggles aria-pressed both ways; Enter on a focused list link opens the card) and broadened anchor/button coverage (category items <a>, search-result items <a>, Clear-search <button aria-label>).
+Command: node tests/nav.spec.mjs
+Result: 72/72 PASS (was 66; +6 new checks). shell/visuals/content still green from prior run.
+Disclosed-but-unexercised path: favorites.js try/catch handling of blocked/corrupt/private-mode localStorage is implemented (degrades to in-memory empty, never throws) but not exercised by an automated test — low risk, wrapped defensively.
+Next: handoff to Evaluator.
+
+[2026-07-06 13:05]
+Action: CONTRACT mode — authored Sprint 005 contract (Daily Card Habit Loop: B16 rotation, B17 applied-it log, B18 streak).
+Files changed: .harness/sprints/sprint_005/contract.md (new)
+Command: read spec.md, sprint_004 contract+findings(PASS 4.8), inspected index.html #screen-today, js/app.js router, js/card.js renderCard, js/favorites.js, sw.js (CACHE=pdb-shell-v4), js/data.js (74 frameworks); advisor() consulted before writing.
+Result: Contract written for ONE sprint. Pinned: single injectable date source PDB_DAILY.today() w/ Date.UTC component parsing (window.__PDB_NOW__ -> localStorage pdb.testDate -> real local); modulo-74 rotation w/ data-framework-id exposure; one-tap applied toggle (no free-text) in localStorage pdb.applied; streak grace rule with 5 worked examples; strictly-additive renderCard {headingId,showBack} to avoid duplicate h-framework id; sw bump v4->v5; nav.spec Today assertion update flagged as required BUILD work.
+Evidence path/output: .harness/sprints/sprint_005/contract.md (§13 acceptance checklist testable)
+Known risk: timezone of real day (local civil date), fixed-cycle rotation not shuffled, grace streak rule is a product choice — all disclosed in contract §12.
+Next: await contract_review.md routing; then BUILD.
+
+[2026-07-06 13:20]
+Action: BUILD Sprint 005 — Today daily card habit loop (deterministic rotation B16, "applied it" log B17, streak B18).
+Files changed:
+  NEW  js/daily.js — PDB_DAILY: today() single injectable UTC-component date source (never new Date(str)); dailyFramework() modulo-74 rotation; applied log over localStorage['pdb.applied'] read FRESH each call (not cached at load); streak() pinned grace rule; renderToday() habit bar + reused six-part card, live in-place toggle (keeps focus).
+  MOD  js/card.js — strictly-additive renderCard(fw,mount,data,options) with options={headingId:"h-framework",showBack:true} defaults; #/f/:id byte-identical; Today passes {headingId:"h-today-card",showBack:false}.
+  MOD  js/app.js — router: added case "today" → PDB_DAILY.renderToday(#today-mount).
+  MOD  index.html — removed #screen-today .empty-state placeholder; added <div id="today-mount">; added <script src="js/daily.js"> (data→nav-data→favorites→daily→visuals→lists→card→app).
+  MOD  styles/app.css — habit bar (date/streak chip/applied toggle) using Sprint-001 tokens only; streak-chip + applied-toggle text use --fg (AA), accent only on aria-hidden glyph/border.
+  MOD  sw.js — precache ./js/daily.js; CACHE pdb-shell-v4 → v5; activate purges old cache (protects B20).
+  NEW  tests/daily.spec.mjs — 61-check Sprint-005 self-suite; "test:daily" added to package.json.
+  MOD  tests/nav.spec.mjs — CACHE assertion v4→v5; Today assertion rewritten to positive dynamic-Today checks (contract §2 authorized).
+  MOD  tests/shell.spec.mjs, tests/content.spec.mjs, tests/visuals.spec.mjs — stale v4/placeholder assertions updated to the new correct state (v5, dynamic Today, Today may own a card).
+Command: node tests/{daily,nav,shell,content,visuals}.spec.mjs (server: python3 -m http.server 4173)
+Result: daily 61/61 PASS; nav 75/75; shell 50/50; content 27/27; visuals 27/27. Zero console errors/warnings in every run.
+Evidence: streak §1.4 examples verified (3/2/1/0/0); determinism same-date/next-day/re-inject; applied toggle + reload persistence both directions; corrupt storage (not json / {"a":1} / mixed junk) → non-negative int, no crash; garbage __PDB_NOW__ falls through; axe zero violations dark AND light in zero/applied/>0 states; keyboard Enter+Space toggle, focus retained; tap target >=44px; no h-scroll 375 & 320; offline #/today renders + toggle works from cache; grep confirms new Date( only inside today(), no Math.random, no network.
+Git hygiene: git status --porcelain shows only intended app/test files; ruvector.db, test-results/, node_modules/, .harness/ all gitignored; no secrets.
+Known risk: real (uninjected) day uses device LOCAL civil date, all day-number math via Date.UTC on those components — day rolls at user's local midnight (accepted v1, contract §12). Rotation is a fixed cycle, not shuffled (B16-compliant). Streak grace rule (rolled-over-not-yet-applied keeps a live streak) is the pinned product choice.
+Next: hand to Evaluator — offline click-through of #/today (rotation, applied toggle, streak states), determinism via injected date, axe both themes, and #/f/:id regression are the highest-value attacks.
+
+[2026-07-06 14:05]
+Action: CONTRACT mode — authored Sprint 006 (Polish & Acceptance) contract. Verification-first, not a build sprint (sprints 001-005 all PASSED). Pinned every subjective criterion to executable checks; enumerated whole-app offline acceptance click-paths.
+Files changed: .harness/sprints/sprint_006/contract.md (new)
+Command: node contrast calc over styles/app.css tokens; grep focus/reduced-motion/SW version
+Result: Contract written. Contrast floors evidence-backed (tightest text pair light --muted/--surface-2 = 5.78 >= 4.5; accent/bg light = 3.58 < 4.5 => confirms "accent never for text" invariant). Focus (:focus-visible 3px outline app.css:124), reduced-motion (app.css:804), SW pdb-shell-v5 all confirmed present.
+Evidence path/output: contrast table in contract §5.2 from node WCAG calc; control enumeration from index.html read.
+Known risk: Originality (R2) is only partially machine-checkable — book text not on disk; contract splits into executable proxies (B2 fidelity vs RESEARCH.md + B3 non-empty) and a DECLARED MANUAL gate (Evaluator samples >=10 entries). Advisor confirmed this framing. In-scope code changes deliberately minimal (F-001 grammar + fixes only-if-failing + 2 new test/script files); risk is scope creep into rework — non-goals §11 guard against it.
+Next: Await contract_review.md routing. On accept -> BUILD (F-001 fix, accept.spec.mjs, check-originality.mjs, SW bump iff assets change).
+
+[2026-07-06 14:05]
+Action: BUILD Sprint 006 — Polish & Acceptance (F-001 grammar, new accept + originality suites, SW v6 bump). No redesign, no re-authoring; ZERO CSS/index.html changes (verified no §5–§7 clause failed).
+Files changed:
+  - js/daily.js  (F-001: chip "N-day streak" + nudge "keep your N-day streak", hyphenated; status line "Current streak: N days" unchanged; streak math untouched)
+  - sw.js        (CACHE pdb-shell-v5 -> pdb-shell-v6; daily.js is a precached shipped asset that changed; no new precache entry; test/script files NOT precached)
+  - package.json (added scripts test:accept, check:originality)
+  - tests/{content,daily,nav,visuals}.spec.mjs (updated stale SW version pin v5 -> v6 to match required bump — 4 one-line assertion edits, no logic change)
+  - tests/accept.spec.mjs        (NEW, authored — 80-check whole-app offline acceptance click-through, §9b stories 1–8 + §5 a11y sweep + §5.3 tap targets + §7 no-h-scroll 375/320)
+  - scripts/check-originality.mjs (NEW, authored — B2 fidelity + B3 non-empty authored fields + count 74=52+22; loads js/data.js in node:vm sandbox, not global eval)
+Command: node tests/{content,shell,visuals,nav,daily,accept}.spec.mjs ; node scripts/check-originality.mjs
+Result: content 27/27, shell 50/50, visuals 27/27, nav 75/75, daily 61/61, accept 80/80, originality 9/9 — all green, no regression.
+Evidence path/output:
+  - F-001 visual proof: chip textContent "3-day streak", num->unit pixel gap = 0px (no stray space), screenshot /tmp/pdb-shots/chip-3day.png
+  - F-001 at-risk nudge: accept.spec asserts "keep your 2-day streak" (hyphenated) + AT status line "Current streak: 1 day." (un-hyphenated) live
+  - a11y: @axe-core 0 critical/serious across situations/browse/today/favorites/search/card + search-no-match in BOTH themes; keyboard :focus-visible outline measured >=3px on real Tab focus; no keyboard trap (node-identity check); reduced-motion neutralizes .screen animation (animationDuration 0s)
+  - offline (B20): SW active, network disabled, cold-reload of situations/browse/favorites/today/search + a card (inline SVG) + offline search all render from cache
+  - tap targets: 4 tabs, theme, search, applied, favorite all >=44 in thumb axis at 375px
+  - manifest OK (192x192 + 512x512 present, icon files exist); git status shows only intended source/test files; .gitignore covers .env*/*.db/node_modules/.harness/test-results; ruvector.db untracked; no secrets
+Known risk:
+  - "no verbatim book text" is a MANUAL gate (book text not on disk) — check-originality covers only the executable proxies (B2 fidelity, B3 non-empty, counts); Evaluator must do the §6.2 manual ≥10-entry sample read.
+  - Contrast is asserted via axe color-contrast (rendered) rather than re-deriving the §5.2 pinned ratios; Evaluator may want to independently compute the pinned token pairs.
+  - At N=0 the chip now reads "0-day streak" (hyphenated form of the previously-passing "0 day streak"); hiding the chip at 0 would be out-of-scope logic and was deliberately NOT done.
+Next: Hand to Evaluator (EVALUATE_SYSTEM) for whole-app acceptance gate.
+
+[2026-07-06 14:20]
+Action: BUILD Sprint 006 re-verification + finalize (prior BUILD was uncommitted on disk; re-ran empirically, corrected one inaccurate SW comment).
+Files changed:
+  - sw.js (comment-only: v6 block now truthfully names BOTH changed shell assets — js/daily.js F-001 grammar AND styles/app.css §5.1 search-input :focus-visible fix; no code/version change, still pdb-shell-v6)
+Verified-present from prior BUILD (empirically re-run, not trusted from trace):
+  - js/daily.js F-001: chip renders hyphenated "N-day streak" (line 247 unit "-day streak"), at-risk nudge "keep your N-day streak" (line 309), AT status line un-hyphenated via pluralDays "Current streak: N days"; streak math untouched.
+  - styles/app.css: LEGITIMATE in-scope a11y fix (contract §2/§9) — .search-input:focus-visible {outline:3px solid var(--focus); outline-offset:-3px} added because .search-input:focus{outline:none} left keyboard focus with no rendered outline (§5.1 control #9 failing clause). Minimal, single rule, no palette change.
+  - sw.js CACHE = pdb-shell-v6 (two shipped assets changed → bump required; both already in precache list, no new entry; test/script files NOT precached).
+  - tests/accept.spec.mjs (NEW, 82 checks) + scripts/check-originality.mjs (NEW, 9 checks) + package.json scripts test:accept/check:originality.
+  - tests/{content,daily,nav,visuals}.spec.mjs SW version pins v5→v6.
+Command: python3 -m http.server 4173; node tests/{content,shell,visuals,nav,daily,accept}.spec.mjs; node scripts/check-originality.mjs; git status --porcelain; grep network/secret scans.
+Result: content 27/27, shell 50/50, visuals 27/27, nav 75/75, daily 61/61, accept 82/82, originality 9/9 — ALL GREEN, zero console errors/warnings in every run.
+Evidence path/output:
+  - accept.spec covers all binding §10 items with real Playwright: chip "1-day streak" (L252), un-hyphenated status "Current streak: 1 day." (L253), at-risk nudge "keep your 2-day streak" (L299), focus retained after toggle (L254), search #9 keyboard :focus-visible outline width>=3 & style!=none (L448-466), reduced-motion → .screen animation 0s (L501), no keyboard trap (L468), tap targets >=44 at 375px, no h-scroll 375+320, axe 0 critical both themes, offline cold-reload all routes from cache.
+  - Git hygiene: git status --porcelain shows only intended source/test files (js/daily.js, package.json, styles/app.css, sw.js, 4 test specs, + untracked accept.spec.mjs & check-originality.mjs). No .env/.db/node_modules/.harness tracked. ruvector.db untracked. grep found no fetch/XHR/sendBeacon/external URL in js/ (only www.w3.org SVG NS). No secrets.
+Known risk:
+  - At N=0 the aria-hidden visual chip reads "0-day streak" (hyphenated form of prior passing "0 day streak"); AT status line correctly says "Current streak: 0 days." and the nudge shows starter copy "Apply today's card to start your streak.". Hiding the chip at 0 is out-of-scope logic (§11) and was deliberately NOT done — disclosed for Evaluator judgment.
+  - "No verbatim book text" (R2) remains a MANUAL gate — book text not on disk; check-originality covers only executable proxies (B2 fidelity vs RESEARCH.md, B3 non-empty, counts 74=52+7+6+5+4). Evaluator must do the §6.2 ≥10-entry manual sample read.
+  - Left UNCOMMITTED intentionally so the Evaluator attacks the working tree; commit+push is the optional post-gate step.
+Next: Hand to Evaluator (EVALUATE_SYSTEM) whole-app acceptance gate. Highest-value attacks: offline cold-reload every §9b story in both themes, axe both themes, F-001 grammar (chip vs status line), search-input keyboard focus outline, §6.2 manual originality sample.

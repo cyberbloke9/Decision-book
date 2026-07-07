@@ -17,12 +17,40 @@
       "trigger": "\"Everything feels urgent\"",
       "essence": "Sort tasks by important vs urgent; schedule the important-not-urgent before it becomes urgent. Quadrant actions: do now / schedule / delegate / drop",
       "visualType": "matrix-2x2",
-      "universalExample": "Your inbox has forty flagged messages. You draw the two axes and a refund dispute lands in do-now, a strategy memo lands in schedule-for-Thursday, three cc'd threads go to delegate, and a newsletter goes to drop. Thirty-five minutes of dread becomes four decisions.",
+      "universalExample": "You run a 4-table cafe. Three customers wave for refills while your landlord wants the ₹40,000 rent decision by Friday. The matrix flags the rent reply as important-not-urgent, so you answer the landlord first — where before you'd have chased the loudest table.",
       "personalPrompt": "Which task have you been treating as urgent all week that is actually only important, and when will you block time for it before it catches fire?",
       "pitfalls": [
         "Almost everything can be argued into 'urgent' — be honest about deadlines that are real versus deadlines that are anxiety.",
         "The important-not-urgent box is where growth lives and where nothing screams at you, so it silently gets skipped."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You run a 4-table cafe. Three customers wave for refills while your landlord wants the ₹40,000 rent decision by Friday. The matrix flags the rent reply as important-not-urgent, so you answer the landlord first — where before you'd have chased the loudest table.",
+          "tradeoff": "You let a waiting customer cool for ten minutes to protect the lease; the cost is a smaller tip tonight weighed against a signed roof for the year."
+        },
+        {
+          "persona": "student",
+          "scenario": "It's exam term. Friends are pinging about tonight's party while a 6-week project worth 40% of the grade sits untouched. The grid drops the party and schedules the project for Saturday, so you stop answering whichever phone buzzes loudest.",
+          "tradeoff": "You give up the party and some social standing this week; the risk is real FOMO now traded for a grade that outlives the night."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your group chats never stop, but your father's cardiology appointment has gone unbooked for 3 weeks. You sort them: the chats are urgent-not-important, the appointment important-not-urgent, so you book it before replying to anyone.",
+          "tradeoff": "You leave friends on read and risk looking distant; the price is a little social friction paid to catch a health problem early."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're a senior engineer who can close any ticket fast, so you clear 20 urgent bugs a day and feel productive. The matrix exposes that the architecture rewrite — important, never urgent — has slipped 6 months because your own speed keeps feeding you quick wins.",
+          "tradeoff": "Choosing the rewrite means your visible ticket count drops and a manager who rewards output notices; you trade short-term applause for the thing that compounds."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Money is no object; your calendar is the scarce thing. Your foundation's staff bring 30 'urgent' asks a week while the succession plan for who runs it after you keeps slipping. The grid protects one quarterly day for succession.",
+          "tradeoff": "You disappoint people used to instant access and may look disengaged; the cost is present-day goodwill spent to secure the institution's future."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "swot-analysis",
@@ -31,12 +59,40 @@
       "trigger": "\"Is this plan any good?\"",
       "essence": "Map strengths, weaknesses, opportunities, threats before committing",
       "visualType": "matrix-2x2",
-      "universalExample": "Before committing a quarter to a new pricing tier, you fill the four boxes: strength — you already have the billing code; weakness — nobody on the team has done pricing research; opportunity — a competitor just raised prices; threat — churn if existing users feel punished. The threat box changes the rollout plan.",
+      "universalExample": "You're about to sign a 2-year lease on a bigger salon. SWOT: strength — loyal regulars; weakness — no cash cushion; opportunity — the mall footfall; threat — a chain opening 200m away next month. The threat box makes you demand a 6-month break clause first.",
       "personalPrompt": "For the plan you're about to commit to, what is the one threat you've been quietly hoping won't matter?",
       "pitfalls": [
         "It's easy to fill boxes with vague words ('great team', 'market risk') that don't change any decision — force each cell to name something specific.",
         "A SWOT describes; it doesn't decide. Follow it with an action or it's just a tidy wall."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You're about to sign a 2-year lease on a bigger salon. SWOT: strength — loyal regulars; weakness — no cash cushion; opportunity — the mall footfall; threat — a chain opening 200m away next month. The threat box makes you demand a 6-month break clause first.",
+          "tradeoff": "Insisting on the break clause risks the landlord walking to a faster tenant; you pay a higher rent to keep an exit."
+        },
+        {
+          "persona": "student",
+          "scenario": "Before picking a final-year specialisation you fill the boxes: strength — you code fast; weakness — you freeze in vivas; opportunity — an AI module everyone's hiring for; threat — it's graded 70% on a live oral. The threat cell steers you to a project-graded track.",
+          "tradeoff": "You give up the fashionable AI label on your CV; the cost is a less hyped specialisation chosen to match how you actually perform."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You're weighing moving in with your partner. Strength — you rarely fight; weakness — you've never split a bill; opportunity — halved rent; threat — their ex still lives one floor up. Naming the threat turns a romantic yes into an honest conversation first.",
+          "tradeoff": "Raising the ex out loud risks a tense evening; you trade a smooth week now for a problem surfaced before a joint lease binds you."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're a star consultant sure a solo practice will fly. SWOT forces the weakness box you keep skipping: in 8 years you've only ever delivered, never sold. The one cell your confidence hid reshapes month one into learning to pitch.",
+          "tradeoff": "Admitting the sales gap delays your launch by a quarter; you sacrifice momentum to fix the hole that sinks most experts who go alone."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can fund any venture, so you nearly greenlight a ₹2-crore vanity magazine. SWOT's threat box asks what money won't fix: your name on a failing title. The reputational threat, not the budget, makes you back it quietly instead of front it.",
+          "tradeoff": "Staying behind the scenes costs you the public credit you'd enjoy; you trade visible glory for a name that survives a flop."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "bcg-box",
@@ -45,12 +101,40 @@
       "trigger": "\"Where should my effort go?\"",
       "essence": "Rate each project by growth potential vs current payoff: stars, cash cows, question marks, dogs",
       "visualType": "matrix-2x2",
-      "universalExample": "You list your five side-projects and rate each on growth potential and current payoff. The newsletter is a cash cow — steady, low growth. The prototype is a question mark — high growth, no payoff yet. Two abandoned repos are dogs. You give the question mark a real month instead of dribbling attention across all five.",
-      "personalPrompt": "Which of your projects is a 'dog' you keep feeding out of habit, and what would you do with that time instead?",
+      "universalExample": "You juggle 5 income streams after your day job. The tuition classes are a cash cow (steady, flat), the Etsy shop a question mark (growing, tiny), two old gigs are dogs. You give the shop one real month instead of dribbling 30 minutes across all five.",
+      "personalPrompt": "Which project, commitment, or even relationship is a 'dog' you keep feeding out of habit, and what would you do with that time instead?",
       "pitfalls": [
         "Labelling something a dog can feel like admitting failure, so people keep low-value work alive to avoid the sting.",
         "Today's question mark can become tomorrow's star or dog — re-plot periodically, don't treat one snapshot as permanent."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You juggle 5 income streams after your day job. The tuition classes are a cash cow (steady, flat), the Etsy shop a question mark (growing, tiny), two old gigs are dogs. You give the shop one real month instead of dribbling 30 minutes across all five.",
+          "tradeoff": "Betting the month on the shop may leave it tiny while the guaranteed ₹8,000 of tuition cash goes unbanked; you risk a sure thing chasing a maybe."
+        },
+        {
+          "persona": "student",
+          "scenario": "You run 4 clubs to pad your CV. The debate society is a star, the coding club a question mark, two are dogs eating your Tuesday nights. You resign the dogs to give the coding club a full term to grow.",
+          "tradeoff": "Quitting two clubs shrinks your CV's length and one friend group; you lose breadth to buy depth in the one place that can become a star."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You spread thin across 6 friendships. Seen as a portfolio, two are stars (mutual, deep), one a question mark worth investing in, three are dogs you keep out of guilt. You let the dogs fade to give the question-mark friend real time.",
+          "tradeoff": "Letting old friends drift feels like a small betrayal; you pay in guilt to stop starving the friendships that actually feed you."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You lead 5 workstreams and each feels essential because you're good at all of them. The box says the analytics revamp is a dog — high effort, dead market. Your competence disguised it. You kill it and pour that week into the star.",
+          "tradeoff": "Killing your own competent work stings and a peer may inherit it and shine; you trade ego for the one project that actually grows."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your family office holds 9 legacy holdings. The vineyard is a beloved dog — draining, flat, sentimental. Plotting it honestly against the fund's stars forces the question your money let you dodge for a decade.",
+          "tradeoff": "Selling the vineyard severs a family story and invites relatives' anger; you sacrifice heritage sentiment to stop a slow, quiet bleed."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "project-portfolio-matrix",
@@ -59,12 +143,40 @@
       "trigger": "\"Too many projects at once\"",
       "essence": "Plot all projects by cost/time vs strategic value; kill the expensive-low-value ones",
       "visualType": "scatter-plot",
-      "universalExample": "You plot every active project by how much time it eats against how much it moves your strategy. A slick internal dashboard sits top-left: expensive, low value. Seeing it as a dot rather than a to-do makes it easy to kill and reclaim two days a week.",
-      "personalPrompt": "Which expensive-but-low-value project would you feel relief to stop, and what is stopping you from stopping it?",
+      "universalExample": "As a shift-manager you plot your recurring duties by hours-eaten against value. The hand-written weekly stock report eats 3 hours and moves nothing. Seen as a dot, not a duty, it's easy to switch to a 20-minute photo log.",
+      "personalPrompt": "Which expensive-but-low-value project or commitment would you feel relief to stop, and what is stopping you from stopping it?",
       "pitfalls": [
         "Sunk effort makes the costly-low-value corner feel too painful to cut — judge future value, not past investment.",
         "Strategic value is easy to inflate for pet projects; get a second opinion on the vertical axis."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "As a shift-manager you plot your recurring duties by hours-eaten against value. The hand-written weekly stock report eats 3 hours and moves nothing. Seen as a dot, not a duty, it's easy to switch to a 20-minute photo log.",
+          "tradeoff": "Dropping the detailed report risks missing a slow discrepancy; you trade some visibility for 2.5 hours back every week."
+        },
+        {
+          "persona": "student",
+          "scenario": "You map your study activities by time versus grade-impact. Re-copying notes into three colours eats 4 hours a week for near-zero marks. Plotting it kills the ritual and frees the time for past-papers.",
+          "tradeoff": "Ditching the pretty notes loses the calm the ritual gave you; you pay in comfort for hours aimed at what's actually examined."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You plot how your weekends go by effort against closeness gained. Hosting a big monthly dinner costs a whole Saturday and leaves everyone tired, not closer. As a dot it's obviously cuttable in favour of one real walk with a friend.",
+          "tradeoff": "Cancelling the dinner disappoints the wider circle who expect it; you give up being the reliable host to protect real connection."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You run 12 initiatives and pride says all are strategic. Plotted, a slick internal dashboard you built sits top-left: expensive, low value. Your skill made it fun, not important. Two days a week reclaimed.",
+          "tradeoff": "Shelving your own polished tool means admitting the effort was misspent; you trade sunk pride for the two days the roadmap needs."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your calendar, not cash, is scarce. You plot your board seats by hours against genuine influence. Three prestigious but powerless charity boards eat 40 hours a quarter. As dots, they're obvious to resign.",
+          "tradeoff": "Leaving the marquee boards costs you visible status and some gala invitations; you trade prestige for hours spent where you actually move things."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "feedback-analysis-drucker",
@@ -73,12 +185,40 @@
       "trigger": "\"Am I actually good at this?\"",
       "essence": "Write down expected outcomes at decision time; compare with reality months later to find your real strengths",
       "visualType": "timeline",
-      "universalExample": "Before shipping a feature you write: 'I expect signups to rise 15% within a month.' Two months later signups rose 3% but support tickets dropped sharply. Comparing prediction to reality, you learn your real strength isn't growth work — it's reducing friction. You steer toward that.",
+      "universalExample": "Before starting a food stall you write: 'I expect 50 customers a day by month two.' Two months on you get 20 customers who each spend double your guess. Prediction versus reality teaches your edge is premium, not volume — so you raise prices instead of chasing footfall.",
       "personalPrompt": "What outcome are you predicting for your current bet, and where will you write it down so your future self can't rewrite the memory?",
       "pitfalls": [
         "Without a written prediction, hindsight quietly edits what you 'always knew' — the record is the whole point.",
         "It only pays off if you actually return to compare months later; schedule the review now."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Before starting a food stall you write: 'I expect 50 customers a day by month two.' Two months on you get 20 customers who each spend double your guess. Prediction versus reality teaches your edge is premium, not volume — so you raise prices instead of chasing footfall.",
+          "tradeoff": "Committing the prediction to paper risks being proven wrong in your own hand; you trade the comfort of a flexible memory for a lesson you can't fudge."
+        },
+        {
+          "persona": "student",
+          "scenario": "Before a semester you write 'group projects will be my strength.' Grades come back: your solo essays scored 15 points higher. The record contradicts your self-story, so you pick a dissertation over a group capstone next year.",
+          "tradeoff": "Believing the data over your self-image costs you the identity of a 'team player'; you give up a flattering label for a truer one."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Before a friend's wedding you predict 'I'll be fine seeing my ex there.' The evening proves you spiralled by 9pm. Because you wrote the prediction first, you can't rewrite it as 'I always knew it'd be hard,' and you plan an early exit next time.",
+          "tradeoff": "Facing that you misjudged your own resilience stings; you pay in a bruised self-image to plan honestly for the next encounter."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Sure your genius is strategy, you predict your new venture wins on vision. A year of notes shows every win came from your dull operational fixes. The written record dethrones your favourite self-story, and you lean into ops.",
+          "tradeoff": "Accepting that your strength is unglamorous costs your ego its preferred title; you trade the 'visionary' badge for the skill that actually pays."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You fund 3 initiatives and assume your judgement is why one soars. Comparing your written predictions, you'd rated the two failures higher. Only the record shows your instinct is average — so you hire a real analyst instead of trusting the gut money let you never test.",
+          "tradeoff": "Admitting your judgement is ordinary punctures the myth wealth built around you; you give up a flattering story to make better bets."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "john-whitmore-grow",
@@ -87,7 +227,7 @@
       "trigger": "\"Vague goal, no plan\"",
       "essence": "Goal → Reality → Options → Will: walk a goal from wish to committed next step",
       "visualType": "flow",
-      "universalExample": "A teammate says 'I want to get better at public speaking.' You walk GROW: Goal — give a confident conference talk this year; Reality — I freeze in meetings of more than six; Options — a local meetup, a speaking course, recording myself; Will — I'll submit to one meetup by Friday. A wish became a dated next step.",
+      "universalExample": "You keep saying 'I should get fitter.' You run GROW: Goal — climb the 4 flights to your flat without stopping; Reality — you're winded by floor 2; Options — daily stairs, a ₹500 skipping rope, a walking buddy; Will — take the stairs starting tomorrow. The wish became a Monday act.",
       "personalPrompt": "For the vague goal you keep restating, what is the smallest concrete thing you will actually do this week?",
       "pitfalls": [
         "It's tempting to jump straight to Options before honestly mapping Reality — the plan then solves the wrong problem.",
@@ -98,7 +238,35 @@
         "Reality — describe where things honestly stand right now.",
         "Options — list the paths available, without judging them yet.",
         "Will — commit to one specific next action, with a date."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You keep saying 'I should get fitter.' You run GROW: Goal — climb the 4 flights to your flat without stopping; Reality — you're winded by floor 2; Options — daily stairs, a ₹500 skipping rope, a walking buddy; Will — take the stairs starting tomorrow. The wish became a Monday act.",
+          "tradeoff": "Committing to one option means dropping the comforting 'someday I'll join a gym'; you trade a big fantasy for a small real thing."
+        },
+        {
+          "persona": "student",
+          "scenario": "You keep restating 'I want better grades.' GROW: Goal — a B in statistics; Reality — you skip the 8am lectures; Options — record them, a study group, office hours; Will — email the professor for notes by Friday. A wish became a dated step.",
+          "tradeoff": "Choosing the concrete step commits you publicly to the professor; you give up the deniability of a private, undated intention."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your partner keeps hearing 'we should talk more.' You run GROW together: Goal — one honest 20-minute check-in a week; Reality — you both scroll after dinner; Options — a no-phone walk, Sunday coffee; Will — walk this Sunday. Vague longing became a plan.",
+          "tradeoff": "Naming a fixed slot risks the talk feeling scheduled, not spontaneous; you trade some romance-of-chance for a conversation that actually happens."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You coach a bright junior who says 'I want to lead.' You resist handing them the answer and run GROW; their Reality — they've never chaired a meeting — surfaces the real gap. They commit to running Thursday's standup. Your restraint made them own it.",
+          "tradeoff": "Withholding your ready-made solution costs you the quick win and feels slower; you sacrifice looking clever for their actually growing."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your heir keeps saying 'I'll run the foundation someday.' You walk GROW instead of handing over a title: Reality — they've never sat with a grantee; Will — shadow one visit this month. The dated step replaces an inherited assumption with earned readiness.",
+          "tradeoff": "Making succession conditional on real steps risks family tension and a delayed handover; you trade smooth inheritance for a successor who's actually ready."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "rubber-band-model",
@@ -107,12 +275,40 @@
       "trigger": "\"Torn between two options\"",
       "essence": "Ask not \"what pulls me?\" but \"what holds me AND what pulls me?\" — both options attract, that's why it hurts",
       "visualType": "tension",
-      "universalExample": "You're torn between staying at a stable job and joining an early startup. Instead of asking which pulls harder, you ask what holds you to each: the job holds you with security and a team you like; the startup pulls you with ownership and speed. Naming both anchors explains why the choice aches — and which anchor you're ready to cut.",
+      "universalExample": "You're torn between a steady ₹40,000 factory job and a cousin's risky workshop. Instead of asking which excites you, you name the anchors: the job holds you with a provident fund and your kids' school fees; the workshop pulls you with part-ownership. Naming both shows why leaving aches.",
       "personalPrompt": "For the two options tugging at you, what is holding you to the one you keep almost leaving?",
       "pitfalls": [
         "Framing it as pure attraction hides the anchors that are really keeping you stuck.",
         "The point is to see the tension clearly, not to resolve it instantly — sitting with both pulls is part of the method."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You're torn between a steady ₹40,000 factory job and a cousin's risky workshop. Instead of asking which excites you, you name the anchors: the job holds you with a provident fund and your kids' school fees; the workshop pulls you with part-ownership. Naming both shows why leaving aches.",
+          "tradeoff": "Seeing the anchors clearly won't cut them for you; you give up the fantasy of a painless choice and sit with a real one."
+        },
+        {
+          "persona": "student",
+          "scenario": "You can't decide between a safe local college and a distant dream course. You map the bands: home holds you with your mother's health and zero debt; the dream pulls with a field you love. The anchors, not the brochures, explain the ache.",
+          "tradeoff": "Facing that your mother's health is the real anchor risks guilt either way; you trade a clean decision for an honest one."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You keep almost leaving a 6-year relationship but never do. The model asks what holds you: shared friends, a lease, and the fear of starting over at 34. Naming the anchors shows you're held by logistics, not love — a harder truth.",
+          "tradeoff": "Seeing that logistics, not love, keeps you there forces a decision you were dodging; you pay in comfort lost for clarity gained."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're a top surgeon eyeing a research post but you never jump. The bands: clinical work holds you with status and a 7-figure income; research pulls with meaning. Your competence is itself an anchor — being the best keeps you where you're bored.",
+          "tradeoff": "Admitting your own excellence traps you costs the story that you 'could leave anytime'; you trade that comfort for a real look at why you stay."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You could retire tomorrow but can't leave the family firm. The anchors aren't money: it's your late father's name on the door and 200 staff who trust you. Naming them shows meaning, not need, holds you.",
+          "tradeoff": "Seeing that legacy is the anchor forces you to choose it deliberately or not; you give up drifting on duty for an owned decision."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "feedback-box",
@@ -121,12 +317,40 @@
       "trigger": "\"Got criticism, feeling defensive\"",
       "essence": "Sort feedback: advice to act on / to ignore / affirmation / noise. Not all feedback is equal",
       "visualType": "matrix-2x2",
-      "universalExample": "After a launch, five people send notes. You sort them: one flags a real onboarding bug (act on it), one is a stylistic preference you'll ignore, one is warm encouragement (affirmation), one is a vague 'meh' (noise). The single actionable note gets your Monday morning; the rest stop haunting you.",
+      "universalExample": "As a lead you get 12 pieces of feedback on your strategy. Your instinct is to defensively file all of it as noise. Forcing the sort, exactly one — a junior's note on a data gap — is gold. Your smartness nearly binned the one thing that mattered.",
       "personalPrompt": "Of the criticism sitting in your head right now, which single piece is advice worth acting on, and which are you just replaying?",
       "pitfalls": [
         "A defensive mood dumps everything into 'noise' so nothing has to change — sort before you react.",
         "The reverse trap: treating every offhand comment as an action item and drowning in other people's preferences."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "After your bakery's first week, 5 people leave notes. You sort: one flags the queue was chaotic (act on it), one wants a flavour you'll skip (preference), one is warm praise (affirmation), one just 'meh' (noise). The queue fix gets Monday; the rest stop haunting you.",
+          "tradeoff": "Filing four notes as noise risks dismissing a slow-burn signal; you trade completeness for the sanity of acting on one real thing."
+        },
+        {
+          "persona": "student",
+          "scenario": "You get feedback on a draft from 4 classmates. One names a genuine logic gap (act), one prefers a different topic (ignore), one says 'great job' (affirmation), one is vague (noise). You fix the logic gap before the Friday deadline and drop the rest.",
+          "tradeoff": "Ignoring the topic suggestion may cost a mark if the marker shared that taste; you gamble on the one fix you can actually make in time."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your partner, mother, and best friend all critique your new job move. You sort: your partner names a real budget risk (act), your mother repeats an old fear (noise for now), your friend is encouraging (affirmation). You address the budget, not the anxiety.",
+          "tradeoff": "Boxing your mother's worry as noise risks her feeling unheard; you pay in a slightly hurt parent to avoid deciding by her fear."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "As a lead you get 12 pieces of feedback on your strategy. Your instinct is to defensively file all of it as noise. Forcing the sort, exactly one — a junior's note on a data gap — is gold. Your smartness nearly binned the one thing that mattered.",
+          "tradeoff": "Taking the junior's note seriously costs you the fiction that you'd covered everything; you trade ego for the flaw that would have sunk the plan."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "As a patron, everyone flatters you, so real feedback hides in the noise. You sort a gala's reactions: 30 compliments (affirmation), one quiet aside that your speech ran long and self-serving (act). The single honest note is the only useful one.",
+          "tradeoff": "Acting on the lone critic over the crowd of flatterers risks trusting the wrong voice; you give up easy applause to hear what money usually buys silence on."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "yes-no-rule",
@@ -135,12 +359,40 @@
       "trigger": "\"I keep re-deciding the same thing\"",
       "essence": "Pre-set personal rules (\"never more than X\") so recurring decisions become automatic",
       "visualType": "flow",
-      "universalExample": "You keep agonising over every podcast invite. You set a rule: 'Only if it reaches 10k listeners and I can prep in under two hours.' Now each invite is a quick gate, not a fresh negotiation with yourself. The recurring decision runs itself.",
+      "universalExample": "Relatives keep asking you for small loans and each one is an agonising negotiation. You set a rule: 'I lend up to ₹2,000, once per person per year, no exceptions.' Now each ask is a quick gate, not a fresh guilt-trip.",
       "personalPrompt": "Which decision do you keep re-litigating, and what personal rule would let you decide it once and stop?",
       "pitfalls": [
         "A rule set too rigidly will misfire on the genuinely exceptional case — build in one deliberate override, not a dozen.",
         "Rules quietly go stale; revisit them when your goals change or they'll steer you by an old map."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Relatives keep asking you for small loans and each one is an agonising negotiation. You set a rule: 'I lend up to ₹2,000, once per person per year, no exceptions.' Now each ask is a quick gate, not a fresh guilt-trip.",
+          "tradeoff": "A fixed rule will sometimes refuse a genuinely desperate case; you trade a little compassion-on-demand for an end to being bled dry."
+        },
+        {
+          "persona": "student",
+          "scenario": "Every party invite during term derails a week of study. You set a rule: 'Only Friday nights, only if the next day is free.' The recurring decision now answers itself instead of eating an hour each time.",
+          "tradeoff": "The rule will make you miss a Wednesday event you'd have loved; you give up a few good nights to protect the grade."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner fight over every 'should we go to your family's thing?' You agree a rule: 'We each get 2 family events a month; beyond that it's optional.' The recurring row is settled once.",
+          "tradeoff": "A rule can feel cold when a one-off event really matters; you trade some flexibility for peace over a fight you kept re-having."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Every podcast and panel invite tempts you because you can add value to all of them. You set a rule: 'Only 10k-plus audience and under 2 hours' prep.' The gate stops your own capability from saying yes to everything.",
+          "tradeoff": "The rule will screen out a small but perfect-fit show; you sacrifice a few gems to stop death by a thousand yeses."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Charities court you constantly and each ask feels worthy. You set a rule: 'I fund 3 causes deeply, decided each January; mid-year asks get a polite no.' The rule protects focus from an infinite worthy queue.",
+          "tradeoff": "You'll turn away a genuinely urgent cause in June; you give up responsiveness to avoid scattering money thinly across fifty logos."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "choice-overload",
@@ -149,12 +401,40 @@
       "trigger": "\"Too many options, can't pick\"",
       "essence": "Beyond a handful of options, satisfaction drops. Cut the menu before choosing from it",
       "visualType": "curve",
-      "universalExample": "Picking an analytics tool, you open twelve tabs and stall for a week. You cut the list to three that meet two non-negotiables, then choose in an afternoon. Fewer options didn't lower quality — it restored your ability to decide at all.",
+      "universalExample": "Buying a fridge, you open 15 tabs and stall for 2 weeks while the old one leaks. You cut to 3 that fit two non-negotiables — size and budget — and choose in an afternoon. Fewer options restored your ability to decide.",
       "personalPrompt": "Where are you stalled because you left too many options open, and which could you cut before choosing?",
       "pitfalls": [
         "Cutting the menu too early can drop the option you'd have loved — trim by clear criteria, not by fatigue.",
         "More research feels like progress but often just widens the menu; set a shortlist size in advance."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Buying a fridge, you open 15 tabs and stall for 2 weeks while the old one leaks. You cut to 3 that fit two non-negotiables — size and budget — and choose in an afternoon. Fewer options restored your ability to decide.",
+          "tradeoff": "Trimming to 3 risks skipping a model you'd have marginally preferred; you trade the perfect fridge for a working one before the kitchen floods."
+        },
+        {
+          "persona": "student",
+          "scenario": "Picking electives, you agonise over 20 modules and nearly miss the enrolment deadline. You cut to 3 that match your timetable and interest, then pick fast. The shortlist unfroze you.",
+          "tradeoff": "Cutting early may drop a hidden-gem module; you trade breadth of consideration for making the deadline at all."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "On dating apps you swipe 40 profiles a night and never message anyone. You force yourself to consider only 3 at a time and actually reply. Fewer options turned endless scrolling into a real conversation.",
+          "tradeoff": "Narrowing risks passing someone you'd have clicked with; you give up the illusion of infinite options for an actual first date."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You keep every strategic option open because you see merit in all 8, and the team stalls waiting on you. You force a shortlist of 2 and commit. Your own breadth of vision was the paralysis.",
+          "tradeoff": "Closing 6 doors means you may shut the eventual best path; you sacrifice optionality for a team that can finally move."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can buy any of 30 houses in the city, so you view them for a year and buy none while your family lives in limbo. You cut to 3 by one rule — walk to the kids' school — and choose. Unlimited budget was the trap.",
+          "tradeoff": "The rule eliminates a stunning house across town; you trade a dream view for a decision your family has waited a year for."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "gap-in-the-market-model",
@@ -163,12 +443,40 @@
       "trigger": "\"Is my idea worth building?\"",
       "essence": "Plot the market's crowded and empty zones; a viable idea sits in an empty zone people actually want filled",
       "visualType": "scatter-plot",
-      "universalExample": "You map note-taking apps by two things users actually want: speed and structure. The crowded corner is fast-but-messy; the empty-but-wanted corner is fast-and-structured. Your idea aims there — an empty zone people are actively frustrated by, not an empty zone nobody cares about.",
+      "universalExample": "Opening a tiffin service, you map 8 rivals by price and health. The crowded corner is cheap-and-oily; the empty-and-wanted corner is affordable-and-genuinely-healthy. You aim there — a gap people actually complain about, not one nobody cares about.",
       "personalPrompt": "For the idea you're weighing, is the gap you found empty because it's untapped, or empty because nobody wants it filled?",
       "pitfalls": [
         "An empty zone can be empty for a good reason — validate that people actually want it, not just that it's unoccupied.",
         "Plotting only your favourite axes can invent a gap that vanishes under the dimensions customers really use."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Opening a tiffin service, you map 8 rivals by price and health. The crowded corner is cheap-and-oily; the empty-and-wanted corner is affordable-and-genuinely-healthy. You aim there — a gap people actually complain about, not one nobody cares about.",
+          "tradeoff": "The healthy niche costs more per meal to run; you trade fat margins for a spot customers are actively frustrated by."
+        },
+        {
+          "persona": "student",
+          "scenario": "Choosing a thesis, you map the field and spot an untouched sub-topic. Before committing 8 months, you check: empty because it's new, or because no journal cares? You pick a gap supervisors actually want filled.",
+          "tradeoff": "The wanted gap is more crowded than the truly empty one; you give up easy novelty for research someone will read."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You're the friend who always organises, and everyone leans on you. You notice the real gap in your circle isn't another planner — it's someone who checks in one-to-one. You fill the wanted gap, not the empty-but-ignored one.",
+          "tradeoff": "Being the deep-check-in friend costs more emotional energy than group logistics; you trade easy visibility for a role people quietly need."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You spot an unserved niche and your intellect races to build it. First you ask, before committing 6 months: empty because untapped, or empty because tried and failed? Your cleverness wants the elegant answer; the honest check confirms people actively want it.",
+          "tradeoff": "Validating first delays your build by a month; you sacrifice speed to avoid a beautiful product nobody asked for."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can fund any 'gap' your circle dreams up. You nearly bankroll a ₹5-crore members' club — until you map it and see the wanted gap is a quiet co-working space, not more exclusivity. Money let you skip the check; you don't.",
+          "tradeoff": "The wanted option is less glamorous than the club; you trade prestige for a venture people will actually use."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "morphological-box-scamper",
@@ -177,7 +485,7 @@
       "trigger": "\"Need a new idea from old parts\"",
       "essence": "Break a thing into attributes, recombine systematically; SCAMPER = Substitute, Combine, Adapt, Modify, Put to other uses, Eliminate, Reverse",
       "visualType": "grid",
-      "universalExample": "Reinventing your onboarding email, you break it into attributes — sender, tone, length, call-to-action, timing — and list options for each. Then you run SCAMPER: substitute the sender for a real founder, combine two emails into one, eliminate the second CTA. New combinations surface that a blank page never would.",
+      "universalExample": "Your small catering menu feels stale and bookings dropped 30%. You break a dish into attributes — protein, sauce, format, price — and run SCAMPER: substitute the format for a lunchbox, eliminate the pricey garnish. A fresh combo appears a blank page never gave.",
       "personalPrompt": "Take the thing you're stuck improving — which single attribute could you substitute or eliminate to get an idea you haven't tried?",
       "pitfalls": [
         "Systematic recombination generates volume, not quality — most combinations are duds, so filter hard afterward.",
@@ -191,7 +499,35 @@
         "Put to other uses — apply it to a different job.",
         "Eliminate — remove a part and see what's left.",
         "Reverse — flip the order or the assumption."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your small catering menu feels stale and bookings dropped 30%. You break a dish into attributes — protein, sauce, format, price — and run SCAMPER: substitute the format for a lunchbox, eliminate the pricey garnish. A fresh combo appears a blank page never gave.",
+          "tradeoff": "Systematic recombination throws up mostly duds; you pay with an evening of filtering to find the two ideas worth cooking."
+        },
+        {
+          "persona": "student",
+          "scenario": "Stuck on a project topic for 3 weeks, you break your field into attributes and force substitutions and reversals. One reversed assumption becomes your whole angle — something staring at a blank doc never produced.",
+          "tradeoff": "Most combinations are junk; you pay in an hour of dross to surface one usable idea before the deadline."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your date nights have become the same dinner every Friday. You break 'date' into attributes — time, place, activity, cost — and swap: a dawn walk instead of dinner, ₹0 instead of ₹2,000. The recombination revives a stale ritual.",
+          "tradeoff": "Some experiments will flop and feel forced; you trade a reliably okay evening for the chance of a memorable one."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're brilliant but keep designing the same product shape for 3 releases. Forcing SCAMPER on your own idea, 'eliminate the dashboard' unlocks a direction your expertise had ruled out on instinct. The method beat your pattern.",
+          "tradeoff": "Entertaining 'bad' combinations wastes some of your scarce time; you sacrifice efficiency to escape your own well-worn groove."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Planning a legacy gift, you'd default to funding a building with your name on it. SCAMPER on 'donation' — combine, put-to-other-use — surfaces funding 20 scholarships instead. The method broke a rich person's reflex.",
+          "tradeoff": "The recombined gift is less visible than a plaque; you trade a monument for impact fewer people will attribute to you."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "gift-model",
@@ -200,12 +536,40 @@
       "trigger": "\"What should I give/offer?\"",
       "essence": "Good gifts sit between what they desire and what surprises them; map gift ideas on desire × surprise",
       "visualType": "matrix-2x2",
-      "universalExample": "Choosing a thank-you gift for a mentor, you plot ideas on desire versus surprise. A gift card is high-desire, zero-surprise (forgettable). A random gadget is high-surprise, low-desire (clutter). A rare edition of a book she loves sits in the sweet spot — wanted and unexpected.",
+      "universalExample": "For your mother's 60th you nearly default to a ₹5,000 gift card (wanted, zero surprise). Plotting desire against surprise, you instead track down a reprint of the novel she lost in a flood — wanted and unexpected.",
       "personalPrompt": "For the gift or offer you're planning, does it sit in the wanted-and-surprising zone, or have you defaulted to safe-but-forgettable?",
       "pitfalls": [
         "Optimising only for surprise produces novelty they didn't want; anchor on genuine desire first.",
         "What counts as desire and surprise is theirs, not yours — map from their taste, not your own."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "For your mother's 60th you nearly default to a ₹5,000 gift card (wanted, zero surprise). Plotting desire against surprise, you instead track down a reprint of the novel she lost in a flood — wanted and unexpected.",
+          "tradeoff": "The thoughtful gift takes 3 weeks to hunt down; you trade the ease of a card for a present that actually lands."
+        },
+        {
+          "persona": "student",
+          "scenario": "Thanking a professor who wrote your reference, you'd grab ₹500 chocolates (safe, forgettable). The grid pushes you to a hand-annotated copy of a paper that changed your direction — high desire, high surprise, near-zero cost.",
+          "tradeoff": "The personal gift risks seeming presumptuous to a formal professor; you trade safety for something that might actually be remembered."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "For your partner's birthday you keep buying perfume they never wear. Mapping desire against surprise, you realise a day with both phones off and a walk they've mentioned twice sits in the sweet spot — wanted, unexpected, ₹0.",
+          "tradeoff": "The experience leaves nothing to unwrap on the day; you give up the visible gesture for the thing they actually wanted."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "For your partner you always pick the objectively 'best' gadget — high spec, low delight — optimising gifts like a spreadsheet. The model says surprise is theirs to feel, not yours to calculate; you choose the odd, personal thing your logic rejected.",
+          "tradeoff": "Trusting their taste over your analysis risks a gift you'd never pick; you sacrifice control for a chance at real delight."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can buy anyone anything, so your gifts read as expensive and impersonal. For a friend who has everything, the wanted-and-surprising axis points to your time — a private dinner you cook, not a ₹1-lakh watch.",
+          "tradeoff": "Cooking yourself exposes you in a way a cheque never does; you trade the safety of money for the risk of actually showing up."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "thinking-outside-the-box",
@@ -214,12 +578,40 @@
       "trigger": "\"Stuck in the obvious answers\"",
       "essence": "The nine-dot lesson: the constraint you can't break usually isn't in the problem, it's in your head",
       "visualType": "nine-dot",
-      "universalExample": "You've been trying to speed up a slow report by optimising the query. Stepping back, you realise the real constraint you assumed — that the report must run live — isn't required at all; a nightly cache solves it. The wall was in the assumption, not the problem.",
+      "universalExample": "Your commute eats 2 hours a day and you keep hunting faster routes. Stepping back, the assumption — that you must be in the office daily — was never enforced; two work-from-home days halve it. The wall was in your head.",
       "personalPrompt": "What rule are you obeying on your current problem that nobody actually imposed on you?",
       "pitfalls": [
         "'Think outside the box' becomes a slogan unless you name the specific assumption you're breaking.",
         "Some constraints are real and load-bearing — question them, but don't romanticise ignoring every limit."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your commute eats 2 hours a day and you keep hunting faster routes. Stepping back, the assumption — that you must be in the office daily — was never enforced; two work-from-home days halve it. The wall was in your head.",
+          "tradeoff": "Asking to work from home risks your manager reading it as slacking; you trade a little standing for four hours a week reclaimed."
+        },
+        {
+          "persona": "student",
+          "scenario": "You've spent a month trying to memorise a huge syllabus faster. The unexamined rule was 'cover everything'; the past 5 papers only ever test a third. Dropping the assumption changes the whole plan.",
+          "tradeoff": "Betting on the likely topics risks the one year the pattern breaks; you trade total coverage for time spent where marks actually are."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You keep trying to 'win' the same argument with your brother about the family home. The assumed constraint — that one of you must be right — dissolves when you ask what you both actually want: neither wanted the house, both feared saying so.",
+          "tradeoff": "Dropping the need to win means conceding the moral high ground; you give up being right to get to a real answer."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're optimising a slow report's query for the third week. Your expertise assumed it must run live; a nightly cache — beneath your skill level — solves it in an hour. Your competence hid the cheap answer.",
+          "tradeoff": "Accepting the unglamorous fix means the elegant optimisation you enjoyed goes unbuilt; you trade craft for the problem actually going away."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You keep throwing money at a charity's fundraising problem for a year. The assumption — that more marketing is the lever — hides the real constraint: donors don't trust where the money goes. No budget fixes that; transparency does.",
+          "tradeoff": "Publishing full accounts exposes past waste; you trade a comfortable opacity for the trust that actually raises funds."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "consequences-model",
@@ -228,12 +620,40 @@
       "trigger": "\"Quick fix vs right fix\"",
       "essence": "Trace each option's consequences beyond step one before acting",
       "visualType": "tree",
-      "universalExample": "Tempted to hardcode a quick fix before a demo, you trace it out: it works tonight, but next week another dev copies the pattern, and in a month it breaks silently in production. Following the branch past step one turns a five-minute shortcut into an obvious no.",
+      "universalExample": "You want to hardcode a quick fix before a big demo. You trace it: works tonight, another dev copies the pattern next week, it fails silently in production within a month. Your speed made the shortcut tempting; the branch makes it a no.",
       "personalPrompt": "For the quick fix you're considering, what happens two steps after it works?",
       "pitfalls": [
         "The tree can branch forever — go deep enough to change the decision, then stop, or you'll paralyse yourself.",
         "People trace only the branches that support the choice they already want; force yourself to follow the uncomfortable ones."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Tempted to skip the ₹1,200 service on your scooter to save this month, you trace it: fine this week, a strained engine next month, a ₹9,000 repair by monsoon. Following the branch turns a saving into an obvious cost.",
+          "tradeoff": "Paying now means a tight month you'd rather avoid; you trade present ease for not being stranded later."
+        },
+        {
+          "persona": "student",
+          "scenario": "You're about to copy a friend's assignment to hit tonight's deadline. You trace it: submitted tonight, flagged by the similarity checker next week, on your record for years. Step two changes the whole calculus.",
+          "tradeoff": "Doing it honestly risks a lower mark or a late penalty; you trade this grade for not gambling your degree."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You want to vent about your partner to a mutual friend after a fight. You trace it: relief tonight, the friend's changed view of them next month, an awkwardness that outlives the argument. The second step stops you.",
+          "tradeoff": "Holding the vent in means sitting with the frustration tonight; you give up the release to protect a partner the friend can't unhear things about."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You want to hardcode a quick fix before a big demo. You trace it: works tonight, another dev copies the pattern next week, it fails silently in production within a month. Your speed made the shortcut tempting; the branch makes it a no.",
+          "tradeoff": "Doing it properly risks a rougher demo; you trade a polished tonight for a system that doesn't rot."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You're about to pull strings to get your child into a top school. You trace it: they're in this year, out of their depth next year, and they learn that rules bend for them for life. The far branch is the real cost.",
+          "tradeoff": "Not pulling the string means a lesser school now; you trade a prestigious label for a child who earns their own place."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "unconscious-thinking-theory",
@@ -242,12 +662,40 @@
       "trigger": "\"Big decision, analysis paralysis\"",
       "essence": "For complex choices: load the facts, then sleep on it — deliberate distraction lets integration happen",
       "visualType": "split",
-      "universalExample": "Facing a complex hiring choice with two strong finalists, you read every note, then deliberately stop and go for a long walk. By evening a clear preference has surfaced that the spreadsheet never produced. You loaded the facts, then let integration happen off-line.",
+      "universalExample": "Choosing between two flats within your ₹18,000 budget, you re-read the listings for days and stall. You gather every fact, then deliberately spend a Sunday away from it. By evening a clear preference has surfaced the spreadsheet never gave.",
       "personalPrompt": "On the tangled decision you're chewing, have you actually loaded the facts and stepped away, or just kept re-reading them?",
       "pitfalls": [
         "Sleeping on it only helps after you've genuinely absorbed the information — distraction without input is just delay.",
         "For simple, well-defined choices, deliberate analysis still beats a gut hunch; reserve this for genuinely complex ones."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Choosing between two flats within your ₹18,000 budget, you re-read the listings for days and stall. You gather every fact, then deliberately spend a Sunday away from it. By evening a clear preference has surfaced the spreadsheet never gave.",
+          "tradeoff": "Trusting the gut that surfaced means you can't fully justify it on paper; you trade a defensible list for a decision that actually feels right."
+        },
+        {
+          "persona": "student",
+          "scenario": "Torn between two dissertation topics, you keep re-reading the same 3 papers. You load the material, then go for a long run. The run, not the fourth re-read, delivers the answer.",
+          "tradeoff": "Stepping away costs you a day you feel you should be working; you trade the comfort of visible effort for genuine clarity."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Unsure whether to forgive a friend's betrayal, you replay the argument on loop for a week. You lay out what actually happened, then stop and sleep on it. Overnight, integration you couldn't force tells you where you stand.",
+          "tradeoff": "Waiting risks the friend reading your silence as an answer; you trade a fast reply for one you won't regret."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Facing a complex hire with 2 strong finalists, you build ever-bigger comparison grids. The theory says your conscious analysis has hit its ceiling; you read every note, then walk away. The walk decides what the grid couldn't.",
+          "tradeoff": "Letting the unconscious decide feels like abandoning rigour; you sacrifice the illusion of full control for a better call."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You've hired 3 consultants to decide a family-business succession and still can't choose. All the data is in; the block is that you keep re-analysing. You step fully away for a week — and the answer, long known, surfaces.",
+          "tradeoff": "Stepping back risks the impatient board reading it as indecision; you trade the look of decisiveness for a choice you can live with."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "stop-rule",
@@ -256,12 +704,40 @@
       "trigger": "\"When do I quit?\"",
       "essence": "Decide the quitting condition BEFORE you start; sunk effort will blind you later",
       "visualType": "spectrum",
-      "universalExample": "Before starting a risky experiment, you decide the exit in advance: 'If I've spent three weekends and haven't got one paying user, I stop.' When week three arrives with no traction, the pre-set line makes quitting a plan, not a defeat.",
+      "universalExample": "You're clever enough to keep 'fixing' a failing project forever. You set the stop rule before you start: 'No paying user by week 6, I kill it.' The rule binds the future you who'll rationalise one more sprint.",
       "personalPrompt": "For the effort you're pouring into, what condition — decided now, in the cold light of day — would tell you to walk away?",
       "pitfalls": [
         "Set the stop rule before you start; once you're invested, sunk cost will bend any line you draw.",
         "A stop rule that's never checked is decoration — put the condition somewhere you'll actually see it."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Before opening a weekend food stall, you set the exit: 'If I've run it 8 weekends and cleared under ₹5,000 total, I stop.' When week 8 comes with ₹3,000, quitting is a plan you made cold, not a failure.",
+          "tradeoff": "The rule may cut a venture that would've turned the corner in week 9; you trade a slim upside for not bleeding your savings indefinitely."
+        },
+        {
+          "persona": "student",
+          "scenario": "Starting a side hustle in first year, you set: 'If it's cost me 3 hours a night for a month and made ₹0, I pause it for exams.' The pre-set line makes stopping a decision, not a defeat.",
+          "tradeoff": "You might quit just before it clicked; you trade a possible breakthrough for a protected GPA."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Re-entering dating after a hard breakup, you decide in advance: 'If a new person makes me feel small twice in the first month, I walk — no fourth chance.' Set while calm, the rule holds when attachment would bend it.",
+          "tradeoff": "The rule may end something that could have grown past a rough start; you trade a maybe for not repeating an old pattern."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're clever enough to keep 'fixing' a failing project forever. You set the stop rule before you start: 'No paying user by week 6, I kill it.' The rule binds the future you who'll rationalise one more sprint.",
+          "tradeoff": "You may kill something your skill could have rescued; you trade that rescue-fantasy for years not sunk into a corpse."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can fund a passion project indefinitely, which is exactly the danger. You set a rule: 'If the gallery hasn't sold a single piece in 12 months, I close it.' Money removed the natural stop, so you build one.",
+          "tradeoff": "The rule may shut a venture that only needed patient capital; you trade infinite patience for not mistaking a hobby for a business forever."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "buyers-decision-model",
@@ -270,7 +746,7 @@
       "trigger": "\"Why did I buy that?\"",
       "essence": "Purchases pass through trigger → search → compare → buy → justify; know which stage you're being manipulated in",
       "visualType": "flow",
-      "universalExample": "You catch yourself about to buy a $200 course. Walking the stages — a tweet triggered it, you searched reviews, compared two options, and now you're about to buy — you notice the 'compare' stage was rigged by the seller's own testimonials. Knowing which stage you're in, you pause the purchase.",
+      "universalExample": "You're about to buy a ₹15,000 blender after a glowing ad. Walking the stages, you spot the 'compare' step was built entirely from the seller's own testimonials. Naming the stage, you pause and check independent reviews.",
       "personalPrompt": "For a purchase you're about to make, which stage are you in, and who is nudging you there?",
       "pitfalls": [
         "The justify stage happens after you buy — awareness there only helps you next time, not this time.",
@@ -282,7 +758,35 @@
         "Compare — you weigh alternatives against each other.",
         "Buy — you commit.",
         "Justify — you tell yourself a story that it was right."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You're about to buy a ₹15,000 blender after a glowing ad. Walking the stages, you spot the 'compare' step was built entirely from the seller's own testimonials. Naming the stage, you pause and check independent reviews.",
+          "tradeoff": "Slowing down means you might miss a genuine sale price; you trade a possible discount for not being steered into a lemon."
+        },
+        {
+          "persona": "student",
+          "scenario": "About to buy an ₹8,000 online course a friend hyped, you map the stages and see your 'search' was one enthusiastic Instagram post. Knowing which stage you skipped, you actually compare free alternatives first.",
+          "tradeoff": "Researching properly costs you the excitement of buying now; you trade the dopamine of the purchase for money kept."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You're about to say yes to a friend's MLM 'opportunity' out of loyalty. You map the stages and see the 'compare' step was skipped entirely — loyalty rushed you to buy. Naming it lets you decline without guilt.",
+          "tradeoff": "Pausing risks the friend feeling rejected; you trade a moment's awkwardness for not funding a pyramid out of politeness."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're about to greenlight a ₹5-lakh tool because the vendor flattered your team's sophistication. You map the funnel and catch the 'justify' story forming before you've even bought. Your own confidence was the lever they pulled.",
+          "tradeoff": "Slowing the deal frustrates a vendor you liked; you trade a smooth relationship for a purchase your ego didn't make."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "A dealer offers a rare ₹2-crore car and everything feels urgent. You map the stages and see the whole 'trigger' was manufactured scarcity aimed at exactly your profile. Naming it cools the urgency.",
+          "tradeoff": "Waiting risks the car genuinely selling to someone else; you trade a possible loss for not being played by your own status."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "flow-model",
@@ -291,12 +795,40 @@
       "trigger": "\"Bored or anxious at work\"",
       "essence": "Flow lives where challenge slightly exceeds skill; too easy = boredom, too hard = anxiety. Adjust one axis",
       "visualType": "curve",
-      "universalExample": "You're bored refactoring trivial code but anxious the moment you touch the payments module. Plotting challenge against skill, boredom sits where the task is too easy and anxiety where it's too hard. You pair-program the payments work to raise your skill toward the challenge — and flow returns.",
+      "universalExample": "Your factory data-entry job bores you flat by 11am, and you blame yourself for laziness. Plotting challenge against skill, the task sits far below your skill — that's boredom, not a flaw. You ask your manager for a stock-analysis task to raise the challenge.",
       "personalPrompt": "Is your current work boring you or scaring you, and which single dial — the challenge or your skill — will you nudge?",
       "pitfalls": [
         "Flow is fragile — interruptions and notifications snap you out of the channel faster than difficulty does.",
         "Chasing flow everywhere ignores the necessary boring maintenance; not every task can or should be flow."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your factory data-entry job bores you flat by 11am, and you blame yourself for laziness. Plotting challenge against skill, the task sits far below your skill — that's boredom, not a flaw. You ask your manager for a stock-analysis task to raise the challenge.",
+          "tradeoff": "Taking on harder work risks visible mistakes early; you trade the safety of easy tasks for hours that don't drag."
+        },
+        {
+          "persona": "student",
+          "scenario": "You freeze every time you open the 6-chapter statistics text and call yourself stupid. On the grid it's anxiety — challenge far above current skill. You spend a week on the basics with a tutor to lift skill toward the challenge.",
+          "tradeoff": "Going back to basics feels like falling behind peers; you give up looking advanced for actually catching flow."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Conversations with your teenage son have gone flat and you assume he's just distant. Seen as flow, your shared activities are too easy to engage him. You raise the challenge — a real project you build together over a month.",
+          "tradeoff": "A harder shared project risks friction and dropped balls; you trade comfortable small talk for a chance at real connection."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're anxious the moment you touch the payments module and bored everywhere else, and you push through both by willpower every day. The grid says willpower is the wrong lever — pair up to raise skill on payments, delegate the trivial. Your grit was masking a mismatch.",
+          "tradeoff": "Admitting willpower isn't the fix costs your self-image as someone who just powers through; you trade that pride for sustainable focus."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You've mastered everything your role offers and drift, bored, through days money can't make interesting. The grid says raise the challenge, not the comfort: you take on a hard, unpaid cause outside your expertise for a year.",
+          "tradeoff": "Choosing a challenge you might fail at risks embarrassment your status usually shields; you trade safe boredom for the discomfort that brings you alive."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "johari-window",
@@ -305,12 +837,40 @@
       "trigger": "\"How do others see me?\"",
       "essence": "Four panes: known/unknown to self × known/unknown to others. Shrink the blind spot by inviting feedback",
       "visualType": "matrix-2x2",
-      "universalExample": "After a rough project, you ask two colleagues for candid notes. They mention you interrupt in reviews — something you'd never noticed. That pane, known to others but not to you, shrinks the moment you invite the feedback. Your blind spot got smaller because you asked.",
+      "universalExample": "Your partner seems distant and you assume it's their mood. You finally ask what you do that pushes them away; they name a habit of interrupting you'd never seen. The pane opens because you asked, not because they nagged.",
       "personalPrompt": "Whose honest read on your blind spot have you been avoiding asking for, and what's one question you could ask them this week?",
       "pitfalls": [
         "The blind spot only shrinks if people feel safe being honest — defensiveness slams the window shut.",
         "Over-sharing to enlarge the 'open' pane can tip into oversharing; the goal is calibrated openness, not exposure."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You keep getting passed over for the shift-lead role and don't know why. You ask 2 trusted co-workers for candid notes; they mention you snap under pressure — something you'd never noticed. The blind pane shrank the moment you asked.",
+          "tradeoff": "Hearing you snap under pressure stings and can't be unheard; you pay in a bruised self-image to fix what was quietly costing you promotions."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your essays keep scoring lower than you expect. You ask your teacher exactly where they lose marks; she says your arguments never conclude. A blind spot of years closes in a 10-minute conversation.",
+          "tradeoff": "Asking risks hearing your best work has a basic flaw; you give up the comfort of not knowing for a weakness you can fix."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your partner seems distant and you assume it's their mood. You finally ask what you do that pushes them away; they name a habit of interrupting you'd never seen. The pane opens because you asked, not because they nagged.",
+          "tradeoff": "Inviting that honesty risks hearing something that hurts about yourself; you trade a comfortable ignorance for a marriage that can actually change."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're the smartest in every room, so in 10 years no one has told you how you land. You explicitly ask a junior for the thing people say when you leave; they admit you talk over the team. Your very competence had sealed the window shut.",
+          "tradeoff": "Asking a junior to critique you costs some authority in the moment; you sacrifice a little status for the feedback your brilliance was blocking."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Everyone flatters you, so your blind pane is enormous. You pay a coach ₹50,000 to tell you the unflattering truth your circle won't: your generosity reads as control. Money bought the honesty your status usually repels.",
+          "tradeoff": "Hearing that your giving controls people is deeply uncomfortable; you trade a flattering self-image for a relationship with reality."
+        }
+      ],
+      "featured": 2
     },
     {
       "id": "cognitive-dissonance",
@@ -319,12 +879,40 @@
       "trigger": "\"I'm justifying something I chose\"",
       "essence": "When actions and beliefs clash, we edit the belief, not the action. Catch yourself rationalizing",
       "visualType": "split",
-      "universalExample": "You bought an expensive standing desk, then rarely stand. Instead of admitting the purchase was impulsive, you find yourself insisting it 'improves posture even sitting.' Catching the rationalisation, you see you're editing the belief to protect the action — and decide to either use the desk or let the regret be honest.",
+      "universalExample": "You bought a ₹30,000 treadmill and rarely use it, so you catch yourself insisting it 'still helps as motivation.' That story is the tell. You see you're bending the belief to protect the purchase, and either use it or sell it honestly.",
       "personalPrompt": "Where are you bending a belief to protect a choice you already made, and what would change if you let the choice be the thing that's wrong?",
       "pitfalls": [
         "The rationalisation feels exactly like a genuine reason — that's why it's hard to catch in the moment.",
         "Spotting dissonance in yourself is uncomfortable; the instinct is to explain it away with one more story."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You bought a ₹30,000 treadmill and rarely use it, so you catch yourself insisting it 'still helps as motivation.' That story is the tell. You see you're bending the belief to protect the purchase, and either use it or sell it honestly.",
+          "tradeoff": "Admitting the buy was impulsive stings your sense of being careful with money; you trade a comforting story for an honest ledger."
+        },
+        {
+          "persona": "student",
+          "scenario": "You picked a degree you now dislike, so you keep telling friends 'the job prospects make it worth it' — a reason you invented after enrolling a year ago. Spotting the rationalisation, you look at a transfer instead of defending a sunk choice.",
+          "tradeoff": "Considering a transfer means admitting a year may have been misspent; you give up the tidy story for a truer path."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You stayed in a friendship that drains you and now insist 'they're just going through a phase' — for the third year. The belief exists to justify not leaving. Naming it, you let the friendship, not your patience, be the problem.",
+          "tradeoff": "Letting the friendship be the problem risks a painful goodbye; you trade a soothing narrative for an honest boundary."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You championed a strategy that's failing, so your sharp mind keeps generating reasons it 'just needs 6 more months.' Your intelligence makes the rationalisations airtight — which is the danger. You let the strategy be wrong.",
+          "tradeoff": "Killing your own strategy costs public face after you argued for it; you sacrifice ego for a decision that isn't defending a mistake."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You backed a family venture that's clearly failing after 2 years but insist 'it's a long-term play' — because admitting otherwise means admitting your judgement, which your wealth rarely questions. You let the venture be the failure.",
+          "tradeoff": "Facing the failed judgement punctures the infallibility money built; you trade a flattering self-image for a decision grounded in reality."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "unimaginable-model",
@@ -333,12 +921,40 @@
       "trigger": "\"I can't picture any other life\"",
       "essence": "Sketch the options you've never allowed yourself to consider; the unimaginable is a location, not a void",
       "visualType": "bubble-map",
-      "universalExample": "Mapping your career options, you list the obvious ones, then force a column for paths you'd never let yourself consider — quitting to teach, moving countries, starting over in a craft. Written down, the 'unimaginable' turns out to be a real location on the map, not a void, and one option there quietly excites you.",
+      "universalExample": "Mapping your career options at 40, you list the obvious ones, then force a column for paths you'd never allow — quitting to run a small farm, retraining as a nurse. Written down, one 'unimaginable' option quietly excites you.",
       "personalPrompt": "What option have you refused to even picture, and what happens if you sketch it out just to see it?",
       "pitfalls": [
         "Listing wild options is easy; the model only helps if you take at least one seriously enough to test.",
         "Some unimaginable options are unimaginable for sound reasons — expand the frontier, then still judge honestly."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Mapping your career options at 40, you list the obvious ones, then force a column for paths you'd never allow — quitting to run a small farm, retraining as a nurse. Written down, one 'unimaginable' option quietly excites you.",
+          "tradeoff": "Taking the wild option seriously risks unsettling a stable life; you trade the safety of never-asking for a door you might actually walk through."
+        },
+        {
+          "persona": "student",
+          "scenario": "Choosing a career, you list the expected graduate jobs, then force yourself to write the ones you'd be embarrassed to admit — a trade apprenticeship, a year abroad. One turns out to fit you better than the 'sensible' list.",
+          "tradeoff": "Admitting you want the unconventional path risks your parents' disappointment; you give up their easy approval for a choice that's yours."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Stuck in a marriage that's neither happy nor terrible, you list the obvious fixes, then force the unimaginable column — separate for a year, live in different cities. Just seeing it written changes the conversation.",
+          "tradeoff": "Naming the unthinkable option out loud risks frightening your spouse; you trade a comfortable silence for an honest look at what you both want."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're sure your only options are the 3 prestigious roles your CV points to. Forced to write the unimaginable — leave the field entirely, start over at the bottom — you find your competence had fenced off the one path that thrills you.",
+          "tradeoff": "Considering a fresh start means risking the status your track record earned; you sacrifice the sunk prestige for a life you'd choose again."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Every option your money buys is on the table, so you list them and feel nothing. Forcing the unimaginable — give most of it away, live simply for a year — surfaces the only option that stirs you.",
+          "tradeoff": "Taking radical simplicity seriously threatens the identity your wealth built; you trade certainty of comfort for a shot at meaning."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "uffe-elbaek-model",
@@ -347,12 +963,40 @@
       "trigger": "\"Who am I vs who I want to be\"",
       "essence": "Rate yourself on value spectrums four ways: how you see yourself, want to be, how others see you, how you'd like them to. The gaps are the story",
       "visualType": "radar",
-      "universalExample": "On a spider chart of values — creativity, security, status, connection — you plot four lines: how you see yourself, who you want to be, how others see you, how you'd like to be seen. The gap between 'want to be' and 'others see' on status tells you where you're performing a version of yourself that costs you.",
+      "universalExample": "On a spider chart of values — security, connection, status, creativity — you plot 4 lines: how you see yourself, who you want to be, how others see you, how you'd like to be seen. The wide gap on status shows you're performing a success you don't feel.",
       "personalPrompt": "On which value is the gap between who you want to be and how others see you the widest, and is that gap worth closing?",
       "pitfalls": [
         "Self-ratings are flattering by default — the honest signal is in the gaps, not the absolute scores.",
         "Guessing how others see you is unreliable; where it matters, ask rather than assume."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "On a spider chart of values — security, connection, status, creativity — you plot 4 lines: how you see yourself, who you want to be, how others see you, how you'd like to be seen. The wide gap on status shows you're performing a success you don't feel.",
+          "tradeoff": "Seeing the gap forces a choice to close it or own it; you give up the comfort of the performance for an honest self-picture."
+        },
+        {
+          "persona": "student",
+          "scenario": "Mapping your values on the chart, the gap between 'who I want to be' (independent) and 'how my parents see me' (their extension) is the widest of the 4 lines. It explains a low-grade resentment you couldn't name for years.",
+          "tradeoff": "Naming that gap risks a hard conversation with your parents; you trade a quiet peace for the chance to actually be seen."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner each plot the chart. The gap between how you want to be seen by them and how they actually see you is huge on 'reliable.' The chart turns a vague hurt of 2 years into a specific one you can talk about.",
+          "tradeoff": "Surfacing that gap risks a painful evening; you trade a comfortable vagueness for a problem you can finally fix."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your self-ratings are all 9s because you're genuinely good. The honest signal is the gap on 'connection' between want-to-be and how-others-see — your competence hides a loneliness the scores flatter over.",
+          "tradeoff": "Facing that gap costs the clean story of a life that's 'all handled'; you sacrifice the flattering scores for the truth in the gaps."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Everything you value seems attained, so all lines sit high. The one gap — between how you want to be seen (generous) and how others see you (transactional) — has been invisible to you and obvious to them for 5 years.",
+          "tradeoff": "Closing that gap means giving without the strings your wealth made habitual; you trade easy leverage for being genuinely trusted."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "energy-model",
@@ -361,12 +1005,40 @@
       "trigger": "\"Drained, don't know why\"",
       "essence": "Track what gives vs takes energy, not what takes time. Prune the drains",
       "visualType": "tension",
-      "universalExample": "You feel drained but your calendar looks light. Tracking energy rather than time for a week, you find the two-hour standup and the endless Slack scroll are the real drains, while deep coding actually restores you. You cut the standup to fifteen minutes and batch Slack — same hours, more energy.",
+      "universalExample": "You feel drained though your calendar looks light. Tracking energy for a week, the 2-hour standup and the endless WhatsApp scroll are the real drains, while your actual work restores you. You cut the standup to 15 minutes.",
       "personalPrompt": "What in your week takes far more energy than it takes time, and what would happen if you pruned it?",
       "pitfalls": [
         "We plan around hours because they're easy to measure; energy is the variable that actually predicts burnout.",
         "A quick fix is to cut all draining tasks, but some are necessary — the move is to reduce or redesign them, not just delete."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You feel drained though your calendar looks light. Tracking energy for a week, the 2-hour standup and the endless WhatsApp scroll are the real drains, while your actual work restores you. You cut the standup to 15 minutes.",
+          "tradeoff": "Trimming the standup risks a manager who reads presence as commitment; you trade some visibility for energy you actually keep."
+        },
+        {
+          "persona": "student",
+          "scenario": "You study 8 hours a day and still feel exhausted and behind. Tracking energy, it's not the study — it's the 3 draining group chats and one toxic friend. Cutting those, the same study hours feel lighter.",
+          "tradeoff": "Muting the friend risks a rift; you give up an old closeness to stop a daily energy leak."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You blame your tiredness on work, but tracking energy for a week shows the weekly call with your mother leaves you flat for hours. Naming the drain lets you shorten and reschedule it, not resent it.",
+          "tradeoff": "Shortening the call risks your mother feeling cut off; you trade a little guilt for not arriving at your own life depleted."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You optimise your calendar to the minute and still burn out. Energy, not time, is the missing variable: 6 back-to-back wins drain more than the count suggests. Your efficiency was measuring the wrong thing.",
+          "tradeoff": "Managing energy means leaving productive-looking hours empty; you sacrifice the optics of a full calendar for a sustainable pace."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Time isn't your constraint — you have staff for that — but you're constantly depleted. Tracking energy, the drain is the 30 shallow social obligations a month your position demands. You prune the ones that only perform status.",
+          "tradeoff": "Declining the events risks looking aloof to your circle; you trade some social capital for the energy to do anything real."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "political-compass",
@@ -375,12 +1047,40 @@
       "trigger": "\"What do I actually believe?\"",
       "essence": "Politics isn't one line; place yourself on economic and social axes independently",
       "visualType": "matrix-2x2",
-      "universalExample": "Arguing about a policy, you realise 'left vs right' flattens two separate questions. Placing yourself on an economic axis and a social axis independently, you find you're economically cautious but socially liberal — a position the single line couldn't hold. The map explains disagreements that felt contradictory.",
+      "universalExample": "Arguing politics with your father every Sunday, 'left vs right' keeps flattening you both. Placing yourself on economic and social axes separately, you find you're economically cautious but socially liberal — a spot the single line couldn't hold.",
       "personalPrompt": "On the belief you hold most strongly, are you collapsing two independent axes into one convenient line?",
       "pitfalls": [
         "Two axes are still a simplification of a many-dimensional reality — useful, but don't mistake the map for the territory.",
         "It's easy to place opponents at the extremes and yourself at the sensible centre; plot honestly."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Arguing politics with your father every Sunday, 'left vs right' keeps flattening you both. Placing yourself on economic and social axes separately, you find you're economically cautious but socially liberal — a spot the single line couldn't hold.",
+          "tradeoff": "Seeing the nuance costs you the ease of a tribe; you give up belonging to a simple side for an honest position."
+        },
+        {
+          "persona": "student",
+          "scenario": "In a debate class you keep getting boxed as 'right-wing' for one economic view. Mapping 2 axes, you show you're economically moderate and socially progressive. The map ends an argument the single line kept fuelling.",
+          "tradeoff": "Refusing the label risks both sides distrusting you; you trade the safety of a camp for accuracy."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner think you're politically opposite and it strains dinners. Plotting both on 2 axes, you're close on social values and only differ on economics. The map shrinks a fight that felt fundamental.",
+          "tradeoff": "Seeing you mostly agree removes a dramatic story you'd both leaned on; you trade the intensity for peace."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You pride yourself on a coherent worldview and place everyone else on your single sophisticated line. Mapping 2 axes reveals your own positions don't sit on one line either — your cleverness had oversimplified you too.",
+          "tradeoff": "Admitting your worldview isn't one clean axis costs the elegance you enjoyed; you sacrifice a tidy identity for a truer one."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your circle assumes your politics from your bank balance. Mapping 2 axes for yourself, you're economically conservative but socially radical — a combination your wealth's stereotype erased. The map reclaims a self others had assigned.",
+          "tradeoff": "Owning the unexpected mix risks alienating peers who assumed you shared theirs; you trade easy belonging for being actually known."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "personal-performance-model",
@@ -389,12 +1089,40 @@
       "trigger": "\"Is this job still right?\"",
       "essence": "Rate current work on want-to / have-to / can-do; misalignment predicts burnout or boredom",
       "visualType": "venn",
-      "universalExample": "Wondering if your role still fits, you draw three circles: want-to, have-to, can-do. The overlap has shrunk — you can still do the work and have to do it, but the want-to circle has drifted away. Seeing the gap explains the low-grade dread and points at what to renegotiate.",
+      "universalExample": "Wondering why your job feels like dread, you draw 3 circles: want-to, have-to, can-do. You can still do it and have to, but want-to drifted away 2 years ago. The shrunk overlap explains the dread and points at what to renegotiate.",
       "personalPrompt": "Where your current role sits, which circle — want-to, have-to, or can-do — has drifted out of the overlap?",
       "pitfalls": [
         "A shrinking want-to circle is easy to blame on yourself when the fix might be changing the role, not your attitude.",
         "The three circles move over time; one snapshot of misalignment isn't a verdict, it's a prompt to check in."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Wondering why your job feels like dread, you draw 3 circles: want-to, have-to, can-do. You can still do it and have to, but want-to drifted away 2 years ago. The shrunk overlap explains the dread and points at what to renegotiate.",
+          "tradeoff": "Naming the drifted want-to means facing a change you'd rather avoid; you trade comfortable numbness for an honest look at the role."
+        },
+        {
+          "persona": "student",
+          "scenario": "You're burning out on a degree and blaming your discipline. The 3 circles show can-do and have-to are fine — it's want-to that's gone. The problem is the fit, not your effort.",
+          "tradeoff": "Admitting the degree may be wrong risks a year lost and parents' worry; you give up the safe story of 'just work harder' for a real question."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your marriage feels heavy and you assume you've failed. The circles reframe it: you both still can-do and have-to the routines, but the want-to overlap has thinned over 5 years. It's a maintenance problem, not a verdict.",
+          "tradeoff": "Seeing the thinned want-to means actively rebuilding it, which is work; you trade the ease of drifting for a marriage that needs tending."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You can do everything your role demands brilliantly, so you assume you should be happy. The circles show can-do is huge but want-to is a sliver — your competence trapped you in work you stopped wanting 3 years ago.",
+          "tradeoff": "Following the shrunk want-to means leaving work you're excellent at; you sacrifice the identity of being the best for doing what you'd choose."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You have no have-to at all — money removed obligation — and you drift for years. The circles reveal that without the have-to circle, want-to alone doesn't organise a life. You deliberately take on a real duty.",
+          "tradeoff": "Choosing an obligation you could avoid costs your freedom; you trade limitless choice for the structure that gives it meaning."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "making-of-model",
@@ -403,12 +1131,40 @@
       "trigger": "\"How did I get here?\"",
       "essence": "Chart your past as scenes — turning points, key people, decisions — to see the plot before writing the next act",
       "visualType": "timeline",
-      "universalExample": "Feeling lost about what's next, you chart your past as scenes: the teacher who pushed you, the job you quit, the project that failed and taught you the most. Laid out as a plot, a pattern emerges — you thrive right after a clean break — and it tells you how to write the next act.",
+      "universalExample": "Feeling stuck at 45, you chart your life as scenes: the boss who pushed you, the job you quit, the move that revived you. Laid out, a pattern shows you thrive right after a clean break — and it tells you what the next year needs.",
       "personalPrompt": "Looking at the turning points that got you here, what pattern in your past is quietly predicting what you need next?",
       "pitfalls": [
         "Hindsight tidies the past into a neat story it never was — hold the narrative loosely.",
         "The point is to inform the next act, not to get stuck admiring or relitigating old scenes."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Feeling stuck at 45, you chart your life as scenes: the boss who pushed you, the job you quit, the move that revived you. Laid out, a pattern shows you thrive right after a clean break — and it tells you what the next year needs.",
+          "tradeoff": "Trusting the pattern means risking another disruptive break; you trade the safety of staying put for what has actually worked before."
+        },
+        {
+          "persona": "student",
+          "scenario": "Lost about a career, you plot your turning points as scenes over 20 years. The pattern: every time you were happiest, you were teaching someone. It points at a path your course-list never suggested.",
+          "tradeoff": "Following the pattern risks a less prestigious path than peers; you give up the expected track for one your own history endorses."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Confused about why relationships keep ending the same way, you chart your last 4 as scenes. The pattern is clear: you leave the moment things get real. Seeing it written is the first step to breaking it.",
+          "tradeoff": "Facing the pattern means owning your part in each ending; you trade the comfort of bad luck for uncomfortable responsibility."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're between big moves and your analytical mind keeps optimising the next role in isolation. Charting your scenes shows every real leap in 15 years came from following curiosity, not strategy. The plot corrects your planning.",
+          "tradeoff": "Trusting curiosity over strategy costs the control you prize; you sacrifice the optimised path for the one your history says works."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can do anything next, which is paralysing. Charting your life as scenes, the through-line isn't wealth — it's the 2 times you built something from nothing. The pattern points past comfort at creation.",
+          "tradeoff": "Following it means leaving ease for hard work you don't need; you trade guaranteed comfort for the thing that ever made you feel alive."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "personal-potential-trap",
@@ -417,12 +1173,40 @@
       "trigger": "\"Chasing potential forever\"",
       "essence": "'Potential' can become a debt that grows; at some point you must cash it in on a committed path",
       "visualType": "curve",
-      "universalExample": "For years you've told yourself you 'have potential' as a writer — someday. You notice the potential has become a comfortable excuse that grows heavier the longer it's uncashed. You pick one committed path — a weekly essay — and trade the open promise for a real, smaller thing.",
+      "universalExample": "You're a prodigy who keeps every path open because you could excel at all of them. The open options themselves are the debt — at 35 you've cashed none. You pick one and go all in, closing the rest.",
       "personalPrompt": "Which 'potential' have you been carrying uncashed for years, and what committed path would let you finally spend it?",
       "pitfalls": [
         "Keeping every door open feels safe but the option itself becomes a debt — at some point staying open is the loss.",
         "Cashing in means closing other doors; the discomfort of that is exactly what the trap uses to keep you frozen."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "For 10 years you've told yourself you 'have potential' as a musician — someday. The potential has become a comfortable excuse that grows heavier the longer it's uncashed. You commit to one open-mic a month and trade the promise for a real thing.",
+          "tradeoff": "Cashing it in means risking public mediocrity; you give up the flattering 'could have been' for the smaller truth of what you are."
+        },
+        {
+          "persona": "student",
+          "scenario": "Everyone calls you 'gifted' and you coast on it, half-trying, for 3 years. The trap: unspent gift feels safe but becomes a debt. You pick one hard subject to actually commit to, closing the 'could ace anything' story.",
+          "tradeoff": "Committing means finding your limits in one place; you trade the safety of untested potential for real, bounded skill."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You keep an old flame as an open 'maybe someday,' never acting, for years. The unrealised possibility becomes an anchor on your present relationships. You close the door deliberately to be actually present with your partner.",
+          "tradeoff": "Closing that door means grieving a fantasy; you give up the comforting 'what if' for a real relationship you're fully in."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're a prodigy who keeps every path open because you could excel at all of them. The open options themselves are the debt — at 35 you've cashed none. You pick one and go all in, closing the rest.",
+          "tradeoff": "Committing to one field means the others' potential dies; you sacrifice the identity of limitless promise for a single real achievement."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your wealth lets you keep every possibility open forever, which is the trap in pure form. The uncashed potential — the company you'd start, the book you'd write for 15 years — is a growing debt no money settles. You commit to one.",
+          "tradeoff": "Choosing one closes a hundred glamorous doors; you trade the comfort of infinite possibility for one finished thing."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "hard-choice-model",
@@ -431,12 +1215,40 @@
       "trigger": "\"Both options seem equal\"",
       "essence": "If options are truly on a par, no more analysis will break the tie — the choice is where you CREATE who you are",
       "visualType": "matrix-2x2",
-      "universalExample": "Two job offers score dead even on every spreadsheet you build. The model says: more analysis won't break a true tie because there's no hidden right answer — this is where you decide who you become. You choose the one that makes you the kind of person you want to be, and commit fully.",
+      "universalExample": "Two job offers score dead even — same ₹50,000 salary, same commute, same hours. The model says more analysis won't break a true tie; there's no hidden right answer. You choose the one that makes you who you want to be, and commit fully.",
       "personalPrompt": "For the choice where the options are genuinely on a par, which one lets you become the person you want to be?",
       "pitfalls": [
         "Mistaking a hard choice for a hard problem sends you back to more analysis that can't help — first check whether it's a true tie.",
         "'Creating who you are' isn't a licence to be reckless; it means committing and owning the choice, not shrugging."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Two job offers score dead even — same ₹50,000 salary, same commute, same hours. The model says more analysis won't break a true tie; there's no hidden right answer. You choose the one that makes you who you want to be, and commit fully.",
+          "tradeoff": "Committing without a 'winner' means owning the choice with no spreadsheet to blame; you give up certainty for wholehearted commitment."
+        },
+        {
+          "persona": "student",
+          "scenario": "Two degree paths score identically on every rubric you build over a month. The model says stop analysing — a true tie is where you author yourself. You pick the one that fits the person you want to become.",
+          "tradeoff": "Choosing on identity not data risks second-guessing later; you trade the false comfort of a 'right' answer for a choice you fully own."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Two partners, both wonderful in different ways, leave you genuinely torn for months. The model reframes: this isn't a problem with a solution, it's a choice about who you become with whom. You choose and commit.",
+          "tradeoff": "Committing means grieving the road not taken; you sacrifice the other good life for wholly living this one."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your analytical gift keeps you spreadsheeting two even options for 3 weeks, sure more data will decide. The model names the trap: on a true tie, your intelligence is just spinning. You commit and become, rather than compute.",
+          "tradeoff": "Stopping the analysis costs your faith that thinking solves everything; you trade the illusion of an optimal answer for a decisive life."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Money makes both ₹1-crore options equally attainable, which removes the usual tiebreaker. The model says a true par is decided by who you want to be, not what you can afford. You choose on character, not cost.",
+          "tradeoff": "Deciding on identity forfeits the safety of a 'sensible' financial answer; you trade an easy metric for the harder work of self-definition."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "cognitive-bias",
@@ -445,12 +1257,40 @@
       "trigger": "\"Can I trust my own thinking?\"",
       "essence": "Your brain systematically distorts: it confirms what it believes, overweights losses, anchors on first numbers, edits memories",
       "visualType": "distortion-lens",
-      "universalExample": "Reviewing a decision that went badly, you audit your own thinking: you anchored on the first estimate, sought data that agreed with you, and now remember 'knowing' it would fail. Naming the distortions doesn't undo the call, but it changes how you'll set up the next one — with a written prediction and a devil's advocate.",
+      "universalExample": "You're sure your judgement is too sharp to be biased — which is itself the bias. Auditing an 8-month decision, anchoring and confirmation are all over it. Your intelligence made the distortions invisible, not absent.",
       "personalPrompt": "On your current big call, which distortion — anchoring, confirmation, loss aversion, or edited memory — is most likely bending your judgement right now?",
       "pitfalls": [
         "Knowing about biases barely reduces them — awareness alone is weak; you need process (checklists, journals, outside views).",
         "It's easy to spot bias in others and stay blind to your own; assume you're distorted too."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Reviewing a ₹2-lakh car buy that went badly, you audit your thinking: you anchored on the first quote, sought only reviews that agreed, and now 'always knew' it was wrong. Naming the distortions won't undo it, but the next big buy gets a written checklist.",
+          "tradeoff": "Admitting you were fooled by your own mind stings; you trade the comfort of 'bad luck' for a process that catches you next time."
+        },
+        {
+          "persona": "student",
+          "scenario": "After a bad exam you audit the bias: you revised only what confirmed you understood, and remember 'knowing' the hard topics. Naming it, you build a devil's-advocate revision plan for the next 3 months.",
+          "tradeoff": "Facing that you fooled yourself costs your confidence; you give up a comfortable self-image for a study method that works."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "After a fight with your partner you audit your own biases: you remembered every slight, discounted every kindness, and anchored on the worst thing said. Seeing the distortions, you apologise for a version of events your mind edited.",
+          "tradeoff": "Admitting your memory was biased means conceding ground in the argument; you trade being right for being accurate."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're sure your judgement is too sharp to be biased — which is itself the bias. Auditing an 8-month decision, anchoring and confirmation are all over it. Your intelligence made the distortions invisible, not absent.",
+          "tradeoff": "Accepting you're as distorted as anyone punctures a prized self-image; you sacrifice the myth of your objectivity for real rigour."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Surrounded by yes-people, your biases go unchallenged for years. Auditing a failed bet, confirmation bias ran unchecked because no one contradicts you. You install a paid contrarian into your process.",
+          "tradeoff": "Inviting contradiction costs the comfort of constant agreement; you trade a pleasant echo for decisions that survive scrutiny."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "crossroads-model",
@@ -459,12 +1299,40 @@
       "trigger": "\"So — what next?\"",
       "essence": "At life junctions, name the roads: where you came from, which road is safe, which is bold, which is unimaginable, and which you'd advise a friend to take",
       "visualType": "crossroads",
-      "universalExample": "At a genuine life junction, you name the roads instead of freezing: the road you came from, the safe road (stay put), the bold road (start the company), the unimaginable one (leave the field entirely), and the road you'd tell a friend to take. Said aloud, the friend's-advice road is obviously the bold one — and you'd been ignoring it.",
+      "universalExample": "At a genuine junction — stay in a safe ₹35,000 job or take a risky offer — you freeze. Instead you name the roads: the one you came from, the safe road, the bold road, the unimaginable one, and the road you'd tell a friend to take. Said aloud, the friend's road is obviously the bold one.",
       "personalPrompt": "Standing at your crossroads, what would you tell a good friend in exactly your position to do?",
       "pitfalls": [
         "Naming five roads can become a way to admire the junction instead of walking down one — set a decision date.",
         "The 'advise a friend' trick works only if you're honest; it's easy to script the friend to endorse your fear."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "At a genuine junction — stay in a safe ₹35,000 job or take a risky offer — you freeze. Instead you name the roads: the one you came from, the safe road, the bold road, the unimaginable one, and the road you'd tell a friend to take. Said aloud, the friend's road is obviously the bold one.",
+          "tradeoff": "Naming the roads doesn't walk one for you; you give up the comfort of freezing for the discomfort of choosing."
+        },
+        {
+          "persona": "student",
+          "scenario": "Standing between a safe local course and a bold distant one, you name all 5 roads. The 'what would I tell a friend' road makes the bold choice obvious — you'd never tell a friend to shrink.",
+          "tradeoff": "The friend's-advice trick only works if you're honest; you risk scripting the friend to endorse your fear, and you have to catch that."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Torn about proposing after 4 years, you name the roads: stay as you are, propose, leave, the unimaginable, and what you'd advise a friend. The friend's-advice road clarifies what your fear was clouding.",
+          "tradeoff": "Following the clear road means acting despite fear; you trade the safety of the junction for a committed direction."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your clever mind generates 12 options and freezes on all of them. The model forces just 5 named roads, and the 'advise a friend' road cuts through the analysis your intelligence hid behind.",
+          "tradeoff": "Reducing to 5 roads feels like a loss of sophistication; you sacrifice the illusion of infinite nuance for a decision."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Every road is affordable, so you've admired the junction for a year without moving. Naming the 5 roads and asking what you'd tell a friend ends the luxurious paralysis money enabled.",
+          "tradeoff": "Choosing forfeits the comfortable optionality wealth gave you; you trade the pleasant view from the crossroads for actually arriving somewhere."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "rumsfeld-matrix",
@@ -473,12 +1341,40 @@
       "trigger": "\"What am I missing?\"",
       "essence": "Sort risk into known knowns, known unknowns, unknown unknowns; work to move things left",
       "visualType": "matrix-2x2",
-      "universalExample": "Planning a migration, you sort the risks: known knowns (the old schema), known unknowns (how long the backfill takes — you can test it), and you deliberately budget time for unknown unknowns by shipping behind a flag. Naming the categories turns 'it'll be fine' into a plan that respects what you can't see.",
+      "universalExample": "Planning a ₹3-lakh home renovation, you sort risks: known knowns (the tiling cost), known unknowns (whether the old wiring holds — you can test it), and you budget 15% for unknown unknowns as contingency. 'It'll be fine' becomes a plan.",
       "personalPrompt": "On your current plan, what's one known unknown you could turn into a known known this week with a small test?",
       "pitfalls": [
         "Unknown unknowns can't be listed by definition — the honest move is to leave slack and stay reversible, not to pretend you've found them all.",
         "Overconfidence relabels real known unknowns as known knowns; interrogate the things you're sure about."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Planning a ₹3-lakh home renovation, you sort risks: known knowns (the tiling cost), known unknowns (whether the old wiring holds — you can test it), and you budget 15% for unknown unknowns as contingency. 'It'll be fine' becomes a plan.",
+          "tradeoff": "Holding a 15% contingency means a smaller renovation now; you trade some scope for not being wiped out by a surprise."
+        },
+        {
+          "persona": "student",
+          "scenario": "Before a 3-month research project you sort what you know: the method (known known), how long data collection takes (known unknown — pilot it), and you leave slack for the unknown unknowns. Naming them beats blind optimism.",
+          "tradeoff": "Leaving slack means committing to less ambitious results; you give up a grander proposal for one you can actually finish."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Before moving in with your partner, you sort the risks: known knowns (you both snore), known unknowns (how you split bills — discuss now), and you agree to expect unknown unknowns with a 3-month check-in. Romance becomes a plan that survives.",
+          "tradeoff": "Naming risks before moving in kills some spontaneity; you trade the fantasy of effortless love for a foundation that holds."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Leading a migration, your confidence relabels real known unknowns as known knowns — you're sure you know the backfill time. The matrix forces you to test it, and it's 3 times your guess. Your certainty was the risk.",
+          "tradeoff": "Testing your assumptions delays the launch a week; you sacrifice a confident timeline for one that's true."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Funding a new venture, your resources let you assume any problem is buyable. The matrix names the unknown unknowns money can't pre-solve: you stay reversible and keep 6 months' runway unallocated instead of committing it all.",
+          "tradeoff": "Holding runway back means a slower, less impressive launch; you trade momentum for the ability to survive what you can't foresee."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "swiss-cheese-model",
@@ -487,12 +1383,40 @@
       "trigger": "\"How did this failure happen?\"",
       "essence": "Accidents happen when holes in multiple defense layers line up; blame the alignment, not one slice",
       "visualType": "layers",
-      "universalExample": "A payment double-charged customers. Instead of blaming the one engineer, you trace the aligned holes: the test suite had a gap, code review was rushed, the staging data didn't cover that case, and there was no alert. Fixing any one layer would have stopped it. You add an alert and a review checklist rather than a scapegoat.",
+      "universalExample": "A customer was double-charged ₹4,000 and everyone blames the new cashier. Tracing the aligned holes: the till software allowed it, no receipt check, no daily reconciliation. Fixing one layer — a daily reconciliation — stops it, not a scapegoat.",
       "personalPrompt": "For your last failure, which single defensive layer — if it had held — would have caught it, and can you strengthen that one now?",
       "pitfalls": [
         "The instinct is to blame the last person who touched it (the final slice), missing the aligned holes behind them.",
         "Adding endless layers has a cost; strengthen the few that catch the most, don't bury the system in checks."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "A customer was double-charged ₹4,000 and everyone blames the new cashier. Tracing the aligned holes: the till software allowed it, no receipt check, no daily reconciliation. Fixing one layer — a daily reconciliation — stops it, not a scapegoat.",
+          "tradeoff": "Adding a reconciliation step costs 20 minutes a day; you trade a little time for errors that no longer reach customers."
+        },
+        {
+          "persona": "student",
+          "scenario": "You missed an assignment deadline and blame yourself entirely. The model shows aligned holes: no calendar reminder, an unclear deadline, a laptop that died on Friday. You add one reliable reminder rather than just resolving to 'try harder.'",
+          "tradeoff": "Building the system feels less noble than willpower; you give up the story of self-discipline for a defence that actually holds."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "A big misunderstanding blew up with your partner and you each blame the other's last comment. Tracing it, the holes aligned: a stressful week, a vague text, no check-in. You add a weekly check-in instead of re-fighting who started it.",
+          "tradeoff": "A scheduled check-in feels unromantic; you trade spontaneity for a layer that catches problems before they explode."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "A production outage hits and your instinct is to blame the engineer who deployed. As the smart lead you see further: the tests had a gap, review was rushed, no alert fired for 20 minutes. You fix the alert, not the person.",
+          "tradeoff": "Owning the systemic failure means you can't offload blame downward; you sacrifice an easy scapegoat for a system that won't repeat it."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "A scandal hits your foundation and advisors want to fire one junior staffer. You trace the aligned holes: no vetting policy, no oversight, no audit in 2 years. You fix the layers, resisting the reputationally-convenient scapegoat.",
+          "tradeoff": "Fixing systems instead of firing someone slows the PR relief; you trade a quick clean narrative for a body that won't fail the same way."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "maslow-pyramids",
@@ -501,12 +1425,40 @@
       "trigger": "\"What do they (or I) actually need?\"",
       "essence": "Needs stack: physical → safety → belonging → esteem → self-actualization; unmet lower layers dominate",
       "visualType": "pyramid",
-      "universalExample": "A teammate keeps missing deadlines and you're about to coach them on ambition. Then you learn they're sleeping badly and worried about rent. The lower tiers — rest, security — are unmet and dominating; no amount of esteem-level pep talk lands until those are addressed. You help with the base first.",
+      "universalExample": "Your teammate keeps missing deadlines and you're about to coach them on focus. Then you learn they're sleeping 4 hours and worried about rent. No productivity tip lands while the base is unmet; you help with the base first.",
       "personalPrompt": "For the person you're trying to motivate (maybe yourself), is an unmet lower need quietly running the show?",
       "pitfalls": [
         "The neat ladder oversimplifies — needs overlap and reorder for real people; use it as a lens, not a law.",
         "Assuming someone's at the top of the pyramid when a basic need is unmet leads to advice that misses entirely."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your teammate keeps missing deadlines and you're about to coach them on focus. Then you learn they're sleeping 4 hours and worried about rent. No productivity tip lands while the base is unmet; you help with the base first.",
+          "tradeoff": "Helping with their rent problem isn't your job and costs you time; you trade some boundary for a teammate who can actually function."
+        },
+        {
+          "persona": "student",
+          "scenario": "A classmate you tutor isn't improving and you push harder on technique. You discover they skip meals to afford ₹3,000 textbooks. Esteem-level coaching can't land on an unmet physiological need; you point them to the food bank first.",
+          "tradeoff": "Getting involved in their situation costs your study time; you give up some hours to remove the block your tutoring couldn't."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your partner seems unmotivated and distant, and you're tempted to talk about goals. Then you see the real issue is they feel unsafe about money after a layoff last month. Security, not esteem, is the unmet tier; you address that first.",
+          "tradeoff": "Focusing on their security need means shelving the growth conversation you wanted; you trade your agenda for meeting them where they are."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You're pushing a talented junior toward stretch goals and they keep faltering for weeks. You assume low ambition; really they don't feel they belong on the team yet. Belonging, a lower tier, blocks the esteem work. You fix inclusion first.",
+          "tradeoff": "Slowing down to build their belonging delays the results you wanted; you sacrifice speed for a person who can then actually stretch."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You fund a scholarship for 20 students and can't understand why they underperform despite every material need met. The unmet tier isn't money — it's belonging in an elite space that signals they don't fit. You fund mentorship, not just the fees.",
+          "tradeoff": "Addressing belonging costs more than writing cheques and is harder to measure; you trade a clean metric for help that actually works."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "sinus-milieu-bourdieu-model",
@@ -515,12 +1467,40 @@
       "trigger": "\"Why do they live so differently?\"",
       "essence": "People cluster by values and class position, not just income; taste is social coordinates",
       "visualType": "bubble-map",
-      "universalExample": "You can't understand why a well-funded product flops with a demographic. Mapping people by values and class position rather than income, you see the target group signals belonging through restraint, not display — and your loud premium branding reads as trying too hard. Taste, not budget, was the barrier.",
-      "personalPrompt": "For the group you're trying to reach, are you reading their values and taste, or just their income bracket?",
+      "universalExample": "Your shop's premium line flops with a wealthy neighbourhood for 3 months. Mapping them by taste, not income, you see they signal status through restraint — your gold-trimmed packaging reads as trying too hard. You switch to plain, and sales climb.",
+      "personalPrompt": "For the people you're trying to reach or win over — customers, in-laws, a whole community — are you reading their values and taste, or just their income bracket?",
       "pitfalls": [
         "Milieu maps can slide into stereotyping — treat them as loose coordinates, not fixed boxes for individuals.",
         "Your own milieu is invisible to you; you'll misjudge others by assuming your taste is neutral."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your shop's premium line flops with a wealthy neighbourhood for 3 months. Mapping them by taste, not income, you see they signal status through restraint — your gold-trimmed packaging reads as trying too hard. You switch to plain, and sales climb.",
+          "tradeoff": "Redesigning for their taste costs a reprint and abandons packaging you loved; you trade your own aesthetic for one that actually sells."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your fundraising drive falls flat over a week with a group you assumed would give. Mapping their milieu, they value grassroots authenticity over polished campaigns — your slick posters signalled the wrong tribe. You go handmade.",
+          "tradeoff": "The authentic approach costs more hours and looks less professional; you give up polish for a signal that lands with them."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You keep clashing with your in-laws for 2 years and blame personality. Mapping their milieu, they value a formality you read as coldness, while your casual warmth reads as disrespect to them. Taste, not character, was the gap.",
+          "tradeoff": "Adapting to their formality costs you some authenticity at dinners; you trade a little of yourself for a bridge across a class divide."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your well-funded product flops with a demographic and your data-brain blames features for a month. Mapping milieu, the group signals belonging through restraint, and your loud premium branding reads as insecure. Your analytics never captured taste.",
+          "tradeoff": "Rebranding quieter costs the bold identity you'd invested in; you sacrifice a distinctive look for one that reads as belonging."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You assume your philanthropy will be welcomed everywhere. Mapping a community's milieu, your grand gestures read as condescension in a culture that values reciprocity, not charity. You fund through a local partner instead.",
+          "tradeoff": "Working through partners means less visible credit for your giving; you trade recognition for help that's actually received well."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "double-loop-learning",
@@ -529,12 +1509,40 @@
       "trigger": "\"Same mistake, again\"",
       "essence": "Loop 1 fixes the action; loop 2 questions the goal/assumption behind it. Most people never enter loop 2",
       "visualType": "nested-loops",
-      "universalExample": "Your launches keep slipping. Single-loop learning tweaks the process — more standups, tighter tickets — and it slips again. Double-loop asks the harder question: is the goal itself (ship monthly) even right for a team this size? Questioning the assumption, not just the action, finally breaks the cycle.",
+      "universalExample": "Your launches keep slipping and you keep adding process — more standups, tighter tickets (single-loop). Your competence keeps you polishing the machine. Double-loop asks if 'ship monthly' is even right for a team of 4. The assumption was the bug.",
       "personalPrompt": "For the mistake you keep repeating, what goal or assumption behind it have you never actually questioned?",
       "pitfalls": [
         "Loop one feels productive, so most people stay there forever — the leverage is in the uncomfortable loop two.",
         "Questioning every goal all the time is its own paralysis; enter loop two when the same fix keeps failing."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your ₹30,000 monthly budget keeps blowing up and you keep tightening categories (single-loop). Double-loop asks the harder question: is the goal — this lifestyle in this expensive area — even right? Questioning the assumption, not the spreadsheet, finally works.",
+          "tradeoff": "Questioning the lifestyle goal risks an unsettling conclusion — maybe you should move; you trade comfortable tweaks for a real answer."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your grades keep slipping for 3 terms and you keep changing study techniques (single-loop). Double-loop asks: is this the right degree for how your mind works? Questioning the goal, not the method, breaks the cycle.",
+          "tradeoff": "Questioning the degree itself risks a scary conclusion and lost time; you give up the safety of 'try harder' for a deeper question."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner keep fighting about chores and keep renegotiating the rota (single-loop). Double-loop asks whether the real issue — feeling unappreciated — is what the rota can't fix. You question the assumption, not the schedule.",
+          "tradeoff": "Naming the deeper issue risks a harder, more vulnerable conversation; you trade the tidy logistics fight for the real one."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your launches keep slipping and you keep adding process — more standups, tighter tickets (single-loop). Your competence keeps you polishing the machine. Double-loop asks if 'ship monthly' is even right for a team of 4. The assumption was the bug.",
+          "tradeoff": "Questioning your own cadence goal costs the identity of a relentless shipper; you sacrifice that badge for a goal that fits reality."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your foundation's programme keeps underdelivering for years and you keep refining its operations (single-loop). Double-loop asks whether the goal — helping in the way you chose — is what people actually need. Questioning that changes everything.",
+          "tradeoff": "Questioning your chosen mission risks admitting years of well-funded effort aimed wrong; you trade a comfortable legacy for genuine impact."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "appreciative-inquiry",
@@ -543,12 +1551,40 @@
       "trigger": "\"Everything about this is broken\"",
       "essence": "Ask what works and how to grow it, instead of what's broken and who's at fault",
       "visualType": "spiral",
-      "universalExample": "A retro is spiralling into blame about everything that's broken. You flip the question: 'What worked, and how do we get more of it?' The team realises pair-debugging saved the release — a strength invisible under the problem-list. You grow that instead of only patching faults.",
+      "universalExample": "A team retro at your shop spirals into blaming everything broken. You flip the question: 'What worked this month, and how do we get more?' Someone names that the 5pm handover saved chaos — a strength no one saw. You build on it.",
       "personalPrompt": "For the thing you've written off as broken, what part is quietly working that you could grow instead?",
       "pitfalls": [
         "Appreciative framing can slide into ignoring real problems — it complements fault-finding, it doesn't replace it.",
         "Forced positivity feels hollow; the strengths you build on have to be genuine, not manufactured."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "A team retro at your shop spirals into blaming everything broken. You flip the question: 'What worked this month, and how do we get more?' Someone names that the 5pm handover saved chaos — a strength no one saw. You build on it.",
+          "tradeoff": "Focusing on strengths risks a real problem going unaddressed; you trade some fault-finding for momentum you can actually build on."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your study group meetings become gripe sessions about the course for an hour. You ask instead what's working: the shared flashcards doubled everyone's recall. Growing that beat cataloguing complaints.",
+          "tradeoff": "The positive frame can feel like ignoring genuine grievances; you give up venting for building, which not everyone wants."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Every conversation with your partner lately is about what's wrong. You deliberately ask 'when did we feel closest recently?' The answer — a Sunday with phones off — is a strength to repeat, not a fault to fix.",
+          "tradeoff": "Asking what works risks papering over a real issue that needs airing; you trade problem-solving for connection, and must not overdo it."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You run a sharp, critical retro that lists 15 failures. As the analytical leader you're great at fault-finding — which blinds you to strengths. Asking what worked surfaces a quiet process that saved the release. Your critique had hidden it.",
+          "tradeoff": "Leading with appreciation feels soft to your rigorous self; you sacrifice the satisfaction of a thorough teardown for a team that grows."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Reviewing your foundation's year, consultants present a 40-page problem audit. You ask the missing question: what's genuinely working that we could double? One small programme, overlooked, is the real win. You fund it up.",
+          "tradeoff": "Betting on the bright spot means diverting money from fixing the audit's problems; you trade comprehensive repair for concentrated growth."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "pareto-principle",
@@ -557,12 +1593,40 @@
       "trigger": "\"Overwhelmed by the task list\"",
       "essence": "~80% of results come from ~20% of causes; find your 20% first",
       "visualType": "split",
-      "universalExample": "Your support queue feels infinite. Tagging a week of tickets, you find 80% trace to three onboarding confusions. Fixing those three — the vital 20% — empties most of the queue, while chasing every one-off ticket never would have. You find the 20% before touching the rest.",
-      "personalPrompt": "In the task list that's overwhelming you, which 20% is producing most of the results, and what if you did only that first?",
+      "universalExample": "Your repair-shop queue feels infinite. Tagging a week of jobs, 80% trace to 3 recurring faults. Fixing those 3 — the vital 20% — empties most of the queue; chasing every one-off never would.",
+      "personalPrompt": "In the work or life that's overwhelming you, which 20% — of tasks, or of the people and habits you pour time into — produces most of what matters, and what if you started there?",
       "pitfalls": [
         "The 80/20 split is a heuristic, not a measured law — find your actual vital few rather than assuming any 20% will do.",
         "The neglected 80% isn't always worthless; some of it is quiet, necessary maintenance."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your repair-shop queue feels infinite. Tagging a week of jobs, 80% trace to 3 recurring faults. Fixing those 3 — the vital 20% — empties most of the queue; chasing every one-off never would.",
+          "tradeoff": "Focusing on the top 3 means some rare jobs wait longer; you trade completeness for clearing the bulk fast."
+        },
+        {
+          "persona": "student",
+          "scenario": "You're drowning revising 12 topics equally. Checking past papers, 80% of the marks come from 3 topics. You put most hours there. The vital few beat spreading thin.",
+          "tradeoff": "Betting on 3 topics risks the year the pattern shifts; you give up full coverage for the marks that actually recur."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You try to please your whole extended family and burn out. You notice 80% of the warmth comes from 3 people who actually reciprocate. Investing there, the guilt-driven rest matters less.",
+          "tradeoff": "Pulling back from the wider family risks hurt feelings; you trade broad duty for depth with the few who give back."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You do everything at 100% because you can. The principle says 80% of your impact comes from 20% of your work; the rest is polish nobody notices. You cut the low-leverage 80%.",
+          "tradeoff": "Doing less on the trivial many costs your identity as thorough; you sacrifice completeness for outsized results."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your philanthropy funds 50 small causes and you feel scattered. The 80/20 lens shows 3 grantees drive most of the real change. You concentrate there instead of sprinkling.",
+          "tradeoff": "Concentrating means cutting 47 causes that still do some good; you trade breadth of goodwill for genuine impact."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "long-tail",
@@ -571,12 +1635,40 @@
       "trigger": "\"Is niche worthless?\"",
       "essence": "Aggregated niches can outweigh the hits; the tail is a market, not a leftover",
       "visualType": "curve",
-      "universalExample": "You almost kill a set of niche tutorials because none is a hit. Then you add up the tail: together the fifty small ones out-earn your one popular guide and bring in exactly the users who convert. The tail wasn't leftover — it was a market you'd been undervaluing.",
-      "personalPrompt": "What niche part of your work are you dismissing as too small, when the aggregate of many small things might be the real opportunity?",
+      "universalExample": "You nearly drop the 20 slow-selling spice blends in your shop to focus on the bestseller. Adding them up, together they out-earn the hit and bring the loyal customers who come every week. The tail was a market you undervalued.",
+      "personalPrompt": "What niche part of your work — or which quiet, minor relationships — are you dismissing as too small, when the aggregate of many small things might be the real value?",
       "pitfalls": [
         "Serving a long tail has real costs (support, maintenance) that can outweigh the aggregated upside — do the sum.",
         "Not every tail pays; some niches stay niche. The insight is 'check the aggregate', not 'niche always wins'."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You nearly drop the 20 slow-selling spice blends in your shop to focus on the bestseller. Adding them up, together they out-earn the hit and bring the loyal customers who come every week. The tail was a market you undervalued.",
+          "tradeoff": "Keeping 20 slow lines costs shelf space and stock-management effort; you trade simplicity for the aggregate the tail quietly earns."
+        },
+        {
+          "persona": "student",
+          "scenario": "You almost delete 30 niche study videos you made because none went viral. Summed, they've earned more over a year than your one popular one and reach exactly the students who subscribe.",
+          "tradeoff": "Maintaining 30 videos costs upkeep hours; you give up focus for a tail that out-earns the hit in aggregate."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You value only your 2 closest friends and neglect the 20 acquaintances. Then a job loss comes and it's the wide, weak-tie network — not the 2 — that surfaces the opportunity. The tail of light ties held real value.",
+          "tradeoff": "Tending many light ties costs the depth you'd give the few; you trade some intimacy for a network that catches you when the few can't."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You focus your product only on power users, dismissing the 40 scattered small use-cases. Aggregated, the tail of niche uses is a bigger market than your flagship. Your 'focus' was leaving money on the table.",
+          "tradeoff": "Serving the tail costs support and maintenance the flagship didn't; you sacrifice a clean product for a larger aggregate market."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your foundation funds only 3 flagship, headline programmes. The dozens of tiny community grants you almost cut, summed, reach more people more cheaply than the flagships. The tail was the real leverage.",
+          "tradeoff": "Backing many small grants costs oversight the flagships didn't need; you trade a clean headline for diffuse but larger reach."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "conflict-resolution-model",
@@ -585,12 +1677,40 @@
       "trigger": "\"We're stuck in a fight\"",
       "essence": "Name the mode you're in — escalate, avoid, concede, compromise, or genuinely resolve — and what each costs",
       "visualType": "matrix-2x2",
-      "universalExample": "Mid-argument with a cofounder, you name the mode you've each defaulted to: you're avoiding, they're competing. Neither resolves anything. Placing both on the assertiveness-versus-cooperation grid, you see the missing mode — genuine collaboration — and its cost: a longer, more honest conversation you'd both been dodging.",
+      "universalExample": "Mid-argument with your landlord over a ₹10,000 deposit, you name the modes: you're avoiding, he's competing. Neither resolves it. Seeing the grid, you shift to collaborating — a longer, more honest talk you'd been dodging.",
       "personalPrompt": "In your current conflict, which mode are you actually in — competing, avoiding, accommodating, compromising, or collaborating — and what is that mode costing you?",
       "pitfalls": [
         "Every mode has a right moment; collaboration isn't always best and avoiding isn't always weak — match mode to stakes.",
         "It's easy to name the other person's mode and stay blind to your own; label yours first."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Mid-argument with your landlord over a ₹10,000 deposit, you name the modes: you're avoiding, he's competing. Neither resolves it. Seeing the grid, you shift to collaborating — a longer, more honest talk you'd been dodging.",
+          "tradeoff": "Collaborating means a harder conversation you'd rather skip; you trade a quick avoidance for a resolution that actually holds."
+        },
+        {
+          "persona": "student",
+          "scenario": "In a group project, you keep accommodating to avoid friction and resent it for weeks. Naming your mode on the grid, you see accommodating is costing you the grade. You shift to compromising and speak up.",
+          "tradeoff": "Speaking up risks the harmony you were protecting; you give up being the easy one for a fairer share of the work."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner fight and you always compete to win. The grid shows both of you competing means nobody resolves. Naming it, you try collaborating — and the recurring fight finally moves after months.",
+          "tradeoff": "Dropping the need to win means being the first to soften; you sacrifice the momentary upper hand for a real resolution."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "In conflicts you default to competing because you're usually right — and win every battle while losing the relationship over years. The grid names the cost your competence hid. You choose collaborating with a peer you keep beating.",
+          "tradeoff": "Collaborating means not proving you're right; you trade the win you'd certainly get for a working relationship."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You avoid conflict entirely because you can just pay or walk away. That avoidance leaves real issues with staff unresolved for 2 years. The grid names avoidance as a mode with a cost, not neutrality.",
+          "tradeoff": "Engaging means discomfort your money usually spares you; you trade the ease of avoidance for problems that finally get solved."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "black-swan-model",
@@ -599,12 +1719,40 @@
       "trigger": "\"Nobody saw it coming\"",
       "essence": "The past is a poor guardrail: rare, extreme events dominate outcomes and are rationalized only afterwards",
       "visualType": "spike",
-      "universalExample": "Your traffic has grown steadily for a year, so you plan capacity off the trend line. The model warns that rare, extreme events dominate: one feature gets shared by a huge account and traffic 50×'s overnight. You can't predict which spike, so you build for graceful failure rather than betting on the smooth line.",
+      "universalExample": "Your small shop's sales grew steadily for a year, so you signed a 2-year stock contract off the trend. The model warns rare shocks dominate: a road closure could halve footfall overnight. You keep flexible terms instead of betting on the smooth line.",
       "personalPrompt": "Where are you extrapolating from a calm past, and what would a single extreme event — good or bad — do to that plan?",
       "pitfalls": [
         "You can't forecast specific black swans; trying to predict them wastes effort better spent on resilience and optionality.",
         "Hindsight makes every black swan look obvious afterward — resist the story that you 'should have seen it'."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your small shop's sales grew steadily for a year, so you signed a 2-year stock contract off the trend. The model warns rare shocks dominate: a road closure could halve footfall overnight. You keep flexible terms instead of betting on the smooth line.",
+          "tradeoff": "Flexible terms cost a higher unit price than the bulk contract; you trade some margin for surviving a shock you can't predict."
+        },
+        {
+          "persona": "student",
+          "scenario": "You plan your finances assuming your part-time income holds steady all year. The model says one extreme event — losing the job, a family emergency — dominates the average. You build a 3-month buffer instead of trusting the trend.",
+          "tradeoff": "Saving a buffer means a tighter month now; you give up small comforts to not be wiped out by one bad event."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You assume your relationship's calm year predicts a calm future and stop investing in it. The model warns a single rare shock — an affair, a death, a move — tests everything. You build resilience now, not smugness.",
+          "tradeoff": "Actively fortifying a good relationship feels unnecessary; you trade present ease for a bond that survives the rare storm."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your metrics have grown smoothly for a year and you plan capacity off the line. The model says a black swan — one huge customer, a viral moment — could 50 times your traffic overnight. You build for graceful failure, not the trend.",
+          "tradeoff": "Building for extremes costs engineering time the smooth line doesn't justify; you sacrifice short-term velocity for surviving the spike."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your wealth has compounded calmly for 10 years and you assume it always will. The model warns rare extreme events — a crash, a fraud, a lawsuit — dominate outcomes. You diversify and stay liquid rather than trust the streak.",
+          "tradeoff": "Diversifying and holding cash lowers your returns in calm years; you trade some upside for surviving the tail event that ruins the overconfident."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "chasm-diffusion-model",
@@ -613,12 +1761,40 @@
       "trigger": "\"Early buzz, then silence\"",
       "essence": "Innovations spread innovators → early adopters → (CHASM) → majority; most die in the gap",
       "visualType": "curve",
-      "universalExample": "Your tool has passionate early adopters, then growth stalls. The model names the gap: the pragmatic majority buys for different reasons than enthusiasts — they want proof, support, and safety, not novelty. Crossing the chasm means re-pitching to their needs, not shouting louder at the people already sold.",
+      "universalExample": "Your product has passionate early adopters, then growth stalls at 6 months. You keep shouting the novelty that won them. The pragmatic majority wants proof and safety, not novelty. You re-pitch entirely, resisting the instinct to market harder.",
       "personalPrompt": "If your early buzz has gone quiet, are you still selling to enthusiasts when the next group needs a completely different reason to say yes?",
       "pitfalls": [
         "Early-adopter love is misleading feedback — it can convince you the chasm doesn't exist right up until growth flatlines.",
         "The majority's reasons aren't the enthusiasts' reasons; reusing the same pitch is what kills products in the gap."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your homemade pickle has passionate fans at the local market, but the supermarket buyer won't bite for 3 months. The chasm: the buyer wants proof, shelf-life, and consistency, not passion. You re-pitch to their needs, not louder to fans.",
+          "tradeoff": "Meeting the buyer's needs costs certification and standardisation that dilutes the artisanal charm; you trade some soul for scale."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your student society is loved by 20 core members but can't grow past them. The majority wants low-commitment, clear value — not the intense culture the core loves. You add a casual tier to cross the gap.",
+          "tradeoff": "A casual tier risks diluting the tight culture the core treasures; you give up some intensity for growth."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You're beloved by your close friends but struggle to make new ones. The chasm: new people need low-stakes, easy entry, not the deep intensity your close circle bonded over across years. You offer lighter first steps.",
+          "tradeoff": "Offering a lighter version of yourself feels less authentic; you trade immediate depth for a bridge new people can actually cross."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your product has passionate early adopters, then growth stalls at 6 months. You keep shouting the novelty that won them. The pragmatic majority wants proof and safety, not novelty. You re-pitch entirely, resisting the instinct to market harder.",
+          "tradeoff": "Re-pitching to the majority alienates the enthusiasts who loved the edge; you sacrifice your first fans' delight for a market that scales."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Your exclusive members' club thrills its founding 50, but new members won't join. The chasm: the next group wants accessibility and clear benefit, not more exclusivity. You open a path in, against your instinct to stay rarefied.",
+          "tradeoff": "Opening up costs the exclusivity your founders paid for; you trade some prestige for the growth the club needs to survive."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "black-box-model",
@@ -627,12 +1803,40 @@
       "trigger": "\"I don't get why it works\"",
       "essence": "You can use, test, and steer a system by inputs/outputs without understanding its insides — and you often must",
       "visualType": "black-box",
-      "universalExample": "A machine-learning ranking model works but nobody fully understands its internals. Rather than stall, you steer it by inputs and outputs: change the training signal, watch the ranking shift, keep what improves the metric. You use and control the box without needing to see inside it — because you often can't.",
+      "universalExample": "A machine-learning model your team relies on is a black box even to you, and it galls your need to understand. Rather than stall the launch, you steer by training signal and output metrics over 2 weeks. You control it without seeing inside — because you can't.",
       "personalPrompt": "What system are you refusing to use until you 'understand it fully', when you could instead learn to steer it by inputs and outputs?",
       "pitfalls": [
         "Treating everything as a black box invites nasty surprises — some systems genuinely need to be opened before you trust them.",
         "Steering by outputs alone can optimise the wrong thing if your success metric is off; watch what you're actually rewarding."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your teenager's mood is a black box you can't decode. Instead of demanding they explain, you steer by inputs and outputs: more sleep and fewer late nights visibly improve things over a week. You control what you can without cracking the box open.",
+          "tradeoff": "Steering by outputs means never fully understanding what's going on inside; you trade the comfort of knowing for what actually helps."
+        },
+        {
+          "persona": "student",
+          "scenario": "You don't fully understand how the grading rubric weights things — it's a black box. Rather than stall, you submit a draft, see the mark, adjust, resubmit within the 2 weeks. You steer by output without decoding the marker's mind.",
+          "tradeoff": "Optimising to the output risks gaming the grade over real learning; you trade depth for a mark you can actually move."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Why your partner withdraws is a black box, and interrogating it makes it worse. You steer by inputs instead: you notice a calm evening and a shared meal reliably help. You act on what works, not on a full diagnosis.",
+          "tradeoff": "Managing by what-works means the root cause stays unexamined; you trade complete understanding for a relationship that functions."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "A machine-learning model your team relies on is a black box even to you, and it galls your need to understand. Rather than stall the launch, you steer by training signal and output metrics over 2 weeks. You control it without seeing inside — because you can't.",
+          "tradeoff": "Steering by outputs risks optimising the wrong metric unseen; you sacrifice full comprehension for shipping something that works."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "A complex market you're invested in behaves as a black box no advisor fully explains. Instead of demanding the certainty money usually buys, you steer by inputs and outputs — adjust exposure, watch returns month by month. You act without full sight.",
+          "tradeoff": "Acting without full understanding risks a blind spot blowing up; you trade the certainty your wealth expects for staying in the game."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "prisoners-dilemma",
@@ -641,12 +1845,40 @@
       "trigger": "\"Should I cooperate or protect myself?\"",
       "essence": "Individually rational betrayal produces mutually worse outcomes; repeated games reward trust",
       "visualType": "matrix-2x2",
-      "universalExample": "Two teams could share a tool and both win, but each fears the other will hoard credit, so both build their own — the worse outcome for everyone. Seeing the payoff matrix, and that you'll work together again next quarter, you move first to cooperate and make the repeated game reward trust.",
+      "universalExample": "Two teams could share a tool and both win, but each fears the other hoards credit, so both rebuild it — the worse outcome. Seeing you'll collaborate again in 3 months, you cooperate first and make the repeated game reward trust.",
       "personalPrompt": "Where are you defending yourself in a way that quietly guarantees a worse outcome for everyone, including you?",
       "pitfalls": [
         "Cooperating blindly with a genuine defector just gets you exploited — trust is rational in repeated games, not one-shot ones.",
         "The matrix assumes you've read the real payoffs; misjudge them and 'cooperate' can be naive."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You and a neighbour both want the shared driveway repaved but each waits for the other to pay, so it stays broken for 3 years. Seeing you'll live next door for a decade, you offer to split it first — the repeated game rewards trust.",
+          "tradeoff": "Moving first risks the neighbour freeloading on your ₹20,000; you trade the safety of waiting for a driveway both of you finally use."
+        },
+        {
+          "persona": "student",
+          "scenario": "You and your lab partner each hold back your best ideas fearing the other takes credit, so the project stays mediocre. Realising you'll partner all term, you share first — and they reciprocate. The repeated game beats hoarding.",
+          "tradeoff": "Sharing first risks them taking the credit once; you give up a guarded advantage for a better joint result over the term."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner each withhold affection until the other gives first, and both feel starved for weeks. Seeing this is a repeated game for life, you give warmth first without keeping score — and it compounds.",
+          "tradeoff": "Giving first risks feeling unreciprocated some days; you trade the safety of scorekeeping for a warmth that grows."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Two teams could share a tool and both win, but each fears the other hoards credit, so both rebuild it — the worse outcome. Seeing you'll collaborate again in 3 months, you cooperate first and make the repeated game reward trust.",
+          "tradeoff": "Cooperating first risks the other team exploiting it once; you sacrifice a guaranteed edge for a partnership that pays over quarters."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You and a rival family-business could merge supply chains and both profit, but distrust keeps you separate and duplicating cost for years. Recognising a decades-long repeated game, you extend trust first with a small shared contract.",
+          "tradeoff": "Extending trust first risks them defecting on the first deal; you trade a defensive posture for a cooperation that compounds for decades."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "team-model",
@@ -655,12 +1887,40 @@
       "trigger": "\"Is this team up to it?\"",
       "essence": "Map members' skill sets against what the task demands; gaps and overlaps become visible",
       "visualType": "grid",
-      "universalExample": "Before committing to a deadline, you map each member's skills against what the project actually demands. Two people overlap heavily on frontend while nobody owns testing — a gap that would've surfaced as a crisis in week three. You reassign or hire for the gap before it bites.",
+      "universalExample": "You assemble a team of 5 people just like you — all brilliant builders — and assume it's covered. Mapping skills, everyone overlaps on building and nobody does testing or sales. Your instinct to hire mirrors left a fatal gap.",
       "personalPrompt": "For the task ahead of your team, where's the gap between what it demands and the skills you actually have on the bench?",
       "pitfalls": [
         "Rating skills is subjective and egos are involved — get honest input, ideally self-and-peer, not one manager's guess.",
         "A perfect skills map still fails if you ignore how the people actually work together; capability isn't chemistry."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Before committing your 5-person shop team to a busy festival week, you map skills against demands: two are great with customers, nobody handles the till fast under pressure. You train one now, before week three's queue melts down.",
+          "tradeoff": "Cross-training the till person costs a slow afternoon of practice; you trade some current output for not collapsing at peak."
+        },
+        {
+          "persona": "student",
+          "scenario": "Before a group project you map each member's skills against what it needs. Three of you can write, nobody can do the stats — a gap that would've hit in the final week. You recruit a stats-strong classmate early.",
+          "tradeoff": "Recruiting a fourth means splitting the grade wider; you give up a bigger individual share for a project that doesn't fail on stats."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Planning a wedding with your partner, you map who's good at what against the 40 tasks. You both hate logistics and neither tracks budgets — the gap that sinks weddings. You delegate that to a planner before it bites.",
+          "tradeoff": "Hiring a planner costs ₹50,000 you'd rather save; you trade money for a gap that would have caused months of fights."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You assemble a team of 5 people just like you — all brilliant builders — and assume it's covered. Mapping skills, everyone overlaps on building and nobody does testing or sales. Your instinct to hire mirrors left a fatal gap.",
+          "tradeoff": "Hiring for the gap means bringing on people unlike you who'll challenge the culture; you sacrifice easy harmony for a team that's actually complete."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can hire anyone, so you stack your foundation with 6 famous names. Mapping their skills against what the mission needs, they all bring prestige and none bring operational grip. Fame filled the board; the gap is execution.",
+          "tradeoff": "Adding an unglamorous operator costs a marquee seat; you trade star power on the letterhead for a mission that actually delivers."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "hersey-blanchard",
@@ -669,12 +1929,40 @@
       "trigger": "\"How hands-on should I be?\"",
       "essence": "Match style to the person's competence & commitment: direct → coach → support → delegate",
       "visualType": "matrix-2x2",
-      "universalExample": "A new hire is eager but green, so you direct closely; a senior engineer is skilled and committed, so you delegate and get out of the way. Micromanaging the senior would insult them; delegating to the newcomer would sink them. You match the style to each person's competence and commitment.",
+      "universalExample": "You delegate everything because that's how you'd want to be led — and your junior, out of their depth, quietly drowns for a month. The model says a new person needs directing, not the freedom you'd crave. You adjust to them, not you.",
       "personalPrompt": "For the person you're leading, does your current hands-on level match their competence and commitment, or are you directing where you should delegate?",
       "pitfalls": [
         "Competence is task-specific — the same person may need directing on one thing and delegation on another; don't fix a single style to a person.",
         "Reading someone's commitment wrong flips the whole prescription; check before you choose the style."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "You run a 6-person shop and manage everyone the same close way. A new hire needs that direction, but your 10-year veteran finds it insulting and disengages. You delegate to the veteran and direct the newcomer.",
+          "tradeoff": "Delegating to the veteran risks a mistake you'd have caught; you trade some control for a senior person who stays motivated."
+        },
+        {
+          "persona": "student",
+          "scenario": "Leading a study group, you spoon-feed all 5 members equally. The strong students are bored and the weak ones still lost. Matching support to each person's level, you stretch the strong and scaffold the weak.",
+          "tradeoff": "Differentiating costs you more prep time per person; you give up the ease of one approach for a group that all actually progress."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Helping your teenage son with life skills, you either hover or abandon. The model says match to competence: direct closely on the new thing (driving), step back on what they've mastered (cooking). You stop applying one mode to everything.",
+          "tradeoff": "Stepping back on mastered skills risks the odd mistake; you trade a little safety for a teenager who grows independent."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You delegate everything because that's how you'd want to be led — and your junior, out of their depth, quietly drowns for a month. The model says a new person needs directing, not the freedom you'd crave. You adjust to them, not you.",
+          "tradeoff": "Directing closely feels like micromanaging to you; you sacrifice your preferred hands-off style for a junior who doesn't sink."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You lead by giving total autonomy, mistaking it for respect, to staff who need clarity. Two projects stall for weeks because people didn't know they should ask. You match style to readiness rather than applying your own ideal.",
+          "tradeoff": "Providing more direction costs the generous hands-off image you liked; you trade that self-image for staff who actually deliver."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "role-playing-model",
@@ -683,12 +1971,40 @@
       "trigger": "\"Meetings go nowhere\"",
       "essence": "Assign thinking roles (de Bono's hats) or recognize natural team roles (Belbin); separate the thinking modes",
       "visualType": "role-wheel",
-      "universalExample": "A meeting keeps going in circles because everyone argues facts and feelings and risks all at once. You assign thinking modes for ten minutes each — first only facts, then only optimism, then only risks — and the tangle unknots. Separating the modes lets the group think one thing at a time.",
-      "personalPrompt": "In your stuck meeting, which single thinking mode is everyone skipping — the hard facts, the risks, or the bold possibilities?",
+      "universalExample": "Your family meeting about moving house goes in circles — facts, fears, hopes all at once. You assign 10 minutes each: first only facts, then only worries, then only possibilities. The tangle unknots when each is heard alone.",
+      "personalPrompt": "In your stuck meeting or tangled family conversation, which single thinking mode is everyone skipping — the hard facts, the risks, or the bold possibilities?",
       "pitfalls": [
         "Assigned roles feel artificial at first and people resist — the facilitator has to hold the structure or it collapses into the usual free-for-all.",
         "Boxing a person permanently into one role (the 'critic') wastes their range; rotate the hats."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your family meeting about moving house goes in circles — facts, fears, hopes all at once. You assign 10 minutes each: first only facts, then only worries, then only possibilities. The tangle unknots when each is heard alone.",
+          "tradeoff": "Forcing structured turns feels stiff for a family chat; you trade natural flow for a decision that actually gets made."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your project group argues features and risks and timelines simultaneously and stalls. You run modes for 15 minutes each — facts, then optimism, then risks. Separating them lets the group think one thing at a time.",
+          "tradeoff": "The structure feels artificial and some resist it; you give up spontaneity for progress you weren't making."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner planning finances mix dreams, fears, and numbers into one heated tangle. You agree to do it in modes: tonight only the facts, tomorrow the hopes. The separation cools a fight.",
+          "tradeoff": "Splitting an emotional talk into modes can feel clinical; you trade the catharsis of venting for a plan you both can hold."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You dominate 1-hour meetings by arguing all angles at once because you can hold them all. It steamrolls the team. Assigning one mode at a time forces space for others' facts and risks your brilliance drowned out.",
+          "tradeoff": "Holding to one mode restrains your fast, multi-angle thinking; you sacrifice your natural pace for a team that contributes."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You chair a board where deference means everyone just agrees with you for years. Assigning thinking modes — a mandated 'risks only' round — forces the critique your status usually suppresses. The structure buys honesty money can't.",
+          "tradeoff": "Inviting a risks round surfaces criticism of your pet ideas; you trade comfortable agreement for decisions that survive scrutiny."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "result-optimisation-model",
@@ -697,12 +2013,40 @@
       "trigger": "\"Deadline vs perfection\"",
       "essence": "Iterate in passes: rough whole first, then refine — never polish one corner of an unfinished canvas",
       "visualType": "spiral",
-      "universalExample": "With a week to a launch, you resist polishing the landing page and instead get the whole product rough-but-working end to end, then refine in passes. When time runs out, everything is presentable rather than one perfect corner beside three unfinished ones.",
+      "universalExample": "Your craftsmanship makes you polish one module to perfection for a week while the product's rest is blank. The model says rough the whole first. Your very excellence at the detail was starving the system. You do a rough end-to-end pass.",
       "personalPrompt": "Where are you polishing one corner while the rest of the canvas is still blank, and what would a rough whole-first pass look like?",
       "pitfalls": [
         "'Iterate' can become an excuse to never finish; each pass needs a clear bar for 'good enough for now'.",
         "Some work genuinely needs deep craft up front; not everything benefits from a rough-first sweep."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "With a week to your stall's launch, you're tempted to perfect the signage. Instead you get everything rough-but-working — menu, stall, till, samples — then refine. When the day comes, all of it is presentable, not one perfect sign beside chaos.",
+          "tradeoff": "A rough-whole approach means nothing is beautiful on day one; you trade polish for a launch that actually works end to end."
+        },
+        {
+          "persona": "student",
+          "scenario": "With 3 days to an essay deadline, you keep perfecting the introduction. You switch to a rough full draft — every section present — then improve. You hand in a complete argument, not a gorgeous intro and a blank conclusion.",
+          "tradeoff": "The rough-first draft feels embarrassingly unpolished mid-way; you give up the comfort of a perfect opening for a finished whole."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Planning a surprise anniversary, you obsess over the perfect gift for weeks and leave everything else. You switch to roughing the whole day — meal, time, place, gift — then refining. The day lands as a whole, not one dazzling gift and no plan.",
+          "tradeoff": "Roughing the whole means the gift is less perfect; you trade one dazzling detail for a day that flows."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your craftsmanship makes you polish one module to perfection for a week while the product's rest is blank. The model says rough the whole first. Your very excellence at the detail was starving the system. You do a rough end-to-end pass.",
+          "tradeoff": "A rough whole offends your standards; you sacrifice the satisfaction of one perfect corner for a product that actually ships."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You can fund endless polish, so your venture perfects its brand for months while the actual product doesn't exist. The model says get the whole thing rough and working first. Money enabled the imbalance. You force an end-to-end version.",
+          "tradeoff": "A rough whole looks less impressive than a gorgeous brand; you trade the beautiful facade for something that functions."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "project-management-triangle",
@@ -711,12 +2055,40 @@
       "trigger": "\"Fast, cheap, good?\"",
       "essence": "You can maximize two of fast/cheap/good; pretending otherwise breaks projects",
       "visualType": "triangle",
-      "universalExample": "A client wants the redesign fast, cheap, and excellent. You put the triangle on the table: pick two. They choose fast and good, so the budget flexes. Naming the trade-off openly prevents the silent version where everyone assumes all three and the project quietly breaks.",
-      "personalPrompt": "On your current project, which two of fast, cheap, and good are you actually choosing — and are you pretending you can have all three?",
+      "universalExample": "A customer wants their tailoring fast, cheap, and perfect by Friday. You put the triangle on the counter: pick two. They choose fast and good, so the price goes up. Naming it openly stops the silent version where they expected all three.",
+      "personalPrompt": "On your current project — a launch, a house move, or a wedding — which two of fast, cheap, and good are you actually choosing, and are you pretending you can have all three?",
       "pitfalls": [
         "The triangle is a simplification — scope, quality, and morale flex too — but its core truth (you can't max everything) holds.",
         "Refusing to choose two doesn't escape the trade-off; it just makes the third corner fail without warning."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "A customer wants their tailoring fast, cheap, and perfect by Friday. You put the triangle on the counter: pick two. They choose fast and good, so the price goes up. Naming it openly stops the silent version where they expected all three.",
+          "tradeoff": "Being upfront risks losing the customer who wanted the impossible; you trade a possible sale for not being blamed for an unfair expectation."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your group wants the project done fast, easy, and top-grade in 2 weeks. You name the triangle: pick two. Choosing fast and good means it won't be easy — real hours are needed. The honest trade prevents the week-three blowup.",
+          "tradeoff": "Naming it forces the group to commit real time now; you give up the comfortable illusion of an easy A."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner want the wedding cheap, quick, and dreamy. The triangle forces the honest talk: pick two. Choosing cheap and dreamy means it takes a year to plan. Naming it prevents resentment later.",
+          "tradeoff": "Facing the trade means giving up one wish out loud; you trade a fantasy of having it all for a plan you both accept."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "A client demands the redesign fast, cheap, and excellent in 6 weeks, and your confidence makes you believe you can defy the triangle. You can't; something gives silently. You put it on the table: pick two. Your ego was the risk.",
+          "tradeoff": "Admitting you can't beat the triangle dents your can-do image; you sacrifice the hero pitch for a project that doesn't quietly break."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You assume money removes the triangle — you can buy fast, cheap, and good. But rushing a quality build for 3 months just burns cash and still slips. You accept the trade money can't erase and choose two openly.",
+          "tradeoff": "Accepting the trade means a project that's not all three despite your budget; you trade the illusion of omnipotence for a realistic plan."
+        }
+      ],
+      "featured": 0
     },
     {
       "id": "drexler-sibbet-team-performance",
@@ -725,7 +2097,7 @@
       "trigger": "\"New team, rough start\"",
       "essence": "Teams pass through 7 stages from orientation to renewal; friction is stage-specific, so is the fix",
       "visualType": "stage-curve",
-      "universalExample": "A new team is tense and slow, and you're tempted to read it as a bad hire. The model says early friction is a stage — orientation and trust-building — not a verdict. You name the stage aloud, invest in clarity of purpose, and the team moves through it instead of fracturing.",
+      "universalExample": "Your new team is slow and tense after a month and your instinct is to swap people. The model says you're reading a normal early stage as a talent problem. You name the stage aloud and build trust, resisting the urge to reshuffle.",
       "personalPrompt": "For your team's current friction, which stage is it — and are you fixing the stage it's actually in, or the one you wish it were in?",
       "pitfalls": [
         "Stages aren't strictly linear; teams loop back, especially when membership changes — don't treat a slip as failure.",
@@ -739,7 +2111,35 @@
         "Implementation — who does what, when, where?",
         "High performance — the team hits its stride.",
         "Renewal — why continue, and what changes next?"
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Your new 5-person shop team is tense and slow after 2 weeks and you fear you hired wrong. The model says early friction is the orientation stage, not a verdict. You invest in clarity of purpose and the team settles instead of fracturing.",
+          "tradeoff": "Naming it a stage means tolerating weeks of discomfort; you trade the quick relief of blaming a hire for a team that matures."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your group project is all friction in week 1 and you assume the group is doomed. The model reframes it as the trust-building stage. You spend a session on roles, and the tension eases into progress.",
+          "tradeoff": "Investing a session in roles feels like lost time; you give up an hour of 'real work' for a group that stops fighting."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and a new stepfamily clash constantly in the first months and you fear it'll never work. The model names it as an orientation stage — normal, not fatal. You focus on shared purpose and let the stage pass.",
+          "tradeoff": "Treating the friction as a stage means patience when you want it fixed now; you trade the comfort of a verdict for a family that gets time to form."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your new team is slow and tense after a month and your instinct is to swap people. The model says you're reading a normal early stage as a talent problem. You name the stage aloud and build trust, resisting the urge to reshuffle.",
+          "tradeoff": "Holding the team together costs you the decisive 'fix' of firing; you sacrifice the illusion of a quick reset for a team that grows through it."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You fund a new hand-picked team and expect instant brilliance for your money within weeks. Early friction reads to you as failure. The model says it's a stage; you invest in purpose and trust rather than throwing more resources at it.",
+          "tradeoff": "Waiting out the stage means your money doesn't buy instant results; you trade the expectation of bought excellence for a team that actually gels."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "expectations-model",
@@ -748,12 +2148,40 @@
       "trigger": "\"They're disappointed and I don't know why\"",
       "essence": "Disappointment = gap between what was expected and what was delivered; manage the expectation, not just the delivery",
       "visualType": "gap-bars",
-      "universalExample": "A client is unhappy though you delivered solid work. Mapping expected against delivered, you find they'd pictured weekly updates you never promised. The disappointment lived in the gap, not the work. Next time you set the expectation explicitly up front — and the same delivery lands as a win.",
+      "universalExample": "Your client is unhappy despite objectively excellent work over 3 months. Your competence made you assume the work would speak for itself; they'd expected weekly updates you never set up. The gap was expectation, not quality.",
       "personalPrompt": "For the person who's disappointed in you, is the gap in what you delivered, or in an expectation you never actually set?",
       "pitfalls": [
         "Managing expectations can tip into under-promising so hard you look timid — calibrate, don't just sandbag.",
         "Expectations are often unspoken; you have to surface them early or you'll manage the wrong gap."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "A customer is unhappy though you did solid work on their ₹8,000 repair. Mapping expected against delivered, they'd pictured a same-day turnaround you never promised. The gap, not the work, was the problem. Next time you state the timeline up front.",
+          "tradeoff": "Setting expectations up front risks scaring off a customer who wanted it faster; you trade a possible booking for not being blamed for an unspoken hope."
+        },
+        {
+          "persona": "student",
+          "scenario": "Your professor seems disappointed though your essay was good. The gap: they expected you to use last week's feedback, which you'd missed. You set expectations by asking exactly what they want next time.",
+          "tradeoff": "Asking what's expected risks looking unsure; you give up appearing effortless for hitting the actual target."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "Your partner is hurt though you thought the weekend went fine. Mapping it, they'd expected a real conversation you never knew was wanted. The disappointment was in the unspoken expectation. You start naming what you each want.",
+          "tradeoff": "Surfacing expectations kills the romance of being 'just known'; you trade the fantasy of mind-reading for needs that actually get met."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "Your client is unhappy despite objectively excellent work over 3 months. Your competence made you assume the work would speak for itself; they'd expected weekly updates you never set up. The gap was expectation, not quality.",
+          "tradeoff": "Managing expectations feels beneath work this good; you sacrifice the belief that excellence sells itself for a client who feels informed."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "You fund a project generously and the team seems ungrateful after a year. The gap: they expected involvement and direction, not just a cheque. Your money set an expectation of partnership you didn't meet. You clarify your role.",
+          "tradeoff": "Clarifying you're only funding, not leading, may disappoint them; you trade being the hero for an honest, met expectation."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "future-of-decisions-model",
@@ -762,12 +2190,40 @@
       "trigger": "\"Will machines decide for us?\"",
       "essence": "A closing reflection: which decisions should you keep, automate, or delegate — choose deliberately",
       "visualType": "triage",
-      "universalExample": "Reviewing your week, you sort recurring decisions into keep, automate, delegate: choosing what to write stays with you (keep), sending invoices becomes a rule (automate), scheduling goes to an assistant (delegate). Deciding deliberately which machine or person handles which call frees your judgement for the ones that need it.",
+      "universalExample": "You make every decision because you're best at all of them, and you're the bottleneck for 12 people. You triage: strategy stays yours (keep), approvals become rules (automate), hiring goes to a trusted lead (delegate). Your talent stops being the ceiling.",
       "personalPrompt": "Of the decisions you make on repeat, which should you keep, which could you automate, and which could you delegate?",
       "pitfalls": [
         "Automating or delegating a decision you don't understand yet just hides a problem — keep it until you can specify it well.",
         "Convenience tempts you to hand off judgement calls that are actually the ones only you should make."
-      ]
+      ],
+      "examples": [
+        {
+          "persona": "everyday",
+          "scenario": "Running your shop, every tiny call comes to you and you're drowning by 3pm. You sort recurring decisions: what to stock stays yours (keep), reorder levels become a rule (automate), staff rota goes to your senior (delegate). Your judgement is freed for what needs it.",
+          "tradeoff": "Delegating the rota risks a scheduling slip; you trade some control for the hours to run the actual business."
+        },
+        {
+          "persona": "student",
+          "scenario": "You agonise over every small study choice and burn out by week 4. You triage: what to focus on stays yours (keep), daily review becomes a fixed rule (automate), and a study app schedules spacing (delegate). Decision fatigue drops.",
+          "tradeoff": "Automating your schedule risks a rigid plan on an off day; you give up flexibility for the energy real thinking needs."
+        },
+        {
+          "persona": "relationship",
+          "scenario": "You and your partner debate every household decision and it's exhausting. You sort: big moves stay joint (keep), the weekly menu becomes a rotating rule (automate), and each of you fully owns certain domains (delegate). Fewer negotiations, more peace.",
+          "tradeoff": "Handing your partner full ownership of a domain means living with their choices; you trade veto power for far fewer daily negotiations."
+        },
+        {
+          "persona": "high-achiever",
+          "scenario": "You make every decision because you're best at all of them, and you're the bottleneck for 12 people. You triage: strategy stays yours (keep), approvals become rules (automate), hiring goes to a trusted lead (delegate). Your talent stops being the ceiling.",
+          "tradeoff": "Delegating decisions you'd make better yourself means accepting good-enough calls; you sacrifice peak quality on each for a team that isn't blocked on you."
+        },
+        {
+          "persona": "privileged",
+          "scenario": "Everyone routes every choice to you because your say carries weight, and it consumes your days. You sort what only you should decide (keep), what can be standing policy (automate), and what a trusted deputy owns (delegate). You reclaim your attention.",
+          "tradeoff": "Delegating decisions your name usually blesses risks a call you'd have made differently; you trade some influence for a life that isn't all approvals."
+        }
+      ],
+      "featured": 3
     },
     {
       "id": "second-order-thinking",
