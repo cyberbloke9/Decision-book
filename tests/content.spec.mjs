@@ -144,34 +144,64 @@ const run = async () => {
 
   // Step 6: card render — all 74. The ACTIVE (non-hidden) tabpanel's scenario
   // (the default is the featured persona) must equal examples[featured].scenario.
+  // This loop ALSO carries the Sprint-004 §6 all-74 render+fold sweep (net-new
+  // machine gate, spec §11 "all 74 render correctly"): per card we additionally
+  // assert essence above the fold at 375×667 AFTER the F-001 serif switch,
+  // exactly 5 role=tab in fixed order with one aria-selected, the featured
+  // example's paired tradeoff co-visible (B30), a single .card-figure svg, no
+  // undefined/NaN leaking into text, and prompt-last (B5). Errors accumulate into
+  // the shared `errors` array (asserted zero in Step 13 — "0 console errors across
+  // the whole sweep").
+  await page.setViewportSize({ width: 375, height: 667 });
+  const order = ["everyday", "student", "relationship", "high-achiever", "privileged"];
   let renderFail = null, promptLastFail = null, stepsFail = null;
+  let foldFail = null, tabSweepFail = null, svgSweepFail = null, tradeoffSweepFail = null, undefSweepFail = null;
   for (const f of fws) {
     await page.goto(BASE + "/#/f/" + f.id, { waitUntil: "networkidle" });
     await page.waitForSelector("#screen-framework:not([hidden])");
     const info = await page.evaluate(() => {
-      const card = document.querySelector("#framework-mount .card");
+      const card = document.querySelector("#framework-mount .card, #framework-mount article.card");
       if (!card) return { ok: false };
       const h2 = card.querySelector("h2.card-name");
       const figcap = card.querySelector(".card-figcaption-name");
+      const exampleSection = card.querySelector(".card-example");
       const exampleText = card.querySelector(".card-example-text");
       const activePanel = card.querySelector(".persona-panel:not([hidden])");
       const activeScenario = activePanel ? (activePanel.querySelector(".persona-scenario") || {}).textContent : null;
+      const activeTradeoff = activePanel ? (activePanel.querySelector(".persona-tradeoff") || {}).textContent : null;
       const pitfalls = card.querySelectorAll(".card-pitfalls-list li");
       const prompt = card.querySelector(".card-prompt");
       const last = card.lastElementChild;
       const steps = [...card.querySelectorAll(".card-steps-list li")].map((li) => li.textContent);
+      // §6 sweep fields:
+      const essenceEl = card.querySelector(".card-essence-text");
+      const essenceTop = essenceEl ? essenceEl.getBoundingClientRect().top : 9999;
+      const tabs = [...card.querySelectorAll('[role="tab"]')].map((t) => t.getAttribute("data-persona"));
+      const selected = [...card.querySelectorAll('[role="tab"][aria-selected="true"]')].length;
+      const figureSvgs = card.querySelectorAll(".card-figure svg").length;
+      const isArticle = card.tagName.toLowerCase() === "article";
+      const textBlob = card.textContent || "";
       return {
         ok: true,
+        isArticle,
         name: h2 ? h2.textContent : "",
         h2id: h2 ? h2.id : "",
         trigger: (card.querySelector(".card-trigger-text") || {}).textContent || "",
         figcap: figcap ? figcap.textContent.trim() : "",
-        essence: (card.querySelector(".card-essence-text") || {}).textContent || "",
+        essence: essenceEl ? essenceEl.textContent : "",
         hasExampleText: !!exampleText,
+        hasExampleSection: !!exampleSection,
         activeScenario,
+        activeTradeoff,
         pitCount: pitfalls.length,
         promptLast: prompt && last === prompt,
-        steps
+        promptIsPart: prompt && prompt.classList.contains("card-part"),
+        steps,
+        essenceTop,
+        tabs,
+        selected,
+        figureSvgs,
+        hasUndef: /\bundefined\b|\bNaN\b/.test(textBlob)
       };
     });
     const featuredScenario = f.examples[f.featured].scenario;
@@ -186,10 +216,27 @@ const run = async () => {
     const hasSteps = Array.isArray(f.steps) && f.steps.length;
     if (hasSteps) { if (info.steps.length !== f.steps.length) stepsFail = stepsFail || `${f.id} steps missing`; }
     else if (info.steps.length !== 0) stepsFail = stepsFail || `${f.id} unexpected steps container`;
+    // §6 sweep assertions (aggregate; first offender reported):
+    if (info.essenceTop >= 600) foldFail = foldFail || `${f.id} essenceTop=${Math.round(info.essenceTop)}`;
+    if (JSON.stringify(info.tabs) !== JSON.stringify(order) || info.selected !== 1) {
+      tabSweepFail = tabSweepFail || `${f.id} tabs=${info.tabs.join(",")} sel=${info.selected}`;
+    }
+    if (info.figureSvgs !== 1) svgSweepFail = svgSweepFail || `${f.id} svgs=${info.figureSvgs}`;
+    if (!info.isArticle || !info.hasExampleSection || !info.activeScenario ||
+        !info.activeTradeoff || !info.activeTradeoff.trim() || !info.promptIsPart) {
+      tradeoffSweepFail = tradeoffSweepFail || `${f.id} art=${info.isArticle} ex=${info.hasExampleSection} scen=${!!info.activeScenario} trade=${!!info.activeTradeoff} promptPart=${info.promptIsPart}`;
+    }
+    if (info.hasUndef) undefSweepFail = undefSweepFail || f.id;
   }
   log(!renderFail, "all 74 cards render six parts + featured scenario in the active panel (B4/B30)", renderFail || "");
   log(!promptLastFail, "personalPrompt is the terminal block (B5)", promptLastFail || "");
   log(!stepsFail, "steps render only when present", stepsFail || "");
+  // §6 all-74 render+fold sweep (net-new Sprint-004 machine gate):
+  log(!foldFail, "SWEEP: essence above the fold (.top<600) on ALL 74 after F-001 serif switch (B35/H1)", foldFail || "");
+  log(!tabSweepFail, "SWEEP: all 74 carry exactly 5 persona tabs in fixed order, one aria-selected", tabSweepFail || "");
+  log(!svgSweepFail, "SWEEP: all 74 carry exactly one <svg> under .card-figure", svgSweepFail || "");
+  log(!tradeoffSweepFail, "SWEEP: all 74 show article.card + featured scenario with paired tradeoff co-visible + prompt card-part (B30/B5)", tradeoffSweepFail || "");
+  log(!undefSweepFail, "SWEEP: no 'undefined'/'NaN' leaks into any of the 74 cards' text", undefSweepFail || "");
 
   // Step 7: data-driven renderer with a synthetic entry (no renderer edits).
   // Synthetic carries a valid examples[]+featured (featured != 0) so it proves
@@ -413,7 +460,7 @@ const run = async () => {
   await cold.close();
   await ctx.setOffline(false);
   const swSrc = await (await ctx.request.get(BASE + "/sw.js")).text();
-  log(/pdb-shell-v10/.test(swSrc) && !/"pdb-shell-v9"/.test(swSrc), "sw cache bumped (v10)");
+  log(/pdb-shell-v11/.test(swSrc) && !/CACHE\s*=\s*"pdb-shell-v10"/.test(swSrc), "sw cache bumped (v11)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak
@@ -427,6 +474,43 @@ const run = async () => {
     noCardLeak: !document.querySelector("#screen-situations .card, #screen-browse .card, #screen-favorites .card, #screen-search .card")
   }));
   log(Object.values(legacy).every(Boolean), "Sprint 001 screens intact, no card leak", JSON.stringify(legacy));
+
+  // Step 12b: F-001 — essence renders in the editorial serif (Charter), in BOTH
+  // themes (Sprint 004 §3.2). The lead --font-serif family is Charter; before the
+  // fix .card-essence-text inherited --font-sans (Avenir Next). We assert the
+  // computed first font-family === "Charter" in dark (default) AND after toggling
+  // to light, mirroring the F-001 pass condition.
+  const firstFamily = (s) => (s || "").split(",")[0].trim().replace(/^["']|["']$/g, "");
+  await page.goto(BASE + "/#/f/eisenhower-matrix", { waitUntil: "networkidle" });
+  for (const theme of ["dark", "light"]) {
+    await page.evaluate((t) => { localStorage.setItem("pdb.theme", t); document.documentElement.setAttribute("data-theme", t); }, theme);
+    await page.waitForSelector("#framework-mount .card-essence-text");
+    const fam = await page.evaluate(() => getComputedStyle(document.querySelector("#framework-mount .card-essence-text")).fontFamily);
+    log(firstFamily(fam) === "Charter", `F-001: .card-essence-text leads with Charter serif in ${theme} theme`, fam);
+  }
+  await page.evaluate(() => { localStorage.setItem("pdb.theme", "dark"); document.documentElement.setAttribute("data-theme", "dark"); });
+
+  // Step 12c: reduced-motion actually neutralizes card/tab transitions (§7 — not
+  // just "a media query exists"). Emulate `reduce`, render a card, and assert the
+  // computed transition/animation durations on animated elements resolve to ~0.
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto(BASE + "/#/f/eisenhower-matrix", { waitUntil: "networkidle" });
+  await page.waitForSelector("#framework-mount .persona-tabs [role='tab']");
+  const rm = await page.evaluate(() => {
+    const dur = (el) => {
+      if (!el) return null;
+      const cs = getComputedStyle(el);
+      const toMax = (v) => Math.max(0, ...String(v).split(",").map((s) => parseFloat(s) || 0));
+      return { t: toMax(cs.transitionDuration), a: toMax(cs.animationDuration) };
+    };
+    const card = document.querySelector("#framework-mount .card");
+    const tab = document.querySelector("#framework-mount [role='tab']");
+    const screen = document.querySelector("#screen-framework");
+    return { card: dur(card), tab: dur(tab), screen: dur(screen) };
+  });
+  const rmZero = [rm.card, rm.tab, rm.screen].every((d) => d && d.t === 0 && d.a === 0);
+  log(rmZero, "reduced-motion: card/tab/screen transition+animation durations resolve to ~0 (§7, B36)", JSON.stringify(rm));
+  await page.emulateMedia({ reducedMotion: null });
 
   // Step 13: console cleanliness
   log(errors.length === 0, "zero console errors/warnings", errors.slice(0, 5).join(" | "));

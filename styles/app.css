@@ -518,6 +518,10 @@ svg.icon,
 /* Essence */
 .card-essence-text {
   margin: 0;
+  /* F-001 (Sprint 004): "THE IDEA" is editorial body reading, so it must read in
+     the Charter serif like its sibling parts (trigger/prompt/pitfalls), not inherit
+     the UI sans. CSS-only; no DOM/behavior change. */
+  font-family: var(--font-serif);
   font-size: var(--fs-1);
   line-height: 1.5;
   color: var(--fg);

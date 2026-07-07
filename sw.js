@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v10";
+var CACHE = "pdb-shell-v11";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -48,6 +48,15 @@ var CACHE = "pdb-shell-v10";
 // the display face is the macOS-guaranteed slab stack, so the SHELL list is
 // unchanged); the bump purges the stale v9 cache so the offline app serves the
 // re-skinned shell (protects B20). js/data.js is byte-unchanged this sprint.
+// v11 (2026-07-08, Sprint 004 — Polish & Acceptance, Phase 10) ships one edit to a
+// single already-listed shell asset: styles/app.css gains the F-001 fix —
+// .card-essence-text now sets font-family: var(--font-serif) so "THE IDEA" reads in
+// the editorial Charter serif like its sibling parts, instead of inheriting the UI
+// sans. The R2/R4 examples/prompt acceptance audit found NO fixable defect, so
+// js/data.js is byte-unchanged this sprint (regenerate is a no-op) and is NOT in
+// this bump's changed-asset list. No new precache entry (app.css is already listed);
+// the bump purges the stale v10 cache so the offline app serves the corrected
+// app.css (protects B20). Changed precached asset this sprint: styles/app.css only.
 var SHELL = [
   "./",
   "index.html",
