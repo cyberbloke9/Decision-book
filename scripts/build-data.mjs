@@ -1,10 +1,10 @@
 /* Build js/data.js from:
    - RESEARCH.md parse (byte-exact trigger/essence + visualRaw) via extract-content.mjs
-   - AUTHORED map below (id → visualType, universalExample, personalPrompt, pitfalls, steps?)
+   - AUTHORED map below (id → visualType, examples[5]+featured, personalPrompt, pitfalls, steps?)
    trigger/essence are NEVER hand-typed here — they come straight from the parser, so B2 holds.
    Run: node scripts/build-data.mjs   → writes ../js/data.js
-   universalExample / personalPrompt / pitfalls / steps are ORIGINAL Generator authoring (B3),
-   grounded in the founder/builder persona; every personalPrompt ends in "?" (B5). */
+   examples / personalPrompt / pitfalls / steps are ORIGINAL Generator authoring (B3),
+   spanning five personas; every personalPrompt ends in "?" (B5). */
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
@@ -754,31 +754,66 @@ const AUTHORED = {
   },
   "second-order-thinking": {
     visualType: "concentric",
-    universalExample: "Cutting prices looks obviously good — more signups this month. Asking 'and then what?', you trace it: competitors match, your margin thins, and the cheap tier attracts users who churn fast and strain support. The first-order win becomes a second-order trap, so you find a better lever.",
+    examples: [
+      { persona: "everyday",      scenario: "A delivery app dangles a ₹200 bonus for 15 extra trips tonight. 'And then what?' — your already-sore knee needs 3 days off next week, costing more shifts than the bonus pays. Tracing the second consequence, you skip it.", tradeoff: "You give up ₹200 you could use this week; the cost is protecting a knee that earns you every future week." },
+      { persona: "student",       scenario: "A ₹500 pack of solved assignments would save you a weekend. 'And then what?' — the mid-term worth 30% tests the exact material you'd skip learning. The downstream exam makes the shortcut expensive.", tradeoff: "You lose a free weekend to actually learn the unit; you pay in leisure to not fail the exam that copying can't sit for you." },
+      { persona: "relationship",  scenario: "Your sister asks to borrow ₹50,000 and yes feels kind. 'And then what?' — she's borrowed twice unpaid, and a third loan curdles into resentment at every family dinner for a year. The second-order cost is the bond, not the cash.", tradeoff: "Offering help-in-kind instead of a loan risks looking stingy tonight; you trade her disappointment for a relationship that survives it." },
+      { persona: "high-achiever", scenario: "You can close a ₹2-crore deal by promising a feature your team can't build in 3 months. 'And then what?' — you ship late, burn the client's trust and your delivery reputation, the thing that wins the next ten deals. Your closing skill hid the trap.", tradeoff: "Walking back the promise loses this quarter's headline number; you sacrifice one visible win to protect the credibility that compounds." },
+      { persona: "privileged",    scenario: "A fast ₹1-crore donation to a flashy cause buys instant praise. 'And then what?' — the charity can't absorb it, half is wasted, and your name attaches to a failure the press finds in a year. The real effect is reputational.", tradeoff: "Funding capacity first delays the applause you'd enjoy now; you trade a quick headline for money that actually lands." }
+    ],
+    featured: 3,
     personalPrompt: "For the move that looks obviously good, what's the consequence of the consequence you haven't traced yet?",
     pitfalls: ["You can chase ripples forever — go far enough to change the decision, then act; endless second-guessing is its own failure.", "First-order thinking is fast and often right; reserve deep tracing for choices that are hard to reverse."]
   },
   "inversion": {
     visualType: "mirror",
-    universalExample: "Struggling to plan a successful onboarding, you flip it: what would guarantee new users bail? A long form, no first win, jargon, silence after signup. Listing the ways to fail hands you the checklist — remove exactly those — that thinking forward never produced.",
+    examples: [
+      { persona: "everyday",      scenario: "You want your new tiffin service to keep customers. Inverting: what guarantees they cancel? Late delivery, cold food, ignored complaints. You fix exactly those 3 in month one before adding fancy dishes.", tradeoff: "You spend the first month on boring reliability instead of exciting menu items; you trade novelty for the retention that pays rent." },
+      { persona: "student",       scenario: "You want to pass your driving test in 2 weeks. Inverted: what fails people? Stalling on the hill, missed mirror checks, panicking at the parallel park. You drill those 3 instead of joyriding.", tradeoff: "You give up the fun of open-road practice for repetitive maneuvers; you pay in boredom to not lose the ₹1,500 re-test fee." },
+      { persona: "relationship",  scenario: "You want your marriage to last. Inverting: what kills marriages? Contempt, stonewalling, never repairing after a fight. You catch yourself stonewalling your wife after Tuesday's argument and repair it that night.", tradeoff: "Naming your own worst pattern out loud costs your pride; you trade the comfort of blaming her for owning the thing you control." },
+      { persona: "high-achiever", scenario: "You want your startup to survive 5 years and instinctively list growth tactics. Inverting exposes what actually kills startups: co-founder blowups, running out of cash, building what no one wants. You fix the founder agreement first.", tradeoff: "Spending week one on a dull cap-table talk delays product work; you sacrifice momentum to remove the failure that ends most smart teams." },
+      { persona: "privileged",    scenario: "You want your family name respected 50 years after you're gone. Inverting: what destroys dynasties? Entitled heirs, a public scandal, a feud over the will between your son and daughter. You spend on your children's character, not just their trust funds.", tradeoff: "Making heirs earn responsibility risks their resentment now; you trade their short-term comfort for a name that outlives the money." }
+    ],
+    featured: 2,
     personalPrompt: "For the goal you're chasing, what would reliably guarantee failure — and are you accidentally doing any of it?",
     pitfalls: ["Avoiding failure isn't the same as achieving greatness — inversion prevents disasters but won't design the win on its own.", "The list of failure modes can get long; focus on the few you're actually at risk of committing."]
   },
   "pre-mortem": {
     visualType: "timeline",
-    universalExample: "Before launch, the team pretends it's six months later and the project failed. Everyone writes why: the API rate limits bit us, marketing wasn't ready, the demo broke on mobile. Surfacing those causes now — while it's still cheap — turns a confident plan into a de-risked one.",
-    personalPrompt: "Imagine your current project has already failed — what's the most likely story of why, and what can you fix today?",
+    examples: [
+      { persona: "everyday",      scenario: "Before signing up for a ₹30,000 gym membership, you imagine it's a year later and you quit in month 2. Why? It's 40 minutes away, you go alone, mornings are chaos. You pick a closer gym and a buddy before paying.", tradeoff: "The closer gym has worse equipment; you trade fancy machines for the location that keeps you actually going." },
+      { persona: "student",       scenario: "Before your 6-month thesis, you pretend it already failed. The story: you left it to the last month and data collection ran over. So you start collecting data in week 1.", tradeoff: "Front-loading the dull data work steals early weeks you'd rather spend reading; you pay in early grind to avoid a March panic." },
+      { persona: "relationship",  scenario: "Before moving in with your partner, you imagine the breakup 12 months on. The likely cause: unspoken resentment over who pays for what. So you have the awkward budget talk before the lease.", tradeoff: "Raising money before romance risks a cold conversation now; you trade one uncomfortable evening for the fight you'd have in month six." },
+      { persona: "high-achiever", scenario: "Before your confident product launch, you run the pre-mortem your optimism resists. The failure story, set 6 months out: so sure of the vision, you never tested pricing, and churn killed it. You run a 2-week pricing test first.", tradeoff: "Testing delays your triumphant launch by weeks; you sacrifice the dramatic reveal to catch the failure your confidence was hiding." },
+      { persona: "privileged",    scenario: "Before endowing a ₹10-crore institute, you imagine it hollow in a decade. The cause: you funded the building but not the people to run it. So you endow salaries, not just marble.", tradeoff: "Spending on unglamorous operating costs means a plainer building; you trade a grand monument for one that actually works." }
+    ],
+    featured: 2,
+    personalPrompt: "Imagine the thing you're about to commit to — a project, a move, a relationship — has already failed a year from now; what's the most likely story of why, and what can you fix today?",
     pitfalls: ["A plan that feels too solid is exactly the one that hides its risks — the smoother it looks, the more you need this.", "Pre-mortems can list every conceivable disaster; prioritise the failures that are both likely and fixable now."]
   },
   "regret-minimization": {
     visualType: "timeline",
-    universalExample: "Torn about leaving a comfortable job to build something of your own, you project to age eighty and ask which you'd regret more: trying and failing, or never trying. The old-self view makes the daily fears shrink and the not-trying regret loom — and the choice clarifies.",
+    examples: [
+      { persona: "everyday",      scenario: "At 34 you're scared to leave a stable ₹40,000 job for a shot at your own repair shop. Projecting to 80, the regret that looms isn't a failed shop — it's never trying. You give it a bounded 12-month attempt.", tradeoff: "The attempt risks a year's savings and the safe salary; you trade security now for a regret you won't carry at 80." },
+      { persona: "student",       scenario: "You're too shy to ask the professor for a research spot, afraid of the 'no.' At 80, the unasked question is the regret, not the rejection. You email her Friday.", tradeoff: "Asking risks a bruising rejection this week; you pay a little pride to avoid a lifelong 'what if.'" },
+      { persona: "relationship",  scenario: "You've loved a friend for 2 years but fear that saying so ends the friendship. Projecting to 80, unspoken love is the heavier regret. You tell them, prepared for either answer.", tradeoff: "Speaking up may cost you the friendship as it is; you risk a comfortable present for a truthful future." },
+      { persona: "high-achiever", scenario: "You've built a career others envy but always wanted to write a novel, endlessly 'not the right time.' At 80, the unwritten book is the regret success can't offset. You block Sunday mornings to write.", tradeoff: "The writing time comes out of career momentum you're proud of; you trade some professional edge for the thing you'd regret skipping." },
+      { persona: "privileged",    scenario: "You could fund anything but keep deferring reconciliation with an estranged brother, telling yourself there's time. At 80, the unmended rift is the one thing money can't buy back. You call him this month.", tradeoff: "Reaching out risks his rejection and reopening old wounds; you trade your pride for a chance the years won't return." }
+    ],
+    featured: 0,
     personalPrompt: "At eighty, looking back, which version of this choice would you regret NOT having taken?",
     pitfalls: ["Regret minimisation biases toward bold action, which isn't always wise — pair it with a real check on downside and reversibility.", "Your imagined eighty-year-old is a guess; don't let a romantic future-self talk you past genuine present-day constraints."]
   },
   "ooda-loop": {
     visualType: "cycle",
-    universalExample: "A competitor ships a feature that reframes your market overnight. Instead of clinging to the roadmap, you run the loop fast: observe the shift, reorient your assumptions, decide on a focused response, act — then loop again as their next move lands. Whoever orients faster stays ahead.",
+    examples: [
+      { persona: "everyday",      scenario: "Your food cart's regular corner gets blocked by 3 weeks of roadwork. Instead of waiting and losing income, you loop fast: see the barricades, reorient, move to the metro exit, act — and re-check daily as the work shifts.", tradeoff: "Moving daily costs you the loyal regulars who knew your old spot; you trade a familiar corner for the footfall that pays this week." },
+      { persona: "student",       scenario: "A week before finals the professor switches the exam from essays to a viva. You don't cling to essay notes: you observe, reorient to spoken answers, practice aloud with a friend, and adjust nightly.", tradeoff: "Switching prep style late throws away hours of essay-shaped notes; you sacrifice sunk study for the format actually being tested." },
+      { persona: "relationship",  scenario: "Your teenage son suddenly goes quiet and withdrawn. Instead of running last year's nagging playbook, you observe the change, reorient, try listening over lecturing, and adjust as he responds across the week.", tradeoff: "Dropping the rules you trusted risks feeling like lost authority; you trade control for the connection that stale tactics were losing." },
+      { persona: "high-achiever", scenario: "A competitor's launch reframes your market overnight and your detailed 5-year roadmap is now a liability. You loop faster than they can: observe, reorient assumptions, decide a focused counter, act, loop again.", tradeoff: "Reorienting means abandoning a roadmap you sold the board on; you pay in credibility for staying alive as reality moves." },
+      { persona: "privileged",    scenario: "Your family fund's blue-chip thesis breaks when a regulation shifts in 2 weeks. Wealth tempts you to wait it out; instead you loop fast: read the shift, reorient the portfolio, act, re-check as rules settle.", tradeoff: "Moving early risks acting on an incomplete picture and real losses; you trade the comfort of patience for not being last to adjust." }
+    ],
+    featured: 3,
     personalPrompt: "In the fast-changing situation you're in, is your plan updating as fast as reality, or are you acting on last week's orientation?",
     pitfalls: ["Orientation is the crux and the easiest step to skip — acting on stale assumptions just loops you faster into the wrong place.", "Speed without direction is thrashing; loop fast, but make sure each Orient step actually incorporates new information."],
     steps: [
@@ -790,55 +825,118 @@ const AUTHORED = {
   },
   "10-10-10": {
     visualType: "timeline",
-    universalExample: "Furious at a curt email, you're about to fire back. You run 10/10/10: in ten minutes you'd feel briefly vindicated; in ten months the relationship would be colder; in ten years it wouldn't matter but the pattern would. The three horizons cool the heat and you reply calmly.",
+    examples: [
+      { persona: "everyday",      scenario: "A rude customer just insulted your cooking and you're about to snap back. 10/10/10: in 10 minutes you'd feel vindicated; in 10 months a viral bad review haunts you; in 10 years the stall's name still carries it. You stay calm and refund.", tradeoff: "Swallowing the retort costs you the satisfaction of being right tonight; you pay in pride to protect a reputation that outlasts one rude man." },
+      { persona: "student",       scenario: "Your group partner ghosted the project and you want to blast them in the class chat. 10/10/10: 10 minutes of triumph, 10 months of a toxic reputation, 10 years it fades but the pattern sticks. You raise it privately with the tutor.", tradeoff: "The private route denies you a public win; you trade a moment of justice for not becoming the person who torches group chats." },
+      { persona: "relationship",  scenario: "Mid-argument, your partner leaves you a perfect cruel line to fire back. 10/10/10: 10 minutes even, 10 months a scar, 10 years a fault line. You breathe and don't say it.", tradeoff: "Holding the cruel line back feels like losing the fight; you trade winning the argument for keeping the marriage." },
+      { persona: "high-achiever", scenario: "A junior publicly questioned your call and your ego wants to crush them in the meeting. 10/10/10: 10 minutes of dominance, 10 months of a team that stops speaking up, 10 years a reputation as a bully. You thank them for the challenge.", tradeoff: "Not asserting dominance now costs a flash of status; you sacrifice ego for a team that keeps telling you the truth." },
+      { persona: "privileged",    scenario: "A rival at the gala slighted you and one word to the right person could bury them. 10/10/10: 10 minutes sweet, 10 months a feud, 10 years a name known for vendettas. You let it pass.", tradeoff: "Declining to retaliate leaves the slight unanswered; you trade the pleasure of revenge for a reputation revenge would stain." }
+    ],
+    featured: 2,
     personalPrompt: "For the emotionally charged choice in front of you, how will you feel about it in ten minutes, ten months, and ten years?",
     pitfalls: ["The tool defuses heat-of-the-moment reactions but can also over-rationalise a decision that genuinely needs feeling — use judgement.", "Guessing the ten-year horizon is speculative; weight the nearer horizons you can actually foresee."]
   },
   "circle-of-competence": {
     visualType: "concentric",
-    universalExample: "Offered a chance to invest in a biotech startup, you map your circle honestly: you understand software economics deeply, biology not at all. Inside the circle you'd trust your own judgement; here you're outside it, so you either pass or bring in someone who genuinely knows the field.",
+    examples: [
+      { persona: "everyday",      scenario: "A cousin pitches you a ₹3-lakh crypto 'sure thing.' You map your circle honestly: you know your electrician's trade cold, crypto not at all. You're outside the circle, so you pass rather than pretend.", tradeoff: "Passing means watching from the sidelines if it moons; you trade a possible windfall for not betting rent money on something you can't judge." },
+      { persona: "student",       scenario: "Everyone's picking the AI elective for the hype. You know you understand systems design, not statistics, and the course is 70% stats. You pick the systems track over the fashionable one.", tradeoff: "You give up the buzzword on your CV; you trade a trendy label for a grade you can actually earn." },
+      { persona: "relationship",  scenario: "Your friend, mid-divorce, wants your legal advice. You know friendship, not family law. Instead of confidently guessing and risking her case, you help her find a real lawyer.", tradeoff: "Saying 'I don't know' feels less helpful than a confident opinion; you trade looking wise for not steering her wrong on something that shapes her life." },
+      { persona: "high-achiever", scenario: "A brilliant surgeon, you're sure that intelligence transfers to stocks and nearly bet ₹50 lakh on your own analysis. The circle reminds you competence is domain-specific. You hire an advisor instead.", tradeoff: "Deferring to an advisor dents the self-image that your mind wins everywhere; you pay in ego to protect a fortune your gut can't manage." },
+      { persona: "privileged",    scenario: "You could fund a biotech venture on instinct, and money makes everyone agree with you. You map the circle: you understand real estate, not molecular biology. You bring in a scientist partner before writing the cheque.", tradeoff: "Sharing control dilutes your say and your returns; you trade autonomy for a bet judged by someone who actually knows the field." }
+    ],
+    featured: 0,
     personalPrompt: "For the call you're about to make, are you inside the circle of what you truly understand — and if not, whose competence will you borrow?",
     pitfalls: ["The dangerous zone is the edge, where you know just enough to feel confident and not enough to be right.", "Circles can grow with real study — 'outside my circle' is a reason to learn or get help, not always to quit."]
   },
   "sunk-cost-fallacy": {
     visualType: "anchor",
-    universalExample: "You've spent three months on a feature nobody's using and catch yourself thinking 'but I've already put so much in.' That sentence is the alarm. The three months are gone either way; the only real question is whether the next month is worth it. It isn't, so you cut it.",
+    examples: [
+      { persona: "everyday",      scenario: "You've paid ₹15,000 into a 6-month course you now hate and tell yourself you can't waste it. The money's gone either way; the only question is whether the next 3 months are worth your evenings. They aren't, so you quit.", tradeoff: "Quitting makes the ₹15,000 feel wasted and family may call it flaky; you trade the sting of admitting a loss for 3 months of your life back." },
+      { persona: "student",       scenario: "You've spent 2 years on a degree you've realized you don't want. 'I can't switch now' is the sunk cost talking. The 2 years are spent regardless; the real question is the next 30 years. You switch.", tradeoff: "Switching costs you a graduation date and a year's fees; you pay a visible price now to not spend a career in the wrong field." },
+      { persona: "relationship",  scenario: "You've dated someone 4 years and stay partly because 'we've invested so much.' The years are gone; staying another decade out of accounting isn't love. You have the honest talk.", tradeoff: "Leaving means walking away from a shared history and mutual friends; you trade the comfort of the familiar for a chance at the right person." },
+      { persona: "high-achiever", scenario: "You've poured 8 months and your reputation into a product no one's buying, and pride says push harder. The 8 months are sunk; competence has curdled into stubbornness. You kill it and redeploy the team.", tradeoff: "Killing your own high-profile bet publicly admits it failed; you sacrifice ego for the runway the next idea needs." },
+      { persona: "privileged",    scenario: "Your family has propped up a loss-making heritage hotel for a decade out of sentiment, sinking millions. The past money is gone; each year adds fresh loss. You finally sell.", tradeoff: "Selling severs a family legacy and draws relatives' anger; you trade heritage sentiment for stopping a bleed the money masked." }
+    ],
+    featured: 2,
     personalPrompt: "Where are you continuing something mainly because of what you've already spent, when the future costs no longer justify it?",
     pitfalls: ["The past investment feels like a reason to continue precisely because walking away makes it feel wasted — but it's already gone.", "The opposite error exists too: quitting the moment things get hard and calling it 'avoiding sunk cost'. Judge future value honestly, both ways."]
   },
   "confirmation-bias": {
     visualType: "funnel",
-    universalExample: "Convinced your new feature is a hit, you scan the analytics and feel satisfied — the numbers you looked at agree with you. That satisfaction is the cue. You deliberately hunt one disconfirming fact: the retention cohort, which you'd skipped. It tells a harder, truer story.",
+    examples: [
+      { persona: "everyday",      scenario: "Sure your ₹50,000 second-hand car is a great deal, you only read the glowing reviews and feel pleased. That pleasure is the cue. You deliberately search '[model] common problems' and find a gearbox fault worth ₹40,000.", tradeoff: "Hunting the bad news risks killing a purchase you were excited about; you trade the thrill of the buy for not inheriting a ₹40,000 repair." },
+      { persona: "student",       scenario: "Convinced your essay argument is airtight, you only cite sources that agree. The comfort is the warning. You go find the 3 strongest papers against you, and engaging them lifts your grade a whole band.", tradeoff: "Seeking the counter-argument means rewriting a section you loved; you pay in ego and effort for an argument that actually holds." },
+      { persona: "relationship",  scenario: "Certain your partner is distant because they've lost interest, you notice only the cold moments. You go looking for the disconfirming fact and learn they're quietly frightened about a parent's illness.", tradeoff: "Testing your story risks learning you misjudged them; you trade the certainty of your grievance for the truth that changes everything." },
+      { persona: "high-achiever", scenario: "Your data confirms your pet strategy and you feel smart scanning the dashboard you chose. That satisfaction is the tell. You force yourself to the one cohort you skipped — the 8% who churned in week 2 — and it tells a harder, truer story.", tradeoff: "Chasing the disconfirming metric may dethrone the strategy you're known for; you sacrifice a flattering narrative for a real one." },
+      { persona: "privileged",    scenario: "Advisors who agree with you are easy to hear, and money buys endless agreement. Suspicious of the echo, you pay a contrarian for 3 months specifically to attack your thesis, and they find the flaw the yes-men missed.", tradeoff: "Inviting attack on your judgement is uncomfortable and slows the decision; you trade the ease of applause for a decision that survives scrutiny." }
+    ],
+    featured: 2,
     personalPrompt: "On the belief you're most comfortable with, what's one disconfirming fact you could actively go looking for before you decide?",
     pitfalls: ["The feeling of being confirmed is pleasant, which is exactly why the bias is hard to notice from inside.", "Hunting for disconfirmation half-heartedly doesn't count; you have to genuinely try to prove yourself wrong."]
   },
   "loss-aversion": {
     visualType: "tension",
-    universalExample: "You cling to a failing project because shutting it down feels like a loss, while the equivalent gain — time freed for something better — barely registers. Knowing losses hurt about twice as much as equal gains feel good, you reframe: keeping it is the real loss. That flips the decision.",
+    examples: [
+      { persona: "everyday",      scenario: "You cling to a ₹12,000 stall spot that barely breaks even because leaving feels like losing your corner. Reframed: keeping it forfeits the better ₹20,000 pitch you keep eyeing. The loss you fear is the smaller one.", tradeoff: "Moving risks the new pitch underperforming and losing a known quantity; you trade a familiar break-even for a bet on more." },
+      { persona: "student",       scenario: "You keep a ₹5,000 scholarship-tied elective you hate because dropping it feels like losing the money. Reframed, staying forfeits the elective that would actually get you hired. The bigger loss is invisible.", tradeoff: "Switching may cost the scholarship and a term's progress; you pay a countable loss to stop an uncountable one." },
+      { persona: "relationship",  scenario: "You stay in a lukewarm 3-year relationship because ending it feels like a loss, while the equal gain — freedom to find better — barely registers. Naming that losses feel double, you see staying is the real loss.", tradeoff: "Leaving means grieving something not terrible and facing being alone; you trade the safety of 'fine' for the possibility of good." },
+      { persona: "high-achiever", scenario: "You refuse to cut a feature the team built because scrapping it feels like losing 3 months of work, though shipping it drags the whole product down. Loss aversion, not logic, is steering. You cut it.", tradeoff: "Cutting forfeits visible effort and a teammate's pride; you sacrifice a sunk feeling for a product that's actually better." },
+      { persona: "privileged",    scenario: "You hold a sentimental but sinking ₹5-crore stake because selling crystallizes a 'loss,' while the equal gain of redeploying it goes unfelt. Reframed, holding is the loss. You sell.", tradeoff: "Selling locks in a paper loss and admits a bad call; you trade a bruised ego for capital that can finally work." }
+    ],
+    featured: 2,
     personalPrompt: "Where is the fear of a loss looming twice as large as an equal gain — and what does the choice look like if you reframe it as gains forgone?",
     pitfalls: ["Reframing gains and losses can be gamed by whoever sets the frame — including you talking yourself into a bad call.", "Loss aversion sometimes protects you (real losses hurt); the goal is proportion, not ignoring downside entirely."]
   },
   "planning-fallacy": {
     visualType: "gantt",
-    universalExample: "You estimate the migration will take a week — it always feels like it'll be different this time. Your last three migrations took three weeks each. You use that track record instead of your optimism, and ask a colleague who guesses four weeks; you meet in the middle at three, and for once you're on time.",
+    examples: [
+      { persona: "everyday",      scenario: "You budget 1 weekend to repaint the flat because 'it's just one room.' Your last 3 paint jobs each took 3 weekends. You use the record, block 3 weekends, and for once finish on time.", tradeoff: "Booking 3 weekends means declining other plans you'd have kept; you trade optimism's freedom for a deadline you actually hit." },
+      { persona: "student",       scenario: "You plan to write your 5,000-word report in 2 days before the deadline, as always. Your history says it takes a week. You start a week out and skip the all-nighter.", tradeoff: "Starting early eats days you'd rather spend free; you pay in leisure now to avoid the 3am panic later." },
+      { persona: "relationship",  scenario: "You promise your spouse the kitchen renovation will take 'a month, tops.' Every past project of yours ran double. You quote 2 months instead, and the marriage survives the delay you didn't over-promise.", tradeoff: "The honest longer estimate disappoints them today; you trade a happy promise now for not breaking one in month two." },
+      { persona: "high-achiever", scenario: "Confident and fast, you tell the board the migration ships in 4 weeks. Your own last three shipped in 10+. Your competence fuels the optimism that keeps burning you. You quote 10 and add a buffer.", tradeoff: "The realistic number looks less impressive to the board; you sacrifice a bold promise for a delivery date you'll actually meet." },
+      { persona: "privileged",    scenario: "You fund a '6-month' building of your foundation's new wing, trusting instinct over the record of such projects running years. You plan for 18 months and staff accordingly.", tradeoff: "Budgeting 18 months ties up capital and patience longer; you trade a fast fantasy for a plan reality won't wreck." }
+    ],
+    featured: 3,
     personalPrompt: "For your current estimate, what does your own track record on similar work say, and what would an outside observer guess?",
     pitfalls: ["'This time is different' is the fallacy's signature line — your reasons for optimism are usually the same ones that failed last time.", "Outside observers over-correct pessimistically; the honest number is often between your guess and theirs, not either extreme."]
   },
   "anchoring": {
     visualType: "spectrum",
-    universalExample: "A vendor opens at $50k and suddenly $35k feels like a bargain — but the first number is dragging your whole sense of the range. You catch it, and recall your own pre-negotiation estimate of $20k, made before you heard their figure. You negotiate from your anchor, not theirs.",
+    examples: [
+      { persona: "everyday",      scenario: "A used-bike seller opens at ₹80,000 and ₹65,000 suddenly feels cheap. You catch the anchor and recall your own pre-quote budget of ₹50,000. You negotiate from your number, not his.", tradeoff: "Holding to ₹50,000 risks losing the bike to a faster buyer; you trade the sure purchase for not overpaying ₹15,000 on a dragged anchor." },
+      { persona: "student",       scenario: "A 'recommended' ₹8,000 tutoring package makes the ₹6,000 one feel like a steal. You realize you'd budgeted ₹3,000 before seeing either. You buy only the sessions you planned.", tradeoff: "The smaller package means fewer sessions and a nagging 'what if'; you pay in reassurance for not being priced by their anchor." },
+      { persona: "relationship",  scenario: "In a fight, your partner's extreme opening demand makes their 'compromise' feel reasonable, though it's still far past fair. You anchor to what you'd have called fair before the row, and negotiate from there.", tradeoff: "Refusing their frame prolongs the argument tonight; you trade a quick truce for an agreement that isn't rigged by their first number." },
+      { persona: "high-achiever", scenario: "A vendor opens at $50k and your trained mind starts optimizing around it, even naming $35k a 'win.' You recall your own pre-call estimate of $20k and negotiate from your anchor, not theirs.", tradeoff: "Anchoring low risks the vendor walking; you trade a smooth deal for not overpaying $15k because they spoke first." },
+      { persona: "privileged",    scenario: "An art dealer opens at ₹2 crore and ₹1.5 feels like a bargain your wealth can absorb. You recall the ₹80 lakh you'd have valued it at cold, and bid your number.", tradeoff: "Bidding low may lose the piece to another collector; you trade the trophy for not letting a dealer's anchor set your fortune's price." }
+    ],
+    featured: 3,
     personalPrompt: "What first number are you unconsciously negotiating around, and what would you have estimated before you ever heard it?",
     pitfalls: ["Anchors work even when you know about them — awareness helps a little, but forming your own estimate first helps far more.", "You can anchor yourself with your own first guess; hold early estimates loosely as new information arrives."]
   },
   "hindsight-bias": {
     visualType: "timeline",
-    universalExample: "A launch flops and everyone now says they 'knew it all along.' You check your own notes from before — you were optimistic. The outcome quietly rewrote the memory. Because you'd journaled the reasoning beforehand, you learn the real lesson instead of a flattering fake one.",
+    examples: [
+      { persona: "everyday",      scenario: "Your ₹1-lakh investment tanks and your brother says he 'knew it was dodgy.' So did you, supposedly — but your note from 3 months ago says you were thrilled. The record stops you learning a fake lesson.", tradeoff: "Keeping a written prediction means facing proof you were wrong; you trade a flattering memory for a real lesson." },
+      { persona: "student",       scenario: "You fail an exam and within an hour feel you 'always knew' that topic would come up. Your pre-exam study plan, written 2 weeks earlier, shows you skipped it as unlikely. The note teaches the true gap, not a comforting story.", tradeoff: "Confronting your own written misjudgement stings; you pay in ego to fix the actual weakness." },
+      { persona: "relationship",  scenario: "A friendship blows up and everyone says the signs were 'obvious.' Your messages from last month show you were genuinely surprised. The record keeps you from mislabeling a good friend as an obvious villain.", tradeoff: "Admitting you didn't see it coming feels naive; you trade the comfort of 'I knew' for fairness to them and yourself." },
+      { persona: "high-achiever", scenario: "Your bet pays off and you rewrite the memory as brilliant foresight, not the coin-flip it was. Your decision note shows you were only 55% sure. It keeps you from over-trusting a gut that got lucky.", tradeoff: "Crediting luck over genius punctures your winning self-image; you sacrifice a flattering story to not bet the next one recklessly." },
+      { persona: "privileged",    scenario: "Your funded venture succeeds and the myth grows that your judgement is golden. Your written 60% confidence says otherwise. The record keeps the wealth-built legend from replacing real calibration.", tradeoff: "Deflating your own legend costs the aura that opens doors; you trade mystique for judgement you can actually trust." }
+    ],
+    featured: 3,
     personalPrompt: "Before your next outcome lands, where will you write down your actual reasoning so hindsight can't rewrite it?",
     pitfalls: ["The edited memory feels completely genuine — you truly believe you knew, which is why only a written record can correct it.", "Hindsight bias also makes others' failures look obvious and blameworthy; extend the same doubt to their foresight as to your own."]
   },
   "implementation-intentions": {
     visualType: "flow",
-    universalExample: "You keep meaning to write but never start. You set an if-then: 'If it's 9am and I've finished coffee, then I open the draft and write one sentence.' The cue does the starting, not your willpower. Within a week the habit runs on the trigger, not on daily negotiation.",
+    examples: [
+      { persona: "everyday",      scenario: "You keep meaning to walk but never do. You set: 'If I finish dinner, then I lace up and walk to the end of the street.' Within a week the after-dinner cue starts the walk, not your willpower.", tradeoff: "Committing the cue means giving up the couch you'd rather sink into; you trade evening comfort for the habit that finally sticks." },
+      { persona: "student",       scenario: "You never start revising. You set: 'If the 2pm lecture ends, then I go straight to the library for one page of notes.' The cue does the starting your motivation never did.", tradeoff: "The fixed rule costs you the spontaneous free afternoon; you pay in flexibility for a habit that runs without daily debate." },
+      { persona: "relationship",  scenario: "You keep meaning to call your aging mother but forget for weeks. You set: 'If it's Sunday 6pm, then I call Mum before dinner.' The cue turns good intentions into a call she can count on.", tradeoff: "A scheduled call risks feeling less spontaneous; you trade the romance of 'whenever' for a call that actually happens weekly." },
+      { persona: "high-achiever", scenario: "You keep 'planning to think strategically' and never do amid the busywork you're good at. You set: 'If it's 8am Monday, then I close the laptop and write next quarter's one priority.' The cue beats your own productivity trap.", tradeoff: "The protected block forfeits an hour of reactive work that feels productive; you sacrifice visible busyness for the thinking that matters." },
+      { persona: "privileged",    scenario: "You mean to mentor your successor but your packed calendar always wins. You set: 'If it's the first Friday, then I spend the morning walking a grantee visit with my heir.' The cue makes succession real, not aspirational.", tradeoff: "Blocking that morning costs a slot others compete for; you trade present demands for an heir who's actually ready." }
+    ],
+    featured: 2,
     personalPrompt: "For the intention you keep failing to act on, what's the specific if-this-then-that that would hand the starting over to a cue?",
     pitfalls: ["Vague triggers ('when I have time') don't fire — the cue has to be concrete and unavoidable, tied to something that already happens.", "One built-in escape hatch ('unless I'm tired') quietly cancels the whole plan; keep the then-action tiny and non-negotiable."],
     steps: [
@@ -849,31 +947,66 @@ const AUTHORED = {
   },
   "deep-work": {
     visualType: "gantt",
-    universalExample: "Your day dissolves into Slack, meetings, and half-finished tickets, and the hard architecture problem never gets touched. You block two protected hours each morning — phone in another room, notifications off — for exactly that problem. Rare, undistracted focus produces more in two hours than the scattered day did in eight.",
-    personalPrompt: "What single cognitively demanding task deserves a protected, distraction-free block this week, and when will you schedule it?",
+    examples: [
+      { persona: "everyday",      scenario: "Your evenings dissolve into TV and phone, and the small-business plan you dream of never gets written. You block 90 minutes each Sunday, phone in another room, for exactly that. Two focused hours beat a scattered month.", tradeoff: "The block costs you your one guaranteed slot of switch-off time; you trade some rest for the project that never happened otherwise." },
+      { persona: "student",       scenario: "Your study 'hours' are really Instagram with a book open, so nothing sticks. You block two phone-free hours each morning for the hardest subject. Rare real focus outlearns a distracted all-day.", tradeoff: "Going phone-free means missing the group chat and some FOMO; you pay in connection for the grades scattered study can't deliver." },
+      { persona: "relationship",  scenario: "You and your partner are always 'together' but half-present on screens, drifting. You block a weekly 2-hour, device-free dinner. Undistracted attention rebuilds what background time couldn't.", tradeoff: "Protecting that block means saying no to other invitations; you trade some social breadth for depth with the person who matters most." },
+      { persona: "high-achiever", scenario: "You clear 40 emails a day and feel productive while the hard architecture problem, the actual lever, slips for months. You block 2 protected morning hours for it, notifications off.", tradeoff: "Ignoring the inbox for two hours means slower replies and a mild reputation ding; you sacrifice responsiveness for the work that compounds." },
+      { persona: "privileged",    scenario: "You could buy any tool but your scarce asset is uninterrupted thought, drowned by 30 daily 'urgent' asks. You block one protected half-day a week for the strategy only you can set.", tradeoff: "The blocked half-day disappoints people used to instant access; you trade present availability for the thinking your role needs." }
+    ],
+    featured: 3,
+    personalPrompt: "What one demanding thing — a work problem, a hard conversation to prepare, a creative project — deserves a protected, distraction-free block this week, and when will you schedule it?",
     pitfalls: ["Deep work is valuable because it's rare — the whole world is engineered to interrupt it, so the block has to be defended deliberately.", "Not all work is deep work; trying to make everything a focus block ignores the shallow tasks that also genuinely need doing."]
   },
   "environment-design": {
     visualType: "sliders",
-    universalExample: "Willpower keeps losing to your phone. Instead of resolving harder, you change the room: phone charges in the kitchen, the writing app opens on launch, the fridge snacks move to a high shelf. Adding friction to distractions and removing it from the goal, the good choice becomes the easy one.",
+    examples: [
+      { persona: "everyday",      scenario: "Willpower keeps losing to late-night snacking. Instead of resolving harder, you move the biscuits to a high shelf and put fruit at eye level. By 11pm the easy choice is the good one.", tradeoff: "The rearrangement costs you the instant comfort of a midnight biscuit; you trade a small pleasure for a habit that runs itself." },
+      { persona: "student",       scenario: "You mean to study but the phone wins every night. Starting Monday you charge it in the kitchen and leave the textbook open on your desk. The setup starts the study session your discipline couldn't.", tradeoff: "Banishing the phone means missing instant messages; you pay in connectivity for a room that pulls you toward the book." },
+      { persona: "relationship",  scenario: "You keep scrolling in bed instead of talking to your partner. You put a charging dock in the hallway so phones don't enter the bedroom. The friction hands the evening back to each other.", tradeoff: "No phone in the bedroom means no late-night browsing you enjoy; you trade a private habit for shared attention." },
+      { persona: "high-achiever", scenario: "You resolve daily to stop context-switching and fail by 10am. Instead of more willpower, you close Slack by default and use a single-task screen. The environment does what discipline couldn't.", tradeoff: "Closing Slack means colleagues wait longer for you; you sacrifice some responsiveness for the deep output the switching killed." },
+      { persona: "privileged",    scenario: "Endless access to everything scatters you. You design a phone-free study, a locked calendar, an assistant who batches requests into two windows a day. Your surroundings, not your restraint, protect your focus.", tradeoff: "The barriers make you less reachable and some people bristle; you trade open access for the attention your work demands." }
+    ],
+    featured: 0,
     personalPrompt: "For the habit you keep losing to, what one piece of friction could you add to the distraction or remove from the goal?",
     pitfalls: ["Designing the environment once isn't enough — distractions creep back in, so the setup needs occasional maintenance.", "You can over-engineer your surroundings into a fragile system; a couple of high-leverage friction changes beat twenty fiddly ones."]
   },
   "ulysses-pact": {
     visualType: "constraint",
-    universalExample: "You know you'll cave and check email during focus time, so while calm you bind your future self: a website blocker with a password a friend holds, running until noon. The constraint is set while you're rational, matched to the exact temptation — with a sane override for a real emergency.",
+    examples: [
+      { persona: "everyday",      scenario: "You know payday means you'll splurge and save nothing. While calm, you set an auto-transfer of ₹5,000 to a locked savings the morning salary lands. Your future self can't touch it easily.", tradeoff: "The auto-lock means less cash for the month's temptations; you trade spending freedom for savings your weaker self can't raid." },
+      { persona: "student",       scenario: "You know you'll doom-scroll during exam week. While clear-headed you install a blocker until 6pm with a password your roommate holds. The pact binds the self that would cave.", tradeoff: "The lock stops legitimate quick breaks too; you pay in flexibility for focus your in-the-moment self would surrender." },
+      { persona: "relationship",  scenario: "You know you cave and text your ex when lonely at midnight. While sober-minded you delete the thread and hand a friend the block-list password until you're steadier.", tradeoff: "Cutting the line off risks feeling isolated some nights; you trade an easy comfort for not reopening a wound weekly." },
+      { persona: "high-achiever", scenario: "You know you'll rationalize skipping the gym once work heats up. You pre-pay a trainer ₹2,000 a session with a steep cancellation fee. The cost binds the future self who'd bargain.", tradeoff: "The commitment means paying even on genuinely brutal days; you sacrifice some slack for a habit your excuses can't erode." },
+      { persona: "privileged",    scenario: "You know you'll meddle after handing the company to your successor. You sign a binding agreement removing your operational vote for 2 years, with a lawyer enforcing it.", tradeoff: "Surrendering the vote means watching choices you'd make differently; you trade control for a successor who can actually lead." }
+    ],
+    featured: 2,
     personalPrompt: "For the moment you know you'll cave, what binding could you set now, while you're clear-headed, that your weaker future self can't easily undo?",
     pitfalls: ["A generic constraint misses the specific temptation — match the lock to the exact thing you'll want to do.", "Absolute rigidity backfires when life genuinely changes; build in a deliberate, costly-but-possible emergency exit."]
   },
   "daily-highlight": {
     visualType: "spotlight",
-    universalExample: "You end busy days having done everything except the thing that mattered. Each morning you name one highlight — 'ship the export fix' — and refuse to touch anything else until it's done. The single spotlight means at least one real thing gets finished, every day, instead of fifty half-things.",
+    examples: [
+      { persona: "everyday",      scenario: "Your days end busy but empty, the one thing that mattered untouched. Each morning you name a single highlight — 'fix the leaking tap' — and refuse everything else until it's done. One real thing finishes daily.", tradeoff: "Guarding the highlight means fifty small tasks slip; you trade a tidy to-do list for one thing that actually matters getting done." },
+      { persona: "student",       scenario: "You end study days having 'revised everything' and remembered nothing. You pick one highlight — 'master integration by parts' — and protect it first. Depth on one beats a shallow sweep.", tradeoff: "Focusing on one topic leaves others for tomorrow; you pay in breadth for actually learning the one that counts." },
+      { persona: "relationship",  scenario: "Your evenings with family blur into logistics and screens. Your daily highlight becomes 'read with my daughter for 20 minutes,' protected before chores. One real moment of connection lands each day.", tradeoff: "The protected 20 minutes means the dishes wait; you trade a spotless kitchen for a memory your daughter keeps." },
+      { persona: "high-achiever", scenario: "You juggle 50 tasks and finish 50 half-things. Naming one highlight — 'ship the pricing fix' — forces one complete, meaningful win a day instead of scattered motion.", tradeoff: "The single focus means visible multitasking drops; you sacrifice the appearance of busy for one thing truly done." },
+      { persona: "privileged",    scenario: "With staff handling everything, your days lack any personal accomplishment. You set a daily highlight — 'write 500 words of the memoir' — that only you can do. Meaning, not activity, anchors the day.", tradeoff: "The writing time forgoes a meeting you could take; you trade one more obligation for something that's actually yours." }
+    ],
+    featured: 2,
     personalPrompt: "If today allowed only one thing to be truly finished, what would your single highlight be?",
     pitfalls: ["Picking a highlight that's too big can't be finished in a day, so nothing gets the closure that makes the method work — size it right.", "Real emergencies will sometimes trump the highlight; the discipline is protecting it by default, not pretending nothing else exists."]
   },
   "wrap": {
     visualType: "flow",
-    universalExample: "Facing a narrow 'should I take this job or not?', you run WRAP: Widen to 'what are all my options?', Reality-test by talking to people who left that company, Attain distance with the ten-year view, and Prepare to be wrong by setting a tripwire to reassess in six months. The narrow yes/no becomes a real decision.",
+    examples: [
+      { persona: "everyday",      scenario: "Stuck on 'should I take the night-shift job or not?', you run WRAP: Widen to other income options, Reality-test by asking a current night-worker, Attain distance with the 10-year view, Prepare to be wrong with a 3-month check-in. The yes/no becomes a real decision.", tradeoff: "Widening the frame delays the quick answer your boss wants; you trade speed for a decision you won't regret in a year." },
+      { persona: "student",       scenario: "Torn over 'this university or not?', you WRAP it: widen to a gap year and other courses, reality-test by talking to graduates who left, distance yourself with the long view, prepare a transfer tripwire. The narrow choice opens up.", tradeoff: "Exploring options risks decision fatigue and a missed deadline; you pay in effort for not locking into a wrong 4-year path." },
+      { persona: "relationship",  scenario: "Facing 'should we break up or not?', you WRAP instead of spiraling: widen to counseling or a break, reality-test with an honest friend, gain distance, prepare to be wrong with a real timeline. The binary softens into clarity.", tradeoff: "Widening past yes/no means sitting in uncertainty longer; you trade the relief of a snap decision for one you can stand behind." },
+      { persona: "high-achiever", scenario: "Sure the answer is 'acquire or not,' your confidence skips the process. WRAP forces the reality-test you'd dodge: you spend a week talking to 3 founders who sold to you, and one call reshapes the whole deal.", tradeoff: "Running the full process slows a deal you wanted to close fast; you sacrifice momentum for not betting big on a narrow frame." },
+      { persona: "privileged",    scenario: "Weighing 'fund this foundation or not,' your wealth makes yes easy and lazy. WRAP widens it: 3 other structures, a reality-test with peers who tried, a 6-month distance rule, a review tripwire. The reflexive yes becomes considered.", tradeoff: "The deliberate process delays a gift you could make today; you trade fast generosity for philanthropy that actually works." }
+    ],
+    featured: 0,
     personalPrompt: "For your current big decision, which of the four — widening, reality-testing, distance, or preparing to be wrong — have you skipped entirely?",
     pitfalls: ["A whether-or-not framing ('should I do X?') is the warning sign of a too-narrow frame — widen before you evaluate.", "It's tempting to reality-test by asking people who'll agree with you; seek the disconfirming evidence instead."],
     steps: [
@@ -885,19 +1018,40 @@ const AUTHORED = {
   },
   "decision-journal": {
     visualType: "journal",
-    universalExample: "Before a big call, you write it down: the situation, the options you rejected, the outcome you expect and how confident you are (70%), and your state of mind (rushed, a bit anxious). Months later you review it and learn whether it was a good decision or just good luck — something memory alone could never tell you.",
+    examples: [
+      { persona: "everyday",      scenario: "Before a ₹2-lakh car purchase you write it down: options rejected, expected upkeep, 70% confident, state of mind (rushed, excited). Months later the journal tells you if it was a good call or just luck.", tradeoff: "Writing it down takes 20 minutes and risks proving you wrong later; you trade a little effort and comfort for a lesson memory can't give." },
+      { persona: "student",       scenario: "Before choosing your dissertation topic you journal the alternatives, your expected grade, confidence, and mood. A year on you learn whether your judgement or chance drove the outcome.", tradeoff: "Recording your reasoning means you can't later pretend you 'always knew'; you pay in honesty for actually improving your judgement." },
+      { persona: "relationship",  scenario: "Before a big relationship decision — moving cities for your partner — you record why, what you expect, your 60% confidence, and that you feel pressured. Later you review it honestly, not through rewritten memory.", tradeoff: "Naming your doubts on paper feels disloyal; you trade a comfortable certainty for a decision you can actually learn from." },
+      { persona: "high-achiever", scenario: "Before a major hire you journal the rejected candidates, expected outcome, confidence (80%), and that you're impatient. Months later it separates your skill from your luck, which your ego blurs.", tradeoff: "The record can expose that a 'great instinct' was a coin flip; you sacrifice a flattering self-story for real calibration." },
+      { persona: "privileged",    scenario: "Before a ₹20-crore allocation you record the thesis, rejected options, confidence, and mood. The journal is the one thing that tells you if your judgement is real or just well-funded.", tradeoff: "Committing predictions to paper risks puncturing the myth around your judgement; you trade the legend for the truth." }
+    ],
+    featured: 0,
     personalPrompt: "For the decision you're about to make, what will you record now — options rejected, expected outcome, confidence, your state of mind — so you can review it honestly later?",
     pitfalls: ["A journal only pays off if you actually revisit entries after the outcome; without the review, it's just writing.", "Recording your emotional state feels awkward but it's often the most useful field — don't skip it to look composed."]
   },
   "weighted-scoring": {
     visualType: "grid",
-    universalExample: "Choosing between three frameworks for a rebuild, you list criteria — team familiarity, performance, ecosystem — weight them by importance, score each option, and multiply. One option wins on paper. You sanity-check it against your gut, notice the weights undervalued hiring, adjust, and decide with eyes open.",
+    examples: [
+      { persona: "everyday",      scenario: "Choosing between 3 flats, you list criteria — rent, commute, light — weight them, and score each. The spreadsheet picks one; your gut flags that you under-weighted the 90-minute commute. You adjust and decide clear-eyed.", tradeoff: "The exercise takes an evening and can feel over-engineered; you trade spontaneity for a choice you won't second-guess for years." },
+      { persona: "student",       scenario: "Torn between 4 job offers, you weight salary, learning, location, and culture, then score. The winner surprises you; a gut check says you low-balled 'learning.' You re-weight and choose with eyes open.", tradeoff: "Reducing a life choice to numbers risks missing the intangibles; you pay in messiness for a decision your feelings alone kept looping." },
+      { persona: "relationship",  scenario: "You and your partner are choosing where to settle, at an impasse. You jointly weight criteria — family nearness, jobs, cost — and score options together. The shared grid turns a fight into a decision.", tradeoff: "Quantifying a home together can feel cold and clinical; you trade some warmth for a way past a stalemate that was hurting you both." },
+      { persona: "high-achiever", scenario: "Choosing a tech stack, you're sure of the answer. The weighted grid forces honesty: you'd under-weighted hiring difficulty at 5% because you personally know the niche language, when the market has maybe 40 engineers who do. You adjust and avoid a hiring trap.", tradeoff: "The model can contradict the expert instinct you're paid for; you sacrifice a little ego for a call the whole team can live with." },
+      { persona: "privileged",    scenario: "Selecting among 5 investments, easy money tempts a gut yes. You weight risk, alignment, and impact, then score. The grid and a gut check together catch a flashy option that fails on your values.", tradeoff: "The rigor slows a deal you could wave through; you trade speed for allocations that survive scrutiny." }
+    ],
+    featured: 0,
     personalPrompt: "For the options you're comparing, what are the real criteria, how would you weight them honestly, and does the winner survive a gut check?",
     pitfalls: ["Weights and scores can be quietly tuned until the answer you already wanted 'wins' — set the weights before you score.", "A tidy number can override a valid gut signal; the model informs the decision, it doesn't replace judgement."]
   },
   "cynefin": {
     visualType: "triage",
-    universalExample: "A production incident hits and you almost reach for the usual runbook. First you classify: this is complex, not merely complicated — no expert already knows the answer. So instead of best-practice, you probe with a small safe change, sense the result, and respond. Naming the domain picks the right method.",
+    examples: [
+      { persona: "everyday",      scenario: "Your shop's sales suddenly drop for 3 weeks and you reach for last year's discount playbook. First you classify: this is complex, not obvious — the cause is unknown. So you probe with small tests, sense results, respond.", tradeoff: "Probing instead of acting decisively feels slow and uncertain; you trade the comfort of a confident fix for one that fits an unknown cause." },
+      { persona: "student",       scenario: "Your grades slip and you assume the 'obvious' fix: study more hours. Classifying honestly, it's complicated — maybe method, sleep, or the subject. You diagnose before grinding harder.", tradeoff: "Stopping to diagnose costs study time you feel you can't spare; you pay in delay for not brute-forcing the wrong solution." },
+      { persona: "relationship",  scenario: "Your partner grows distant and you reach for the obvious 'just talk it out.' Naming the domain, it's complex — no single cause or script. You probe gently, sense, and respond instead of applying a formula.", tradeoff: "Abandoning the tidy fix means tolerating ambiguity and slow progress; you trade a quick script for an approach that fits a real person." },
+      { persona: "high-achiever", scenario: "At 2am a production incident hits and you grab the usual runbook. You classify first: complex, not merely complicated — no expert knows this yet. You probe with a small safe change instead of best-practice.", tradeoff: "Probing forgoes the decisive command move your reputation rests on; you sacrifice looking in control for the method the domain requires." },
+      { persona: "privileged",    scenario: "A portfolio company falters 3 weeks before payroll and money tempts a big decisive intervention. You classify: chaotic — act first to stabilize, then sense. You steady cash flow before diagnosing, resisting the grand fix.", tradeoff: "Acting to stabilize before understanding risks treating a symptom; you trade a perfect diagnosis for stopping the bleeding now." }
+    ],
+    featured: 3,
     personalPrompt: "What KIND of problem are you actually facing — obvious, complicated, complex, or chaotic — and are you using the method that domain calls for?",
     pitfalls: ["Misclassifying a complex problem as merely complicated makes you apply best-practice where none exists — and it fails.", "The most dangerous move is assuming the obvious domain; complacency there is how ordered problems slide into chaos."],
     steps: [
@@ -936,10 +1090,8 @@ const frameworks = parsed.map((row, i) => {
   const a = AUTHORED[id];
   if (!a) throw new Error("No authored fields for " + id);
   const name = NAME_OVERRIDES[i + 1] || row.name;
-  // Sprint 001 (B24/R1 transition): frameworks that carry the new examples[] set
-  // universalExample := examples[featured].scenario (byte-equal, guarantees D5 by
-  // construction). Frameworks without examples[] keep their existing string.
-  const universalExample = a.examples ? a.examples[a.featured].scenario : a.universalExample;
+  // Sprint 002 (B1/B4 amendment): universalExample is REMOVED app-wide. Every
+  // framework now carries examples[] (5 persona scenarios+tradeoffs) + featured.
   const fw = {
     id,
     name,
@@ -947,21 +1099,20 @@ const frameworks = parsed.map((row, i) => {
     trigger: row.trigger,
     essence: row.essence,
     visualType: a.visualType,
-    universalExample,
+    examples: a.examples,
+    featured: a.featured,
     personalPrompt: a.personalPrompt,
     pitfalls: a.pitfalls
   };
   if (a.steps) fw.steps = a.steps;
-  if (a.examples) { fw.examples = a.examples; fw.featured = a.featured; }
   return fw;
 });
 
-// Guard the examples[] shape at build time (B24/B25/D1/D2): every framework that
-// carries examples must have exactly 5, personas in the fixed order, non-empty
-// scenario+tradeoff, and featured an int in [0,4]. Fails the build before writing.
+// Guard the examples[] shape at build time (B24/B25/E1/E2): EVERY framework (all
+// 74, Sprint 002) must carry examples of exactly 5, personas in the fixed order,
+// non-empty scenario+tradeoff, and featured an int in [0,4]. Fails before writing.
 const PERSONA_ORDER = ["everyday", "student", "relationship", "high-achiever", "privileged"];
 frameworks.forEach((f) => {
-  if (!("examples" in f)) return;
   const ex = f.examples;
   if (!Array.isArray(ex) || ex.length !== 5) throw new Error(`${f.id}: examples must be length 5, got ${ex && ex.length}`);
   ex.forEach((e, k) => {
@@ -970,7 +1121,7 @@ frameworks.forEach((f) => {
     if (typeof e.tradeoff !== "string" || !e.tradeoff.trim()) throw new Error(`${f.id}: empty tradeoff at ${e.persona}`);
   });
   if (!Number.isInteger(f.featured) || f.featured < 0 || f.featured > 4) throw new Error(`${f.id}: featured must be int 0..4, got ${f.featured}`);
-  if (f.universalExample !== ex[f.featured].scenario) throw new Error(`${f.id}: universalExample != examples[featured].scenario`);
+  if ("universalExample" in f) throw new Error(`${f.id}: universalExample must not exist (removed Sprint 002)`);
 });
 
 // Derive VISUAL_TYPES from actually-used values (stable order = first appearance).
@@ -1036,7 +1187,7 @@ const banner = `/* =============================================================
    Source of truth: scripts/build-data.mjs + .planning/RESEARCH.md.
    Regenerate with: node scripts/build-data.mjs   — do not hand-edit this file.
    trigger/essence are byte-exact copies of RESEARCH.md cells (B2).
-   universalExample/personalPrompt/pitfalls/steps are original Generator authoring (B3).
+   examples/personalPrompt/pitfalls/steps are original Generator authoring (B3).
    Plain script: attaches PDB_DATA to window (no bundler, no network fetch).
    ========================================================================== */`;
 

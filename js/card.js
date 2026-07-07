@@ -65,6 +65,145 @@
     return btn;
   }
 
+  /* Persona visual system (B31) — one consistent label + glyph per persona,
+     reused on EVERY card. Fixed order matches the data contract (B24). Accent
+     colour comes from the CSS custom property --persona-<persona> (theme-scoped,
+     AA-verified in both themes); the glyph is decorative (aria-hidden). */
+  var PERSONA_ORDER = ["everyday", "student", "relationship", "high-achiever", "privileged"];
+  var PERSONA_META = {
+    "everyday":      { label: "Everyday",      glyph: "◈" }, // ◈
+    "student":       { label: "Student",       glyph: "✎" }, // ✎
+    "relationship":  { label: "Relationship",  glyph: "♥" }, // ♥
+    "high-achiever": { label: "High-achiever", glyph: "▲" }, // ▲
+    "privileged":    { label: "Privileged",    glyph: "♛" }  // ♛
+  };
+
+  /* Build the featured-first example section with the accessible persona tab
+     widget. `headingId` scopes every widget id so the framework card and the
+     Today card can coexist in the DOM without id collisions (per-instance
+     scoping, BLOCKER-class). Returns the <section>. */
+  function exampleSection(fw, headingId) {
+    var section = el("section", "card-part card-example");
+    section.appendChild(el("p", "card-part-label", "For example"));
+
+    var examples = fw.examples;
+    var featured = fw.featured;
+    var valid = Array.isArray(examples) && examples.length === 5 &&
+      Number.isInteger(featured) && featured >= 0 && featured <= 4 &&
+      examples.every(function (e) {
+        return e && typeof e.scenario === "string" && e.scenario.trim() &&
+          typeof e.tradeoff === "string" && e.tradeoff.trim();
+      });
+
+    // Defensive degrade — never crash, never render undefined/NaN (spec §6 state).
+    if (!valid) {
+      var degrade = el("p", "card-example-empty card-example-text",
+        "A worked example for this framework isn't available yet.");
+      section.appendChild(degrade);
+      return section;
+    }
+
+    var scope = "ex-" + headingId; // unique per rendered instance
+
+    var tablist = el("div", "persona-tabs");
+    tablist.setAttribute("role", "tablist");
+    tablist.setAttribute("aria-label", "Choose a persona for this example");
+
+    var panelsWrap = el("div", "persona-panels");
+
+    var tabs = [];
+    var panels = [];
+
+    examples.forEach(function (e, i) {
+      var meta = PERSONA_META[e.persona] || { label: e.persona, glyph: "" };
+      var isFeatured = i === featured;
+      var tabId = scope + "-tab-" + e.persona;
+      var panelId = scope + "-panel-" + e.persona;
+
+      // --- Tab ---
+      var tab = el("button", "persona-tab");
+      tab.setAttribute("type", "button");
+      tab.id = tabId;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", panelId);
+      tab.setAttribute("aria-selected", isFeatured ? "true" : "false");
+      tab.setAttribute("tabindex", isFeatured ? "0" : "-1");
+      tab.setAttribute("data-persona", e.persona);
+      tab.style.setProperty("--persona-accent", "var(--persona-" + e.persona + ")");
+      if (isFeatured) tab.classList.add("is-featured");
+
+      var glyph = el("span", "persona-glyph", meta.glyph);
+      glyph.setAttribute("aria-hidden", "true");
+      tab.appendChild(glyph);
+      tab.appendChild(el("span", "persona-label", meta.label));
+      if (isFeatured) tab.appendChild(el("span", "persona-featured-badge", "Featured"));
+      tablist.appendChild(tab);
+      tabs.push(tab);
+
+      // --- Panel ---
+      var panel = el("div", "persona-panel");
+      panel.id = panelId;
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("aria-labelledby", tabId);
+      panel.style.setProperty("--persona-accent", "var(--persona-" + e.persona + ")");
+      if (!isFeatured) panel.setAttribute("hidden", "");
+
+      // The FEATURED panel's scenario carries .card-example-text so the default
+      // rendered card exposes the featured scenario there (v1 selector contract).
+      var scenClass = "persona-scenario" + (isFeatured ? " card-example-text" : "");
+      panel.appendChild(el("p", scenClass, e.scenario));
+
+      // Cost element — always co-visible with its scenario (B30, never hidden).
+      var cost = el("div", "persona-cost");
+      cost.appendChild(el("span", "persona-cost-label", "The cost"));
+      cost.appendChild(el("p", "persona-tradeoff", e.tradeoff));
+      panel.appendChild(cost);
+
+      panelsWrap.appendChild(panel);
+      panels.push(panel);
+    });
+
+    // Selection follows focus (automatic activation) — ArrowLeft/Right move the
+    // selected tab AND its panel; the newly selected tab receives focus.
+    function select(idx, moveFocus) {
+      for (var j = 0; j < tabs.length; j++) {
+        var on = j === idx;
+        tabs[j].setAttribute("aria-selected", on ? "true" : "false");
+        tabs[j].setAttribute("tabindex", on ? "0" : "-1");
+        if (on) panels[j].removeAttribute("hidden");
+        else panels[j].setAttribute("hidden", "");
+      }
+      if (moveFocus) tabs[idx].focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { select(i, false); });
+      tab.addEventListener("keydown", function (ev) {
+        var key = ev.key;
+        if (key === "ArrowRight" || key === "ArrowDown") {
+          ev.preventDefault();
+          select((i + 1) % tabs.length, true);
+        } else if (key === "ArrowLeft" || key === "ArrowUp") {
+          ev.preventDefault();
+          select((i - 1 + tabs.length) % tabs.length, true);
+        } else if (key === "Home") {
+          ev.preventDefault();
+          select(0, true);
+        } else if (key === "End") {
+          ev.preventDefault();
+          select(tabs.length - 1, true);
+        } else if (key === "Enter" || key === " " || key === "Spacebar") {
+          ev.preventDefault();
+          select(i, true);
+        }
+      });
+    });
+
+    section.appendChild(tablist);
+    section.appendChild(panelsWrap);
+    return section;
+  }
+
   /* Render one framework entry into `mount`, replacing its contents.
      data defaults to window.PDB_DATA.
      options (strictly additive; defaults preserve #/f/:id byte-for-byte):
@@ -153,11 +292,8 @@
       article.appendChild(stepsSec);
     }
 
-    // 6. Universal example
-    var ex = el("section", "card-part card-example");
-    ex.appendChild(el("p", "card-part-label", "For example"));
-    ex.appendChild(el("p", "card-example-text", fw.universalExample));
-    article.appendChild(ex);
+    // 6. Example — featured-first + persona-tab widget (B30/B31/B34)
+    article.appendChild(exampleSection(fw, headingId));
 
     // 7. Pitfalls
     var pit = el("section", "card-part card-pitfalls");

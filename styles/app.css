@@ -54,6 +54,14 @@
   --accent-soft: #3a3416;
   --focus: #ffcd5c;       /* focus ring */
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  /* Persona accent system (Sprint 002, B31) — additive, namespaced tokens that
+     do NOT touch any v1 palette token. Dark-theme values: light-toned accents,
+     each AA (>=4.5:1) as text on --bg/--surface/--surface-2. */
+  --persona-everyday: #8fbaff;
+  --persona-student: #5fd6c4;
+  --persona-relationship: #ff9ec6;
+  --persona-high-achiever: #ffc857;
+  --persona-privileged: #cdacff;
   color-scheme: dark;
 }
 
@@ -69,6 +77,13 @@
   --accent-soft: #f2e6c9;
   --focus: #8a5a00;       /* focus ring */
   --shadow: 0 8px 24px rgba(35, 30, 15, 0.12);
+  /* Persona accent system (Sprint 002, B31) — light-theme values: dark-toned
+     accents, each AA (>=4.5:1) as text on --bg/--surface/--surface-2. */
+  --persona-everyday: #1f5fbf;
+  --persona-student: #0e7167;
+  --persona-relationship: #b03567;
+  --persona-high-achiever: #8a6100;
+  --persona-privileged: #6a3fc0;
   color-scheme: light;
 }
 
@@ -477,8 +492,79 @@ svg.icon,
 .card-pitfalls-list li { color: var(--fg); }
 .card-pitfalls-list li::marker { color: var(--accent); }
 
-/* Example */
+/* Example — featured-first + persona tab widget (Sprint 002, B30/B31/B34).
+   Only additive persona styles + additive --persona-* tokens; no v1 palette
+   token or font-family is touched (that is Sprint 003). */
 .card-example-text { margin: 0; color: var(--fg); line-height: 1.55; }
+.card-example-empty { color: var(--muted); font-style: italic; }
+
+/* Tablist — five persona tabs. Wraps to rows so it fits 375px AND 320px with
+   no page horizontal scroll; each tab is a >=44px tap target (B23). */
+.persona-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-4);
+}
+.persona-tab {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-bottom: 3px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs--1);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease),
+              border-color var(--motion-fast) var(--ease);
+}
+.persona-tab:hover { background: var(--surface); }
+.persona-glyph { color: var(--persona-accent); font-size: var(--fs-0); line-height: 1; }
+.persona-label { white-space: nowrap; }
+.persona-tab[aria-selected="true"] {
+  background: var(--surface);
+  border-color: var(--persona-accent);
+}
+.persona-featured-badge {
+  margin-left: auto;
+  padding: 2px 7px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--persona-accent);
+  border: 1px solid var(--persona-accent);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Panels — exactly one visible at a time; scenario + its cost are ALWAYS
+   co-visible inside the same panel (B30 — no visible scenario without its
+   paired tradeoff). */
+.persona-panels { margin: 0; }
+.persona-panel {
+  border-left: 3px solid var(--persona-accent);
+  padding-left: var(--space-4);
+}
+.persona-panel[hidden] { display: none; }
+.persona-scenario { margin: 0 0 var(--space-3); color: var(--fg); line-height: 1.55; }
+.persona-cost { display: grid; gap: var(--space-1); }
+.persona-cost-label {
+  font-size: var(--fs--1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--persona-accent);
+}
+.persona-tradeoff { margin: 0; color: var(--fg); line-height: 1.5; }
 
 /* Personal prompt — emphasized TERMINAL element (the call to action) */
 .card-prompt {

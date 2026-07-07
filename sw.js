@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v8";
+var CACHE = "pdb-shell-v9";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -33,6 +33,13 @@ var CACHE = "pdb-shell-v8";
 // tradeoffs) + featured, and their universalExample is now examples[featured].
 // scenario. No new precache entry (data.js is already listed); the bump purges
 // the stale v7 cache so the offline app serves the new data.js (protects B20).
+// v9 (2026-07-07, Sprint 002 — v2 examples engine finished + card UI) ships edits
+// to two already-listed shell assets: js/data.js is regenerated so the 22
+// extension frameworks gain examples[] + featured (all 74 now complete) and
+// universalExample is removed app-wide; js/card.js gains the featured-first +
+// persona-tab example renderer (B30/B31). No new precache entry (both files are
+// already listed); the bump purges the stale v8 cache so the offline app serves
+// the new data.js + card.js (protects B20).
 var SHELL = [
   "./",
   "index.html",

@@ -366,7 +366,7 @@ const run = async () => {
   /* ---- 12. Offline regression (B20/§8) ---- */
   {
     const swSrc = readFileSync(resolve(HERE, "..", "sw.js"), "utf8");
-    log(/CACHE\s*=\s*"pdb-shell-v8"/.test(swSrc), "sw.js CACHE === pdb-shell-v8");
+    log(/CACHE\s*=\s*"pdb-shell-v9"/.test(swSrc), "sw.js CACHE === pdb-shell-v9");
     log(/js\/daily\.js/.test(swSrc), "sw.js precaches js/daily.js");
     log(/keys\.filter[\s\S]*caches\.delete/.test(swSrc), "sw.js activate purges old cache");
 

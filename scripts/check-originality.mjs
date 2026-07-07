@@ -10,8 +10,9 @@
      - B2 fidelity: every framework's `trigger`/`essence` in js/data.js match the
        pre-authored originals parsed from .planning/RESEARCH.md (index-aligned,
        symmetric normalize — mirrors tests/content.spec.mjs).
-     - B3 non-empty authored fields: universalExample, personalPrompt, and every
-       element of pitfalls[] (>=1) are non-empty, non-placeholder strings.
+     - B3 non-empty authored fields: examples[] (5 persona scenario+tradeoff pairs),
+       personalPrompt, and every element of pitfalls[] (>=1) are non-empty,
+       non-placeholder strings.
    ========================================================================== */
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -90,8 +91,22 @@ const isBad = (s) => {
   return PLACEHOLDERS.some((p) => low === p || low.includes(p));
 };
 let badExample = "", badPrompt = "", badPitfall = "";
+const PERSONA_ORDER = ["everyday", "student", "relationship", "high-achiever", "privileged"];
 for (const f of fws) {
-  if (isBad(f.universalExample)) badExample = badExample || `${f.id}: "${f.universalExample}"`;
+  // B24/B25: examples must be 5 personas in fixed order, each with a non-empty,
+  // non-placeholder scenario AND tradeoff.
+  if (!Array.isArray(f.examples) || f.examples.length !== 5) {
+    badExample = badExample || `${f.id}: examples not array of 5`;
+  } else {
+    f.examples.forEach((e, k) => {
+      if (!e || e.persona !== PERSONA_ORDER[k]) badExample = badExample || `${f.id}: persona[${k}]`;
+      if (isBad(e && e.scenario)) badExample = badExample || `${f.id}/${e && e.persona}: scenario`;
+      if (isBad(e && e.tradeoff)) badExample = badExample || `${f.id}/${e && e.persona}: tradeoff`;
+    });
+    if (!Number.isInteger(f.featured) || f.featured < 0 || f.featured > 4) {
+      badExample = badExample || `${f.id}: featured=${f.featured}`;
+    }
+  }
   if (isBad(f.personalPrompt)) badPrompt = badPrompt || `${f.id}: "${f.personalPrompt}"`;
   if (!Array.isArray(f.pitfalls) || f.pitfalls.length < 1) {
     badPitfall = badPitfall || `${f.id}: pitfalls missing/empty array`;
@@ -101,7 +116,7 @@ for (const f of fws) {
     }
   }
 }
-log(!badExample, "every universalExample non-empty & non-placeholder (B3)", badExample);
+log(!badExample, "every framework has 5 valid persona examples (scenario+tradeoff) (B3/B24)", badExample);
 log(!badPrompt, "every personalPrompt non-empty & non-placeholder (B3)", badPrompt);
 log(!badPitfall, "every framework has >=1 non-placeholder pitfall (B3)", badPitfall);
 

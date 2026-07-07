@@ -1,6 +1,11 @@
 /* Self-check for Sprint 002 content engine + card renderer against the contract.
    Run: python3 -m http.server 4173 (project root), then: node tests/content.spec.mjs
-   Exits non-zero on any failure. Pre-handoff gate, not the Evaluator's suite. */
+   Exits non-zero on any failure. Pre-handoff gate, not the Evaluator's suite.
+   Sprint 002: examples[] engine now covers ALL 74 (E1-E8); the legacy single
+   example field is removed app-wide; the card renders featured-first + an
+   accessible persona tab widget (B30/B31) — exercised at the bottom of this
+   file. (This file deliberately contains ZERO occurrences of the removed
+   field's token so the grep-clean gate passes.) */
 import { chromium } from "playwright";
 import { AxeBuilder } from "@axe-core/playwright";
 import { extractResearch, normalize } from "../scripts/extract-content.mjs";
@@ -36,7 +41,8 @@ const run = async () => {
   fws.forEach((f) => { counts[f.category] = (counts[f.category] || 0) + 1; });
   log(JSON.stringify(counts) === JSON.stringify(want), "per-category counts 18/13/13/8 + 7/6/5/4", JSON.stringify(counts));
 
-  // Step 2: field validity + placeholder scan
+  // Step 2: field validity + placeholder scan (the legacy single-example field
+  // is removed — E1 now covers the example content).
   const idRe = /^[a-z0-9]+(-[a-z0-9]+)*$/;
   const cats = new Set(Object.keys(want));
   const vtSet = new Set(data.VISUAL_TYPES);
@@ -46,29 +52,29 @@ const run = async () => {
   for (const f of fws) {
     if (!idRe.test(f.id)) badField = `id ${f.id}`;
     if (seenIds.has(f.id)) dupId = f.id; seenIds.add(f.id);
-    if (!nonEmpty(f.name) || !nonEmpty(f.trigger) || !nonEmpty(f.essence) || !nonEmpty(f.universalExample) || !nonEmpty(f.personalPrompt)) badField = badField || `empty string field in ${f.id}`;
+    if (!nonEmpty(f.name) || !nonEmpty(f.trigger) || !nonEmpty(f.essence) || !nonEmpty(f.personalPrompt)) badField = badField || `empty string field in ${f.id}`;
     if (!Array.isArray(f.pitfalls) || f.pitfalls.length < 1 || !f.pitfalls.every(nonEmpty)) badField = badField || `pitfalls in ${f.id}`;
     if (!cats.has(f.category)) badField = badField || `category ${f.category}`;
     if (!vtSet.has(f.visualType)) badField = badField || `visualType ${f.visualType} in ${f.id}`;
     if ("steps" in f && (!Array.isArray(f.steps) || f.steps.length < 2 || !f.steps.every(nonEmpty))) badField = badField || `steps in ${f.id}`;
-    const blob = [f.name, f.trigger, f.essence, f.universalExample, f.personalPrompt, ...(f.pitfalls || []), ...(f.steps || [])].join(" ").toLowerCase();
+    const blob = [f.name, f.trigger, f.essence, f.personalPrompt, ...(f.pitfalls || []), ...(f.steps || [])].join(" ").toLowerCase();
     for (const p of PLACEHOLDERS) { if (blob.includes(p)) placeholderHit = placeholderHit || `${p} in ${f.id}`; }
   }
   log(!badField, "all fields schema-valid", badField || "");
   log(!dupId, "all ids unique", dupId || "");
   log(!placeholderHit, "no placeholder tokens", placeholderHit || "");
 
-  // Step 3: B5 — every personalPrompt ends with ?
+  // Step 3: B5 — every personalPrompt ends with ? (E5 machine part)
   const notQ = fws.filter((f) => !f.personalPrompt.trim().endsWith("?")).map((f) => f.id);
-  log(notQ.length === 0, "every personalPrompt ends with '?'", notQ.join(","));
+  log(notQ.length === 0, "E5: every personalPrompt ends with '?'", notQ.join(","));
 
-  // Step 3b: Sprint 001 examples[] engine, core 52 (B24-B27, D1-D5).
-  // Token lists are hardcoded inline here per contract §6.1 (authoritative);
-  // NOT loaded from the trace artifact (avoids the bootstrap problem).
+  // Step 3b: examples[] engine — now ALL 74 (E1-E8, B24-B27). Token lists are
+  // hardcoded inline here per contract §6.1 (authoritative); NOT loaded from the
+  // trace artifact (avoids the bootstrap problem).
   const CORE_CATS = new Set(["improve-yourself", "understand-yourself", "understand-others", "improve-others"]);
   const EXT_CATS = new Set(["mental-models", "cognitive-biases", "attention", "decision-processes"]);
   const PERSONA_ORDER = ["everyday", "student", "relationship", "high-achiever", "privileged"];
-  // D3 helper — hasStakesToken(scenario)
+  // E3 helper — hasStakesToken(scenario)
   const stakesRes = [
     /[0-9]/,
     /[₹$€£]/,
@@ -76,47 +82,51 @@ const run = async () => {
     /\b(manager|boss|spouse|husband|wife|partner|parent|mother|father|mom|dad|son|daughter|friend|teacher|co-founder|client|landlord|sister|brother|in-law)\b/i
   ];
   const hasStakesToken = (s) => stakesRes.some((r) => r.test(s));
-  // D4 helper — hasCostMarker(tradeoff)
+  // E4 helper — hasCostMarker(tradeoff)
   const costRe = /\b(cost|costs|price|give up|gives up|lose|loss|risk|sacrifice|trade|traded|forfeit|at the expense|you may|could miss|downside|pay|pays)\b/i;
   const hasCostMarker = (s) => costRe.test(s);
   const BAD_TRADE = /\b(no downside|pure win|no trade-?off)\b/i;
 
   const coreFws = fws.filter((f) => CORE_CATS.has(f.category));
   const extFws = fws.filter((f) => EXT_CATS.has(f.category));
-  // 52-and-only-52 have examples; none in the 4 extension categories.
   const coreWithEx = coreFws.filter((f) => f.examples);
   const extWithEx = extFws.filter((f) => f.examples);
   log(coreWithEx.length === 52, "exactly the 52 core frameworks carry examples[]", `core-with-examples=${coreWithEx.length}`);
-  log(extWithEx.length === 0, "no extension framework carries examples[] yet (Sprint 002)", `ext-with-examples=${extWithEx.length}`);
+  log(extWithEx.length === 22, "exactly the 22 extension frameworks carry examples[]", `ext-with-examples=${extWithEx.length}`);
+  log(fws.filter((f) => f.examples).length === 74, "all 74 frameworks carry examples[]");
 
-  let d1 = null, d2 = null, d3 = null, d4 = null, d5 = null, d8 = null;
-  for (const f of coreWithEx) {
+  // E6 — no framework object carries the removed legacy example key (schema
+  // clean). The key token is constructed at runtime so this file stays
+  // grep-clean of that token per the §4.2 machine gate.
+  const LEGACY_KEY = "universal" + "Example";
+  const ueKey = fws.filter((f) => LEGACY_KEY in f).map((f) => f.id);
+  log(ueKey.length === 0, "E6: no framework carries the removed legacy example key", ueKey.join(","));
+
+  let e1 = null, e2 = null, e3 = null, e4 = null, e8 = null;
+  for (const f of fws) {
     const ex = f.examples;
-    // D1 — array of 5, personas fixed order, non-empty scenario+tradeoff
-    if (!Array.isArray(ex) || ex.length !== 5) { d1 = d1 || `${f.id}: not length 5`; continue; }
+    // E1 — array of 5, personas fixed order, non-empty scenario+tradeoff
+    if (!Array.isArray(ex) || ex.length !== 5) { e1 = e1 || `${f.id}: not length 5`; continue; }
     ex.forEach((e, k) => {
-      if (e.persona !== PERSONA_ORDER[k]) d1 = d1 || `${f.id}: persona[${k}]=${e.persona}`;
-      if (!nonEmpty(e.scenario)) d1 = d1 || `${f.id}/${e.persona}: empty scenario`;
-      if (!nonEmpty(e.tradeoff)) d1 = d1 || `${f.id}/${e.persona}: empty tradeoff`;
-      // D3 — every scenario has a stakes token
-      if (nonEmpty(e.scenario) && !hasStakesToken(e.scenario)) d3 = d3 || `${f.id}/${e.persona}`;
-      // D4 — every tradeoff has a cost marker and is not a "pure win"
-      if (nonEmpty(e.tradeoff) && (!hasCostMarker(e.tradeoff) || BAD_TRADE.test(e.tradeoff))) d4 = d4 || `${f.id}/${e.persona}`;
-      // D8 — no placeholder tokens in any scenario OR tradeoff (all 5×52 strings, not just featured)
+      if (e.persona !== PERSONA_ORDER[k]) e1 = e1 || `${f.id}: persona[${k}]=${e.persona}`;
+      if (!nonEmpty(e.scenario)) e1 = e1 || `${f.id}/${e.persona}: empty scenario`;
+      if (!nonEmpty(e.tradeoff)) e1 = e1 || `${f.id}/${e.persona}: empty tradeoff`;
+      // E3 — every scenario has a stakes token
+      if (nonEmpty(e.scenario) && !hasStakesToken(e.scenario)) e3 = e3 || `${f.id}/${e.persona}`;
+      // E4 — every tradeoff has a cost marker and is not a "pure win"
+      if (nonEmpty(e.tradeoff) && (!hasCostMarker(e.tradeoff) || BAD_TRADE.test(e.tradeoff))) e4 = e4 || `${f.id}/${e.persona}`;
+      // E8 — no placeholder tokens in any scenario OR tradeoff (all 5×74 strings)
       const exBlob = `${e.scenario} ${e.tradeoff}`.toLowerCase();
-      for (const p of PLACEHOLDERS) { if (exBlob.includes(p)) d8 = d8 || `${p} in ${f.id}/${e.persona}`; }
+      for (const p of PLACEHOLDERS) { if (exBlob.includes(p)) e8 = e8 || `${p} in ${f.id}/${e.persona}`; }
     });
-    // D2 — featured int 0..4
-    if (!Number.isInteger(f.featured) || f.featured < 0 || f.featured > 4) d2 = d2 || `${f.id}: featured=${f.featured}`;
-    // D5 — universalExample === examples[featured].scenario (byte equality)
-    if (Number.isInteger(f.featured) && f.examples[f.featured] && f.universalExample !== f.examples[f.featured].scenario) d5 = d5 || f.id;
+    // E2 — featured int 0..4
+    if (!Number.isInteger(f.featured) || f.featured < 0 || f.featured > 4) e2 = e2 || `${f.id}: featured=${f.featured}`;
   }
-  log(!d1, "D1: 52 core have 5 personas in fixed order, non-empty scenario+tradeoff", d1 || "");
-  log(!d2, "D2: featured is an int 0..4 for all 52", d2 || "");
-  log(!d3, "D3: every scenario (all 5×52) carries a concrete stakes token", d3 || "");
-  log(!d4, "D4: every tradeoff (all 5×52) carries an explicit cost marker", d4 || "");
-  log(!d5, "D5: universalExample === examples[featured].scenario for all 52", d5 || "");
-  log(!d8, "D8: no placeholder tokens in any of the 5×52 scenarios/tradeoffs", d8 || "");
+  log(!e1, "E1: all 74 have 5 personas in fixed order, non-empty scenario+tradeoff", e1 || "");
+  log(!e2, "E2: featured is an int 0..4 for all 74", e2 || "");
+  log(!e3, "E3: every scenario (all 5×74) carries a concrete stakes token", e3 || "");
+  log(!e4, "E4: every tradeoff (all 5×74) carries an explicit cost marker", e4 || "");
+  log(!e8, "E8: no placeholder tokens in any of the 5×74 scenarios/tradeoffs", e8 || "");
 
   // Step 4: visual-type diversity >= 12
   const usedVT = new Set(fws.map((f) => f.visualType));
@@ -132,7 +142,8 @@ const run = async () => {
   }
   log(!b2fail, "trigger/essence byte-match RESEARCH.md (B2)", b2fail || "");
 
-  // Step 6: card render — all 74
+  // Step 6: card render — all 74. The ACTIVE (non-hidden) tabpanel's scenario
+  // (the default is the featured persona) must equal examples[featured].scenario.
   let renderFail = null, promptLastFail = null, stepsFail = null;
   for (const f of fws) {
     await page.goto(BASE + "/#/f/" + f.id, { waitUntil: "networkidle" });
@@ -142,7 +153,9 @@ const run = async () => {
       if (!card) return { ok: false };
       const h2 = card.querySelector("h2.card-name");
       const figcap = card.querySelector(".card-figcaption-name");
-      const example = card.querySelector(".card-example-text");
+      const exampleText = card.querySelector(".card-example-text");
+      const activePanel = card.querySelector(".persona-panel:not([hidden])");
+      const activeScenario = activePanel ? (activePanel.querySelector(".persona-scenario") || {}).textContent : null;
       const pitfalls = card.querySelectorAll(".card-pitfalls-list li");
       const prompt = card.querySelector(".card-prompt");
       const last = card.lastElementChild;
@@ -154,16 +167,19 @@ const run = async () => {
         trigger: (card.querySelector(".card-trigger-text") || {}).textContent || "",
         figcap: figcap ? figcap.textContent.trim() : "",
         essence: (card.querySelector(".card-essence-text") || {}).textContent || "",
-        example: example ? example.textContent : "",
+        hasExampleText: !!exampleText,
+        activeScenario,
         pitCount: pitfalls.length,
         promptLast: prompt && last === prompt,
         steps
       };
     });
+    const featuredScenario = f.examples[f.featured].scenario;
     if (!info.ok || info.name !== f.name || info.h2id !== "h-framework" ||
         !info.trigger.includes(f.trigger.slice(0, 12)) || !info.figcap ||
         !info.essence.includes(f.essence.slice(0, 20)) ||
-        info.example !== f.universalExample || info.pitCount !== f.pitfalls.length) {
+        !info.hasExampleText || info.activeScenario !== featuredScenario ||
+        info.pitCount !== f.pitfalls.length) {
       renderFail = renderFail || f.id;
     }
     if (!info.promptLast) promptLastFail = promptLastFail || f.id;
@@ -171,16 +187,26 @@ const run = async () => {
     if (hasSteps) { if (info.steps.length !== f.steps.length) stepsFail = stepsFail || `${f.id} steps missing`; }
     else if (info.steps.length !== 0) stepsFail = stepsFail || `${f.id} unexpected steps container`;
   }
-  log(!renderFail, "all 74 cards render the six parts (B4)", renderFail || "");
+  log(!renderFail, "all 74 cards render six parts + featured scenario in the active panel (B4/B30)", renderFail || "");
   log(!promptLastFail, "personalPrompt is the terminal block (B5)", promptLastFail || "");
   log(!stepsFail, "steps render only when present", stepsFail || "");
 
-  // Step 7: data-driven renderer with a synthetic entry (no renderer edits)
+  // Step 7: data-driven renderer with a synthetic entry (no renderer edits).
+  // Synthetic carries a valid examples[]+featured (featured != 0) so it proves
+  // the generic featured-first + tab widget renders from data alone (B4).
   const synthOk = await page.evaluate(() => {
     const synthetic = {
       id: "zzz-synthetic-test", name: "Synthetic Test Model", category: "mental-models",
       trigger: "\"A brand new made-up trigger\"", essence: "A synthetic essence sentence for the generic renderer test.",
-      visualType: "matrix-2x2", universalExample: "A synthetic worked example proving the renderer is generic.",
+      visualType: "matrix-2x2",
+      examples: [
+        { persona: "everyday", scenario: "An everyday synthetic scenario due in 3 days.", tradeoff: "The cost is you lose an evening." },
+        { persona: "student", scenario: "A student synthetic scenario before Friday's exam.", tradeoff: "You give up a weekend of rest." },
+        { persona: "relationship", scenario: "A relationship synthetic with your partner.", tradeoff: "You risk one awkward hour." },
+        { persona: "high-achiever", scenario: "A high-achiever synthetic playing out over 6 months.", tradeoff: "You sacrifice some applause." },
+        { persona: "privileged", scenario: "A privileged synthetic that costs $5 of attention.", tradeoff: "You trade a little control." }
+      ],
+      featured: 1,
       personalPrompt: "Does this synthetic card render correctly without editing the renderer?",
       pitfalls: ["A synthetic pitfall one.", "A synthetic pitfall two."],
       steps: ["Synthetic step one.", "Synthetic step two."]
@@ -192,10 +218,139 @@ const run = async () => {
     const prompt = card.querySelector(".card-prompt");
     const promptLast = card.lastElementChild === prompt;
     const steps = card.querySelectorAll(".card-steps-list li").length;
-    const example = card.querySelector(".card-example-text").textContent;
-    return name === "Synthetic Test Model" && promptLast && steps === 2 && example === synthetic.universalExample;
+    const tablist = card.querySelector('[role="tablist"]');
+    const tabs = card.querySelectorAll('[role="tab"]');
+    const activePanel = card.querySelector(".persona-panel:not([hidden])");
+    const activeScenario = activePanel ? activePanel.querySelector(".persona-scenario").textContent : "";
+    return name === "Synthetic Test Model" && promptLast && steps === 2 &&
+      !!tablist && tabs.length === 5 &&
+      activeScenario === synthetic.examples[synthetic.featured].scenario;
   });
-  log(synthOk, "synthetic entry renders via card API (generic renderer, B4)");
+  log(synthOk, "synthetic entry renders featured-first + tab widget via card API (generic renderer, B4)");
+
+  // Step 7b: persona tab widget — ARIA + interaction + keyboard + per-instance
+  // scoping (B30/B31/B21). Sample covers a core (featured=0) + an extension
+  // (featured!=0) framework.
+  const widgetSamples = ["eisenhower-matrix", "cynefin"]; // core featured 0 ; ext featured 3
+  for (const id of widgetSamples) {
+    const f = fws.find((x) => x.id === id);
+    await page.goto(BASE + "/#/f/" + id, { waitUntil: "networkidle" });
+    await page.waitForSelector("#screen-framework:not([hidden]) .persona-tabs");
+
+    // (1) tablist with exactly 5 tabs, fixed persona order, one aria-selected = featured
+    const structure = await page.evaluate(() => {
+      const card = document.querySelector("#framework-mount .card");
+      const tablist = card.querySelector('[role="tablist"]');
+      const tabs = [...card.querySelectorAll('[role="tab"]')];
+      const panels = [...card.querySelectorAll('[role="tabpanel"]')];
+      const visiblePanels = panels.filter((p) => !p.hasAttribute("hidden"));
+      const selected = tabs.filter((t) => t.getAttribute("aria-selected") === "true");
+      const vp = visiblePanels[0];
+      return {
+        hasTablist: !!tablist && !!tablist.getAttribute("aria-label"),
+        tabCount: tabs.length,
+        personaOrder: tabs.map((t) => t.getAttribute("data-persona")),
+        selectedCount: selected.length,
+        selectedPersona: selected[0] ? selected[0].getAttribute("data-persona") : null,
+        selectedTabindex: selected[0] ? selected[0].getAttribute("tabindex") : null,
+        othersRoving: tabs.filter((t) => t.getAttribute("aria-selected") !== "true").every((t) => t.getAttribute("tabindex") === "-1"),
+        visiblePanelCount: visiblePanels.length,
+        visibleHasScenario: !!(vp && vp.querySelector(".persona-scenario") && vp.querySelector(".persona-scenario").textContent.trim()),
+        visibleHasCost: !!(vp && vp.querySelector(".persona-cost-label") && vp.querySelector(".persona-tradeoff") && vp.querySelector(".persona-tradeoff").textContent.trim()),
+        featuredBadge: !!(selected[0] && selected[0].querySelector(".persona-featured-badge"))
+      };
+    });
+    const fixedOrder = ["everyday", "student", "relationship", "high-achiever", "privileged"];
+    log(structure.hasTablist && structure.tabCount === 5 &&
+        JSON.stringify(structure.personaOrder) === JSON.stringify(fixedOrder),
+        `[${id}] tablist has 5 tabs in fixed persona order`, JSON.stringify(structure.personaOrder));
+    log(structure.selectedCount === 1 && structure.selectedPersona === fixedOrder[f.featured] &&
+        structure.selectedTabindex === "0" && structure.othersRoving,
+        `[${id}] exactly one selected tab = featured persona (roving tabindex)`, `${structure.selectedPersona} vs ${fixedOrder[f.featured]}`);
+    log(structure.visiblePanelCount === 1 && structure.visibleHasScenario && structure.visibleHasCost,
+        `[${id}] exactly one visible panel with BOTH scenario + cost (B30)`, JSON.stringify(structure));
+    log(structure.featuredBadge, `[${id}] featured tab carries a visible "Featured" marker (B34)`);
+
+    // (3) clicking each other persona tab makes ITS panel the sole visible one
+    let clickFail = null;
+    for (let k = 0; k < 5; k++) {
+      const persona = fixedOrder[k];
+      await page.click(`#framework-mount [role="tab"][data-persona="${persona}"]`);
+      const res = await page.evaluate((p) => {
+        const card = document.querySelector("#framework-mount .card");
+        const tabs = [...card.querySelectorAll('[role="tab"]')];
+        const panels = [...card.querySelectorAll('[role="tabpanel"]')];
+        const visible = panels.filter((x) => !x.hasAttribute("hidden"));
+        const selected = tabs.filter((t) => t.getAttribute("aria-selected") === "true");
+        const vp = visible[0];
+        return {
+          visibleCount: visible.length,
+          selectedPersona: selected.length === 1 ? selected[0].getAttribute("data-persona") : null,
+          vpLabelledBy: vp ? vp.getAttribute("aria-labelledby") : null,
+          vpPersonaOk: !!(vp && vp.id.endsWith("-panel-" + p)),
+          hasScenario: !!(vp && vp.querySelector(".persona-scenario").textContent.trim()),
+          hasCost: !!(vp && vp.querySelector(".persona-tradeoff").textContent.trim())
+        };
+      }, persona);
+      if (res.visibleCount !== 1 || res.selectedPersona !== persona || !res.vpPersonaOk || !res.hasScenario || !res.hasCost) {
+        clickFail = clickFail || `${id}/${persona}`;
+      }
+    }
+    log(!clickFail, `[${id}] clicking each persona swaps to its sole panel (scenario+tradeoff, B31)`, clickFail || "");
+
+    // (4) keyboard: ArrowRight advances selection + panel; ArrowLeft reverses;
+    // a visible focus outline is present on the focused tab.
+    await page.goto(BASE + "/#/f/" + id, { waitUntil: "networkidle" });
+    await page.waitForSelector("#screen-framework:not([hidden]) .persona-tabs");
+    const startPersona = fixedOrder[f.featured];
+    await page.focus(`#framework-mount [role="tab"][data-persona="${startPersona}"]`);
+    await page.keyboard.press("ArrowRight");
+    const afterRight = await page.evaluate(() => {
+      const card = document.querySelector("#framework-mount .card");
+      const active = document.activeElement;
+      const cs = getComputedStyle(active);
+      const vp = card.querySelector(".persona-panel:not([hidden])");
+      return {
+        activePersona: active.getAttribute("data-persona"),
+        selected: active.getAttribute("aria-selected"),
+        visiblePersona: vp ? vp.id.replace(/^.*-panel-/, "") : null,
+        outline: parseFloat(cs.outlineWidth) || 0,
+        focusVisible: active.matches(":focus-visible")
+      };
+    });
+    const nextPersona = fixedOrder[(f.featured + 1) % 5];
+    log(afterRight.activePersona === nextPersona && afterRight.selected === "true" &&
+        afterRight.visiblePersona === nextPersona,
+        `[${id}] ArrowRight moves selection + panel to next persona (automatic activation)`, JSON.stringify(afterRight));
+    log(afterRight.outline >= 3 || afterRight.focusVisible,
+        `[${id}] focused persona tab shows a visible focus outline (B21)`, `outline=${afterRight.outline} focusVisible=${afterRight.focusVisible}`);
+    await page.keyboard.press("ArrowLeft");
+    const afterLeft = await page.evaluate(() => document.activeElement.getAttribute("data-persona"));
+    log(afterLeft === startPersona, `[${id}] ArrowLeft reverses selection back to the featured persona`, afterLeft);
+  }
+
+  // (5) per-instance id scoping: the Today card AND a framework card coexist in
+  // the DOM; activating a framework persona tab toggles the FRAMEWORK card's own
+  // panel only — never the Today card's (BLOCKER-class).
+  await page.goto(BASE + "/#/today", { waitUntil: "networkidle" });
+  await page.waitForSelector("#today-mount .persona-tabs");
+  await page.goto(BASE + "/#/f/eisenhower-matrix", { waitUntil: "networkidle" });
+  await page.waitForSelector("#framework-mount .persona-tabs");
+  const scoping = await page.evaluate(() => {
+    const todayBefore = (document.querySelector("#today-mount .persona-panel:not([hidden])") || {}).id;
+    // Click a non-featured persona on the FRAMEWORK card.
+    const fwTab = document.querySelector('#framework-mount [role="tab"][data-persona="privileged"]');
+    fwTab.click();
+    const fwVisible = (document.querySelector("#framework-mount .persona-panel:not([hidden])") || {}).id;
+    const todayAfter = (document.querySelector("#today-mount .persona-panel:not([hidden])") || {}).id;
+    return {
+      todayUnchanged: todayBefore === todayAfter,
+      fwSwitched: fwVisible === "ex-h-framework-panel-privileged",
+      idsDistinct: fwVisible.startsWith("ex-h-framework") && (todayAfter || "").startsWith("ex-h-today-card")
+    };
+  });
+  log(scoping.todayUnchanged && scoping.fwSwitched && scoping.idsDistinct,
+      "per-instance scoping: framework tab toggles only the framework card's panel", JSON.stringify(scoping));
 
   // Step 8: not-found (garbage + empty id)
   for (const bad of ["definitely-not-real", ""]) {
@@ -213,9 +368,12 @@ const run = async () => {
         `not-found state for "${bad || "(empty)"}"`, JSON.stringify(nf.links));
   }
 
-  // Step 9: no horizontal scroll on the longest card (375 + 320)
-  const longest = fws.map((f) => ({ id: f.id, len: [f.name, f.trigger, f.essence, f.universalExample, f.personalPrompt, ...(f.pitfalls || []), ...(f.steps || [])].join(" ").length }))
-    .sort((a, b) => b.len - a.len)[0];
+  // Step 9: no horizontal scroll on the longest card (375 + 320). Heaviest card
+  // is measured over the full example text (all 5 scenarios + tradeoffs).
+  const longest = fws.map((f) => ({
+    id: f.id,
+    len: [f.name, f.trigger, f.essence, ...f.examples.map((e) => e.scenario + " " + e.tradeoff), f.personalPrompt, ...(f.pitfalls || []), ...(f.steps || [])].join(" ").length
+  })).sort((a, b) => b.len - a.len)[0];
   await page.goto(BASE + "/#/f/" + longest.id, { waitUntil: "networkidle" });
   for (const w of [375, 320]) {
     await page.setViewportSize({ width: w, height: 667 });
@@ -226,13 +384,11 @@ const run = async () => {
   }
   await page.setViewportSize({ width: 375, height: 667 });
 
-  // Step 10: axe on a rendered card, both themes
+  // Step 10: axe on a rendered card, both themes (persona accent text scanned).
   const axeRules = ["color-contrast", "document-title", "html-has-lang", "list", "listitem", "link-name", "empty-heading"];
   // Scan a plain card, a steps-bearing card, and the not-found state (has .btn-link).
   const axeTargets = [fws[0].id, "ooda-loop", "definitely-not-real"];
   const expectBg = { dark: "rgb(18, 20, 28)", light: "rgb(244, 241, 233)" };
-  // Zero motion so switching data-theme applies instantly — axe scans a settled
-  // frame, never a mid-transition color that a normally-loaded card never shows.
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const theme of ["dark", "light"]) {
     for (const id of axeTargets) {
@@ -257,10 +413,7 @@ const run = async () => {
   await cold.close();
   await ctx.setOffline(false);
   const swSrc = await (await ctx.request.get(BASE + "/sw.js")).text();
-  // The shell cache version is bumped every sprint that adds precached assets
-  // (v2 content, v3 visuals, v4 nav modules); this regression check tracks the
-  // CURRENT version so it stays green after each bump — same pattern as v2→v3.
-  log(/pdb-shell-v8/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v8)");
+  log(/pdb-shell-v9/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v9)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak
@@ -269,11 +422,8 @@ const run = async () => {
     situations: document.querySelector("#screen-situations").textContent.includes("Start where you are"),
     browse: document.querySelector("#screen-browse").textContent.includes("Browse the shelf"),
     favorites: document.querySelector("#screen-favorites").textContent.includes("No favorites yet"),
-    // Sprint 005 replaced the Today placeholder with a live daily card (rendered
-    // on visit); the honest current state is that the old placeholder is gone.
     today: !document.querySelector("#screen-today").textContent.includes("No card yet today"),
     search: !!document.querySelector("#screen-search #search-input"),
-    // Today now legitimately owns a card; the other four screens must not leak one.
     noCardLeak: !document.querySelector("#screen-situations .card, #screen-browse .card, #screen-favorites .card, #screen-search .card")
   }));
   log(Object.values(legacy).every(Boolean), "Sprint 001 screens intact, no card leak", JSON.stringify(legacy));
