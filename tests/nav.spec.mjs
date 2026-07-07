@@ -307,7 +307,7 @@ const run = async () => {
 
   /* ---- 9. A11y — axe both themes ---- */
   const axeRules = ["color-contrast", "link-name", "button-name", "list", "listitem", "document-title", "html-has-lang", "empty-heading", "aria-allowed-attr"];
-  const expectBg = { dark: "rgb(18, 20, 28)", light: "rgb(244, 241, 233)" };
+  const expectBg = { dark: "rgb(32, 24, 17)", light: "rgb(233, 223, 202)" };
   await page.emulateMedia({ reducedMotion: "reduce" });
   // Populate a favorite so the favorites list (not just empty) is scanned.
   await page.goto(BASE + "/#/f/" + idA, { waitUntil: "networkidle" });
@@ -394,7 +394,7 @@ const run = async () => {
   await ctx.setOffline(false);
 
   const swSrc = readFileSync(resolve(HERE, "..", "sw.js"), "utf8");
-  log(/CACHE\s*=\s*"pdb-shell-v9"/.test(swSrc), "sw.js CACHE === pdb-shell-v9");
+  log(/CACHE\s*=\s*"pdb-shell-v10"/.test(swSrc), "sw.js CACHE === pdb-shell-v10");
   log(/js\/nav-data\.js/.test(swSrc) && /js\/favorites\.js/.test(swSrc) && /js\/lists\.js/.test(swSrc), "sw.js precaches the 3 new modules");
   log(/keys\.filter[\s\S]*caches\.delete/.test(swSrc), "sw.js activate purges old cache");
 

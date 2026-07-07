@@ -388,7 +388,7 @@ const run = async () => {
   const axeRules = ["color-contrast", "document-title", "html-has-lang", "list", "listitem", "link-name", "empty-heading"];
   // Scan a plain card, a steps-bearing card, and the not-found state (has .btn-link).
   const axeTargets = [fws[0].id, "ooda-loop", "definitely-not-real"];
-  const expectBg = { dark: "rgb(18, 20, 28)", light: "rgb(244, 241, 233)" };
+  const expectBg = { dark: "rgb(32, 24, 17)", light: "rgb(233, 223, 202)" };
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const theme of ["dark", "light"]) {
     for (const id of axeTargets) {
@@ -413,7 +413,7 @@ const run = async () => {
   await cold.close();
   await ctx.setOffline(false);
   const swSrc = await (await ctx.request.get(BASE + "/sw.js")).text();
-  log(/pdb-shell-v9/.test(swSrc) && !/"pdb-shell-v1"/.test(swSrc), "sw cache bumped (v9)");
+  log(/pdb-shell-v10/.test(swSrc) && !/"pdb-shell-v9"/.test(swSrc), "sw cache bumped (v10)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak

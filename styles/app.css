@@ -1,18 +1,30 @@
 /* ==========================================================================
-   Pocket Decision Book — app shell styles (Sprint 001)
+   Pocket Decision Book — app shell styles
    Design tokens, type scale, layout chrome, both themes.
    Type scale: Major Third (1.25). Base 16px.
      step -1  0.80rem  | step 0  1.00rem | step 1  1.25rem
      step 2   1.563rem | step 3  1.953rem | step 4 2.441rem
-   Font pairing: system serif (display/headings) + system sans (body/UI).
-   Accent (gold) is used ONLY for non-text indicators, borders and focus —
-   never to paint body text — so AA contrast holds in both themes.
+
+   Sprint 003 (2026-07-07) — "FIELD MANUAL" visual identity (v2.0, Phase 9).
+   Type system: a slab DISPLAY face for framework names (--font-display),
+   a Charter-led editorial serif body (--font-serif), and a distinct UI sans
+   (--font-sans). This replaces the v1 system-serif/system-sans pairing.
+   Palette: warm "Deep Ink" dark theme + "Paper" light theme (see §token
+   blocks below). The v1 baseline values are recorded in each theme comment.
+   Accent stays an indicators-only colour (borders, focus, list markers, SVG
+   accent fills) — NEVER paints body text — so AA contrast holds in both themes.
    ========================================================================== */
 
 /* ---- Design tokens ---- */
 :root {
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Type — Field Manual pairing (Sprint 003, B33). All three families are
+     genuinely different classes and none leads with the retired v1 stacks:
+       --font-display : slab (American Typewriter ships on macOS) — framework NAMES
+       --font-serif   : editorial body reading (Charter ships on macOS)
+       --font-sans    : UI chrome (tabs/buttons/labels/SVG text) */
+  --font-display: "American Typewriter", "Rockwell", "Roboto Slab", "Zilla Slab", Georgia, serif;
+  --font-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --fs--1: 0.80rem;
   --fs-0: 1.00rem;
@@ -42,21 +54,24 @@
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* Dark theme (default) */
+/* Dark theme (default) — "Deep Ink" (Sprint 003, B32).
+   v1 baseline (before): --bg #12141c  --surface #1b1e2b  --surface-2 #232739
+     --border #333a52  --fg #eceef5  --muted #b6bcd0  --accent #f0b429
+     --accent-soft #3a3416  --focus #ffcd5c.  Cool navy → warm ink; gold → vermilion. */
 :root[data-theme="dark"] {
-  --bg: #12141c;
-  --surface: #1b1e2b;
-  --surface-2: #232739;
-  --border: #333a52;
-  --fg: #eceef5;          /* body/heading text */
-  --muted: #b6bcd0;       /* secondary text */
-  --accent: #f0b429;      /* gold — indicators only */
-  --accent-soft: #3a3416;
-  --focus: #ffcd5c;       /* focus ring */
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --bg: #201811;          /* rgb(32, 24, 17) — warm ink */
+  --surface: #2a2015;
+  --surface-2: #362a1c;
+  --border: #524232;
+  --fg: #f4ede0;          /* body/heading text */
+  --muted: #c3b7a1;       /* secondary text */
+  --accent: #e2622f;      /* vermilion — indicators only */
+  --accent-soft: #3d2416;
+  --focus: #ff8a5c;       /* focus ring */
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   /* Persona accent system (Sprint 002, B31) — additive, namespaced tokens that
      do NOT touch any v1 palette token. Dark-theme values: light-toned accents,
-     each AA (>=4.5:1) as text on --bg/--surface/--surface-2. */
+     each AA (>=4.5:1) as text on the new --bg/--surface/--surface-2 (axe-verified). */
   --persona-everyday: #8fbaff;
   --persona-student: #5fd6c4;
   --persona-relationship: #ff9ec6;
@@ -65,25 +80,30 @@
   color-scheme: dark;
 }
 
-/* Light theme */
+/* Light theme — "Paper" (Sprint 003, B32).
+   v1 baseline (before): --bg #f4f1e9  --surface #ffffff  --surface-2 #efeade
+     --border #d5cebd  --fg #1b1d26  --muted #55596b  --accent #a9741a
+     --accent-soft #f2e6c9  --focus #8a5a00.  Near-white cream → warm kraft; gold → rust. */
 :root[data-theme="light"] {
-  --bg: #f4f1e9;
-  --surface: #ffffff;
-  --surface-2: #efeade;
-  --border: #d5cebd;
-  --fg: #1b1d26;
-  --muted: #55596b;
-  --accent: #a9741a;      /* gold — indicators only */
-  --accent-soft: #f2e6c9;
-  --focus: #8a5a00;       /* focus ring */
-  --shadow: 0 8px 24px rgba(35, 30, 15, 0.12);
-  /* Persona accent system (Sprint 002, B31) — light-theme values: dark-toned
-     accents, each AA (>=4.5:1) as text on --bg/--surface/--surface-2. */
-  --persona-everyday: #1f5fbf;
-  --persona-student: #0e7167;
-  --persona-relationship: #b03567;
-  --persona-high-achiever: #8a6100;
-  --persona-privileged: #6a3fc0;
+  --bg: #e9dfca;          /* rgb(233, 223, 202) — warm kraft paper */
+  --surface: #f6efdd;
+  --surface-2: #ded1b5;
+  --border: #c9b995;
+  --fg: #241d12;
+  --muted: #5a4f39;
+  --accent: #b5401d;      /* rust — indicators only */
+  --accent-soft: #ecdcc0;
+  --focus: #8a2f12;       /* focus ring */
+  --shadow: 0 8px 24px rgba(35, 25, 10, 0.16);
+  /* Persona accent system (Sprint 002, B31) — light-theme values re-darkened for
+     the new kraft backgrounds so each persona accent stays AA (>=4.5:1) as text
+     on --bg/--surface/--surface-2 (the v1 values dropped below 4.5:1 on the
+     darker paper; axe-verified). Namespaced — no v1 palette token is touched. */
+  --persona-everyday: #17458a;
+  --persona-student: #0b5a52;
+  --persona-relationship: #932c56;
+  --persona-high-achiever: #6f4d00;
+  --persona-privileged: #573399;
   color-scheme: light;
 }
 
@@ -210,7 +230,7 @@ svg.icon,
 .screen-inner {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4) var(--space-6);
+  padding: var(--space-4) var(--space-4) var(--space-6);
 }
 
 /* screen enter transition — transform only (never opacity, so text contrast
@@ -355,7 +375,13 @@ svg.icon,
 .card * { overflow-wrap: anywhere; word-break: normal; }
 
 /* Header */
-.card-header { margin-bottom: var(--space-5); }
+/* Compact above-the-fold rhythm (Sprint 003, H1) so the enlarged plate still
+   leaves essence above the 375px fold. Restored to airier spacing on wide
+   screens (>=640px) where there is no fold pressure. (The .card-trigger and
+   figure margin overrides live AFTER .card-part below so they win the cascade.) */
+.card-header { margin-bottom: var(--space-2); }
+.card-header .card-kicker { margin-bottom: var(--space-1); }
+.card-essence .card-part-label { margin-bottom: var(--space-1); line-height: 1.2; }
 .card-kicker {
   margin: 0 0 var(--space-2);
   font-size: var(--fs--1);
@@ -366,10 +392,13 @@ svg.icon,
 }
 .card-name {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-display);   /* slab display face — Field Manual (B33) */
   font-weight: 600;
-  font-size: var(--fs-3);
-  line-height: 1.12;
+  font-size: 1.45rem;                 /* mobile: still the largest heading on the
+                                         card (> the 20px essence) but tight enough
+                                         to keep even the longest name above the
+                                         375px fold (H1); bumped to --fs-3 >=640px */
+  line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--fg);
 }
@@ -387,6 +416,7 @@ svg.icon,
 
 /* Trigger — quoted voice of the user, set apart with an accent rule */
 .card-trigger {
+  margin-bottom: var(--space-3);   /* compact fold rhythm (H1); after .card-part so it wins */
   padding-left: var(--space-4);
   border-left: 3px solid var(--accent);
 }
@@ -395,35 +425,38 @@ svg.icon,
   font-family: var(--font-serif);
   font-size: var(--fs-1);
   font-style: italic;
-  line-height: 1.4;
+  line-height: 1.3;
   color: var(--fg);
 }
 
 /* Visual figure — original inline SVG (Sprint 003) above a form-name caption.
    The SVG sits on --surface; all diagram colour comes from theme tokens below,
    so it reads with AA contrast in BOTH dark and light themes. */
+/* Figure — enlarged plate (Sprint 003, B35 H2). The diagram fills more width via
+   trimmed side padding (grow by width, not height); vertical padding + the caption
+   are compacted so essence stays above the 375px fold (H1). */
 .card-figure {
-  margin: 0 0 var(--space-5);
+  margin: 0 0 var(--space-2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-1);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-4);
+  padding: var(--space-1) var(--space-2);
 }
 .card-visual {
   display: block;
   width: 100%;
-  max-width: 320px;
+  max-width: 384px;         /* raised from v1 320px (B35 H2, >=380) */
   aspect-ratio: 120 / 84;   /* matches the viewBox → never collapses to 0px */
   height: auto;
   margin: 0 auto;
 }
 .card-figure-fallback {
   width: 100%;
-  max-width: 320px;
+  max-width: 384px;
   aspect-ratio: 120 / 84;
   border: 1px dashed var(--border);
   border-radius: var(--radius-sm);
@@ -456,7 +489,16 @@ svg.icon,
 .card-visual .v-text-inv    { fill: var(--bg); font-family: var(--font-sans); font-size: 10px; font-weight: 700; }
 .card-visual .v-text-inv-sm { fill: var(--bg); font-family: var(--font-sans); font-size: 7px;  font-weight: 700; }
 
-.card-figcaption { min-width: 0; display: flex; flex-direction: column; gap: 2px; align-self: flex-start; }
+/* Caption compacted to one baseline row (Sprint 003, H1) — reclaims the vertical
+   space the enlarged plate spends, keeping essence above the 375px fold. */
+.card-figcaption {
+  min-width: 0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+  align-self: flex-start;
+}
 .card-figcaption-kicker {
   font-size: var(--fs--1);
   font-weight: 700;
@@ -465,8 +507,9 @@ svg.icon,
   color: var(--muted);
 }
 .card-figcaption-name {
-  font-family: var(--font-serif);
-  font-size: var(--fs-1);
+  font-family: var(--font-display);   /* slab display face — Field Manual (B33) */
+  font-size: var(--fs-0);             /* compact caption keeps the plate short (H1);
+                                         bumped back up on wide screens below */
   font-weight: 600;
   color: var(--fg);
   line-height: 1.2;
@@ -492,9 +535,26 @@ svg.icon,
 .card-pitfalls-list li { color: var(--fg); }
 .card-pitfalls-list li::marker { color: var(--accent); }
 
+/* Pitfalls — a distinct "caution slip" container (Sprint 003, B35 H3) so the
+   watch-outs read as visually separate from the example block, which sits on the
+   plain page with persona accent bars. Text stays --fg → AA on --surface-2. */
+.card-pitfalls {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
 /* Example — featured-first + persona tab widget (Sprint 002, B30/B31/B34).
-   Only additive persona styles + additive --persona-* tokens; no v1 palette
-   token or font-family is touched (that is Sprint 003). */
+   Restyled for Field Manual (Sprint 003): the example block is the heart of the
+   card, so it sits open on the page under a top hairline (distinct from the boxed
+   "caution slip" pitfalls container below it — B35 H3), with persona accent bars
+   as its structure. */
+.card-example {
+  border-top: 2px solid var(--border);
+  padding-top: var(--space-4);
+}
 .card-example-text { margin: 0; color: var(--fg); line-height: 1.55; }
 .card-example-empty { color: var(--muted); font-style: italic; }
 
@@ -767,7 +827,7 @@ svg.icon,
 }
 .back-link:hover { color: var(--accent); }
 .back-chevron { width: 20px; height: 20px; flex: none; }
-.card-back { margin-bottom: var(--space-4); margin-left: calc(-1 * var(--space-2)); }
+.card-back { margin-bottom: var(--space-2); margin-left: calc(-1 * var(--space-2)); }
 
 /* ---- Card header row (name + favorite star) ---- */
 .card-header-row {
@@ -914,6 +974,13 @@ svg.icon,
 /* ---- Wider than phone: keep content readable & centered ---- */
 @media (min-width: 640px) {
   .screen-inner { padding-top: var(--space-7); }
+  /* No fold pressure on wide screens — restore the airier card rhythm and the
+     larger display name (Sprint 003, H1 is a 375px concern only). */
+  .card-name { font-size: var(--fs-3); }
+  .card-header { margin-bottom: var(--space-5); }
+  .card-trigger { margin-bottom: var(--space-5); }
+  .card-figure { margin-bottom: var(--space-5); gap: var(--space-3); padding: var(--space-4); }
+  .card-figcaption-name { font-size: var(--fs-1); }
 }
 
 /* ==========================================================================

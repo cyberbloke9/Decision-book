@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v9";
+var CACHE = "pdb-shell-v10";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -40,6 +40,14 @@ var CACHE = "pdb-shell-v9";
 // persona-tab example renderer (B30/B31). No new precache entry (both files are
 // already listed); the bump purges the stale v8 cache so the offline app serves
 // the new data.js + card.js (protects B20).
+// v10 (2026-07-07, Sprint 003 — "Field Manual" UI transformation, Phase 9) ships
+// edits to three already-listed shell assets: styles/app.css (new named palette +
+// slab display type system + hierarchy pass), index.html (theme-color meta →
+// #201811), and manifest.json (theme_color/background_color → #201811). No new
+// precache entry (all three are already listed; no self-hosted font was added —
+// the display face is the macOS-guaranteed slab stack, so the SHELL list is
+// unchanged); the bump purges the stale v9 cache so the offline app serves the
+// re-skinned shell (protects B20). js/data.js is byte-unchanged this sprint.
 var SHELL = [
   "./",
   "index.html",
