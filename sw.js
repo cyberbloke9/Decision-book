@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v11";
+var CACHE = "pdb-shell-v12";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -28,6 +28,8 @@ var CACHE = "pdb-shell-v11";
 // assets: index.html (iOS standalone meta tags) and js/favorites.js (fresh
 // storage re-read per call so a second tab never clobbers favorites). No new
 // precache entry; the bump purges the stale v6 cache (protects B20).
+// v12 (post-v2 review swarm) ships js/card.js a11y fixes (tabpanel tabindex,
+// click focus) + comment-only app.css edit; both precached, purge stale v11.
 // v8 (2026-07-07, Sprint 001 — v2 examples engine) regenerates the precached
 // js/data.js: the 52 core frameworks gain examples[] (5 persona scenarios +
 // tradeoffs) + featured, and their universalExample is now examples[featured].

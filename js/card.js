@@ -145,6 +145,9 @@
       panel.id = panelId;
       panel.setAttribute("role", "tabpanel");
       panel.setAttribute("aria-labelledby", tabId);
+      // APG tabs pattern: a panel with no focusable children must itself be
+      // focusable so keyboard/AT users can Tab from the active tab into it.
+      panel.setAttribute("tabindex", "0");
       panel.style.setProperty("--persona-accent", "var(--persona-" + e.persona + ")");
       if (!isFeatured) panel.setAttribute("hidden", "");
 
@@ -177,7 +180,9 @@
     }
 
     tabs.forEach(function (tab, i) {
-      tab.addEventListener("click", function () { select(i, false); });
+      // Explicit focus: Safari does not focus buttons on click by default,
+      // which would desync DOM focus from aria-selected/roving tabindex.
+      tab.addEventListener("click", function () { select(i, true); });
       tab.addEventListener("keydown", function (ev) {
         var key = ev.key;
         if (key === "ArrowRight" || key === "ArrowDown") {

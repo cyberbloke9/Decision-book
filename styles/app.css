@@ -71,7 +71,8 @@
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   /* Persona accent system (Sprint 002, B31) — additive, namespaced tokens that
      do NOT touch any v1 palette token. Dark-theme values: light-toned accents,
-     each AA (>=4.5:1) as text on the new --bg/--surface/--surface-2 (axe-verified). */
+     each AA (>=4.5:1) as text on --bg/--surface/--surface-2 — mechanically enforced
+     for all 30 pairs by tests/contrast.spec.mjs (axe only covers featured personas). */
   --persona-everyday: #8fbaff;
   --persona-student: #5fd6c4;
   --persona-relationship: #ff9ec6;
@@ -98,7 +99,8 @@
   /* Persona accent system (Sprint 002, B31) — light-theme values re-darkened for
      the new kraft backgrounds so each persona accent stays AA (>=4.5:1) as text
      on --bg/--surface/--surface-2 (the v1 values dropped below 4.5:1 on the
-     darker paper; axe-verified). Namespaced — no v1 palette token is touched. */
+     darker paper; all 30 pairs enforced by tests/contrast.spec.mjs). Namespaced —
+     no v1 palette token is touched. */
   --persona-everyday: #17458a;
   --persona-student: #0b5a52;
   --persona-relationship: #932c56;
