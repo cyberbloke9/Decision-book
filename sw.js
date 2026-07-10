@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v14";
+var CACHE = "pdb-shell-v15";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -81,6 +81,18 @@ var CACHE = "pdb-shell-v14";
 // stale v13 cache so the offline app serves the new module + the three edited
 // ones (protects B20, soul-constraint offline B73/B75). Changed/new precached
 // assets this sprint: js/journal.js (new), js/app.js, js/card.js, index.html.
+// v15 (2026-07-10, v3.0 Sprint 003 — SRS mastery engine, Phase 13) adds ONE new
+// precached module: js/srs.js (window.PDB_SRS — the pdb.srs Leitner ladder data
+// layer + the Today-screen daily-card grade control and 0–3 due-for-review shelf,
+// B56–B60). It is also added to the index.html <script> tags (after journal.js,
+// before app.js). js/app.js (one additive PDB_SRS.renderToday call in the today
+// route) and index.html (the new #srs-mount sibling) are edited (already
+// precached — no new entry for them); styles/app.css gains SRS styling (already
+// precached). js/daily.js is NOT touched (SRS is a strictly-additive sibling).
+// The version bump purges the stale v14 cache so the offline app serves the new
+// module + the edited ones (protects B20, soul-constraint offline B73/B75).
+// Changed/new precached assets this sprint: js/srs.js (new), js/app.js,
+// index.html, styles/app.css.
 var SHELL = [
   "./",
   "index.html",
@@ -95,6 +107,7 @@ var SHELL = [
   "js/persona-tabs.js",
   "js/card.js",
   "js/journal.js",
+  "js/srs.js",
   "js/app.js",
   "manifest.json",
   "icons/icon-192.png",

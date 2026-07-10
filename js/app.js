@@ -106,6 +106,13 @@
         if (daily && typeof daily.renderToday === "function") {
           daily.renderToday(byId("today-mount"), data);
         }
+        // Additive SRS deck (v3.0 Sprint 003): the daily-card grade control +
+        // due-shelf, rendered into the SEPARATE #srs-mount sibling. daily card
+        // above is byte-identical (B58i/B59/R2).
+        var srs = root.PDB_SRS;
+        if (srs && typeof srs.renderToday === "function") {
+          srs.renderToday(byId("srs-mount"));
+        }
         break;
       }
       case "search":

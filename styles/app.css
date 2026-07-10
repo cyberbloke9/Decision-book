@@ -1391,3 +1391,103 @@ svg.icon,
 /* ---- B52 affordance after the framework card ---- */
 .card-journal-action { margin-top: var(--space-5); }
 .card-journal-action .journal-this { width: 100%; justify-content: center; }
+
+/* ==========================================================================
+   Sprint 003 — SRS mastery engine (Phase 13). A strictly-additive deck under
+   the Today daily card, in #srs-mount only. Namespaced .srs-* — reuses no
+   daily-card class. Reuses Sprint-001 tokens (no new palette / fonts); accent
+   paints indicators/borders only, never body text, so AA holds in both themes.
+   Every grade button is >= 44x44; long names wrap; nothing scrolls at 320/375px;
+   prefers-reduced-motion is honored by the global rule above.
+   ========================================================================== */
+.srs-mount { min-width: 0; margin-top: var(--space-5); }
+.srs-mount * { overflow-wrap: anywhere; word-break: normal; }
+
+/* ---- (a) Daily-card grade control ---- */
+.srs-daily {
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+.srs-daily-prompt {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  color: var(--fg);
+}
+.srs-graded {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-0);
+}
+.srs-graded:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Grade button row (shared by daily control + shelf rows) ---- */
+.srs-grade-row { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.srs-grade {
+  flex: 1 1 auto;
+  min-width: 120px;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-weight: 600;
+  font-size: var(--fs-0);
+  cursor: pointer;
+  transition: border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease);
+}
+.srs-grade:hover { border-color: var(--focus); }
+.srs-grade:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.srs-grade-got { border-color: var(--accent); }
+
+/* ---- (b) Due-for-review shelf ---- */
+.srs-shelf {
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.srs-shelf-heading {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  color: var(--fg);
+}
+.srs-shelf-heading:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+.srs-shelf-empty { margin: 0; color: var(--muted); font-size: var(--fs-0); }
+.srs-shelf-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.srs-shelf-row {
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  display: grid;
+  gap: var(--space-3);
+}
+.srs-shelf-row-head { display: grid; gap: var(--space-1); }
+.srs-shelf-name {
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.srs-shelf-name:hover { border-bottom-color: var(--focus); }
+.srs-shelf-name:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+.srs-shelf-reason { margin: 0; color: var(--muted); font-size: var(--fs--1); }
