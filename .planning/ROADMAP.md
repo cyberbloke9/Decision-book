@@ -31,3 +31,13 @@ Requirements in .planning/V2.md (raw human feedback verbatim + persona rubric + 
 - **v6.0 "Sustain"**: Pro tier (web-first payments); optional E2E-encrypted sync; more languages; my-models community gallery.
 
 Soul constraints binding on ALL milestones: <1s open, fully offline, core free, no account required for core, decisions stay on-device by default.
+
+## Milestone: v3.0 "Practice" — journal, SRS, quiz, weekly review (started 2026-07-10)
+
+Requirements: .planning/V3.md. Phases map 1:1 to harness sprints.
+
+- [ ] **Phase 11 — Storage & widget infrastructure**: PDB_STORE versioned localStorage gateway (migrate favorites/applied/theme WITHOUT data loss, schemaVersion + migration hook); extract persona tabs to js/persona-tabs.js with onSelect hook. All existing suites stay green.
+- [ ] **Phase 12 — Decision journal**: Farnam Street entry form (situation, frame, options+rejected, expected outcome+confidence, state, linked frameworks, review date), list/detail views, journal-this affordance on cards, markdown export.
+- [ ] **Phase 13 — SRS engine**: Leitner-ladder per-framework mastery via injectable clock; grading on daily card; Today gains a due-shelf (max 3/day) with rotation/streak untouched.
+- [ ] **Phase 14 — Reverse quiz**: 5-question rounds, scenario→pick-framework with plausible distractors, deterministic seeding, immediate feedback, feeds SRS, local stats.
+- [ ] **Phase 15 — Weekly review + IA + polish + gate**: due-entry outcome recording (expected vs actual), weekly recap, Practice tab IA (Situations/Browse/Today/Practice; favorites relocated without regression), whole-app acceptance gate.
