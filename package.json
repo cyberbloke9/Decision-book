@@ -10,6 +10,7 @@
     "test:store": "node tests/store.spec.mjs",
     "test:journal": "node tests/journal.spec.mjs",
     "test:srs": "node tests/srs.spec.mjs",
+    "test:quiz": "node tests/quiz.spec.mjs",
     "test:content": "node tests/content.spec.mjs",
     "test:shell": "node tests/shell.spec.mjs",
     "test:visuals": "node tests/visuals.spec.mjs",

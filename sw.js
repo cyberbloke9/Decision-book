@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v15";
+var CACHE = "pdb-shell-v16";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -93,6 +93,20 @@ var CACHE = "pdb-shell-v15";
 // module + the edited ones (protects B20, soul-constraint offline B73/B75).
 // Changed/new precached assets this sprint: js/srs.js (new), js/app.js,
 // index.html, styles/app.css.
+// v16 (2026-07-10, v3.0 Sprint 004 — Reverse quiz, Phase 14) adds ONE new
+// precached module: js/quiz.js (window.PDB_QUIZ — the pure seeded question
+// builder + display-only stem redaction + the pdb.quiz local stats layer + the
+// #/quiz screen and the additive Today "Test your recall" entry card, B61–B65).
+// It is also added to the index.html <script> tags (after srs.js, before app.js).
+// js/app.js (the quiz route arm + the one additive renderEntry line in the today
+// case) and index.html (the new #screen-quiz section + the #quiz-entry-mount
+// sibling) are edited (already precached — no new entry for them); styles/app.css
+// gains quiz styling (already precached). js/daily.js and js/srs.js are NOT
+// touched (the quiz is a strictly-additive sibling reusing PDB_SRS.grade). The
+// version bump purges the stale v15 cache so the offline app serves the new
+// module + the edited ones (protects B20, soul-constraint offline B73/B75).
+// Changed/new precached assets this sprint: js/quiz.js (new), js/app.js,
+// index.html, styles/app.css.
 var SHELL = [
   "./",
   "index.html",
@@ -108,6 +122,7 @@ var SHELL = [
   "js/card.js",
   "js/journal.js",
   "js/srs.js",
+  "js/quiz.js",
   "js/app.js",
   "manifest.json",
   "icons/icon-192.png",

@@ -1491,3 +1491,214 @@ svg.icon,
 .srs-shelf-name:hover { border-bottom-color: var(--focus); }
 .srs-shelf-name:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 .srs-shelf-reason { margin: 0; color: var(--muted); font-size: var(--fs--1); }
+
+/* ==========================================================================
+   Sprint 004 — Reverse recall quiz (Phase 14). The #/quiz screen (#quiz-mount)
+   + the additive Today "Test your recall" card (#quiz-entry-mount). Namespaced
+   .quiz-* — reuses no daily-card / SRS / journal class. Reuses Sprint-001 tokens
+   (no new palette / fonts); accent paints indicators/borders only, never body
+   text, so AA >= 4.5:1 holds in BOTH themes. Correct/incorrect is carried by the
+   TEXT ("Correct" / "Not quite"), not by color alone (WCAG 1.4.1). Every button
+   is >= 44px tall; long text wraps; nothing scrolls at 320/375px;
+   prefers-reduced-motion is honored by the global rule.
+   ========================================================================== */
+.quiz-mount, .quiz-entry-mount { min-width: 0; }
+.quiz-mount * , .quiz-entry-mount * { overflow-wrap: anywhere; word-break: normal; }
+.quiz-entry-mount { margin-top: var(--space-4); }
+
+/* ---- Shared quiz button ---- */
+.quiz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-0);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease);
+}
+.quiz-btn:hover { border-color: var(--focus); }
+.quiz-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.quiz-btn--primary { border-color: var(--accent); background: var(--accent-soft); }
+
+/* ---- Stats strip (start state + summary + Today card) ---- */
+.quiz-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin: var(--space-4) 0;
+}
+.quiz-stat { display: grid; gap: var(--space-1); }
+.quiz-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-3);
+  line-height: 1;
+  color: var(--fg);
+}
+.quiz-stat-label { color: var(--muted); font-size: var(--fs--1); }
+.quiz-stats-empty { margin: var(--space-4) 0; color: var(--muted); font-size: var(--fs-0); }
+
+/* ---- Start / first-run state ---- */
+.quiz-start { display: grid; gap: var(--space-2); }
+.quiz-intro {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  color: var(--fg);
+}
+.quiz-start-btn { justify-self: start; margin-top: var(--space-2); }
+
+/* ---- Question in progress ---- */
+.quiz-question { display: grid; gap: var(--space-4); }
+.quiz-progress {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs--1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.quiz-progress:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+.quiz-stem {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  line-height: 1.5;
+  color: var(--fg);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+}
+.quiz-options { display: grid; gap: var(--space-3); }
+.quiz-option {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-0);
+  cursor: pointer;
+  transition: border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease);
+}
+.quiz-option:hover { border-color: var(--focus); }
+.quiz-option:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.quiz-option:disabled { cursor: default; opacity: 1; }
+.quiz-option--correct {
+  border-color: var(--accent);
+  border-width: 2px;
+  background: var(--accent-soft);
+}
+.quiz-option--wrong {
+  border-color: var(--fg);
+  border-width: 2px;
+  border-style: dashed;
+  background: var(--surface);
+}
+
+/* ---- Feedback panel ---- */
+.quiz-live { position: relative; }
+.quiz-feedback {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.quiz-feedback-head {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-1);
+  color: var(--fg);
+}
+.quiz-feedback-head:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+.quiz-feedback-head--correct { color: var(--fg); }
+.quiz-feedback:has(.quiz-feedback-head--correct) { border-left-color: var(--accent); }
+.quiz-feedback-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-2);
+  color: var(--fg);
+}
+.quiz-feedback-essence {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-0);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.quiz-card-link {
+  justify-self: start;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.quiz-card-link:hover { border-bottom-color: var(--focus); }
+.quiz-card-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+.quiz-next { justify-self: start; margin-top: var(--space-2); }
+
+/* ---- Round-complete summary ---- */
+.quiz-summary { display: grid; gap: var(--space-2); }
+.quiz-summary-head {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-3);
+  color: var(--fg);
+}
+.quiz-summary-head:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+.quiz-summary .quiz-btn { justify-self: start; margin-top: var(--space-2); }
+.quiz-back-link {
+  justify-self: start;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.quiz-back-link:hover { color: var(--fg); border-bottom-color: var(--focus); }
+.quiz-back-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+/* ---- Today "Test your recall" entry card ---- */
+.quiz-entry-card {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.quiz-entry-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-1);
+  color: var(--fg);
+}
+.quiz-entry-body { margin: 0; color: var(--muted); font-size: var(--fs-0); line-height: 1.5; }
+.quiz-entry-link {
+  justify-self: start;
+  margin-top: var(--space-2);
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.quiz-entry-link:hover { border-bottom-color: var(--focus); }
+.quiz-entry-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }

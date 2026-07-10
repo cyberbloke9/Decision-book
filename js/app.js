@@ -11,7 +11,7 @@
   var THEME_KEY = "pdb.theme";
   var DEFAULT_ROUTE = "situations";
   var TAB_ROUTES = ["situations", "browse", "favorites", "today"];
-  var ALL_ROUTES = TAB_ROUTES.concat(["search"]);
+  var ALL_ROUTES = TAB_ROUTES.concat(["search", "quiz"]);
 
   var screens = {};
   var tabs = {};
@@ -113,6 +113,18 @@
         if (srs && typeof srs.renderToday === "function") {
           srs.renderToday(byId("srs-mount"));
         }
+        // Additive reverse-quiz entry card (v3.0 Sprint 004): the "Test your
+        // recall" card, rendered into the SEPARATE #quiz-entry-mount sibling.
+        // #today-mount and #srs-mount above are byte-identical (R2/B59).
+        var quiz = root.PDB_QUIZ;
+        if (quiz && typeof quiz.renderEntry === "function") {
+          quiz.renderEntry(byId("quiz-entry-mount"));
+        }
+        break;
+      }
+      case "quiz": {
+        var Q = root.PDB_QUIZ;
+        if (Q && typeof Q.render === "function") Q.render(byId("quiz-mount"));
         break;
       }
       case "search":
@@ -271,7 +283,8 @@
       browse: "Browse",
       favorites: "Favorites",
       today: "Today",
-      search: "Search"
+      search: "Search",
+      quiz: "Reverse quiz"
     };
     return "Pocket Decision Book — " + (names[desc.route] || "Situations");
   }

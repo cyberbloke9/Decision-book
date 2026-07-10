@@ -460,7 +460,7 @@ const run = async () => {
   await cold.close();
   await ctx.setOffline(false);
   const swSrc = await (await ctx.request.get(BASE + "/sw.js")).text();
-  log(/pdb-shell-v15/.test(swSrc) && !/CACHE\s*=\s*"pdb-shell-v14"/.test(swSrc), "sw cache bumped (v15)");
+  log(/pdb-shell-v16/.test(swSrc) && !/CACHE\s*=\s*"pdb-shell-v15"/.test(swSrc), "sw cache bumped (v16)");
   log(/js\/data\.js/.test(swSrc) && /js\/card\.js/.test(swSrc), "sw precaches data.js + card.js");
 
   // Step 12: Sprint 001 non-regression — five screens keep honest copy, no card leak
