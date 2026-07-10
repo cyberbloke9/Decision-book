@@ -191,12 +191,17 @@
     </a>
   </nav>
 
+  <!-- store.js FIRST: favorites/daily/app/card persistence now routes through
+       window.PDB_STORE. persona-tabs.js BEFORE card.js: card consumes
+       window.PDB_PERSONA_TABS (v3.0 Sprint 001, contract §10). -->
+  <script src="js/store.js"></script>
   <script src="js/data.js"></script>
   <script src="js/nav-data.js"></script>
   <script src="js/favorites.js"></script>
   <script src="js/daily.js"></script>
   <script src="js/visuals.js"></script>
   <script src="js/lists.js"></script>
+  <script src="js/persona-tabs.js"></script>
   <script src="js/card.js"></script>
   <script src="js/app.js"></script>
 </body>

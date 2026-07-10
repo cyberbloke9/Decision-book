@@ -7,6 +7,7 @@
     "serve": "python3 -m http.server 4173",
     "icons": "python3 scripts/gen-icons.py",
     "data": "node scripts/build-data.mjs",
+    "test:store": "node tests/store.spec.mjs",
     "test:content": "node tests/content.spec.mjs",
     "test:shell": "node tests/shell.spec.mjs",
     "test:visuals": "node tests/visuals.spec.mjs",

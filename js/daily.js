@@ -103,9 +103,19 @@
      (never cache at module load — a test may seed storage after load and read
      back without a reload). Returns a sanitized array of valid, unique
      YYYY-MM-DD strings. Robust to missing/blocked/corrupt storage. */
+  function readAppliedRaw() {
+    var store = root.PDB_STORE;
+    if (store && typeof store.get === "function") return store.get(APPLIED_KEY);
+    try {
+      return root.localStorage ? root.localStorage.getItem(APPLIED_KEY) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   function readApplied() {
     try {
-      var raw = root.localStorage ? root.localStorage.getItem(APPLIED_KEY) : null;
+      var raw = readAppliedRaw();
       if (!raw) return [];
       var parsed = JSON.parse(raw);
       if (!Array.isArray(parsed)) return [];
@@ -125,6 +135,13 @@
   }
 
   function writeApplied(arr) {
+    // Persist through the v3 gateway (byte-identical key name + JSON array of
+    // YYYY-MM-DD strings, B42/B44); defensive raw fallback if it's absent.
+    var store = root.PDB_STORE;
+    if (store && typeof store.set === "function") {
+      store.set(APPLIED_KEY, JSON.stringify(arr));
+      return;
+    }
     try {
       if (root.localStorage) root.localStorage.setItem(APPLIED_KEY, JSON.stringify(arr));
     } catch (e) { /* blocked/full — no-op, never throw */ }

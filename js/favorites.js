@@ -39,26 +39,35 @@
     }
   }
 
-  function read() {
+  // Persistence routes through PDB_STORE (v3 gateway) with byte-identical key
+  // name + JSON array-of-id-strings shape (B42/B44). PDB_STORE.get is itself
+  // read-through + try/catch-guarded, so the multi-tab freshness discipline is
+  // preserved. A defensive raw-localStorage fallback is kept for the (load-order
+  // guaranteed absent) case where the gateway is missing — it never throws.
+  function readRaw() {
+    var store = root.PDB_STORE;
+    if (store && typeof store.get === "function") return store.get(KEY);
     try {
-      return parse(root.localStorage ? root.localStorage.getItem(KEY) : null);
+      return root.localStorage ? root.localStorage.getItem(KEY) : null;
     } catch (e) {
-      return [];
+      return null;
     }
+  }
+
+  function read() {
+    return parse(readRaw());
   }
 
   function sync() {
-    var raw;
-    try {
-      if (!root.localStorage) return; // no storage — keep the in-memory mirror
-      raw = root.localStorage.getItem(KEY);
-    } catch (e) {
-      return; // storage blocked — keep the in-memory mirror
-    }
-    ids = parse(raw);
+    ids = parse(readRaw());
   }
 
   function write() {
+    var store = root.PDB_STORE;
+    if (store && typeof store.set === "function") {
+      store.set(KEY, JSON.stringify(ids));
+      return;
+    }
     try {
       if (root.localStorage) root.localStorage.setItem(KEY, JSON.stringify(ids));
     } catch (e) {

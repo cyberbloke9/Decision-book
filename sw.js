@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v12";
+var CACHE = "pdb-shell-v13";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -59,16 +59,30 @@ var CACHE = "pdb-shell-v12";
 // this bump's changed-asset list. No new precache entry (app.css is already listed);
 // the bump purges the stale v10 cache so the offline app serves the corrected
 // app.css (protects B20). Changed precached asset this sprint: styles/app.css only.
+// v13 (2026-07-10, v3.0 Sprint 001 — Storage & widget infrastructure, Phase 11)
+// adds TWO new precached modules: js/store.js (the window.PDB_STORE versioned
+// localStorage gateway, B41) and js/persona-tabs.js (the window.PDB_PERSONA_TABS
+// ARIA tab widget extracted from card.js, B45). Both are also added to the
+// index.html <script> tags (store.js first, persona-tabs.js before card.js).
+// js/favorites.js, js/daily.js, js/app.js, js/card.js are edited to route
+// persistence through PDB_STORE / consume PDB_PERSONA_TABS (already precached —
+// no new entry for them). The version bump purges the stale v12 cache so the
+// offline app serves the two new modules + the four edited ones (protects B20,
+// soul-constraint offline B73/B75). Changed/new precached assets this sprint:
+// js/store.js (new), js/persona-tabs.js (new), js/favorites.js, js/daily.js,
+// js/app.js, js/card.js, index.html.
 var SHELL = [
   "./",
   "index.html",
   "styles/app.css",
+  "js/store.js",
   "js/data.js",
   "js/nav-data.js",
   "js/favorites.js",
   "js/daily.js",
   "js/visuals.js",
   "js/lists.js",
+  "js/persona-tabs.js",
   "js/card.js",
   "js/app.js",
   "manifest.json",

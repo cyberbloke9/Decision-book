@@ -256,7 +256,15 @@
 
   function setTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
-    try { localStorage.setItem(THEME_KEY, theme); } catch (e) { /* storage unavailable */ }
+    // Persist through the v3 gateway (pdb.theme stays byte-identical: "light"/
+    // "dark", B42/B44). The index.html anti-flash inline script keeps its RAW
+    // localStorage read by design (B42 carve-out) — it runs before any module.
+    var store = root.PDB_STORE;
+    if (store && typeof store.set === "function") {
+      store.set(THEME_KEY, theme);
+    } else {
+      try { localStorage.setItem(THEME_KEY, theme); } catch (e) { /* storage unavailable */ }
+    }
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
       var bg = getComputedStyle(document.body).backgroundColor;
