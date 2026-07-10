@@ -6,7 +6,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE = "pdb-shell-v13";
+var CACHE = "pdb-shell-v14";
 
 // Precache the full shell. Includes BOTH the bare root "./" and "index.html"
 // so start_url ("." ) and a direct /index.html both resolve offline.
@@ -71,6 +71,16 @@ var CACHE = "pdb-shell-v13";
 // soul-constraint offline B73/B75). Changed/new precached assets this sprint:
 // js/store.js (new), js/persona-tabs.js (new), js/favorites.js, js/daily.js,
 // js/app.js, js/card.js, index.html.
+// v14 (2026-07-10, v3.0 Sprint 002 — Decision journal, Phase 12) adds ONE new
+// precached module: js/journal.js (window.PDB_JOURNAL — the pdb.journal data
+// layer + list/new/detail/edit render functions + pure export builder, B47–B55).
+// It is also added to the index.html <script> tags (after card.js, before app.js).
+// js/app.js (journal route parse + dispatch), js/card.js (the B52 "Journal this
+// decision" affordance on #/f/:id), index.html (the #screen-journal section) are
+// edited (already precached — no new entry for them). The version bump purges the
+// stale v13 cache so the offline app serves the new module + the three edited
+// ones (protects B20, soul-constraint offline B73/B75). Changed/new precached
+// assets this sprint: js/journal.js (new), js/app.js, js/card.js, index.html.
 var SHELL = [
   "./",
   "index.html",
@@ -84,6 +94,7 @@ var SHELL = [
   "js/lists.js",
   "js/persona-tabs.js",
   "js/card.js",
+  "js/journal.js",
   "js/app.js",
   "manifest.json",
   "icons/icon-192.png",

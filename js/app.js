@@ -35,14 +35,29 @@
   // #/s/:id (situation detail), #/c/:id (category detail).
   var PARAM_PREFIXES = { f: "framework", s: "situation", c: "category" };
 
+  function decode(s) {
+    try { return decodeURIComponent(s); } catch (e) { return s; }
+  }
+
   function parseHash() {
     var raw = (location.hash || "").replace(/^#\/?/, "").split(/[?#]/)[0].trim();
     var head = raw.indexOf("/") !== -1 ? raw.slice(0, raw.indexOf("/")) : raw;
     if (Object.prototype.hasOwnProperty.call(PARAM_PREFIXES, head)) {
       var rawId = raw === head ? "" : raw.slice(head.length + 1);
-      var id = "";
-      try { id = decodeURIComponent(rawId); } catch (e) { id = rawId; }
-      return { route: PARAM_PREFIXES[head], id: id.trim() };
+      return { route: PARAM_PREFIXES[head], id: decode(rawId).trim() };
+    }
+    // Journal (v3.0 Sprint 002): one screen, several sub-views by path segment.
+    // Recognized here so garbage-hash normalization never eats #/journal/...
+    if (head === "journal") {
+      var rest = raw === "journal" ? "" : raw.slice("journal".length + 1);
+      var segs = rest ? rest.split("/") : [];
+      if (!segs.length) return { route: "journal", sub: "list" };
+      if (segs[0] === "new") {
+        return { route: "journal", sub: "new", fwId: segs.length > 1 ? decode(segs.slice(1).join("/")).trim() : "" };
+      }
+      var eid = decode(segs[0]).trim();
+      if (segs[1] === "edit") return { route: "journal", sub: "edit", id: eid };
+      return { route: "journal", sub: "detail", id: eid };
     }
     return ALL_ROUTES.indexOf(raw) !== -1 ? { route: raw } : null;
   }
@@ -54,7 +69,9 @@
     var card = window.PDB_CARD;
     var fw = (id && data && typeof data.byId === "function") ? data.byId(id) : null;
     if (fw && card && typeof card.renderCard === "function") {
-      card.renderCard(fw, mount, data);
+      // journalAction:true adds the B52 "Journal this decision" affordance as a
+      // sibling AFTER article.card (only on #/f/:id, never the Today card).
+      card.renderCard(fw, mount, data, { journalAction: true });
       return fw;
     }
     if (card && typeof card.renderNotFound === "function") {
@@ -98,6 +115,26 @@
         if (input) input.value = "";
         lists.renderSearch("", byId("search-results"), data);
         break;
+      case "journal": {
+        var J = root.PDB_JOURNAL;
+        var jmount = byId("journal-mount");
+        var jh = byId("h-journal");
+        if (!J || !jmount) break;
+        if (desc.sub === "new") {
+          if (jh) jh.textContent = "New decision";
+          J.renderNew(jmount, { fwId: desc.fwId });
+        } else if (desc.sub === "edit") {
+          if (jh) jh.textContent = "Edit decision";
+          J.renderEdit(jmount, desc.id);
+        } else if (desc.sub === "detail") {
+          if (jh) jh.textContent = "Decision";
+          J.renderDetail(jmount, desc.id);
+        } else {
+          if (jh) jh.textContent = "Your journal";
+          J.renderList(jmount);
+        }
+        break;
+      }
       case "situation": {
         var h = byId("h-situation");
         var mount = byId("situation-detail-mount");
@@ -217,6 +254,10 @@
     if (desc.route === "category") {
       var cat = root.PDB_DATA && root.PDB_DATA.categoryById ? root.PDB_DATA.categoryById(desc.id) : null;
       return "Pocket Decision Book — " + (cat ? cat.label : "Category");
+    }
+    if (desc.route === "journal") {
+      var jnames = { new: "New decision", edit: "Edit decision", detail: "Decision" };
+      return "Pocket Decision Book — " + (jnames[desc.sub] || "Journal");
     }
     var names = {
       situations: "Situations",

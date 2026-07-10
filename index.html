@@ -149,6 +149,15 @@
       </div>
     </section>
 
+    <!-- Decision journal (v3.0 Sprint 002 — reached by #/journal routes + the
+         "Journal this decision" card affordance; NOT a bottom tab this sprint). -->
+    <section class="screen" id="screen-journal" data-route="journal" aria-labelledby="h-journal" hidden>
+      <div class="screen-inner">
+        <h2 class="screen-title" id="h-journal">Your journal</h2>
+        <div id="journal-mount" class="journal-mount"></div>
+      </div>
+    </section>
+
     <!-- Framework card (reached only by direct hash #/f/:id this sprint) -->
     <section class="screen" id="screen-framework" data-route="framework" aria-labelledby="h-framework" hidden>
       <div class="screen-inner">
@@ -203,6 +212,7 @@
   <script src="js/lists.js"></script>
   <script src="js/persona-tabs.js"></script>
   <script src="js/card.js"></script>
+  <script src="js/journal.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

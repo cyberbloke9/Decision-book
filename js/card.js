@@ -231,6 +231,18 @@
     article.appendChild(prompt);
 
     mount.appendChild(article);
+
+    // B52 "Journal this decision" affordance — a real keyboard-operable link,
+    // rendered ONLY on #/f/:id (gated by options.journalAction). Appended as a
+    // SIBLING after article.card so the card's lastElementChild stays
+    // .card-prompt (B5). The Today daily card never sets journalAction.
+    if (options.journalAction) {
+      var jaWrap = el("div", "card-journal-action");
+      var ja = el("a", "btn-link journal-this", "Journal this decision");
+      ja.setAttribute("href", "#/journal/new/" + encodeURIComponent(fw.id));
+      jaWrap.appendChild(ja);
+      mount.appendChild(jaWrap);
+    }
     return mount;
   }
 
