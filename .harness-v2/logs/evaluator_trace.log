@@ -1,0 +1,245 @@
+
+[CONTRACT_REVIEW] sprint_001 — REJECTED
+- 4 blockers: trace format, full-loop definition, sampling strategy, D3/D4 validation mechanism
+- 2 high findings: "all 52" assertion unverifiable, D6 machine/manual split unclear
+- Verdict: reject and resubmit after clarifications added to contract §7/§7a
+- Issues are about testability and specificity, not scope validity
+
+---
+
+## CONTRACT_REVIEW — Sprint 001 [2026-07-07 EVALUATOR]
+
+**Task**: Review Sprint 001 contract before Generator implementation.
+
+**Process**:
+1. Read spec.md (full scope of v2.0 milestone, Phases 7–10)
+2. Read sprint_001/contract.md (data-only sprint, 52 core frameworks)
+3. Verified key risks via empirical testing:
+   - D4 regex multi-word phrases: tested `/\b(cost|at the expense|...|pay|pays)\b/i` against test strings "at the expense", "give up", "you may", "could miss" — all matched correctly ✓
+   - D3/D4 token list consistency: compared §6.1 (authoritative regex forms) vs §7.1 (reference prose lists for trace) — character-identical ✓
+   - Sampled worked example (§7.3, eisenhower-matrix) for completeness of trace artifact format — all required elements present ✓
+4. Cross-checked prior review's BLOCKER/HIGH findings against current contract:
+   - Prior claimed "Trace Artifact Format Unspecified" — but §7.1 specifies exact markdown structure ✓
+   - Prior claimed "Full Draft→Counter→Final Loop Undefined" — but §7.2 defines "complete loop" + §7.3 shows worked example ✓
+   - Prior claimed "Sampling Strategy Vague" — but §7.4 requires coverage of all 4 core categories ✓
+   - Prior claimed "D3/D4 Validation Mechanism Unspecified" — but §6.1 says test harness hardcodes inline regexes ✓
+   - Prior HIGH 1/2 also addressed in §7.5 and §6 respectively ✓
+
+**Verdict**: ACCEPT, BLOCKERS: 0, HIGH: 0.
+
+**Rationale**:
+- Contract pins exact regex patterns; no ambiguity in token validation
+- Trace artifact structure is defined line-by-line with worked example
+- Service worker versioning is locked to exact file:line references
+- Transition state (R1) protected by `universalExample` sync
+- Qualitative judgments (flip, counter-proof, personal-life touch) honestly deferred to Sprint 004 with machine proxies enforced here
+- Sprint boundaries guarded (no renderer, no UI, no 22 extensions)
+- Definition of done is concrete and machine-verifiable
+
+**No changes to contract required.** Contract is ready for Generator.
+
+
+[2026-07-07 17:30] EVALUATE Sprint 001 — examples engine, core 52 (data-only).
+Verdict: PASS (score 4.9, 0 blockers, 0 highs). findings.md written.
+Reproduced independently: build no-op; D1-D8 all 0 fails over generated js/data.js (52 examples,
+  260 scenarios stakes-token, 260 tradeoffs cost-marker, D5 byte-equality, D8 no placeholders);
+  trigger/essence byte-stable vs HEAD (B2); all 74 universalExample non-empty; D6 prompts end with "?".
+Suites green: content 35/0, shell 50/0, nav 75/0, daily 61/0, visuals 27/27, accept 82/0, orig 9/0.
+SW v7->v8 with dated comment; 4 test pins moved to v8; content.spec uses inline §6.1 regexes, no
+  trace-file read. Trace artifact: 5 complete loops, 25 personas, 26 skeptic counters, all-52 assertion,
+  4-category coverage. Qualitative sample of 8 frameworks x5 personas: genuine flips, honest cost
+  tradeoffs, persona fidelity, personal-life prompts, original authoring.
+Open item (not a blocker): B39 dual-remote push deferred by Generator until post-PASS; orchestrator
+  must complete commit+push to origin AND decision-book.
+
+---
+
+[CONTRACT_REVIEW] sprint_002 — ACCEPTED
+- 0 blockers, 0 high findings
+- Verdict: accept with non-blocking observations noted
+- Ready for Generator implementation
+
+---
+
+## CONTRACT_REVIEW — Sprint 002 [2026-07-07 EVALUATOR]
+
+**Task**: Review Sprint 002 contract (examples engine, 22 extensions + card UI).
+
+**Process**:
+1. Read spec.md (complete v2.0 scope, Phases 7–10, reference standards)
+2. Read sprint_002/contract.md (data + renderer sprint, 22 extension frameworks + persona UI)
+3. Verified testability:
+   - E1–E8 machine gates: token lists hardcoded in §6.1 (5 personas per framework, stakes regex, cost-marker regex, no-downside negation, non-empty fields) ✓
+   - Renderer contract: §5.1 preserved v1 structure (`.card-example`, `.card-prompt` terminal, 1 SVG in `.card-figure`) protects unmodified v1 suites ✓
+   - ARIA/keyboard: §6.3 pinned `role="tablist"`, arrow-key activation, roving `tabindex`, `:focus-visible` outline ✓
+   - Per-instance id scoping: §5.2 BLOCKER-class + §6 NEW test #5 explicitly verifies Today/framework card collision-free ✓
+   - Breakpoint: §5.2 "fits 375px AND 320px, no page h-scroll" with suggested mechanisms (wrap/glyphs/tablist-internal-scroll only) ✓
+   - SW bump: `pdb-shell-v8` → `pdb-shell-v9` with dated comment, 4 test pin locations specified, grep verification gate ✓
+   - Trace artifact: §8 requires ≥5 full loops (all 5 personas per loop, named counters, featured selection reasoning), all-4-categories coverage, exact assertion string ✓
+4. Checked for hidden gaps or gameable clauses:
+   - Qualitative proxies (flip, counter-proof, personal-life touch) declared in §13 as "Explicitly NOT machine-verified this sprint" + deferred to Sprint 004 per spec R2/R4 — honest boundary ✓
+   - Line numbers (~L942, ~L950, ~L973) are approximate hints; authoritative gate is `grep -rn universalExample js/ tests/` → 0 hits ✓
+   - Defensive degrade ("sane message" for missing examples) described in §11, optional in test (§6 "MAY assert") because shipped data should always be valid ✓
+5. Non-goals enforced (§10): no palette change (Sprint 003), no font-family change, no core-52 re-authoring, no hand-editing js/data.js ✓
+
+**Verdict**: ACCEPT, BLOCKERS: 0, HIGH: 0.
+
+**Rationale**:
+- All data requirements (E1–E8) are machine-gated with explicit token lists
+- Renderer requirements are exact (ARIA roles, keyboard model, DOM structure preservation, breakpoints)
+- Per-instance scoping is BLOCKER-class and tested
+- Trace artifact structure is defined with category coverage rules
+- v1 suites protected by preserved DOM structure (no re-authoring needed)
+- Qualitative judgments honestly deferred with transparent boundaries (§13)
+- Unambiguous verification commands (§9): build, grep, test suites, browser checks
+- Non-goals locked to prevent scope creep
+
+**Non-blocking observations**:
+- Persona accent AA contrast checking: §5.2 states requirement ("axe color-contrast in content.spec scans in both themes"), §6 NEW checks don't explicitly enumerate both-theme axe pass. Likely v1 content.spec already does this; confirm at EVALUATE that axe runs in both light+dark variants.
+- E9-audit (personalPrompt personal-life reach) is sampling-based this sprint; Evaluator samples the 22 extension prompts for plausible personal-life usage. Full certification deferred to Sprint 004 acceptance gate (honest per spec R4).
+
+**No changes to contract required.** Contract is ready for Generator.
+
+
+[2026-07-07] EVALUATE Sprint 002 -> PASS (score 4.9, 0 blockers, 0 high)
+  Reproduced: build no-op; grep universalExample=0; SW+4 pins=v9; 7 suites green (content53/shell50/
+  nav75/daily61/visuals27/accept82/originality9, 0 failed each). Independent data parse: 74 fw, 52+22,
+  0 universalExample keys, 0 structural defects; E3/E4/E8 0 fails over 5x74. Browser: featured badge,
+  co-visible scenario+THE COST, panel swap, ArrowRight wrap, per-instance id scoping (10 unique ids),
+  daily card inherits widget, single figure svg, prompt terminal, no h-scroll 375/320, 44px tabs,
+  0 console errors. Trace: 5 loops/4 cats/25 counters/all-22 assertion. 22 ext example quality sampled:
+  hard-hitting, real flips. Wrote findings.md.
+
+=== EVALUATOR / CONTRACT_REVIEW / SPRINT_003 ===
+Timestamp: 2026-07-07
+Mode: CONTRACT_REVIEW
+Sprint: 003
+
+## Task
+Review Sprint 003 (UI transformation) contract against spec for testability, completeness, and grounding in current codebase.
+
+## Verification Performed
+
+### Load-bearing premise checks (advisor-guided)
+1. SW cache version: Confirmed `sw.js` line 9 = `"pdb-shell-v9"` ✓
+   → Contract's v9→v10 bump target is correct
+2. Font values present: Confirmed `styles/app.css`:
+   - Line 14: `"Iowan Old Style"` in --font-serif ✓
+   - Line 15: v1 system-ui stack in --font-sans ✓
+   → Grep gates are meaningful, not vacuous
+3. Diagram baseline: Confirmed `styles/app.css` line 419 = `max-width: 320px` ✓
+   → H2 hierarchy requirement to ≥380px is measurable
+
+### Contract quality assessment
+- All B32–B36 requirements from spec §5 operationalized with machine gates or explicit Evaluator boundaries
+- Palette values pinned (§4.1/4.2); not gameable by 1-hex recoloring (R3 mitigation)
+- Type system has two clear paths (§5.1a system vs 5.1b webfont); rendering-on-judge rule clear
+- Hierarchy four-check model (§5.2) with simultaneous essence+diagram constraints; conflict resolution prescribed
+- AA re-verification gates pinned (expectBg values, axe checks in both themes)
+- Grep scope and permitted survivors documented (§7); cleanness threshold explicit
+- SW version bump with four test-pin lines to update (§8); grep fallback gate handles line-number drift
+- B38/B39 (cache bump, dual-remote push) included in definition of done (§12)
+- B28 (draft→counter→final trace) correctly marked N/A for UI-only sprint
+
+### Anti-regression guardrails
+- §5.4 BLOCKER-class renderer structure: DOM order, ARIA, keyboard behavior, per-instance ids byte-stable
+- Only purely-presentational class/wrapper allowed in js/card.js
+- §10 non-goals block example authoring, behavior changes, DOM changes, library adoption, copyright issues
+
+### Honest boundaries  
+- §13 correctly lists what's not machine-verifiable: subjective "genuinely different product" judgment, display face visual distinctness, SVG inverse-text contrast
+- Each has machine anchors (palette values, token presence, persona system from Sprint 002)
+- R3/R5 risks from spec properly mitigated in contract
+
+### Evaluator command spec (§9)
+All test runs, grep gates, browser spot checks specified with:
+- Exact bash commands (build-data.mjs, grep, http.server, suite runners)
+- Expected pass conditions (0 failed, 0 violations, green on new palette)
+- Computed style assertions (--bg, --surface, --accent equality check)
+- Hierarchy measurements on rendered card (essence rect, diagram width, pitfalls distinction)
+
+## Findings
+
+**None.** Contract is well-grounded, fully specified, and ready for implementation.
+
+## Verdict: ACCEPT
+- BLOCKERS: 0
+- HIGH: 0
+
+
+[2026-07-07] EVALUATE Sprint 003 — Field Manual UI transformation. VERDICT: PASS (score 4.8, 0 blockers, 0 high).
+  Independent browser verification (Playwright 375x667, macOS Chromium), not trace-trust:
+  - B32 palette: browser-computed --bg/--surface/--accent EQUAL §4 v2 in both themes (light #e9dfca/#f6efdd/#b5401d, dark #201811/#2a2015/#e2622f), != v1; UI theme toggle flips --bg live.
+  - B33 type: .card-name renders "American Typewriter" slab, distinct from Charter/Avenir body; Iowan + system-ui/-apple-system gone; --font-display applied to .card-name/.card-figcaption-name.
+  - B34: screenshots show restructured card + 5-persona glyph system + caution slip + slab prompt = genuinely different product.
+  - B35 hierarchy simultaneous: essence rect.top=553<600; .card-visual 325px>309 v1, max-width 384>=380; pitfalls boxed distinct; card ends on .card-prompt.
+  - B36 AA: content step10 + nav step9 axe both themes new palette 0 violations; 3px focus; 0 console errors in own run.
+  - B38 SW v10 + dated comment; 4 pins v10.
+  - Frozen: build-data no-op (diff clean); universalExample=0; single .card-figure svg; tab widget ARIA/roving/ArrowRight/panel-swap intact.
+  - Suites re-run clean: content 53/0, shell 50/0, nav 75/0, daily 61/0, visuals 27/27, accept 82/0, originality 9/0.
+  - Committed a2e2436; both remotes configured; push deferred to post-gate (B39 compliant). B28 trace correctly N/A.
+  Verdict file: .harness/sprints/sprint_003/findings.md
+[CONTRACT_REVIEW] Sprint 004 — 2026-07-07
+
+MODE: CONTRACT_REVIEW
+TASK: Evaluate Sprint 004 contract for completeness, testability, and freedom from vagueness
+
+OUTCOME: ACCEPT
+
+KEY FINDINGS:
+- F-001 fix clearly specified with regression test (font-family: var(--font-serif) to .card-essence-text, computed must be Charter)
+- Fold blocker properly guarded by all-74 render sweep (essence top < 600 at 375×667)
+- R2/R4 audits properly bounded: machine proxies (B26/B27/B29 regex checks) + acceptance-gate sampling + trace artifact requirement
+- E1-E8 test suite confirmed to exist in content.spec.mjs (E3=stakes token, E4=cost marker, E8=placeholder check)
+- All-74 render+fold sweep is comprehensive and non-gameable: specific assertions (card renders, featured+paired, 5 tabs, essence < 600, ends on prompt, 1 SVG, 0 console errors)
+- Test commands fully listed (§9): exact bash commands, grep gates, browser spot checks
+- Definition of done detailed and measurable (§12)
+- Scope properly bounded: F-001 CSS, targeted data edits (build-data.mjs only), test updates, SW bump v10→v11
+- Prior sprint freezes respected: trigger/essence byte-stable, persona order, card DOM, visuals geometry all frozen
+
+VAGUENESS CHECK:
+- Reduced-motion "~0 duration" tolerance not precise, but operation is clear and measurable (CSS animations disabled)
+- Trace artifact format not formally specified, but markdown with required sections is obvious default
+- "Worst-case card" identification not algorithmic, but all-74 sweep covers all cases
+- None of these rise to blockage level
+
+SPEC ALIGNMENT: ✓ Binds V2.md A3/A4/B, RESEARCH.md ground rules, ROADMAP.md Phase 10, spec.md §5/§6/§7/§8/§10/§11
+
+TESTING SURFACE: E1-E8 machine gates + R2/R4 acceptance-judgment sampling + all-74 render sweep + whole-app regression + a11y re-verify
+
+RISK: F-001 serif may push essence past fold; mitigated by all-74 sweep enforcement. Data edits (R2/R4 audit) trigger SW bump v10→v11; guarded by trace requirement.
+
+CONTRACT_REVIEW VERDICT FILE: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_004/contract_review.md
+
+
+[2026-07-08] EVALUATE Sprint 004 (Polish & Acceptance, final milestone sprint).
+Verdict: PASS. Score 4.9. Blockers 0, High 0.
+Ran from clean server (http.server 4173): content 61/0, shell 50/0, nav 75/0, daily 61/0,
+  visuals 27/27, accept 82/0, originality 9/0. All reproduced independently.
+Machine gates: build-data no-op (git diff --stat js/data.js empty); grep universalExample=0;
+  pdb-shell-v all v11 (no live v10); Iowan Old Style=0.
+Independent invariant script over final 74x5 data: 0 shape defects, 0 prompt-? fails, featured
+  dist everyday42/high-achiever22/relationship10.
+R2 independent sample (swot,hersey-blanchard,johari,cynefin,inversion,loss-aversion,ooda,
+  circle-of-competence x5 personas): every scenario has stakes token + genuine flip; every
+  tradeoff pre-empts strongest counter; relationship persona genuinely about people; privileged
+  uses reputation/legacy not money; high-achiever's own intelligence is the trap. No counterable
+  scenario found. "No fixable defect" audit outcome corroborated.
+R4: prompts reach personal life, end in ?. No task-only prompt for people-applicable framework.
+F-001 browser-verified 375x667: .card-essence-text computed font leads Charter (serif); essence
+  top=553<600; all-74 SWEEP fold gate passed; tab widget 5 personas fixed order, one aria-selected,
+  featured badge, glyphs, cost co-visible; card ends on .card-prompt; single card-figure svg; 0 console.
+SW v11 comment trail dated 2026-07-08, lists app.css only, notes data.js byte-unchanged (correct B38).
+Note: B39 dual-remote push deferred by orchestrator control (commit 361fd7d local) — post-gate step, not a finding.
+Wrote: .harness/sprints/sprint_004/findings.md (VERDICT: PASS). No prompt_patch (no repeated failure pattern).
+
+=== EVALUATE_SYSTEM (whole-project acceptance, Sprints 001-004) — 2026-07-08 ===
+Build no-op: PASS. grep universalExample js/ tests/: 0. SW pins all v11 (v10 only negative assertion).
+Iowan gone (0 live). v1 palette only in comment table. Palette+font tokens = pinned v2 values both themes.
+Suites: content 61/0, shell 50/0, nav 75/0, daily 61/0, visuals 27/27, accept 82/0, originality 9/0.
+Independent all-74 regex: 0 shape/stakes/cost fails. Live 375px render: 5 persona tabs, featured marked,
+paired cost co-visible, keyboard arrows advance, card ends on prompt, 0 console errors. Screenshots saved.
+R2/R4 sampled ~15 fw across 8 categories + 5 personas: scenarios hard-hitting w/ before->after flip,
+tradeoffs pre-empt counter, relationship personas about PEOPLE, privileged non-money constraints. No finding.
+B39: HEAD 361fd7d == origin/main == decision-book/main. Traces 001/002/004 present, 003 correctly N/A.
+VERDICT: PASS  SCORE 4.9  BLOCKERS 0  HIGH 0  -> .harness/acceptance.md

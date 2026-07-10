@@ -1,0 +1,250 @@
+[2026-07-07 16:05]
+Action: CONTRACT mode — authored Sprint 001 contract (examples engine, core 52; data-only sprint).
+Files changed: .harness/sprints/sprint_001/contract.md (created)
+Command: read spec.md, V2.md, build-data.mjs, content.spec.mjs; grep pdb-shell-v across tests/; node split of 52 core / 22 ext by category.
+Result: Contract written. Scope = examples[]+featured for the 52 core (category-defined), universalExample=examples[featured].scenario transition, SW bump v7->v8, 4 test files pin the version and must move to v8, content.spec ADDs examples checks (keeps v1 assertions), B28 trace artifact required, renderer/UI/22-extensions are Non-Goals.
+Evidence path/output: .harness/sprints/sprint_001/contract.md ; SW pins found at content.spec:207, visuals.spec:251, daily.spec:369, nav.spec:397, sw.js:9.
+Known risk: "hard-hitting/cannot-be-countered/personal-life" are only proxy-checkable (D3/D4 token regexes); qualitative halves are Evaluator-sampled + Sprint 004 acceptance — stated honestly in contract §9.
+Next: await contract_review.md routing; on accept, enter BUILD mode.
+
+[2026-07-07 00:00]
+Action: CONTRACT mode — revised sprint_001/contract.md in place per contract_review.md (REJECT, 4 blockers + 2 highs).
+Files changed: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_001/contract.md
+Command: (contract edits only; no code in CONTRACT mode)
+Result:
+  - BLOCKER 1 (trace format): §7.1 fixes exact file structure + markdown format rules for printing D3/D4 token lists (separate ### D3 / ### D4 sections, comma-delimited within bullets, raw list only).
+  - BLOCKER 2 (full loop undefined): §7.2 defines "complete loop" (>=1 draft candidate per persona, >=1 named counter per candidate, explicit revision/discard, featured selection with written reason); §7.3 adds a worked example loop.
+  - BLOCKER 3 (sampling vague): §7.4 requires >=5 samples covering all four core categories (>=1 each of improve-yourself/understand-yourself/understand-others/improve-others + >=1 extra), named at top.
+  - BLOCKER 4 (D3/D4 validation mechanism): §6.1 pins token lists as authoritative in-contract, hardcoded inline regexes in content.spec.mjs, NOT loaded from trace; trace prints for reference only; contract wins on conflict.
+  - HIGH 1 (all-52 unverifiable): §7.5 anchors the "all 52" assertion to D3+D4 green across all 52 in content.spec.mjs.
+  - HIGH 2 (D6 muddied): §4 splits into D6 (machine: non-empty, ends with ?, terminal block) and D6-audit (sampled/manual, no new artifact required).
+Evidence path/output: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_001/contract.md (§4 D6/D6-audit, §6.1, §7.1–7.5)
+Known risk: D3/D4 regex lists are the sole machine proxy for "hard-hitting"; a bland scenario that happens to contain a digit could pass the proxy — this is disclosed in §9 as Evaluator-sampled + Sprint 004 acceptance, per R2/R4.
+Next: orchestrator routes revised contract to Evaluator for re-review.
+
+[2026-07-07 00:05]
+Action: Reconciled §4 D3/D4 with authoritative §6.1 (advisor flagged internal contradiction reintroducing BLOCKER 4's ambiguity).
+Files changed: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_001/contract.md
+Command: (contract edit only)
+Result: Removed garbled `l% risk` token and informal `Monday…Sunday/Friday` list from §4; both D3 and D4 in §4 now defer to §6.1 as the single authoritative token source. No two divergent lists remain in the contract.
+Evidence path/output: contract.md §4 (D3/D4 now "§6.1 governs"), §6.1 (authoritative regexes).
+Known risk: none new; §6.1 regex `\b` boundaries won't match inflections like "loses" — this is the reviewer's dictated list, left as-is per review.
+Next: orchestrator routes revised contract to Evaluator.
+
+[2026-07-07 17:12]
+Action: BUILD Sprint 001 — examples[] engine for the 52 core frameworks (B24-B29, D1-D8, S1-S2, B37/B38).
+Files changed:
+  - scripts/build-data.mjs (added examples[]+featured to 52 core AUTHORED entries via draft→counter→final
+    loop; build now derives universalExample := examples[featured].scenario when examples present, and
+    passes examples/featured through; added build-time examples-shape guard; re-audited 7 project-only
+    personalPrompts for personal-life reach — bcg-box, project-portfolio-matrix, sinus-milieu, pareto,
+    long-tail, role-playing, project-management-triangle).
+  - js/data.js (REGENERATED via node scripts/build-data.mjs — never hand-edited; deterministic no-op verified).
+  - sw.js (cache pdb-shell-v7 → v8 with dated 2026-07-07 comment-trail entry; data.js is precached).
+  - tests/content.spec.mjs (ADDED D1-D5 examples[] checks with inline §6.1 regexes; retained all v1
+    assertions incl. universalExample non-empty + render-equality; SW pin → v8).
+  - tests/nav.spec.mjs, tests/daily.spec.mjs, tests/visuals.spec.mjs (SW version pins v7 → v8).
+  - .harness/logs/generator_trace_sprint_001.md (B28 trace artifact: token lists + 5 full loops across
+    all 4 core categories + all-52 assertion).
+Command: node scripts/build-data.mjs; python3 -m http.server 4173; node tests/{content,shell,nav,daily,visuals,accept}.spec.mjs; node scripts/check-originality.mjs
+Result: content.spec 34/0 PASS; shell 50/0; nav 75/0; daily 61/0; visuals 27/27; accept 82/0; originality 9/0.
+  Scratch validator (exact §6.1 regexes over all 260 scenarios + 260 tradeoffs): ALL CLEAR.
+  Build deterministic (regenerate-twice diff identical). Secret scan clean. 375/320px no horizontal scroll.
+  axe color-contrast PASS both themes. Zero console errors/warnings.
+Evidence path/output:
+  - .harness/logs/generator_trace_sprint_001.md (loops)
+  - test stdout above (0 failed across all suites)
+  - data-layer spot check: 52 frameworks carry examples[]; personas in fixed order;
+    universalExample === examples[featured].scenario (eisenhower verified true).
+Known risk:
+  - D3/D4 are token proxies; "shows a flip" and "cannot be countered" quality are Evaluator-sampled +
+    Sprint 004 acceptance (contract §9). featured scenarios chosen per-framework (mix of everyday=0 and
+    high-achiever=3) — Evaluator should sample these for genuine flip quality.
+  - personalPrompt "touches personal life" is a design principle (D6-audit), not machine-checkable; 7
+    prompts rewritten, remainder judged already personal — Evaluator sampling may flag others.
+  - The 22 extensions still carry only universalExample (mixed state is intended, per §11 / R1).
+Next: Push to BOTH remotes (origin + decision-book, B39) is DEFERRED until the Evaluator passes the gate
+  (Generator does not self-certify). All material is on disk for the Evaluator to attack.
+
+[2026-07-07 17:20]
+Action: Post-review hardening — moved D8 placeholder scan into the DELIVERED gate (content.spec.mjs
+  Step 3b now scans all 5×52 scenarios+tradeoffs, not just the featured scenario that rides in
+  universalExample). Verified featured-persona distribution of the currently-visible default surface.
+Command: node tests/content.spec.mjs
+Result: content.spec now 35/0 PASS (adds "D8: no placeholder tokens in any of the 5×52 scenarios/tradeoffs").
+  Featured distribution across 52 core cards: everyday 36, high-achiever 15, relationship 1 — weighted
+  to average-person relatability; the 15 high-achiever defaults are concentrated in inherently
+  leadership frameworks (team-model, hersey-blanchard, expectations, future-of-decisions, drexler-sibbet)
+  plus frameworks whose high-achiever flip genuinely survives its counter best (prisoners-dilemma, chasm,
+  black-box, double-loop, cognitive-bias, etc.). Eyeballed all 52 featured scenarios — each reads as
+  concrete/hard-hitting standalone.
+Evidence path/output: content.spec stdout (35/0); featured-scenario batch print reviewed.
+Known risk: unchanged from prior entry.
+Next: unchanged — push to both remotes deferred until Evaluator passes the gate.
+
+[2026-07-07 17:40]
+Action: CONTRACT mode — authored Sprint 002 contract (extensions 22 examples + card UI + universalExample removal).
+Files changed: .harness/sprints/sprint_002/contract.md (new)
+Command: read spec.md, V2.md, sprint_001 contract/findings/review, js/card.js, tests/content.spec.mjs, scripts/build-data.mjs emit logic; grep universalExample/pdb-shell across js|tests; inspect accept/visuals/daily/nav card-structure deps; advisor() consulted.
+Result: Contract written. Pinned: (a) all-74 E1–E8 data checks reusing Sprint-001 §6.1 token regexes; (b) app-wide universalExample removal with grep-0 gate across js/+tests/ incl. build-data emit ~L942/950, D5 guard ~L973, banner comments; (c) renderer contract preserving .card-example/.card-example-text + .card-prompt terminal + single .card-figure svg so v1 suites (accept/visuals/daily/nav) stay green by structure, pin-bump only; (d) persona tab widget ARIA (tablist/tab/tabpanel, roving tabindex, ArrowL/R automatic activation, focus-visible >=3px, reduced-motion); (e) per-instance id scoping (framework vs Today card coexist in DOM); (f) 5 tabs fit 375/320px no h-scroll + >=44px; (g) persona accents = new --persona-* tokens, AA both themes, NO change to v1 palette tokens/font-family (protects content.spec L233 expectBg wait + Sprint 003 B32/B33 baseline); (h) SW v8->v9 + 4 pins; (i) trace artifact for 22 ext, 4-category coverage, all-22 assertion.
+Evidence path/output: /Users/prithviputta/Downloads/pocket-decision-book/.harness/sprints/sprint_002/contract.md
+Known risk: "cannot be countered"/flip quality + personal-life prompt reach remain qualitative (R2/R4) — Evaluator-sampled, Sprint 004 gate. Tab widget at 375px is the tightest layout constraint.
+Next: Await Evaluator contract review; then BUILD.
+
+[2026-07-07 22:15]
+Action: BUILD mode — Sprint 002 (extensions 22 examples finish + card UI + universalExample removal app-wide).
+Files changed:
+  - scripts/build-data.mjs (13 extension scenarios reworded to add a concrete stakes token so E3 passes for all 22; the 22-ext examples[]+featured + universalExample removal were already in the tree from the prior partial build)
+  - js/data.js (regenerated via build-data.mjs — 74 frameworks, all carry examples[]+featured, ZERO universalExample; build is idempotent/no-op on re-run)
+  - js/card.js (NEW example renderer: featured-first + labelled "The cost" tradeoff pairing (B30) + accessible persona tab widget (B31) — role=tablist/tab/tabpanel, roving tabindex, ArrowL/R+Home/End+Enter/Space automatic activation, per-instance id scoping from headingId, "Featured" badge (B34), defensive degrade for invalid examples)
+  - styles/app.css (NEW additive --persona-* accent tokens per theme, AA-verified >=4.5:1 both themes; persona-tabs/tab/glyph/label/badge/panel/cost styles; wraps to fit 375 AND 320px; >=44px tap targets; NO v1 palette token or font-family touched)
+  - sw.js (CACHE pdb-shell-v8 -> v9 + dated 2026-07-07 comment trail; precache list unchanged)
+  - tests/content.spec.mjs (MIGRATED: dropped all universalExample refs incl. field/blob/D5/render-eq/synthetic/longest; E1-E8 over all 74; NEW tab-widget block — ARIA structure, one-visible-panel scenario+cost, click-swap all 5, keyboard Arrow L/R + focus-visible, per-instance Today-vs-framework scoping; SW pin v9; grep-clean of the removed token via constructed key literal)
+  - tests/visuals.spec.mjs, tests/daily.spec.mjs, tests/nav.spec.mjs (SW pin v8 -> v9 only)
+  - .harness/logs/generator_trace_sprint_002.md (NEW B28 trace — 5 full loops covering all 4 extension categories, all-22 assertion string)
+Command:
+  node scripts/build-data.mjs   (74 frameworks; idempotent no-op on re-run)
+  grep -rn universalExample js/ tests/   -> 0 hits
+  grep -rn pdb-shell-v tests/ sw.js      -> all v9
+  node tests/content.spec.mjs   -> 53 passed, 0 failed
+  node tests/shell.spec.mjs     -> 50 passed, 0 failed
+  node tests/nav.spec.mjs       -> 75 passed, 0 failed
+  node tests/daily.spec.mjs     -> 61 passed, 0 failed
+  node tests/visuals.spec.mjs   -> 27/27 passed
+  node tests/accept.spec.mjs    -> 82 passed, 0 failed
+  node scripts/check-originality.mjs -> 9 passed, 0 failed
+Result: All 74 frameworks carry a valid examples[]+featured (52 core + 22 ext); no universalExample anywhere; card renders featured-first + paired tradeoff + accessible persona tabs; .card-prompt stays terminal; exactly one .card-figure svg; no page h-scroll at 375/320; persona accents AA both themes; per-instance scoping verified; zero console errors/warnings across every suite.
+Evidence path/output:
+  - test stdout above (0 failed across all 7 gates)
+  - screenshots: /tmp/pdb_card_cynefin_dark.png (featured-first + tabs, dark), /tmp/pdb_card_light_relationship.png (persona switched, light), /tmp/pdb_card_320.png (no overflow at 320px)
+  - .harness/logs/generator_trace_sprint_002.md (5 countering loops + all-22 assertion)
+Known risk:
+  - E3 for 13 of the 22-ext scenarios was reworded to inject a concrete stakes token (the prior partial build's originals lacked one). Rewordings are natural (added times/roles/numbers), but the "flip/hard-hitting" quality half of B26 and the "cannot be countered" half of B27 stay Evaluator-sampled + Sprint 004 acceptance (contract §13) — the extension set is inherently thinner than the core 52; Evaluator should sample the 22 featured scenarios for genuine flip quality.
+  - personalPrompt personal-life reach (E9-audit) for the 22 ext is judgment, not machine-checkable — Evaluator sampling + Sprint 004 gate.
+  - Keyboard focus-visible assertion accepts outline>=3px OR matches(':focus-visible') to tolerate engine heuristics on programmatic focus during a keydown; both held green in this run.
+Next: Push to BOTH remotes (origin + decision-book, B39) is DEFERRED until the Evaluator passes the gate (Generator does not self-certify). All material is on disk for the Evaluator to attack.
+
+[2026-07-07 22:40]
+Action: CONTRACT mode — authored Sprint 003 contract (UI transformation, ROADMAP M2 Phase 9).
+Files changed: .harness/sprints/sprint_003/contract.md (created)
+Command: (contract authoring only; no code written in CONTRACT mode)
+Result: Contract written. Pinned "Field Manual" palette (deep-ink dark #201811 / paper light #e9dfca)
+  with exact per-token before/after tables (B32); distinct slab display face --font-display with a
+  macOS-guaranteed-render rule (advisor: system fallback silently matching serif body would fail B33
+  on the judging machine) and v1 font-value removal gate; B35 hierarchy as TWO simultaneous machine
+  checks (essence rect.top<600 AND .card-visual max-width>=380, grow by width not height); B36 AA
+  re-verify via existing axe both themes after expectBg migration; SW bump v9->v10 (4 pins).
+Evidence path/output: verified against disk — sw.js CACHE=pdb-shell-v9; tests hardcode only two
+  expectBg lines (content.spec:391, nav.spec:310) + four SW pins; manifest.json theme_color &
+  background_color both #12141c (both migrate to #201811); index.html theme-color meta #12141c;
+  app.css v1 tokens/fonts confirmed (Iowan Old Style, system-ui). Sprint 002 findings VERDICT: PASS.
+Known risk: dark --bg cool->warm margin is the smallest of the three gated tokens (still an
+  unambiguous exact-value match gate, not a formula). Persona --persona-* tokens may need AA retune on
+  the new (slightly darker) paper bg — contract permits this in-scope. B28 trace is N/A this sprint
+  (no example authoring) — flagged so Evaluator does not require generator_trace_sprint_003.md.
+Next: await contract_review.md routing; on acceptance, BUILD mode implements exactly §4/§5/§7/§8.
+
+[2026-07-07 14:30]
+Action: BUILD Sprint 003 — "Field Manual" UI transformation (Phase 9, B32/B33/B34/B35/B36/B38/B39/B40).
+Files changed:
+  - styles/app.css: new named palette (Deep Ink dark + Paper light, pinned §4 values, v1 baseline
+    recorded in theme comments); type system (--font-display slab "American Typewriter" stack applied
+    to .card-name + .card-figcaption-name; --font-serif re-led with Charter; --font-sans re-set — v1
+    "Iowan Old Style" and system-ui/-apple-system/"Segoe UI" strings gone); light personas re-darkened
+    (#17458a/#0b5a52/#932c56/#6f4d00/#573399) for AA on the kraft backgrounds; hierarchy pass —
+    .card-visual max-width 320→384 (H2), figure/header/trigger/caption/name rhythm compacted for the
+    375px fold (H1), .card-name mobile 1.45rem (restored --fs-3 >=640px), pitfalls given a boxed
+    "caution slip" container distinct from the open example block (H3).
+  - index.html: theme-color #12141c → #201811.
+  - manifest.json: theme_color/background_color #12141c → #201811.
+  - sw.js: CACHE pdb-shell-v9 → v10 + dated v10 comment-trail entry (B38; SHELL unchanged, no font file).
+  - tests/content.spec.mjs + tests/nav.spec.mjs: expectBg → {dark rgb(32,24,17), light rgb(233,223,202)}; sw pin → v10.
+  - tests/visuals.spec.mjs + tests/daily.spec.mjs: sw pin → v10.
+  NOT changed: scripts/build-data.mjs, js/data.js (build-data is a verified no-op), js/card.js (no DOM/ARIA
+  change needed — H3 used existing .card-example/.card-pitfalls sections), js/visuals.js, trigger/essence text.
+  B28 draft→counter→final trace is N/A this sprint (no example authoring) — no generator_trace_sprint_003.md.
+Command: node scripts/build-data.mjs (no-op); node tests/{content,shell,nav,daily,visuals,accept}.spec.mjs; node scripts/check-originality.mjs
+Result:
+  - content 53/0 | shell 50/0 | nav 75/0 | daily 61/0 | visuals 27/27 | accept 82/0 | originality 9/0 — ALL green, zero console errors/warnings.
+  - axe color-contrast PASS on the NEW palette in BOTH themes (content step 10 + nav step 9), incl. re-darkened light personas.
+  - build-data.mjs produces byte-identical js/data.js (diff -q clean); grep universalExample js/ tests/ = 0; grep "Iowan Old Style" = 0;
+    v1-palette live hits = only the two §4 "v1 baseline (before)" comment tables in app.css (permitted docs); rgb(18/244 pins = 0; sw pins all v10.
+Evidence path/output:
+  - Browser spot-check (375×667): computed --bg/--surface/--accent EQUAL §4 v2 and ≠ v1 in both themes;
+    --font-display present + applied to .card-name (computed "American Typewriter, Rockwell…", distinct from Charter body);
+    card lastElementChild = .card-part.card-prompt (H4); pitfalls bg = surface-2 vs example bg transparent+2px border-top (H3);
+    persona-tab :focus outline 3px (accept §5.1).
+  - H1 measured across ALL 74 diagram frameworks at 375×667: max .card-essence-text top = 589px (< 600), worst = several 1-line-name
+    frameworks; longest name (hersey-blanchard "Hersey–Blanchard (Situational Leadership)") = 589. 0 of 74 at/over 600.
+  - H2: .card-visual rendered width = 325px for all (v1 baseline 309px) → strictly wider; max-width 384px (>=380 proxy).
+Known risk:
+  - H1 headroom is ~11px (worst 589 vs 600). It is defended by the mobile display-name size (1.45rem) + compacted figure/section
+    rhythm; a future data change lengthening a name/trigger could erode it. All current 74 pass; measured, not assumed.
+  - "Reads as a genuinely different product" (B34 qualitative) and display-face visual distinctness are Evaluator eye-judgments on
+    macOS; machine anchors (pinned palette, applied slab token, v1 fonts gone, persona system + restructured card) are all satisfied.
+  - SVG inverse-text (v-text-inv on accent fill) contrast is not axe-scanned and not a gate this sprint (§6 honest boundary); visuals.js untouched.
+Next: commit + push to origin and decision-book (B39), then hand to Evaluator.
+
+[2026-07-07 23:40]
+Action: CONTRACT mode — authored Sprint 004 (Polish & Acceptance, ROADMAP M2 Phase 10) contract.
+Files changed: .harness/sprints/sprint_004/contract.md (new)
+Command: (contract authoring only; no code)
+Result: Contract written. Key decisions, informed by advisor review:
+  - §0 UN-freezes examples/prompt DATA for TARGETED REPAIR ONLY (build-data.mjs -> regenerate),
+    so the deferred R2/R4 acceptance judgment is fixable, not toothless. No wholesale re-authoring.
+  - §3 F-001 fix (.card-essence-text -> font-family var(--font-serif)) + net-new regression assert
+    (computed font leads with Charter, both themes; grep confirmed 0 existing font asserts in tests/).
+  - §3.3 flags the F-001/fold interaction: Charter is taller than Avenir Next; SW003 reported only
+    ~47px fold headroom (worst ~589<600) with sans essence, so serif can regress B35/H1 -> re-verify
+    top<600 on worst-case cards, recover by width/padding not height.
+  - §4 makes the examples counter-audit the substantive heart (R2/R4), with a REQUIRED
+    generator_trace_sprint_004.md audit artifact and an Evaluator sampling method (not vibes).
+  - §5 SW bump v10->v11 (app.css always precached; data.js iff audited) + 4 test pins.
+  - §6 net-new all-74 render+fold sweep as a machine gate (spec "all 74 render correctly").
+  - §7 concrete a11y/reduced-motion(app.css:956 must neutralize transitions)/perf proxies.
+  - §12 milestone-level DoD: full v2 history (001-004) on BOTH remotes, not just the 004 commit.
+Evidence path/output: .harness/sprints/sprint_004/contract.md
+Known risk: F-001 serif switch may regress essence-above-fold on a long card (mitigated by §3.3 + §6
+  sweep). Examples audit may find little (001/002 both 4.9) — contract requires evidence either way,
+  not manufactured churn.
+Next: Await contract_review.md routing; then BUILD mode.
+
+[2026-07-08 01:30]
+Action: BUILD Sprint 004 — Polish & Acceptance (Phase 10). F-001 serif essence fix; net-new
+  all-74 render+fold sweep + F-001 regression + reduced-motion assertions; R2/R4 examples/prompt
+  acceptance audit; SW v10->v11; commit locally (push deferred per CONTROL).
+Files changed:
+  - styles/app.css (F-001: .card-essence-text gains font-family: var(--font-serif); CSS-only).
+  - sw.js (CACHE pdb-shell-v10 -> v11 + dated 2026-07-08 comment trail; changed asset = app.css only,
+    js/data.js byte-unchanged so NOT listed).
+  - tests/content.spec.mjs (Step 6 augmented into the §6 all-74 sweep: essence .top<600 post-serif,
+    5 tabs fixed-order + one aria-selected, single .card-figure svg, article.card + paired tradeoff
+    co-visible + prompt card-part, no undefined/NaN; Step 12b F-001 Charter-first-family both themes;
+    Step 12c reduced-motion durations ~0; SW pin -> v11 with negative regex now !/CACHE="pdb-shell-v10"/).
+  - tests/nav.spec.mjs, tests/daily.spec.mjs, tests/visuals.spec.mjs (SW pins v10 -> v11).
+  - .harness/logs/generator_trace_sprint_004.md (REQUIRED §4.4 R2/R4 audit trace artifact).
+Command: node scripts/build-data.mjs (no-op); git diff --stat js/data.js (empty);
+  grep -rn universalExample js/ tests/ (0); grep pdb-shell-v (8×v11 live, 0 live v10);
+  grep "Iowan Old Style" styles/ (0); python3 -m http.server 4173;
+  node tests/{content,shell,nav,daily,visuals,accept}.spec.mjs; node scripts/check-originality.mjs.
+Result: content 61/0 (incl. 5 SWEEP + 2 F-001 + 1 reduced-motion all PASS), shell 50/0, nav 75/0,
+  daily 61/0, visuals 27/27, accept 82/0, originality 9/0. Zero console errors/warnings.
+  Machine invariants on final 74×5 data all clean (B24/B25 shape, featured 0-4, E3 stakes, E4 cost,
+  E8 placeholder, prompt ends-?, 0 universalExample). data.js == fresh build-data output (byte-identical).
+  Fold: all 74 essence.top<600 AFTER serif switch (worst-case incl. john-whitmore-grow) — the §3.3
+  serif-vs-fold fight has no real regression (essence.top is set by content ABOVE it, unaffected by
+  essence's own font family), empirically confirmed by the sweep.
+Evidence path/output:
+  - .harness/logs/generator_trace_sprint_004.md (R2/R4 audit: 16 featured + 16 relationship +
+    24 non-featured pairs + 16 prompts sampled across all 8 categories; named counter per scenario;
+    outcome = NO fixable defect, data frozen, no churn manufactured per §0/§4.1).
+  - commit 361fd7d (local only; push to origin + decision-book DEFERRED per orchestrator CONTROL
+    "commit locally only, do not git push" — B39 milestone dual-push is the post-gate step).
+Known risk:
+  - R2 "un-counterable" and R4 "touches personal life" are acceptance-gate JUDGMENTS (contract §13);
+    the machine proxies + this audit trace are necessary-not-sufficient. Evaluator's independent
+    sampling (§4.3: >=12 featured + >=6 non-featured, relationship=people) is the certification.
+  - data.js unchanged means the audit found little — this is the documented expected outcome for
+    content that scored 4.9 in 001/002, not a skipped audit (evidence in the trace artifact).
+Next: Evaluator attacks the build. On gate PASS, the deferred B39 dual-remote push (origin +
+  decision-book) of the full v2 milestone head is the delivery step.
